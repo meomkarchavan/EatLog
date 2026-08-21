@@ -29,6 +29,25 @@ describe('AuthScreen Component', () => {
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
   });
 
+  it('toggles password visibility when eye icon button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<AuthScreen />);
+
+    const passwordInput = screen.getByPlaceholderText('Password');
+    const toggleBtn = screen.getByTitle(/show password/i);
+
+    expect(passwordInput).toHaveAttribute('type', 'password');
+
+    // Click to show password
+    await user.click(toggleBtn);
+    expect(passwordInput).toHaveAttribute('type', 'text');
+    expect(screen.getByTitle(/hide password/i)).toBeInTheDocument();
+
+    // Click again to hide password
+    await user.click(screen.getByTitle(/hide password/i));
+    expect(passwordInput).toHaveAttribute('type', 'password');
+  });
+
   it('toggles to sign up mode and updates button and text', async () => {
     const user = userEvent.setup();
     render(<AuthScreen />);

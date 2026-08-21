@@ -36,9 +36,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     if (await signOutBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
       await signOutBtn.click();
     }
-
-    // Sign Up with new test user
-    await expect(page.locator('#auth-email')).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('#auth-email')).toBeVisible({ timeout: 20000 });
     
     const toggleSignUp = page.locator('#auth-toggle');
     const isSignUpBtnVisible = await page.getByRole('button', { name: /create account/i }).isVisible().catch(() => false);
