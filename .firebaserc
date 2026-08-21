@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "eatlog-924b6"
+    "default": "eatlog-924b6",
+    "production": "eatlog-924b6",
+    "dev": "eatlog-dev"
   }
 }
