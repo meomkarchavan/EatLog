@@ -222,10 +222,16 @@ export default function Dashboard() {
         return;
       }
 
-      // Construct noon time for selected date to prevent timezone rollover
-      const [year, month, day] = selectedDate.split('-').map(Number);
-      const noonDate = new Date(year, month - 1, day, 12, 0, 0);
-      const timestamp = noonDate.toISOString();
+      // Use actual current time for today; noon for retroactive entries
+      const todayCheck = formatLocalDate(new Date());
+      let timestamp;
+      if (selectedDate === todayCheck) {
+        timestamp = new Date().toISOString();
+      } else {
+        const [year, month, day] = selectedDate.split('-').map(Number);
+        const noonDate = new Date(year, month - 1, day, 12, 0, 0);
+        timestamp = noonDate.toISOString();
+      }
 
       // Write to Firestore daily_logs
       await addDoc(collection(db, 'daily_logs'), {
