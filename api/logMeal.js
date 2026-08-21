@@ -8,22 +8,28 @@ RULES:
 2. ESTIMATION HEURISTICS: Estimate based on standard adult portion sizes for plated meals. **CRITICAL: If the image is of a nutrition label or food packaging, extract the exact calories and macronutrient values stated on the label for one standard serving.**
 3. OUTPUT SCHEMA: Return exactly this structure: { "food_summary": string, "calories": integer, "protein_g": integer, "carbs_g": integer, "fat_g": integer, "fiber_g": integer, "is_valid": boolean, "error_message": string or null }`;
 
-// Helper to get GEMINI_API_KEY from process.env or .env.local
+// Candidate models in order of priority with high free-tier quotas (1,500 RPD vs 20 RPD)
+const CANDIDATE_MODELS = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"];
+
+// Helper to get GEMINI_API_KEY from process.env, .env.local, .env.development, or .env.production
 function getApiKey() {
   if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "your_gemini_api_key_here") {
     return process.env.GEMINI_API_KEY;
   }
-  try {
-    const envPath = path.resolve(process.cwd(), ".env.local");
-    if (fs.existsSync(envPath)) {
-      const content = fs.readFileSync(envPath, "utf-8");
-      const match = content.match(/^GEMINI_API_KEY=(.+)$/m);
-      if (match && match[1]) {
-        return match[1].trim();
+  const envFiles = [".env.local", ".env.development", ".env.production", ".env"];
+  for (const file of envFiles) {
+    try {
+      const envPath = path.resolve(process.cwd(), file);
+      if (fs.existsSync(envPath)) {
+        const content = fs.readFileSync(envPath, "utf-8");
+        const match = content.match(/^GEMINI_API_KEY=(.+)$/m);
+        if (match && match[1] && match[1].trim() !== "your_gemini_api_key_here") {
+          return match[1].trim();
+        }
       }
+    } catch (e) {
+      // Continue searching
     }
-  } catch (e) {
-    console.warn("Could not read .env.local fallback:", e.message);
   }
   return process.env.GEMINI_API_KEY;
 }
@@ -83,20 +89,9 @@ export default async function handler(req, res) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3.6-flash",
-      systemInstruction: SYSTEM_INSTRUCTION,
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.1,
-      },
-    });
-
     // Build the prompt parts
     const parts = [];
-
     if (image) {
-      // Multimodal: image + optional text context
       parts.push({
         inlineData: {
           mimeType: "image/jpeg",
@@ -105,24 +100,41 @@ export default async function handler(req, res) {
       });
       parts.push({ text: text || "Analyze this food image and estimate total calories and macronutrients (protein, carbs, fat, fiber)." });
     } else {
-      // Text-only
       parts.push({ text });
     }
 
-    // Call model with 1 retry for transient spikes
-    let response;
-    try {
-      const result = await model.generateContent(parts);
-      response = result.response;
-    } catch (apiErr) {
-      if (apiErr.status === 503 || apiErr.message?.includes("503") || apiErr.message?.includes("high demand")) {
-        console.warn("Retrying Gemini request after transient 503...");
-        await new Promise((r) => setTimeout(r, 1000));
-        const retryResult = await model.generateContent(parts);
-        response = retryResult.response;
-      } else {
-        throw apiErr;
+    let response = null;
+    let lastError = null;
+
+    // Try primary model and fallback models if rate-limited (429) or transient 503 occurs
+    for (const modelName of CANDIDATE_MODELS) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: SYSTEM_INSTRUCTION,
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.1,
+          },
+        });
+
+        const result = await model.generateContent(parts);
+        response = result.response;
+        if (response) break; // Success!
+      } catch (err) {
+        console.warn(`Model ${modelName} failed with:`, err.status || err.message);
+        lastError = err;
+        // If 429 (quota exceeded) or 503 (high demand) or 404 (model not found), try next candidate
+        if (err.status === 429 || err.status === 503 || err.status === 404 || err.message?.includes("quota") || err.message?.includes("429")) {
+          continue;
+        } else {
+          throw err;
+        }
       }
+    }
+
+    if (!response) {
+      throw lastError || new Error("All Gemini candidate models failed to generate content.");
     }
 
     const rawText = response.text();
@@ -142,6 +154,8 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Gemini API error:", error);
 
+    const isQuotaError = error.status === 429 || error.message?.includes("quota") || error.message?.includes("429");
+
     return res.status(500).json({
       food_summary: null,
       calories: 0,
@@ -150,7 +164,9 @@ export default async function handler(req, res) {
       fat_g: 0,
       fiber_g: 0,
       is_valid: false,
-      error_message: error.message?.includes("high demand")
+      error_message: isQuotaError
+        ? "Gemini API daily quota reached. Please try again shortly or check your Google AI Studio plan."
+        : error.message?.includes("high demand")
         ? "Gemini is currently experiencing high demand. Please retry in a moment."
         : error.message || "Failed to analyze meal",
     });

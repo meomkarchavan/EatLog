@@ -1,28 +1,19 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import handler from '../../api/logMeal';
 
-vi.mock('@google/generative-ai', () => ({
-  GoogleGenerativeAI: class {
-    getGenerativeModel() {
-      return {
-        generateContent: vi.fn().mockResolvedValue({
-          response: {
-            text: () => JSON.stringify({
-              food_summary: '2 boiled eggs',
-              calories: 140,
-              protein_g: 12,
-              carbs_g: 1,
-              fat_g: 10,
-              fiber_g: 0,
-              is_valid: true,
-              error_message: null,
-            }),
-          },
-        }),
-      };
-    }
-  },
-}));
+let mockGenerateContent = vi.fn();
+
+vi.mock('@google/generative-ai', () => {
+  return {
+    GoogleGenerativeAI: class {
+      getGenerativeModel({ model }) {
+        return {
+          generateContent: (...args) => mockGenerateContent(model, ...args),
+        };
+      }
+    },
+  };
+});
 
 function createMockReqRes({ method = 'POST', body = {} } = {}) {
   const req = { method, body };
@@ -43,6 +34,7 @@ function createMockReqRes({ method = 'POST', body = {} } = {}) {
 
 describe('api/logMeal Serverless Function', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     process.env.GEMINI_API_KEY = 'mock-gemini-key';
   });
 
@@ -63,6 +55,21 @@ describe('api/logMeal Serverless Function', () => {
   });
 
   it('processes valid text meal request and returns structured nutritional JSON with secondary macros', async () => {
+    mockGenerateContent.mockResolvedValueOnce({
+      response: {
+        text: () => JSON.stringify({
+          food_summary: '2 boiled eggs',
+          calories: 140,
+          protein_g: 12,
+          carbs_g: 1,
+          fat_g: 10,
+          fiber_g: 0,
+          is_valid: true,
+          error_message: null,
+        }),
+      },
+    });
+
     const { req, res } = createMockReqRes({
       method: 'POST',
       body: { text: '2 boiled eggs' },
@@ -81,5 +88,39 @@ describe('api/logMeal Serverless Function', () => {
       is_valid: true,
       error_message: null,
     });
+  });
+
+  it('automatically falls back to next model when primary model encounters 429 quota error', async () => {
+    // First model throws 429 Too Many Requests
+    const quotaErr = new Error('429 Too Many Requests: Quota exceeded');
+    quotaErr.status = 429;
+    mockGenerateContent.mockRejectedValueOnce(quotaErr);
+
+    // Second fallback model succeeds
+    mockGenerateContent.mockResolvedValueOnce({
+      response: {
+        text: () => JSON.stringify({
+          food_summary: 'Protein Shake',
+          calories: 200,
+          protein_g: 30,
+          carbs_g: 5,
+          fat_g: 3,
+          fiber_g: 1,
+          is_valid: true,
+          error_message: null,
+        }),
+      },
+    });
+
+    const { req, res } = createMockReqRes({
+      method: 'POST',
+      body: { text: 'Protein Shake' },
+    });
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.data.calories).toBe(200);
+    expect(res.data.protein_g).toBe(30);
   });
 });
