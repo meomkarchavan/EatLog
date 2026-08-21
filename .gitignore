@@ -3,3 +3,7 @@ node_modules/
 .env.local
 .env.*.local
 .firebase/
+.vercel
+dist/
+test-results/
+playwright-report/

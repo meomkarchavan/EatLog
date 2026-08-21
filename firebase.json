@@ -5,6 +5,24 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
+  },
+  "auth": {
+    "authorizedDomains": [
+      "localhost"
+    ],
+    "providers": {
+      "emailPassword": true
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }
