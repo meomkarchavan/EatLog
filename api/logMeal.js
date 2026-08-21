@@ -8,8 +8,15 @@ RULES:
 2. ESTIMATION HEURISTICS: Estimate based on standard adult portion sizes for plated meals. **CRITICAL: If the image is of a nutrition label or food packaging, extract the exact calories and macronutrient values stated on the label for one standard serving.**
 3. OUTPUT SCHEMA: Return exactly this structure: { "food_summary": string, "calories": integer, "protein_g": integer, "carbs_g": integer, "fat_g": integer, "fiber_g": integer, "is_valid": boolean, "error_message": string or null }`;
 
-// Candidate models in order of priority with high free-tier quotas (1,500 RPD vs 20 RPD)
-const CANDIDATE_MODELS = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"];
+// Verified working models available in Google Generative AI in order of preference
+const CANDIDATE_MODELS = [
+  "gemini-3.5-flash",
+  "gemini-3.5-flash-lite",
+  "gemini-3.1-flash-lite",
+  "gemini-flash-latest",
+  "gemini-3.7-flash",
+  "gemini-3.6-flash",
+];
 
 // Helper to get GEMINI_API_KEY from process.env, .env.local, .env.development, or .env.production
 function getApiKey() {
@@ -106,7 +113,7 @@ export default async function handler(req, res) {
     let response = null;
     let lastError = null;
 
-    // Try primary model and fallback models if rate-limited (429) or transient 503 occurs
+    // Try candidate models in order with automatic fallback on 429, 404, or 503
     for (const modelName of CANDIDATE_MODELS) {
       try {
         const model = genAI.getGenerativeModel({
@@ -120,12 +127,15 @@ export default async function handler(req, res) {
 
         const result = await model.generateContent(parts);
         response = result.response;
-        if (response) break; // Success!
+        if (response) {
+          console.log(`[Gemini API] Successfully analyzed with model: ${modelName}`);
+          break;
+        }
       } catch (err) {
-        console.warn(`Model ${modelName} failed with:`, err.status || err.message);
+        console.warn(`[Gemini API] Model ${modelName} failed with:`, err.status || err.message);
         lastError = err;
-        // If 429 (quota exceeded) or 503 (high demand) or 404 (model not found), try next candidate
-        if (err.status === 429 || err.status === 503 || err.status === 404 || err.message?.includes("quota") || err.message?.includes("429")) {
+        // If 429 (quota exceeded), 404 (not found), or 503 (high demand), try next candidate
+        if (err.status === 429 || err.status === 404 || err.status === 503 || err.message?.includes("quota") || err.message?.includes("429")) {
           continue;
         } else {
           throw err;
@@ -165,7 +175,7 @@ export default async function handler(req, res) {
       fiber_g: 0,
       is_valid: false,
       error_message: isQuotaError
-        ? "Gemini API daily quota reached. Please try again shortly or check your Google AI Studio plan."
+        ? "Gemini API rate limit reached. Please try again in a few seconds."
         : error.message?.includes("high demand")
         ? "Gemini is currently experiencing high demand. Please retry in a moment."
         : error.message || "Failed to analyze meal",
