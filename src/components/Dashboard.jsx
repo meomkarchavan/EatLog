@@ -289,6 +289,8 @@ export default function Dashboard() {
 
   const caloriePercent = Math.min(100, Math.round((totalCalories / targets.targetCalories) * 100));
   const proteinPercent = Math.min(100, Math.round((totalProtein / targets.targetMacros.protein_g) * 100));
+  const calorieSurplus = totalCalories - targets.targetCalories;
+  const proteinSurplus = totalProtein - targets.targetMacros.protein_g;
 
   return (
     <div className="flex flex-col h-full bg-black">
@@ -390,17 +392,20 @@ export default function Dashboard() {
               <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
                 <p className="text-zinc-500 text-xs font-medium uppercase tracking-widest mb-1">Calories</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-black text-white tabular-nums leading-none">
+                  <span className={`text-3xl font-black tabular-nums leading-none ${calorieSurplus > 0 ? 'text-red-400' : 'text-white'}`}>
                     {totalCalories}
                   </span>
                   <span className="text-xs text-zinc-500 font-normal">
                     / {targets.targetCalories} kcal
                   </span>
+                  {calorieSurplus > 0 && (
+                    <span className="text-[10px] text-red-400 font-semibold">+{calorieSurplus} over</span>
+                  )}
                 </div>
                 {/* Minimal Progress Bar */}
                 <div className="w-full bg-surface-3 h-1.5 rounded-full mt-2.5 overflow-hidden">
                   <div
-                    className="bg-amber-400 h-full rounded-full transition-all duration-500"
+                    className={`${calorieSurplus > 0 ? 'bg-red-400' : 'bg-amber-400'} h-full rounded-full transition-all duration-500`}
                     style={{ width: `${caloriePercent}%` }}
                   />
                 </div>
@@ -410,12 +415,15 @@ export default function Dashboard() {
               <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
                 <p className="text-zinc-500 text-xs font-medium uppercase tracking-widest mb-1">Protein</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-black text-white tabular-nums leading-none">
+                  <span className={`text-3xl font-black tabular-nums leading-none ${proteinSurplus > 0 ? 'text-emerald-300' : 'text-white'}`}>
                     {totalProtein}
                   </span>
                   <span className="text-xs text-zinc-500 font-normal">
                     / {targets.targetMacros.protein_g}g
                   </span>
+                  {proteinSurplus > 0 && (
+                    <span className="text-[10px] text-emerald-400 font-semibold">+{proteinSurplus}g over</span>
+                  )}
                 </div>
                 {/* Minimal Progress Bar */}
                 <div className="w-full bg-surface-3 h-1.5 rounded-full mt-2.5 overflow-hidden">
@@ -485,7 +493,7 @@ export default function Dashboard() {
           <div className="fixed bottom-0 left-0 right-0 bg-surface-1 border-t border-surface-3 px-4 py-3 safe-area-pb">
             <form onSubmit={handleTextSubmit} className="flex items-center gap-2">
               {/* Date Selector Badge */}
-              <div className="relative shrink-0">
+              <div className="relative shrink-0 overflow-hidden rounded-xl">
                 <button
                   type="button"
                   onClick={() => dateInputRef.current?.showPicker ? dateInputRef.current.showPicker() : dateInputRef.current?.focus()}
@@ -500,6 +508,7 @@ export default function Dashboard() {
                   value={selectedDate}
                   onChange={(e) => e.target.value && setSelectedDate(e.target.value)}
                   className="absolute inset-0 opacity-0 pointer-events-auto cursor-pointer"
+                  tabIndex={-1}
                 />
               </div>
 
@@ -510,7 +519,7 @@ export default function Dashboard() {
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isLoading}
                 title="Log food from photo"
-                className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
+                className="relative z-10 shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
               >
                 <CameraIcon />
               </button>
