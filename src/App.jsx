@@ -5,6 +5,7 @@ import AuthScreen from './components/AuthScreen';
 import Dashboard from './components/Dashboard';
 import { ToastProvider } from './components/Toast';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -30,8 +31,10 @@ export default function App() {
     <ToastProvider>
       {!user ? <AuthScreen /> : <Dashboard />}
       <SpeedInsights />
+      <Analytics />
     </ToastProvider>
   );
 }
+
 
 
