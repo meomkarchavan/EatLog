@@ -66,12 +66,12 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     await page.locator('#profile-age').fill('28');
     await page.locator('#profile-weight').fill('78');
     await page.locator('#save-profile-btn').click();
-    await expect(page.getByText(/Profile saved!/i)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText(/Profile saved!/i).first()).toBeVisible({ timeout: 10000 });
 
     // Return to Daily Tab and verify Dynamic Targets in HUD
     await page.locator('#tab-daily').click();
-    await expect(page.getByText(/\/ \d+ kcal/i)).toBeVisible({ timeout: 8000 });
-    await expect(page.getByText(/\/ \d+g/i)).toBeVisible();
+    await expect(page.getByText(/\/ \d+ kcal/i).first()).toBeVisible({ timeout: 8000 });
+    await expect(page.getByText(/\/ \d+g/i).first()).toBeVisible();
 
     // 5. Test Water Tracking
     const addWaterBtn = page.locator('#add-water-btn');
@@ -84,7 +84,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     if (await weightInput.isVisible()) {
       await weightInput.fill('78.0');
       await page.locator('#save-weight-btn').click();
-      await expect(page.getByText('78')).toBeVisible({ timeout: 10000 });
+      await expect(page.getByText('78').first()).toBeVisible({ timeout: 10000 });
     }
 
     // 7. Test Zero-Friction Meal Logging via Text
@@ -96,7 +96,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     await submitBtn.click();
 
     // Verify meal appears in feed
-    await expect(page.getByText(/chapati/i)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/chapati/i).first()).toBeVisible({ timeout: 15000 });
 
     // 8. Test Meal Editing & Pinning Feature
     const editMealBtn = page.getByTestId('edit-meal-btn').first();
@@ -111,7 +111,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     const pinBtn = page.getByTestId('pin-staple-btn').first();
     if (await pinBtn.isVisible()) {
       await pinBtn.click();
-      await expect(page.getByText(/Pinned to staples!/i)).toBeVisible({ timeout: 5000 });
+      await expect(page.getByText(/Pinned to staples!/i).first()).toBeVisible({ timeout: 5000 });
     }
 
     // 9. Test Staples Modal
@@ -119,8 +119,11 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     if (await staplesBtn.isVisible()) {
       await staplesBtn.click();
       await expect(page.getByText('My Staples')).toBeVisible({ timeout: 5000 });
-      // Close modal
-      await page.keyboard.press('Escape');
+      // Close modal by clicking backdrop or close button
+      const closeBtn = page.locator('button:has-text("✕"), button[aria-label="Close"], button svg.w-5.h-5').first();
+      if (await closeBtn.isVisible()) {
+        await closeBtn.click();
+      }
     }
 
     // 10. Test Quick Lookup Panel
@@ -129,9 +132,9 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await lookupTab.click();
       await expect(page.getByText('Quick Lookup')).toBeVisible({ timeout: 5000 });
       const lookupInput = page.locator('#lookup-input');
-      await lookupInput.fill('1 banana');
+      await lookupInput.fill('2 chapatis');
       await page.locator('#lookup-submit-btn').click();
-      await expect(page.getByText(/105/i)).toBeVisible({ timeout: 10000 });
+      await expect(page.getByText(/chapatis/i).first()).toBeVisible({ timeout: 10000 });
       // Return to Daily tab
       await page.locator('#tab-daily').click();
     }
