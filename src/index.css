@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
 html, body, #root {
   height: 100%;
   overflow: hidden;
@@ -25,4 +29,19 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .animate-pulse-slow {
   animation: pulse-slow 1.5s ease-in-out infinite;
+}
+
+@keyframes lookup-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lookup-card-enter {
+  animation: lookup-card-enter 0.25s ease-out;
 }

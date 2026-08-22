@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useToast } from './Toast';
 
-export default function MealCard({ log }) {
+export default function MealCard({ log, onPinStaple, isPinned }) {
+  const { showToast, showConfirm } = useToast();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isReEstimating, setIsReEstimating] = useState(false);
@@ -48,7 +50,7 @@ export default function MealCard({ log }) {
       const data = await res.json();
 
       if (!data.is_valid) {
-        alert(data.error_message || 'Could not estimate nutrition for this meal.');
+        showToast(data.error_message || 'Could not estimate nutrition for this meal.', 'error');
         return;
       }
 
@@ -60,9 +62,10 @@ export default function MealCard({ log }) {
         fat_g: Number(data.fat_g) || 0,
         fiber_g: Number(data.fiber_g) || 0,
       }));
+      showToast('Nutritional facts recalculated!', 'success');
     } catch (err) {
       console.error('Re-estimate error:', err);
-      alert('AI estimation failed. You can adjust numbers manually.');
+      showToast('AI estimation failed. You can adjust numbers manually.', 'warning');
     } finally {
       setIsReEstimating(false);
     }
@@ -85,9 +88,10 @@ export default function MealCard({ log }) {
         updated_at: new Date().toISOString(),
       });
       setIsEditing(false);
+      showToast('Meal updated successfully.', 'success');
     } catch (err) {
       console.error('Error updating meal log:', err);
-      alert('Failed to save changes. Please try again.');
+      showToast('Failed to save changes. Please try again.', 'error');
     } finally {
       setIsSaving(false);
     }
@@ -95,14 +99,15 @@ export default function MealCard({ log }) {
 
   const handleDelete = async () => {
     if (!log.docId) return;
-    const confirmDelete = window.confirm(`Delete "${log.food_summary}"?`);
-    if (!confirmDelete) return;
+    const ok = await showConfirm(`Delete "${log.food_summary}"?`);
+    if (!ok) return;
 
     try {
       await deleteDoc(doc(db, 'daily_logs', log.docId));
+      showToast('Meal deleted.', 'info');
     } catch (err) {
       console.error('Error deleting meal log:', err);
-      alert('Failed to delete meal log.');
+      showToast('Failed to delete meal log.', 'error');
     }
   };
 
@@ -250,6 +255,11 @@ export default function MealCard({ log }) {
                 Photo
               </span>
             )}
+            {log.input_method === 'staple' && (
+              <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] text-zinc-400">
+                Staple
+              </span>
+            )}
             <button
               data-testid="edit-meal-btn"
               onClick={handleStartEdit}
@@ -261,6 +271,35 @@ export default function MealCard({ log }) {
                 <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
               </svg>
               <span>Edit</span>
+            </button>
+            {/* Pin to Staples */}
+            {onPinStaple && (
+              <button
+                data-testid="pin-staple-btn"
+                onClick={() => onPinStaple(log)}
+                className={`text-xs transition-colors font-medium ml-0.5 flex items-center gap-0.5 ${
+                  isPinned
+                    ? 'text-amber-400 hover:text-amber-300'
+                    : 'text-zinc-500 hover:text-amber-400'
+                }`}
+                title={isPinned ? 'Remove from staples' : 'Pin to staples'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+                  <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                </svg>
+                <span>{isPinned ? 'Pinned' : 'Pin'}</span>
+              </button>
+            )}
+            {/* Delete (trash icon) */}
+            <button
+              data-testid="delete-meal-btn"
+              onClick={handleDelete}
+              className="text-xs text-zinc-500 hover:text-rose-400 transition-colors font-medium ml-0.5 flex items-center gap-0.5"
+              title="Delete meal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+                <path fillRule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.519.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clipRule="evenodd" />
+              </svg>
             </button>
           </div>
         </div>

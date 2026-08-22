@@ -8,6 +8,9 @@ import {
   onSnapshot,
   addDoc,
   doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import WaterTracker from './WaterTracker';
@@ -15,7 +18,10 @@ import WeightTracker from './WeightTracker';
 import WeeklyView from './WeeklyView';
 import Profile from './Profile';
 import MealCard from './MealCard';
+import LookupPanel from './LookupPanel';
+import DatePicker from './DatePicker';
 import { calculateNutritionTargets } from '../utils/nutritionMath';
+import { useToast } from './Toast';
 
 // --- Icons (inline SVG) ---
 function CameraIcon() {
@@ -104,16 +110,19 @@ function fileToBase64(file) {
 }
 
 export default function Dashboard() {
+  const { showToast } = useToast();
   const todayStr = formatLocalDate(new Date());
-  const [currentTab, setCurrentTab] = useState('daily'); // 'daily' | 'weekly' | 'profile'
+  const [currentTab, setCurrentTab] = useState('daily'); // 'daily' | 'weekly' | 'profile' | 'lookup'
   const [selectedDate, setSelectedDate] = useState(todayStr);
   const [dailyLogs, setDailyLogs] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
   const [currentWeight, setCurrentWeight] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [inputText, setInputText] = useState('');
+  const [showStaplesModal, setShowStaplesModal] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [isDateLoading, setIsDateLoading] = useState(false);
   const fileInputRef = useRef(null);
-  const dateInputRef = useRef(null);
   const inputRef = useRef(null);
 
   // 1. Real-time listener for logs on selectedDate
@@ -121,6 +130,8 @@ export default function Dashboard() {
     const uid = auth.currentUser?.uid;
     if (!uid || !selectedDate) return;
 
+    setIsDateLoading(true);
+    setDailyLogs([]);
     const { startISO, endISO } = getDateBounds(selectedDate);
 
     const q = query(
@@ -136,9 +147,11 @@ export default function Dashboard() {
       (snapshot) => {
         const logs = snapshot.docs.map((doc) => ({ docId: doc.id, ...doc.data() }));
         setDailyLogs(logs);
+        setIsDateLoading(false);
       },
       (error) => {
         console.error('Firestore listener error:', error);
+        setIsDateLoading(false);
       }
     );
 
@@ -198,6 +211,9 @@ export default function Dashboard() {
   const totalFat = dailyLogs.reduce((sum, log) => sum + (Number(log.fat_g) || 0), 0);
   const totalFiber = dailyLogs.reduce((sum, log) => sum + (Number(log.fiber_g) || 0), 0);
 
+  // Staples derived from user profile (synced via real-time listener)
+  const staples = userProfile?.staples || [];
+
   // Dynamic Targets Calculation with graceful fallbacks (2500 kcal / 150g protein)
   const targets = calculateNutritionTargets(userProfile || {}, currentWeight);
 
@@ -218,7 +234,7 @@ export default function Dashboard() {
       const data = await res.json();
 
       if (!data.is_valid) {
-        alert(data.error_message || 'Could not identify the food.');
+        showToast(data.error_message || 'Could not identify the food.', 'error');
         return;
       }
 
@@ -248,9 +264,10 @@ export default function Dashboard() {
       });
 
       setInputText('');
+      showToast(`Logged: ${data.food_summary}`, 'success');
     } catch (err) {
       console.error('Submission error:', err);
-      alert('Something went wrong. Please try again.');
+      showToast('Something went wrong. Please try again.', 'error');
     } finally {
       setIsLoading(false);
     }
@@ -272,10 +289,83 @@ export default function Dashboard() {
       await submitToAPI({ image: base64 }, 'vision');
     } catch (err) {
       console.error('Image processing error:', err);
-      alert('Failed to process image.');
+      showToast('Failed to process image.', 'error');
     }
 
     if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  // --- Staples: Pin / Unpin / Re-log ---
+  const handlePinStaple = async (log) => {
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+
+    const staplePayload = {
+      food_summary: log.food_summary,
+      calories: Number(log.calories) || 0,
+      protein_g: Number(log.protein_g) || 0,
+      carbs_g: Number(log.carbs_g) || 0,
+      fat_g: Number(log.fat_g) || 0,
+      fiber_g: Number(log.fiber_g) || 0,
+    };
+
+    // Check if already pinned (by food_summary match)
+    const alreadyPinned = staples.some(
+      (s) => s.food_summary === log.food_summary
+    );
+
+    try {
+      const profileRef = doc(db, 'user_profiles', uid);
+      if (alreadyPinned) {
+        // Remove the matching staple
+        const toRemove = staples.find(
+          (s) => s.food_summary === log.food_summary
+        );
+        await updateDoc(profileRef, { staples: arrayRemove(toRemove) });
+        showToast('Removed from staples.', 'info');
+      } else {
+        await updateDoc(profileRef, { staples: arrayUnion(staplePayload) });
+        showToast('Pinned to staples!', 'success');
+      }
+    } catch (err) {
+      console.error('Error updating staples:', err);
+      showToast('Failed to update staples.', 'error');
+    }
+  };
+
+  const handleRelogStaple = async (staple) => {
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+
+    // Use actual current time for today; noon for past dates
+    const todayCheck = formatLocalDate(new Date());
+    let timestamp;
+    if (selectedDate === todayCheck) {
+      timestamp = new Date().toISOString();
+    } else {
+      const [year, month, day] = selectedDate.split('-').map(Number);
+      const noonDate = new Date(year, month - 1, day, 12, 0, 0);
+      timestamp = noonDate.toISOString();
+    }
+
+    try {
+      await addDoc(collection(db, 'daily_logs'), {
+        id: crypto.randomUUID(),
+        user_id: uid,
+        timestamp: timestamp,
+        food_summary: staple.food_summary,
+        calories: Number(staple.calories) || 0,
+        protein_g: Number(staple.protein_g) || 0,
+        carbs_g: Number(staple.carbs_g) || 0,
+        fat_g: Number(staple.fat_g) || 0,
+        fiber_g: Number(staple.fiber_g) || 0,
+        input_method: 'staple',
+      });
+      showToast(`Re-logged: ${staple.food_summary}`, 'success');
+    } catch (err) {
+      console.error('Staple re-log error:', err);
+      showToast('Failed to re-log staple.', 'error');
+    }
   };
 
   const isToday = selectedDate === todayStr;
@@ -337,6 +427,17 @@ export default function Dashboard() {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
               )}
             </button>
+            <button
+              id="tab-lookup"
+              onClick={() => setCurrentTab('lookup')}
+              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+                currentTab === 'lookup'
+                  ? 'bg-violet-600 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              Lookup
+            </button>
           </div>
 
           <button
@@ -350,14 +451,16 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content Area */}
-      {currentTab === 'weekly' ? (
+      {currentTab === 'lookup' ? (
+        <LookupPanel />
+      ) : currentTab === 'weekly' ? (
         <WeeklyView />
       ) : currentTab === 'profile' ? (
-        <Profile latestWeightKg={currentWeight} />
+        <Profile latestWeightKg={currentWeight || userProfile?.current_weight_kg} />
       ) : (
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
           {/* Daily HUD */}
-          <section className="px-5 pt-4 pb-2">
+          <section className={`px-5 pt-4 pb-2 transition-opacity duration-200 ${isDateLoading ? 'opacity-40' : 'opacity-100'}`}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-zinc-500 text-xs font-medium uppercase tracking-wider">
                 {displayDateTitle}
@@ -457,7 +560,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Quick Trackers Grid: Water & Morning Weight */}
+            {/* Quick Trackers Grid: Water & Weight */}
             <div className="space-y-2 mt-3">
               <WaterTracker selectedDate={selectedDate} />
               <WeightTracker selectedDate={selectedDate} />
@@ -469,14 +572,27 @@ export default function Dashboard() {
 
           {/* Log Feed */}
           <section className="flex-1 overflow-y-auto px-5 py-3 space-y-2 pb-28">
-            {dailyLogs.length === 0 && !isLoading && (
+            {isDateLoading && (
+              <div className="space-y-2 animate-pulse-slow">
+                <div className="bg-surface-2 rounded-xl h-16 border border-surface-3/60" />
+                <div className="bg-surface-2 rounded-xl h-16 border border-surface-3/60" />
+                <div className="bg-surface-2 rounded-xl h-12 border border-surface-3/60 w-3/4" />
+              </div>
+            )}
+
+            {!isDateLoading && dailyLogs.length === 0 && !isLoading && (
               <p className="text-zinc-600 text-sm text-center mt-10">
                 No meals logged for {isToday ? 'today' : displayDateTitle}.
               </p>
             )}
 
             {dailyLogs.map((log) => (
-              <MealCard key={log.docId} log={log} />
+              <MealCard
+                key={log.docId}
+                log={log}
+                onPinStaple={handlePinStaple}
+                isPinned={staples.some((s) => s.food_summary === log.food_summary)}
+              />
             ))}
           </section>
 
@@ -489,28 +605,108 @@ export default function Dashboard() {
             </div>
           )}
 
+          {/* Staples Modal */}
+          {showStaplesModal && (
+            <div className="fixed inset-0 bg-black/70 backdrop-blur-xs flex items-end justify-center z-50" onClick={() => setShowStaplesModal(false)}>
+              <div
+                className="w-full max-w-lg bg-surface-1 border-t border-surface-3 rounded-t-3xl p-5 pb-8 lookup-card-enter"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-amber-400">
+                      <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                    </svg>
+                    <h3 className="text-white text-base font-bold">My Staples</h3>
+                    <span className="text-zinc-500 text-xs">{staples.length} item{staples.length !== 1 ? 's' : ''}</span>
+                  </div>
+                  <button
+                    onClick={() => setShowStaplesModal(false)}
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-500 hover:text-white hover:bg-surface-3 transition-all"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Staples List */}
+                {staples.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-zinc-500 text-sm">No staples pinned yet.</p>
+                    <p className="text-zinc-600 text-xs mt-1">Tap the ⭐ on any logged meal to pin it here.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {staples.map((staple, idx) => (
+                      <div
+                        key={`${staple.food_summary}-${idx}`}
+                        className="flex items-center gap-3 bg-surface-2 rounded-xl p-3 border border-surface-3/60"
+                      >
+                        {/* Tap to re-log */}
+                        <button
+                          onClick={() => {
+                            handleRelogStaple(staple);
+                            setShowStaplesModal(false);
+                          }}
+                          className="flex-1 text-left min-w-0 active:scale-[0.98] transition-transform"
+                        >
+                          <p className="text-white text-sm font-medium truncate">{staple.food_summary}</p>
+                          <div className="flex items-center gap-3 mt-1">
+                            <span className="text-amber-400 text-xs font-semibold tabular-nums">{staple.calories} cal</span>
+                            <span className="text-emerald-400 text-[10px] tabular-nums">{staple.protein_g}g pro</span>
+                            <span className="text-sky-400 text-[10px] tabular-nums">{staple.carbs_g}g carb</span>
+                            <span className="text-rose-400 text-[10px] tabular-nums">{staple.fat_g}g fat</span>
+                          </div>
+                        </button>
+                        {/* Unpin button */}
+                        <button
+                          onClick={() => handlePinStaple(staple)}
+                          title="Remove from staples"
+                          className="shrink-0 w-8 h-8 flex items-center justify-center rounded-lg text-amber-400 hover:text-rose-400 hover:bg-surface-3 transition-all"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                            <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                          </svg>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Hint */}
+                {staples.length > 0 && (
+                  <p className="text-zinc-600 text-[10px] text-center mt-3">Tap any staple to instantly log it</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Date Picker Modal */}
+          <DatePicker
+            isOpen={showDatePicker}
+            onClose={() => setShowDatePicker(false)}
+            selectedDate={selectedDate}
+            onSelectDate={setSelectedDate}
+          />
+
           {/* Omni-Input Bar with Date Picker */}
           <div className="fixed bottom-0 left-0 right-0 bg-surface-1 border-t border-surface-3 px-4 py-3 safe-area-pb">
             <form onSubmit={handleTextSubmit} className="flex items-center gap-2">
               {/* Date Selector Badge */}
-              <div className="relative shrink-0 overflow-hidden rounded-xl">
-                <button
-                  type="button"
-                  onClick={() => dateInputRef.current?.showPicker ? dateInputRef.current.showPicker() : dateInputRef.current?.focus()}
-                  title="Change logging date"
-                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50"
-                >
-                  <CalendarIcon />
-                </button>
-                <input
-                  ref={dateInputRef}
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => e.target.value && setSelectedDate(e.target.value)}
-                  className="absolute inset-0 opacity-0 pointer-events-auto cursor-pointer"
-                  tabIndex={-1}
-                />
-              </div>
+              <button
+                type="button"
+                onClick={() => setShowDatePicker(true)}
+                title="Change logging date"
+                className={`shrink-0 w-10 h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border ${
+                  selectedDate !== todayStr
+                    ? 'bg-cyan-950/30 text-cyan-400 border-cyan-800/40'
+                    : 'bg-surface-3 text-zinc-300 hover:text-white border-zinc-700/50'
+                }`}
+              >
+                <CalendarIcon />
+              </button>
 
               {/* Camera Button */}
               <button
@@ -532,6 +728,29 @@ export default function Dashboard() {
                 className="hidden"
               />
 
+              {/* Staples Button */}
+              <button
+                id="staples-btn"
+                type="button"
+                onClick={() => setShowStaplesModal(true)}
+                disabled={isLoading}
+                title="My Staples"
+                className={`relative z-10 shrink-0 w-10 h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border disabled:opacity-30 ${
+                  staples.length > 0
+                    ? 'bg-amber-950/30 text-amber-400 border-amber-800/40'
+                    : 'bg-surface-3 text-zinc-400 border-zinc-700/50 hover:text-amber-400'
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                  <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                </svg>
+                {staples.length > 0 && (
+                  <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 flex items-center justify-center rounded-full bg-amber-500 text-black text-[9px] font-bold">
+                    {staples.length}
+                  </span>
+                )}
+              </button>
+
               {/* Text Input */}
               <input
                 ref={inputRef}
@@ -549,7 +768,7 @@ export default function Dashboard() {
                 id="submit-btn"
                 type="submit"
                 disabled={isLoading || !inputText.trim()}
-                className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20 flex items-center justify-center"
+                className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20"
               >
                 <SendIcon />
               </button>

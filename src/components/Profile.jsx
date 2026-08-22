@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { calculateNutritionTargets } from '../utils/nutritionMath';
+import { exportAllDataAsCsv } from '../utils/exportCsv';
+import { useToast } from './Toast';
 
 export default function Profile({ latestWeightKg }) {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     height_cm: '',
     age: '',
@@ -16,6 +19,8 @@ export default function Profile({ latestWeightKg }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportResult, setExportResult] = useState(null);
 
   useEffect(() => {
     const uid = auth.currentUser?.uid;
@@ -49,6 +54,16 @@ export default function Profile({ latestWeightKg }) {
     return unsubscribe;
   }, []);
 
+  // Keep form weight in sync with latest recorded weight if available
+  useEffect(() => {
+    if (latestWeightKg !== undefined && latestWeightKg !== null && String(latestWeightKg) !== '') {
+      setFormData((prev) => ({
+        ...prev,
+        current_weight_kg: String(latestWeightKg),
+      }));
+    }
+  }, [latestWeightKg]);
+
   const targets = calculateNutritionTargets(formData, latestWeightKg);
 
   const handleSubmit = async (e) => {
@@ -61,6 +76,8 @@ export default function Profile({ latestWeightKg }) {
 
     try {
       const docRef = doc(db, 'user_profiles', uid);
+      const parsedWeight = Number(formData.current_weight_kg) || null;
+
       await setDoc(
         docRef,
         {
@@ -70,17 +87,35 @@ export default function Profile({ latestWeightKg }) {
           gender: formData.gender,
           activity_level: formData.activity_level,
           goal: formData.goal,
-          current_weight_kg: Number(formData.current_weight_kg) || null,
-          baseline_weight_kg: Number(formData.current_weight_kg) || null,
+          current_weight_kg: parsedWeight,
+          baseline_weight_kg: parsedWeight,
           updated_at: new Date().toISOString(),
         },
         { merge: true }
       );
+
+      // Also sync today's weight log
+      if (parsedWeight) {
+        const todayStr = new Date().toLocaleDateString('en-CA');
+        const weightDocRef = doc(db, 'weight_logs', `${uid}_${todayStr}`);
+        await setDoc(
+          weightDocRef,
+          {
+            user_id: uid,
+            date: todayStr,
+            weight_kg: parsedWeight,
+            updated_at: new Date().toISOString(),
+          },
+          { merge: true }
+        );
+      }
+
       setSaveSuccess(true);
+      showToast('Profile saved! Dynamic targets applied.', 'success');
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err) {
       console.error('Error saving user profile:', err);
-      alert('Failed to save profile. Please try again.');
+      showToast('Failed to save profile. Please try again.', 'error');
     } finally {
       setIsSaving(false);
     }
@@ -215,7 +250,7 @@ export default function Profile({ latestWeightKg }) {
           />
           {latestWeightKg && (
             <p className="text-[11px] text-zinc-500 mt-1">
-              Latest morning log: <span className="text-purple-400 font-semibold">{latestWeightKg} kg</span>
+              Latest recorded weight: <span className="text-purple-400 font-semibold">{latestWeightKg} kg</span>
             </p>
           )}
         </div>
@@ -316,6 +351,48 @@ export default function Profile({ latestWeightKg }) {
           </p>
         )}
       </form>
+
+      {/* Data Export Section */}
+      <div className="bg-surface-2 rounded-2xl p-5 border border-surface-3 space-y-3">
+        <div>
+          <h3 className="text-white text-sm font-bold">Export Your Data</h3>
+          <p className="text-zinc-500 text-xs mt-0.5">
+            Download all your meal logs and weight logs as a CSV file.
+          </p>
+        </div>
+        <button
+          id="export-csv-btn"
+          type="button"
+          disabled={isExporting}
+          onClick={async () => {
+            setIsExporting(true);
+            setExportResult(null);
+            try {
+              const result = await exportAllDataAsCsv();
+              setExportResult(result);
+              showToast(`Exported ${result.mealCount} meals + ${result.weightCount} weight records!`, 'success');
+              setTimeout(() => setExportResult(null), 5000);
+            } catch (err) {
+              console.error('Export error:', err);
+              showToast('Failed to export data. Please try again.', 'error');
+            } finally {
+              setIsExporting(false);
+            }
+          }}
+          className="w-full bg-surface-3 text-white font-semibold rounded-xl py-3 text-sm active:scale-[0.98] transition-all disabled:opacity-40 border border-zinc-700/50 hover:border-zinc-600 flex items-center justify-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+            <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
+            <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+          </svg>
+          {isExporting ? 'Exporting...' : 'Export All Data (CSV)'}
+        </button>
+        {exportResult && (
+          <p className="text-emerald-400 text-xs text-center font-medium">
+            ✓ Exported {exportResult.mealCount} meals + {exportResult.weightCount} weight entries → {exportResult.filename}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

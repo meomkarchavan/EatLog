@@ -415,7 +415,7 @@ export default function WeeklyView() {
             <h3 className="text-sm font-semibold text-white tracking-tight">
               Body Weight (Last 7 Days)
             </h3>
-            <p className="text-[11px] text-zinc-500">Morning weigh-in trend</p>
+            <p className="text-[11px] text-zinc-500">Body weight trend</p>
           </div>
           <span className="text-xs text-purple-400 font-medium font-mono">Kilograms</span>
         </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc, increment } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import { useToast } from './Toast';
 
 function WaterDropIcon() {
   return (
@@ -11,6 +12,7 @@ function WaterDropIcon() {
 }
 
 export default function WaterTracker({ selectedDate }) {
+  const { showToast } = useToast();
   const [totalMl, setTotalMl] = useState(0);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -58,7 +60,7 @@ export default function WaterTracker({ selectedDate }) {
       );
     } catch (err) {
       console.error('Error logging water:', err);
-      alert('Failed to log water intake.');
+      showToast('Failed to log water intake.', 'error');
     } finally {
       setIsUpdating(false);
     }
@@ -85,7 +87,7 @@ export default function WaterTracker({ selectedDate }) {
       );
     } catch (err) {
       console.error('Error subtracting water:', err);
-      alert('Failed to update water intake.');
+      showToast('Failed to update water intake.', 'error');
     } finally {
       setIsUpdating(false);
     }

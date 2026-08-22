@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import { useToast } from './Toast';
 
 function ScaleIcon() {
   return (
@@ -11,6 +12,7 @@ function ScaleIcon() {
 }
 
 export default function WeightTracker({ selectedDate }) {
+  const { showToast } = useToast();
   const [weightKg, setWeightKg] = useState('');
   const [currentSavedWeight, setCurrentSavedWeight] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -51,7 +53,7 @@ export default function WeightTracker({ selectedDate }) {
     const numericWeight = parseFloat(weightKg);
 
     if (!uid || !selectedDate || isNaN(numericWeight) || numericWeight <= 0) {
-      alert('Please enter a valid weight in kg.');
+      showToast('Please enter a valid weight in kg.', 'warning');
       return;
     }
 
@@ -70,10 +72,23 @@ export default function WeightTracker({ selectedDate }) {
         },
         { merge: true }
       );
+
+      // Keep user_profiles current_weight_kg in sync so macro targets and profile stay updated
+      const profileRef = doc(db, 'user_profiles', uid);
+      await setDoc(
+        profileRef,
+        {
+          current_weight_kg: numericWeight,
+          updated_at: new Date().toISOString(),
+        },
+        { merge: true }
+      );
+
       setIsEditing(false);
+      showToast('Weight recorded & profile updated!', 'success');
     } catch (err) {
       console.error('Error saving weight:', err);
-      alert('Failed to save morning weight.');
+      showToast('Failed to save weight.', 'error');
     } finally {
       setIsSaving(false);
     }
@@ -86,7 +101,7 @@ export default function WeightTracker({ selectedDate }) {
           <ScaleIcon />
         </div>
         <div>
-          <p className="text-zinc-500 text-[11px] font-medium uppercase tracking-wider">Morning Weight</p>
+          <p className="text-zinc-500 text-[11px] font-medium uppercase tracking-wider">Weight</p>
           {currentSavedWeight !== null && !isEditing ? (
             <p className="text-xl font-bold text-white tabular-nums leading-tight">
               {currentSavedWeight}{' '}

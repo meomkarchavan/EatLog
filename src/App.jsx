@@ -3,6 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import AuthScreen from './components/AuthScreen';
 import Dashboard from './components/Dashboard';
+import { ToastProvider } from './components/Toast';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -24,9 +25,10 @@ export default function App() {
     );
   }
 
-  if (!user) {
-    return <AuthScreen />;
-  }
-
-  return <Dashboard />;
+  return (
+    <ToastProvider>
+      {!user ? <AuthScreen /> : <Dashboard />}
+    </ToastProvider>
+  );
 }
+

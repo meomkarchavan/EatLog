@@ -69,6 +69,7 @@ describe('Profile Component', () => {
 
     await user.type(screen.getByLabelText(/height/i), '175');
     await user.type(screen.getByLabelText(/age/i), '25');
+    await user.clear(screen.getByLabelText(/current weight/i));
     await user.type(screen.getByLabelText(/current weight/i), '75');
 
     const saveBtn = screen.getByRole('button', { name: /save profile/i });

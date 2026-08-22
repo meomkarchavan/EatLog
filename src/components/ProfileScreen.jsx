@@ -6,8 +6,10 @@ import {
   ACTIVITY_MODIFIERS,
   GOAL_MODIFIERS,
 } from '../utils/targetEngine';
+import { useToast } from './Toast';
 
 export default function ProfileScreen({ latestWeightKg }) {
+  const { showToast } = useToast();
   const [profile, setProfile] = useState({
     height_cm: '',
     age: '',
@@ -78,10 +80,11 @@ export default function ProfileScreen({ latestWeightKg }) {
         { merge: true }
       );
       setSaveSuccess(true);
+      showToast('Profile saved!', 'success');
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err) {
       console.error('Error saving profile:', err);
-      alert('Failed to save profile.');
+      showToast('Failed to save profile.', 'error');
     } finally {
       setIsSaving(false);
     }
@@ -202,7 +205,7 @@ export default function ProfileScreen({ latestWeightKg }) {
           </div>
         </div>
 
-        {/* Baseline Weight (if no morning weigh-in logged yet) */}
+        {/* Baseline Weight (if no weigh-in logged yet) */}
         <div>
           <label className="block text-zinc-400 text-xs font-medium mb-1.5" htmlFor="profile-weight">
             Current / Baseline Weight (kg)
@@ -221,7 +224,7 @@ export default function ProfileScreen({ latestWeightKg }) {
           />
           {latestWeightKg && (
             <p className="text-[11px] text-zinc-500 mt-1">
-              Latest recorded morning weight: <span className="text-purple-400 font-semibold">{latestWeightKg} kg</span>
+              Latest recorded weight: <span className="text-purple-400 font-semibold">{latestWeightKg} kg</span>
             </p>
           )}
         </div>

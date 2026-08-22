@@ -35,7 +35,7 @@ describe('WeightTracker Component', () => {
   it('renders initial state with input when no weight is recorded', () => {
     render(<WeightTracker selectedDate="2026-08-21" />);
 
-    expect(screen.getByText(/Morning Weight/i)).toBeInTheDocument();
+    expect(screen.getByText(/^Weight$/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/e\.g\. 74\.5/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
   });
