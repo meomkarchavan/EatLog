@@ -15,10 +15,14 @@
   },
   "auth": {
     "authorizedDomains": [
-      "localhost"
+      "localhost",
+      "eat-log-git-dev-omkar-chavans-projects.vercel.app",
+      "eat-log-omkar-chavans-projects.vercel.app",
+      "eattlog.vercel.app"
     ],
     "providers": {
-      "emailPassword": true
+      "emailPassword": true,
+      "googleSignIn": true
     }
   },
   "firestore": {

@@ -431,14 +431,17 @@ export default function Profile({ latestWeightKg }) {
           </p>
         </div>
 
-        <div className="flex items-center justify-between p-3.5 bg-surface-3/50 rounded-xl border border-zinc-800">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-surface-2 flex items-center justify-center border border-zinc-700/50">
+        <div className="flex items-center justify-between p-3.5 bg-surface-3/50 rounded-xl border border-zinc-800 gap-3">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="w-8 h-8 rounded-lg bg-surface-2 flex items-center justify-center border border-zinc-700/50 flex-shrink-0">
               <GoogleIcon />
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <div className="text-white text-xs font-semibold">Google</div>
-              <div className="text-zinc-500 text-[11px]">
+              <div
+                className="text-zinc-500 text-[11px] truncate"
+                title={isGoogleLinked ? googleProviderInfo?.email : undefined}
+              >
                 {isGoogleLinked
                   ? googleProviderInfo.email || 'Connected'
                   : 'Not connected'}
@@ -447,8 +450,8 @@ export default function Profile({ latestWeightKg }) {
           </div>
 
           {isGoogleLinked ? (
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400 text-xs font-medium bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-800/40">
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <span className="text-emerald-400 text-xs font-medium bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-800/40 whitespace-nowrap">
                 Connected
               </span>
               {hasMultipleProviders && (
@@ -457,7 +460,7 @@ export default function Profile({ latestWeightKg }) {
                   id="unlink-google-btn"
                   disabled={isLinkingGoogle}
                   onClick={handleUnlinkGoogle}
-                  className="text-zinc-400 hover:text-red-400 text-xs font-medium px-2 py-1 transition-colors"
+                  className="text-zinc-400 hover:text-red-400 text-xs font-medium px-2 py-1 transition-colors whitespace-nowrap"
                 >
                   Disconnect
                 </button>
@@ -469,7 +472,7 @@ export default function Profile({ latestWeightKg }) {
               id="link-google-btn"
               disabled={isLinkingGoogle}
               onClick={handleLinkGoogle}
-              className="bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-lg px-3.5 py-2 active:scale-95 transition-all disabled:opacity-40"
+              className="bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-lg px-3.5 py-2 active:scale-95 transition-all disabled:opacity-40 flex-shrink-0 whitespace-nowrap"
             >
               {isLinkingGoogle ? 'Connecting...' : 'Connect'}
             </button>
