@@ -15,6 +15,11 @@ export default defineConfig({
   reporter: 'list',
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    extraHTTPHeaders: process.env.VERCEL_PROTECTION_BYPASS
+      ? {
+          'x-vercel-protection-bypass': process.env.VERCEL_PROTECTION_BYPASS,
+        }
+      : {},
     trace: 'on-first-retry',
     viewport: { width: 414, height: 896 }, // Mobile-first viewport
   },
