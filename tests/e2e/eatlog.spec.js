@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('EatLog E2E Functional & UI Automation Suite', () => {
-  const testEmail = `eatlog_e2e_${Date.now()}@example.com`;
+  // Use single deterministic E2E user so we never spam Firebase Auth with duplicate users
+  const testEmail = 'e2e_runner@eatlog.app';
   const testPassword = 'TestPassword123!';
 
   test('Complete End-to-End User Flow: Auth -> Goals Profile -> HUD -> Water & Weight -> Meal Logging & Editing -> Retroactive -> Weekly View', async ({ page }) => {
@@ -31,22 +32,29 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     // 1. Visit App
     await page.goto('/');
 
-    // 2. Auth Flow: If already logged in, sign out to test auth flow cleanly
+    // 2. Auth Flow: If already logged in with another account, sign out
     const signOutBtn = page.locator('#sign-out-btn');
     if (await signOutBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
       await signOutBtn.click();
     }
     await expect(page.locator('#auth-email')).toBeVisible({ timeout: 20000 });
-    
-    const toggleSignUp = page.locator('#auth-toggle');
-    const isSignUpBtnVisible = await page.getByRole('button', { name: /create account/i }).isVisible().catch(() => false);
-    if (!isSignUpBtnVisible && await toggleSignUp.isVisible()) {
-      await toggleSignUp.click();
-    }
 
+    // Fill credentials and sign in with the deterministic test runner account
     await page.locator('#auth-email').fill(testEmail);
     await page.locator('#auth-password').fill(testPassword);
     await page.locator('#auth-submit').click();
+
+    // Fallback: If not found, switch to sign up
+    const errorMsg = page.locator('p.text-red-400');
+    if (await errorMsg.isVisible({ timeout: 2000 }).catch(() => false)) {
+      const toggleSignUp = page.locator('#auth-toggle');
+      if (await toggleSignUp.isVisible()) {
+        await toggleSignUp.click();
+        await page.locator('#auth-email').fill(testEmail);
+        await page.locator('#auth-password').fill(testPassword);
+        await page.locator('#auth-submit').click();
+      }
+    }
 
     // 3. Verify Dashboard HUD (Primary & Secondary Macros)
     await expect(page.locator('#tab-daily')).toBeVisible({ timeout: 15000 });
@@ -111,7 +119,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     const pinBtn = page.getByTestId('pin-staple-btn').first();
     if (await pinBtn.isVisible()) {
       await pinBtn.click();
-      await expect(page.getByText(/Pinned to staples!/i).first()).toBeVisible({ timeout: 5000 });
+      await expect(page.getByText(/(Pinned to|Removed from) staples/i).first()).toBeVisible({ timeout: 5000 });
     }
 
     // 9. Test Staples Modal
@@ -167,8 +175,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     await expect(exportBtn).toBeVisible({ timeout: 5000 });
 
     // Return to Daily View
-    const dailyTab = page.locator('#tab-daily');
-    await dailyTab.click();
+    await page.locator('#tab-daily').click();
     await expect(page.getByText("Today's Intake")).toBeVisible();
   });
 });
