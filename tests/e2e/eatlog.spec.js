@@ -36,19 +36,20 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     // 1. Visit App
     await page.goto('/');
 
-    // 2. Auth Flow: If auth screen is shown, log in or sign up
-    const emailInput = page.locator('#auth-email');
-    const isAuthVisible = await emailInput.isVisible({ timeout: 5000 }).catch(() => false);
+    // 2. Wait for auth state initialization to finish (either AuthScreen or Dashboard)
+    await expect(page.locator('#auth-email, #tab-daily').first()).toBeVisible({ timeout: 20000 });
 
-    if (isAuthVisible) {
-      // Fill credentials and sign in with the deterministic test runner account
+    // If AuthScreen is displayed, log in (or sign up)
+    const emailInput = page.locator('#auth-email');
+    if (await emailInput.isVisible()) {
       await emailInput.fill(testEmail);
       await page.locator('#auth-password').fill(testPassword);
       await page.locator('#auth-submit').click();
 
-      // Fallback: If not found, switch to sign up
+      // If sign in returns error (e.g. invalid credential), toggle to sign up and submit
       const errorMsg = page.locator('p.text-red-400');
-      if (await errorMsg.isVisible({ timeout: 2000 }).catch(() => false)) {
+      const hasError = await errorMsg.isVisible({ timeout: 4000 }).catch(() => false);
+      if (hasError) {
         const toggleSignUp = page.locator('#auth-toggle');
         if (await toggleSignUp.isVisible()) {
           await toggleSignUp.click();
