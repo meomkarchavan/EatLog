@@ -8,11 +8,14 @@ import * as firebaseAuth from 'firebase/auth';
 vi.mock('firebase/auth', () => ({
   signInWithEmailAndPassword: vi.fn(),
   createUserWithEmailAndPassword: vi.fn(),
+  signInWithPopup: vi.fn(),
+  GoogleAuthProvider: vi.fn(),
   getAuth: vi.fn(() => ({})),
 }));
 
 vi.mock('../../src/firebase', () => ({
   auth: {},
+  googleProvider: {},
 }));
 
 describe('AuthScreen Component', () => {
@@ -20,10 +23,11 @@ describe('AuthScreen Component', () => {
     vi.clearAllMocks();
   });
 
-  it('renders sign in form with email and password inputs by default', () => {
+  it('renders sign in form with Google auth button, email, and password inputs by default', () => {
     render(<AuthScreen />);
 
     expect(screen.getByText('EatLog')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /continue with google/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
@@ -108,6 +112,22 @@ describe('AuthScreen Component', () => {
     });
   });
 
+  it('calls signInWithPopup when Continue with Google button is clicked', async () => {
+    firebaseAuth.signInWithPopup.mockResolvedValueOnce({ user: { uid: 'google-user-789' } });
+    const user = userEvent.setup();
+    render(<AuthScreen />);
+
+    const googleBtn = screen.getByRole('button', { name: /continue with google/i });
+    await user.click(googleBtn);
+
+    await waitFor(() => {
+      expect(firebaseAuth.signInWithPopup).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.anything()
+      );
+    });
+  });
+
   it('displays user-friendly error message on auth failure', async () => {
     firebaseAuth.signInWithEmailAndPassword.mockRejectedValueOnce({
       code: 'auth/invalid-credential',
@@ -125,3 +145,4 @@ describe('AuthScreen Component', () => {
     });
   });
 });
+

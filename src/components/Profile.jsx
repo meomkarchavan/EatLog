@@ -1,12 +1,36 @@
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { linkWithPopup, unlink } from 'firebase/auth';
+import { auth, db, googleProvider } from '../firebase';
 import { calculateNutritionTargets } from '../utils/nutritionMath';
 import { exportAllDataAsCsv } from '../utils/exportCsv';
 import { useToast } from './Toast';
 
+function GoogleIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24">
+      <path
+        fill="#EA4335"
+        d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"
+      />
+      <path
+        fill="#4285F4"
+        d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.8 0 12s.7 3.3 1.9 5.7l3.7-2.9z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"
+      />
+    </svg>
+  );
+}
+
 export default function Profile({ latestWeightKg }) {
-  const { showToast } = useToast();
+  const { showToast, showConfirm } = useToast();
   const [formData, setFormData] = useState({
     height_cm: '',
     age: '',
@@ -21,6 +45,8 @@ export default function Profile({ latestWeightKg }) {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportResult, setExportResult] = useState(null);
+  const [isLinkingGoogle, setIsLinkingGoogle] = useState(false);
+  const [providerData, setProviderData] = useState(auth.currentUser?.providerData || []);
 
   useEffect(() => {
     const uid = auth.currentUser?.uid;
@@ -65,6 +91,59 @@ export default function Profile({ latestWeightKg }) {
   }, [latestWeightKg]);
 
   const targets = calculateNutritionTargets(formData, latestWeightKg);
+
+  const googleProviderInfo = providerData.find((p) => p.providerId === 'google.com');
+  const isGoogleLinked = !!googleProviderInfo;
+  const hasMultipleProviders = providerData.length > 1;
+
+  const handleLinkGoogle = async () => {
+    if (!auth.currentUser) return;
+    setIsLinkingGoogle(true);
+    try {
+      const result = await linkWithPopup(auth.currentUser, googleProvider);
+      setProviderData([...(result.user?.providerData || [])]);
+      showToast('Google account connected successfully!', 'success');
+    } catch (err) {
+      if (err.code !== 'auth/popup-closed-by-user') {
+        const messages = {
+          'auth/credential-already-in-use':
+            'This Google account is already linked to another user account.',
+          'auth/provider-already-linked':
+            'Google account is already linked to your profile.',
+          'auth/popup-blocked':
+            'Popup was blocked by browser. Please allow popups for this site.',
+        };
+        showToast(messages[err.code] || `Failed to connect Google: ${err.message}`, 'error');
+      }
+    } finally {
+      setIsLinkingGoogle(false);
+    }
+  };
+
+  const handleUnlinkGoogle = async () => {
+    if (!auth.currentUser) return;
+    if (!hasMultipleProviders) {
+      showToast('Cannot disconnect your only sign-in method.', 'warning');
+      return;
+    }
+    const confirmed = await showConfirm(
+      'Disconnect Google Account',
+      'Are you sure you want to disconnect your Google account? You will need to sign in with your email and password.',
+      'Disconnect'
+    );
+    if (!confirmed) return;
+
+    setIsLinkingGoogle(true);
+    try {
+      const user = await unlink(auth.currentUser, 'google.com');
+      setProviderData([...(user?.providerData || [])]);
+      showToast('Google account disconnected.', 'success');
+    } catch (err) {
+      showToast(`Failed to disconnect: ${err.message}`, 'error');
+    } finally {
+      setIsLinkingGoogle(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -248,11 +327,6 @@ export default function Profile({ latestWeightKg }) {
             onChange={(e) => setFormData({ ...formData, current_weight_kg: e.target.value })}
             className="w-full bg-surface-3 text-white placeholder-zinc-600 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-zinc-700/50 tabular-nums"
           />
-          {latestWeightKg && (
-            <p className="text-[11px] text-zinc-500 mt-1">
-              Latest recorded weight: <span className="text-purple-400 font-semibold">{latestWeightKg} kg</span>
-            </p>
-          )}
         </div>
 
         {/* Gender Toggle */}
@@ -286,7 +360,7 @@ export default function Profile({ latestWeightKg }) {
           </div>
         </div>
 
-        {/* Activity Level Select */}
+        {/* Activity Level */}
         <div>
           <label className="block text-zinc-400 text-xs font-medium mb-1.5" htmlFor="profile-activity">
             Activity Level
@@ -297,22 +371,14 @@ export default function Profile({ latestWeightKg }) {
             onChange={(e) => setFormData({ ...formData, activity_level: e.target.value })}
             className="w-full bg-surface-3 text-white rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-zinc-700/50"
           >
-            <option value="sedentary" className="bg-surface-2 text-white">
-              Sedentary (1.2x — little or no exercise)
-            </option>
-            <option value="light" className="bg-surface-2 text-white">
-              Light (1.375x — exercise 1-3 days/wk)
-            </option>
-            <option value="moderate" className="bg-surface-2 text-white">
-              Moderate (1.55x — exercise 3-5 days/wk)
-            </option>
-            <option value="heavy" className="bg-surface-2 text-white">
-              Heavy (1.725x — hard exercise 6-7 days/wk)
-            </option>
+            <option value="sedentary" className="bg-surface-2 text-white">Sedentary (1.2x)</option>
+            <option value="light" className="bg-surface-2 text-white">Light (1.375x)</option>
+            <option value="moderate" className="bg-surface-2 text-white">Moderate (1.55x)</option>
+            <option value="heavy" className="bg-surface-2 text-white">Heavy (1.725x)</option>
           </select>
         </div>
 
-        {/* Goal Select */}
+        {/* Goal */}
         <div>
           <label className="block text-zinc-400 text-xs font-medium mb-1.5" htmlFor="profile-goal">
             Goal
@@ -323,15 +389,9 @@ export default function Profile({ latestWeightKg }) {
             onChange={(e) => setFormData({ ...formData, goal: e.target.value })}
             className="w-full bg-surface-3 text-white rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-zinc-700/50"
           >
-            <option value="lose" className="bg-surface-2 text-white">
-              Lose Fat (-300 kcal deficit)
-            </option>
-            <option value="maintain" className="bg-surface-2 text-white">
-              Maintain Weight (0 kcal adjustment)
-            </option>
-            <option value="gain" className="bg-surface-2 text-white">
-              Gain Muscle (+300 kcal surplus)
-            </option>
+            <option value="lose" className="bg-surface-2 text-white">Lose Fat (-300 kcal)</option>
+            <option value="maintain" className="bg-surface-2 text-white">Maintain Weight</option>
+            <option value="gain" className="bg-surface-2 text-white">Gain Muscle (+300 kcal)</option>
           </select>
         </div>
 
@@ -340,7 +400,7 @@ export default function Profile({ latestWeightKg }) {
           id="save-profile-btn"
           type="submit"
           disabled={isSaving}
-          className="w-full bg-white text-black font-semibold rounded-xl py-3 text-sm active:scale-[0.98] transition-transform disabled:opacity-40 mt-2"
+          className="w-full bg-white text-black font-semibold rounded-xl py-3 text-sm active:scale-[0.98] transition-transform disabled:opacity-40"
         >
           {isSaving ? 'Calculating & Saving...' : 'Save Profile & Update Targets'}
         </button>
@@ -351,6 +411,61 @@ export default function Profile({ latestWeightKg }) {
           </p>
         )}
       </form>
+
+      {/* Connected Accounts Section */}
+      <div className="bg-surface-2 rounded-2xl p-5 border border-surface-3 space-y-4">
+        <div>
+          <h3 className="text-white text-sm font-bold">Connected Accounts</h3>
+          <p className="text-zinc-500 text-xs mt-0.5">
+            Link your Google account for quick 1-tap sign in.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between p-3.5 bg-surface-3/50 rounded-xl border border-zinc-800">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-surface-2 flex items-center justify-center border border-zinc-700/50">
+              <GoogleIcon />
+            </div>
+            <div>
+              <div className="text-white text-xs font-semibold">Google</div>
+              <div className="text-zinc-500 text-[11px]">
+                {isGoogleLinked
+                  ? googleProviderInfo.email || 'Connected'
+                  : 'Not connected'}
+              </div>
+            </div>
+          </div>
+
+          {isGoogleLinked ? (
+            <div className="flex items-center gap-2">
+              <span className="text-emerald-400 text-xs font-medium bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-800/40">
+                Connected
+              </span>
+              {hasMultipleProviders && (
+                <button
+                  type="button"
+                  id="unlink-google-btn"
+                  disabled={isLinkingGoogle}
+                  onClick={handleUnlinkGoogle}
+                  className="text-zinc-400 hover:text-red-400 text-xs font-medium px-2 py-1 transition-colors"
+                >
+                  Disconnect
+                </button>
+              )}
+            </div>
+          ) : (
+            <button
+              type="button"
+              id="link-google-btn"
+              disabled={isLinkingGoogle}
+              onClick={handleLinkGoogle}
+              className="bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-lg px-3.5 py-2 active:scale-95 transition-all disabled:opacity-40"
+            >
+              {isLinkingGoogle ? 'Connecting...' : 'Connect'}
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* Data Export Section */}
       <div className="bg-surface-2 rounded-2xl p-5 border border-surface-3 space-y-3">

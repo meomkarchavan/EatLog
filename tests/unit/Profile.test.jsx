@@ -4,6 +4,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Profile from '../../src/components/Profile';
 import * as firestore from 'firebase/firestore';
+import * as firebaseAuth from 'firebase/auth';
 
 let profileCallback = null;
 
@@ -20,9 +21,20 @@ vi.mock('firebase/firestore', () => ({
   setDoc: vi.fn(() => Promise.resolve()),
 }));
 
+vi.mock('firebase/auth', () => ({
+  linkWithPopup: vi.fn(() => Promise.resolve({
+    user: {
+      providerData: [{ providerId: 'google.com', email: 'testuser@gmail.com' }],
+    },
+  })),
+  unlink: vi.fn(() => Promise.resolve({ user: { providerData: [] } })),
+  GoogleAuthProvider: vi.fn(),
+}));
+
 vi.mock('../../src/firebase', () => ({
-  auth: { currentUser: { uid: 'test-user-123' } },
+  auth: { currentUser: { uid: 'test-user-123', providerData: [] } },
   db: {},
+  googleProvider: {},
 }));
 
 describe('Profile Component', () => {
@@ -94,6 +106,24 @@ describe('Profile Component', () => {
     });
   });
 
+  it('renders Connected Accounts section and handles linking Google account', async () => {
+    const user = userEvent.setup();
+    render(<Profile latestWeightKg={75} />);
+
+    expect(screen.getByText('Connected Accounts')).toBeInTheDocument();
+    const connectBtn = screen.getByRole('button', { name: /connect/i });
+    expect(connectBtn).toBeInTheDocument();
+
+    await user.click(connectBtn);
+
+    await waitFor(() => {
+      expect(firebaseAuth.linkWithPopup).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.anything()
+      );
+    });
+  });
+
   it('renders Export CSV section and triggers export when button is clicked', async () => {
     const user = userEvent.setup();
     const exportCsvModule = await import('../../src/utils/exportCsv');
@@ -116,4 +146,5 @@ describe('Profile Component', () => {
     });
   });
 });
+
 
