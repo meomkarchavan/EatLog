@@ -137,4 +137,40 @@ describe('MealCard Component', () => {
       );
     });
   });
+
+  it('deletes log directly when trash icon button is clicked on the card', async () => {
+    const user = userEvent.setup();
+    render(<MealCard log={mockLog} />);
+
+    const deleteBtn = screen.getByTestId('delete-meal-btn');
+    await user.click(deleteBtn);
+
+    await waitFor(() => {
+      expect(firestore.deleteDoc).toHaveBeenCalledWith(
+        expect.objectContaining({ id: 'meal-123' })
+      );
+    });
+  });
+
+  it('renders pin staple button and calls onPinStaple when clicked', async () => {
+    const user = userEvent.setup();
+    const handlePin = vi.fn();
+
+    render(<MealCard log={mockLog} onPinStaple={handlePin} isPinned={false} />);
+
+    const pinBtn = screen.getByTestId('pin-staple-btn');
+    expect(pinBtn).toHaveTextContent('Pin');
+
+    await user.click(pinBtn);
+    expect(handlePin).toHaveBeenCalledWith(mockLog);
+  });
+
+  it('shows Pinned label and Staple badge when log was pinned or logged as staple', () => {
+    const stapleLog = { ...mockLog, input_method: 'staple' };
+    render(<MealCard log={stapleLog} onPinStaple={vi.fn()} isPinned={true} />);
+
+    expect(screen.getByTestId('pin-staple-btn')).toHaveTextContent('Pinned');
+    expect(screen.getByText('Staple')).toBeInTheDocument();
+  });
 });
+

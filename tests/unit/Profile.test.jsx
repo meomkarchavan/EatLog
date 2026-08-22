@@ -93,4 +93,27 @@ describe('Profile Component', () => {
       );
     });
   });
+
+  it('renders Export CSV section and triggers export when button is clicked', async () => {
+    const user = userEvent.setup();
+    const exportCsvModule = await import('../../src/utils/exportCsv');
+    const exportSpy = vi.spyOn(exportCsvModule, 'exportAllDataAsCsv').mockResolvedValueOnce({
+      filename: 'EatLog_Export_2026-08-22.csv',
+      mealCount: 15,
+      weightCount: 7,
+    });
+
+    render(<Profile latestWeightKg={75} />);
+
+    expect(screen.getByText('Export Your Data')).toBeInTheDocument();
+    const exportBtn = screen.getByRole('button', { name: /export all data \(csv\)/i });
+
+    await user.click(exportBtn);
+
+    await waitFor(() => {
+      expect(exportSpy).toHaveBeenCalled();
+      expect(screen.getByText(/Exported 15 meals \+ 7 weight entries/i)).toBeInTheDocument();
+    });
+  });
 });
+
