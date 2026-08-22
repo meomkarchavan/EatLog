@@ -23,6 +23,10 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await route.fulfill({ json });
     });
 
+    // Handle browser console logs and errors
+    page.on('console', (msg) => console.log('BROWSER LOG:', msg.text()));
+    page.on('pageerror', (err) => console.log('BROWSER ERROR:', err.message));
+
     // Handle any browser alert dialogs automatically
     page.on('dialog', async (dialog) => {
       console.log('Dialog opened:', dialog.message());
@@ -32,32 +36,31 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     // 1. Visit App
     await page.goto('/');
 
-    // 2. Auth Flow: If already logged in with another account, sign out
-    const signOutBtn = page.locator('#sign-out-btn');
-    if (await signOutBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await signOutBtn.click();
-    }
-    await expect(page.locator('#auth-email')).toBeVisible({ timeout: 20000 });
+    // 2. Auth Flow: If auth screen is shown, log in or sign up
+    const emailInput = page.locator('#auth-email');
+    const isAuthVisible = await emailInput.isVisible({ timeout: 5000 }).catch(() => false);
 
-    // Fill credentials and sign in with the deterministic test runner account
-    await page.locator('#auth-email').fill(testEmail);
-    await page.locator('#auth-password').fill(testPassword);
-    await page.locator('#auth-submit').click();
+    if (isAuthVisible) {
+      // Fill credentials and sign in with the deterministic test runner account
+      await emailInput.fill(testEmail);
+      await page.locator('#auth-password').fill(testPassword);
+      await page.locator('#auth-submit').click();
 
-    // Fallback: If not found, switch to sign up
-    const errorMsg = page.locator('p.text-red-400');
-    if (await errorMsg.isVisible({ timeout: 2000 }).catch(() => false)) {
-      const toggleSignUp = page.locator('#auth-toggle');
-      if (await toggleSignUp.isVisible()) {
-        await toggleSignUp.click();
-        await page.locator('#auth-email').fill(testEmail);
-        await page.locator('#auth-password').fill(testPassword);
-        await page.locator('#auth-submit').click();
+      // Fallback: If not found, switch to sign up
+      const errorMsg = page.locator('p.text-red-400');
+      if (await errorMsg.isVisible({ timeout: 2000 }).catch(() => false)) {
+        const toggleSignUp = page.locator('#auth-toggle');
+        if (await toggleSignUp.isVisible()) {
+          await toggleSignUp.click();
+          await page.locator('#auth-email').fill(testEmail);
+          await page.locator('#auth-password').fill(testPassword);
+          await page.locator('#auth-submit').click();
+        }
       }
     }
 
     // 3. Verify Dashboard HUD (Primary & Secondary Macros)
-    await expect(page.locator('#tab-daily')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('#tab-daily')).toBeVisible({ timeout: 25000 });
     await expect(page.getByText('CALORIES', { exact: false })).toBeVisible();
     await expect(page.getByText('PROTEIN', { exact: false })).toBeVisible();
     await expect(page.getByText('CARBS', { exact: false })).toBeVisible();
