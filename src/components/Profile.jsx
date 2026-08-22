@@ -104,14 +104,23 @@ export default function Profile({ latestWeightKg }) {
       setProviderData([...(result.user?.providerData || [])]);
       showToast('Google account connected successfully!', 'success');
     } catch (err) {
+      console.error('[Firebase Link Google Error]:', {
+        code: err.code,
+        message: err.message,
+        error: err,
+      });
       if (err.code !== 'auth/popup-closed-by-user') {
         const messages = {
+          'auth/operation-not-allowed':
+            'Google Sign-In is disabled in Firebase Console.',
           'auth/credential-already-in-use':
             'This Google account is already linked to another user account.',
           'auth/provider-already-linked':
             'Google account is already linked to your profile.',
           'auth/popup-blocked':
             'Popup was blocked by browser. Please allow popups for this site.',
+          'auth/unauthorized-domain':
+            'This domain is not authorized in Firebase Console.',
         };
         showToast(messages[err.code] || `Failed to connect Google: ${err.message}`, 'error');
       }
@@ -139,6 +148,7 @@ export default function Profile({ latestWeightKg }) {
       setProviderData([...(user?.providerData || [])]);
       showToast('Google account disconnected.', 'success');
     } catch (err) {
+      console.error('[Firebase Unlink Google Error]:', err);
       showToast(`Failed to disconnect: ${err.message}`, 'error');
     } finally {
       setIsLinkingGoogle(false);

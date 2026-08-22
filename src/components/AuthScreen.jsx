@@ -66,6 +66,7 @@ export default function AuthScreen() {
         await signInWithEmailAndPassword(auth, email, password);
       }
     } catch (err) {
+      console.error('[Firebase Auth Error]:', err);
       const messages = {
         'auth/invalid-credential': 'Invalid email or password.',
         'auth/email-already-in-use': 'Account already exists.',
@@ -85,21 +86,29 @@ export default function AuthScreen() {
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
+      console.error('[Firebase Google Auth Error]:', {
+        code: err.code,
+        message: err.message,
+        error: err,
+      });
       if (err.code !== 'auth/popup-closed-by-user') {
         const messages = {
+          'auth/operation-not-allowed':
+            'Google Sign-In is disabled. Enable Google provider in Firebase Console (Authentication > Sign-in method).',
           'auth/account-exists-with-different-credential':
             'An account already exists with this email address using a different sign-in method.',
           'auth/unauthorized-domain':
-            'This domain is not authorized in Firebase Console.',
+            'This domain is not authorized in Firebase Console (Authentication > Settings > Authorized domains).',
           'auth/popup-blocked':
             'Popup blocked by browser. Please allow popups for this site.',
         };
-        setError(messages[err.code] || err.message);
+        setError(messages[err.code] || `Google Sign-In failed (${err.code}): ${err.message}`);
       }
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-black px-6">
