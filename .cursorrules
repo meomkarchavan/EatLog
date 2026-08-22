@@ -19,13 +19,17 @@ You must strictly adhere to the following Git workflow and deployment rules for 
   - **Firebase Staging/Dev**: `eatlog-dev`
   - **Vercel Preview Environment**
 
-## 4. Production (`main` Branch)
-- Only thoroughly tested and verified code from `dev` is allowed to be merged into `main`.
-- The `main` branch strictly represents production and connects to:
-  - **Firebase Production**: `eatlog-924b6`
-  - **Vercel Production URL**: `https://eattlog.vercel.app`
+## 4. Production (`main` Branch) — Explicit Approval Required
+- **NEVER merge into `main` automatically.**
+- Merging `dev` into `main` and deploying to production must **ONLY** be executed when the user explicitly instructs to merge to `main`.
+- When asked to add/update features, complete all work and verifications on `dev` and the Vercel preview deployment, then report results and wait for explicit user permission before touching `main`.
 
-## 5. Verification Checklist Before PR / Merge
-1. Run Vitest unit tests: `npm run test` (must pass 100%).
-2. Run Playwright E2E suite: `npm run test:e2e` (must pass).
-3. Validate production build: `npm run build` (must be clean).
+## 5. Verification Pipeline (Step-by-Step)
+1. Develop on `dev` (or branch off `dev`).
+2. Run local unit tests: `npm run test` (must pass 100%).
+3. Run local E2E tests: `npm run test:e2e` (must pass 100%).
+4. Commit and push to `origin/dev`.
+5. Wait for Vercel preview deployment to build (`● Ready`).
+6. Run E2E tests against the live preview URL (`BASE_URL=<preview-url> npx playwright test`).
+7. **STOP & Report to User**: Wait for explicit user confirmation before merging to `main`.
+
