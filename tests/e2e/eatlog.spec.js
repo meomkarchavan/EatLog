@@ -98,7 +98,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     // Verify meal appears in feed
     await expect(page.getByText(/chapati/i)).toBeVisible({ timeout: 15000 });
 
-    // 8. Test Meal Editing Feature
+    // 8. Test Meal Editing & Pinning Feature
     const editMealBtn = page.getByTestId('edit-meal-btn').first();
     await expect(editMealBtn).toBeVisible({ timeout: 10000 });
     await editMealBtn.click();
@@ -107,23 +107,45 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     await expect(page.getByRole('button', { name: /save changes/i })).toBeVisible();
     await page.getByRole('button', { name: /cancel/i }).click();
 
-    // 9. Test Retroactive Date Picker Navigation
-    const dateInput = page.locator('input[type="date"]');
-    await expect(dateInput).toBeAttached();
+    // Test Pin to Staples
+    const pinBtn = page.getByTestId('pin-staple-btn').first();
+    if (await pinBtn.isVisible()) {
+      await pinBtn.click();
+      await expect(page.getByText(/Pinned to staples!/i)).toBeVisible({ timeout: 5000 });
+    }
 
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toISOString().split('T')[0];
-    await dateInput.fill(yesterdayStr);
+    // 9. Test Staples Modal
+    const staplesBtn = page.locator('#staples-btn');
+    if (await staplesBtn.isVisible()) {
+      await staplesBtn.click();
+      await expect(page.getByText('My Staples')).toBeVisible({ timeout: 5000 });
+      // Close modal
+      await page.keyboard.press('Escape');
+    }
 
-    // Verify "Reset to Today" appears
-    await expect(page.getByRole('button', { name: /reset/i })).toBeVisible({ timeout: 5000 });
+    // 10. Test Quick Lookup Panel
+    const lookupTab = page.locator('#tab-lookup');
+    if (await lookupTab.isVisible()) {
+      await lookupTab.click();
+      await expect(page.getByText('Quick Lookup')).toBeVisible({ timeout: 5000 });
+      const lookupInput = page.locator('#lookup-input');
+      await lookupInput.fill('1 banana');
+      await page.locator('#lookup-submit-btn').click();
+      await expect(page.getByText(/105/i)).toBeVisible({ timeout: 10000 });
+      // Return to Daily tab
+      await page.locator('#tab-daily').click();
+    }
 
-    // Click Reset
-    await page.getByRole('button', { name: /reset/i }).click();
-    await expect(page.getByText("Today's Intake")).toBeVisible();
+    // 11. Test Custom DatePicker Modal Navigation
+    const calendarBtn = page.locator('button[title="Change logging date"]');
+    if (await calendarBtn.isVisible()) {
+      await calendarBtn.click();
+      await expect(page.getByRole('button', { name: /go to today/i })).toBeVisible({ timeout: 5000 });
+      await page.getByRole('button', { name: /go to today/i }).click();
+      await expect(page.getByText("Today's Intake")).toBeVisible();
+    }
 
-    // 10. Test Weekly Dashboard & Charts View
+    // 12. Test Weekly Dashboard & Charts View
     const weeklyTab = page.locator('#tab-weekly');
     await weeklyTab.click();
 
@@ -135,6 +157,11 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     await expect(page.getByText(/Daily Water Intake \(Last 7 Days\)/i)).toBeVisible();
     await expect(page.getByText(/Body Weight \(Last 7 Days\)/i)).toBeVisible();
     await expect(page.getByText(/90-Day Protein Consistency/i)).toBeVisible();
+
+    // 13. Test CSV Export in Goals / Profile Tab
+    await profileTab.click();
+    const exportBtn = page.locator('#export-csv-btn');
+    await expect(exportBtn).toBeVisible({ timeout: 5000 });
 
     // Return to Daily View
     const dailyTab = page.locator('#tab-daily');

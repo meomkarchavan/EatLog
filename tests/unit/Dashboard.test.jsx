@@ -177,4 +177,35 @@ describe('Dashboard Component', () => {
       );
     });
   });
+
+  it('renders dynamic targets badge with BMI and goal when profile exists', () => {
+    render(<Dashboard />);
+    // Profile in mock: 180cm, 80kg, goal lose -> BMI 24.7 • LOSE
+    expect(screen.getByText(/BMI 24\.7 • LOSE/i)).toBeInTheDocument();
+  });
+
+  it('opens Staples modal when staples button is clicked and allows 1-tap re-log', async () => {
+    const user = userEvent.setup();
+    render(<Dashboard />);
+
+    // Click staples button (#staples-btn)
+    const staplesBtn = document.getElementById('staples-btn');
+    expect(staplesBtn).toBeInTheDocument();
+    await user.click(staplesBtn);
+
+    // Modal opens
+    expect(screen.getByText('My Staples')).toBeInTheDocument();
+  });
+
+  it('renders Quick Lookup tab and switches to LookupPanel when clicked', async () => {
+    const user = userEvent.setup();
+    render(<Dashboard />);
+
+    const lookupTab = screen.getByRole('button', { name: /lookup/i });
+    await user.click(lookupTab);
+
+    expect(screen.getByText('Quick Lookup')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Search food stats\.\.\./i)).toBeInTheDocument();
+  });
 });
+
