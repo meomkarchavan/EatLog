@@ -220,49 +220,49 @@ export default function WeeklyView() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5 pb-28">
+    <div className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 sm:py-4 space-y-4 sm:space-y-5 pb-28">
       {/* 7-Day Averages Summary Grid */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {/* Protein Card */}
-        <section className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
-          <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider mb-1">
+        <section className="bg-surface-2 rounded-2xl p-2.5 sm:p-4 border border-surface-3">
+          <p className="text-zinc-500 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider mb-1 truncate">
             Protein Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black text-emerald-400 tabular-nums">
+          <div className="flex items-baseline gap-0.5 sm:gap-1">
+            <span className="text-xl sm:text-3xl font-black text-emerald-400 tabular-nums">
               {sevenDayProteinAverage}
             </span>
-            <span className="text-xs text-zinc-500 font-medium">g/d</span>
+            <span className="text-[10px] sm:text-xs text-zinc-500 font-medium">g/d</span>
           </div>
-          <p className="text-[10px] text-zinc-500 mt-1">Target: &gt;120g</p>
+          <p className="text-[9px] sm:text-[10px] text-zinc-500 mt-1 truncate">Target: &gt;120g</p>
         </section>
 
         {/* Calories Card */}
-        <section className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
-          <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider mb-1">
+        <section className="bg-surface-2 rounded-2xl p-2.5 sm:p-4 border border-surface-3">
+          <p className="text-zinc-500 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider mb-1 truncate">
             Calories Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black text-amber-400 tabular-nums">
+          <div className="flex items-baseline gap-0.5 sm:gap-1">
+            <span className="text-xl sm:text-3xl font-black text-amber-400 tabular-nums">
               {sevenDayCalorieAverage}
             </span>
-            <span className="text-xs text-zinc-500 font-medium">kcal</span>
+            <span className="text-[10px] sm:text-xs text-zinc-500 font-medium">kcal</span>
           </div>
-          <p className="text-[10px] text-zinc-500 mt-1">7-Day Mean</p>
+          <p className="text-[9px] sm:text-[10px] text-zinc-500 mt-1 truncate">7-Day Mean</p>
         </section>
 
         {/* Water Card */}
-        <section className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
-          <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider mb-1">
+        <section className="bg-surface-2 rounded-2xl p-2.5 sm:p-4 border border-surface-3">
+          <p className="text-zinc-500 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider mb-1 truncate">
             Water Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black text-cyan-400 tabular-nums">
+          <div className="flex items-baseline gap-0.5 sm:gap-1">
+            <span className="text-xl sm:text-3xl font-black text-cyan-400 tabular-nums">
               {sevenDayWaterAverage}
             </span>
-            <span className="text-xs text-zinc-500 font-medium">L/d</span>
+            <span className="text-[10px] sm:text-xs text-zinc-500 font-medium">L/d</span>
           </div>
-          <p className="text-[10px] text-zinc-500 mt-1">Hydration</p>
+          <p className="text-[9px] sm:text-[10px] text-zinc-500 mt-1 truncate">Hydration</p>
         </section>
       </div>
 

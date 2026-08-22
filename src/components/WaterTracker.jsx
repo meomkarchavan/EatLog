@@ -96,14 +96,14 @@ export default function WaterTracker({ selectedDate }) {
   const formattedLiters = (totalMl / 1000).toFixed(2);
 
   return (
-    <div className="flex items-center justify-between bg-surface-2 rounded-2xl p-4 mt-3 border border-surface-3">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-cyan-950/40 border border-cyan-800/30 flex items-center justify-center">
+    <div className="flex items-center justify-between bg-surface-2 rounded-2xl p-3.5 sm:p-4 mt-2.5 sm:mt-3 border border-surface-3 gap-2">
+      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-950/40 border border-cyan-800/30 flex items-center justify-center">
           <WaterDropIcon />
         </div>
-        <div>
-          <p className="text-zinc-500 text-[11px] font-medium uppercase tracking-wider">Water Intake</p>
-          <p className="text-xl font-bold text-white tabular-nums leading-tight">
+        <div className="min-w-0">
+          <p className="text-zinc-500 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider">Water Intake</p>
+          <p className="text-lg sm:text-xl font-bold text-white tabular-nums leading-tight truncate">
             {totalMl.toLocaleString()}{' '}
             <span className="text-xs font-normal text-zinc-500">ml ({formattedLiters} L)</span>
           </p>
@@ -111,13 +111,13 @@ export default function WaterTracker({ selectedDate }) {
       </div>
 
       {/* Action Buttons: Minus & Plus */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
         <button
           id="subtract-water-btn"
           onClick={handleSubtractWater}
           disabled={isUpdating || totalMl <= 0}
           title="Subtract 250ml"
-          className="flex items-center justify-center w-8 h-8 bg-surface-3 hover:bg-zinc-800 text-zinc-400 hover:text-white active:scale-95 border border-zinc-700/50 rounded-xl text-base font-bold transition-all disabled:opacity-30 disabled:pointer-events-none"
+          className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-surface-3 hover:bg-zinc-800 text-zinc-400 hover:text-white active:scale-95 border border-zinc-700/50 rounded-xl text-base font-bold transition-all disabled:opacity-30 disabled:pointer-events-none"
         >
           −
         </button>
@@ -126,7 +126,7 @@ export default function WaterTracker({ selectedDate }) {
           id="add-water-btn"
           onClick={handleAddWater}
           disabled={isUpdating}
-          className="flex items-center gap-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 active:scale-95 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all disabled:opacity-40"
+          className="flex items-center gap-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 active:scale-95 border border-cyan-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all disabled:opacity-40"
         >
           <span>+250ml</span>
         </button>

@@ -95,21 +95,21 @@ export default function WeightTracker({ selectedDate }) {
   };
 
   return (
-    <div className="flex items-center justify-between bg-surface-2 rounded-2xl p-4 mt-3 border border-surface-3">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-purple-950/40 border border-purple-800/30 flex items-center justify-center">
+    <div className="flex items-center justify-between bg-surface-2 rounded-2xl p-3.5 sm:p-4 mt-2.5 sm:mt-3 border border-surface-3 gap-2">
+      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-950/40 border border-purple-800/30 flex items-center justify-center">
           <ScaleIcon />
         </div>
-        <div>
-          <p className="text-zinc-500 text-[11px] font-medium uppercase tracking-wider">Weight</p>
+        <div className="min-w-0">
+          <p className="text-zinc-500 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider">Weight</p>
           {currentSavedWeight !== null && !isEditing ? (
-            <p className="text-xl font-bold text-white tabular-nums leading-tight">
+            <p className="text-lg sm:text-xl font-bold text-white tabular-nums leading-tight truncate">
               {currentSavedWeight}{' '}
               <span className="text-xs font-normal text-zinc-500">kg</span>
             </p>
           ) : (
-            <p className="text-xs text-zinc-400 mt-0.5">
-              {isEditing ? 'Update your weight' : 'Not recorded yet'}
+            <p className="text-xs text-zinc-400 mt-0.5 truncate">
+              {isEditing ? 'Update weight' : 'Not recorded'}
             </p>
           )}
         </div>
@@ -119,12 +119,12 @@ export default function WeightTracker({ selectedDate }) {
         <button
           id="edit-weight-btn"
           onClick={() => setIsEditing(true)}
-          className="text-purple-400 hover:text-purple-300 text-xs font-medium px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-500/10 active:scale-95 transition-all"
+          className="shrink-0 text-purple-400 hover:text-purple-300 text-xs font-medium px-2.5 sm:px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-500/10 active:scale-95 transition-all"
         >
           Edit
         </button>
       ) : (
-        <form onSubmit={handleSaveWeight} className="flex items-center gap-2">
+        <form onSubmit={handleSaveWeight} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <input
             id="weight-input"
             type="number"
@@ -134,13 +134,13 @@ export default function WeightTracker({ selectedDate }) {
             placeholder="e.g. 74.5"
             value={weightKg}
             onChange={(e) => setWeightKg(e.target.value)}
-            className="w-20 bg-surface-3 text-white text-xs rounded-xl px-2.5 py-2 outline-none focus:ring-1 focus:ring-purple-500 border border-zinc-700/50 tabular-nums"
+            className="w-16 sm:w-20 bg-surface-3 text-white text-xs rounded-xl px-2 sm:px-2.5 py-1.5 sm:py-2 outline-none focus:ring-1 focus:ring-purple-500 border border-zinc-700/50 tabular-nums"
           />
           <button
             id="save-weight-btn"
             type="submit"
             disabled={isSaving || !weightKg}
-            className="flex items-center gap-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 active:scale-95 border border-purple-500/40 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all disabled:opacity-40"
+            className="flex items-center gap-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 active:scale-95 border border-purple-500/40 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-semibold tracking-wide transition-all disabled:opacity-40"
           >
             <span>{isSaving ? '...' : 'Save'}</span>
           </button>

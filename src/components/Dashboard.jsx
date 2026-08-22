@@ -383,18 +383,18 @@ export default function Dashboard() {
   const proteinSurplus = totalProtein - targets.targetMacros.protein_g;
 
   return (
-    <div className="flex flex-col h-full bg-black">
+    <div className="flex flex-col h-full bg-black max-w-2xl mx-auto w-full">
       {/* Top Header */}
-      <header className="px-5 pt-4 pb-2 border-b border-surface-3">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-black text-white tracking-tight">EatLog</h1>
+      <header className="px-3.5 sm:px-5 pt-3 sm:pt-4 pb-2 border-b border-surface-3">
+        <div className="flex items-center justify-between gap-1.5 sm:gap-3">
+          <h1 className="text-lg sm:text-xl font-black text-white tracking-tight shrink-0">EatLog</h1>
           
           {/* Tab Switcher: Daily | Weekly | Profile */}
-          <div className="flex items-center bg-surface-2 p-1 rounded-xl border border-surface-3">
+          <div className="flex items-center bg-surface-2 p-0.5 sm:p-1 rounded-xl border border-surface-3 gap-0.5">
             <button
               id="tab-daily"
               onClick={() => setCurrentTab('daily')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all ${
                 currentTab === 'daily'
                   ? 'bg-white text-black shadow-sm'
                   : 'text-zinc-400 hover:text-white'
@@ -405,7 +405,7 @@ export default function Dashboard() {
             <button
               id="tab-weekly"
               onClick={() => setCurrentTab('weekly')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all ${
                 currentTab === 'weekly'
                   ? 'bg-white text-black shadow-sm'
                   : 'text-zinc-400 hover:text-white'
@@ -416,7 +416,7 @@ export default function Dashboard() {
             <button
               id="tab-profile"
               onClick={() => setCurrentTab('profile')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
+              className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all flex items-center gap-1 ${
                 currentTab === 'profile'
                   ? 'bg-white text-black shadow-sm'
                   : 'text-zinc-400 hover:text-white'
@@ -430,7 +430,7 @@ export default function Dashboard() {
             <button
               id="tab-lookup"
               onClick={() => setCurrentTab('lookup')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all ${
                 currentTab === 'lookup'
                   ? 'bg-violet-600 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-white'
@@ -443,7 +443,7 @@ export default function Dashboard() {
           <button
             id="sign-out-btn"
             onClick={() => signOut(auth)}
-            className="text-zinc-600 text-xs font-medium active:text-zinc-400 transition-colors"
+            className="text-zinc-500 hover:text-zinc-300 text-[11px] sm:text-xs font-medium shrink-0 transition-colors"
           >
             Sign Out
           </button>
@@ -460,12 +460,12 @@ export default function Dashboard() {
       ) : (
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
           {/* Daily HUD */}
-          <section className={`px-5 pt-4 pb-2 transition-opacity duration-200 ${isDateLoading ? 'opacity-40' : 'opacity-100'}`}>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-zinc-500 text-xs font-medium uppercase tracking-wider">
+          <section className={`px-3.5 sm:px-5 pt-3.5 sm:pt-4 pb-2 transition-opacity duration-200 ${isDateLoading ? 'opacity-40' : 'opacity-100'}`}>
+            <div className="flex items-center justify-between mb-2 gap-2">
+              <span className="text-zinc-500 text-xs font-medium uppercase tracking-wider truncate">
                 {displayDateTitle}
               </span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 {targets.hasProfile ? (
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-surface-3 text-zinc-300 font-medium border border-zinc-700/50">
                     BMI {targets.bmi} • {targets.goal?.toUpperCase()}
@@ -475,7 +475,7 @@ export default function Dashboard() {
                     onClick={() => setCurrentTab('profile')}
                     className="text-[10px] px-2 py-0.5 rounded-md bg-amber-950/30 text-amber-400 hover:text-amber-300 font-medium border border-amber-800/30 transition-colors"
                   >
-                    Set up your profile targets →
+                    Set up targets →
                   </button>
                 )}
                 {!isToday && (
@@ -490,19 +490,19 @@ export default function Dashboard() {
             </div>
 
             {/* Primary Macro HUD with Dynamic Targets & Minimalist Progress Bars */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
               {/* Calories Card */}
-              <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
-                <p className="text-zinc-500 text-xs font-medium uppercase tracking-widest mb-1">Calories</p>
-                <div className="flex items-baseline gap-1">
-                  <span className={`text-3xl font-black tabular-nums leading-none ${calorieSurplus > 0 ? 'text-red-400' : 'text-white'}`}>
+              <div className="bg-surface-2 rounded-2xl p-3.5 sm:p-4 border border-surface-3">
+                <p className="text-zinc-500 text-[10px] sm:text-xs font-medium uppercase tracking-widest mb-1">Calories</p>
+                <div className="flex items-baseline gap-1 flex-wrap">
+                  <span className={`text-2xl sm:text-3xl font-black tabular-nums leading-none ${calorieSurplus > 0 ? 'text-red-400' : 'text-white'}`}>
                     {totalCalories}
                   </span>
                   <span className="text-xs text-zinc-500 font-normal">
                     / {targets.targetCalories} kcal
                   </span>
                   {calorieSurplus > 0 && (
-                    <span className="text-[10px] text-red-400 font-semibold">+{calorieSurplus} over</span>
+                    <span className="text-[10px] text-red-400 font-semibold w-full">+{calorieSurplus} over</span>
                   )}
                 </div>
                 {/* Minimal Progress Bar */}
@@ -515,17 +515,17 @@ export default function Dashboard() {
               </div>
 
               {/* Protein Card */}
-              <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
-                <p className="text-zinc-500 text-xs font-medium uppercase tracking-widest mb-1">Protein</p>
-                <div className="flex items-baseline gap-1">
-                  <span className={`text-3xl font-black tabular-nums leading-none ${proteinSurplus > 0 ? 'text-emerald-300' : 'text-white'}`}>
+              <div className="bg-surface-2 rounded-2xl p-3.5 sm:p-4 border border-surface-3">
+                <p className="text-zinc-500 text-[10px] sm:text-xs font-medium uppercase tracking-widest mb-1">Protein</p>
+                <div className="flex items-baseline gap-1 flex-wrap">
+                  <span className={`text-2xl sm:text-3xl font-black tabular-nums leading-none ${proteinSurplus > 0 ? 'text-emerald-300' : 'text-white'}`}>
                     {totalProtein}
                   </span>
                   <span className="text-xs text-zinc-500 font-normal">
                     / {targets.targetMacros.protein_g}g
                   </span>
                   {proteinSurplus > 0 && (
-                    <span className="text-[10px] text-emerald-400 font-semibold">+{proteinSurplus}g over</span>
+                    <span className="text-[10px] text-emerald-400 font-semibold w-full">+{proteinSurplus}g over</span>
                   )}
                 </div>
                 {/* Minimal Progress Bar */}
@@ -539,22 +539,22 @@ export default function Dashboard() {
             </div>
 
             {/* Secondary Macro Row (Carbs, Fat, Fiber) */}
-            <div className="flex gap-6 mt-3 pt-3 border-t border-surface-3/50">
+            <div className="flex gap-4 sm:gap-6 mt-3 pt-2.5 border-t border-surface-3/50 flex-wrap">
               <div>
                 <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-wider">Carbs</p>
-                <p className="text-base font-bold text-sky-400 tabular-nums">
+                <p className="text-sm sm:text-base font-bold text-sky-400 tabular-nums">
                   {totalCarbs}<span className="text-xs font-normal text-zinc-500 ml-0.5">g</span>
                 </p>
               </div>
               <div>
                 <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-wider">Fat</p>
-                <p className="text-base font-bold text-rose-400 tabular-nums">
+                <p className="text-sm sm:text-base font-bold text-rose-400 tabular-nums">
                   {totalFat}<span className="text-xs font-normal text-zinc-500 ml-0.5">g</span>
                 </p>
               </div>
               <div>
                 <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-wider">Fiber</p>
-                <p className="text-base font-bold text-lime-400 tabular-nums">
+                <p className="text-sm sm:text-base font-bold text-lime-400 tabular-nums">
                   {totalFiber}<span className="text-xs font-normal text-zinc-500 ml-0.5">g</span>
                 </p>
               </div>
@@ -568,10 +568,10 @@ export default function Dashboard() {
           </section>
 
           {/* Divider */}
-          <div className="h-px bg-surface-3 mx-5 mt-3" />
+          <div className="h-px bg-surface-3 mx-3.5 sm:mx-5 mt-2" />
 
           {/* Log Feed */}
-          <section className="flex-1 overflow-y-auto px-5 py-3 space-y-2 pb-28">
+          <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-2.5 pb-28">
             {isDateLoading && (
               <div className="space-y-2 animate-pulse-slow">
                 <div className="bg-surface-2 rounded-xl h-16 border border-surface-3/60" />
@@ -692,14 +692,14 @@ export default function Dashboard() {
           />
 
           {/* Omni-Input Bar with Date Picker */}
-          <div className="fixed bottom-0 left-0 right-0 bg-surface-1 border-t border-surface-3 px-4 py-3 safe-area-pb">
-            <form onSubmit={handleTextSubmit} className="flex items-center gap-2">
+          <div className="fixed bottom-0 left-0 right-0 bg-surface-1/95 backdrop-blur-md border-t border-surface-3 px-2.5 sm:px-4 py-2.5 sm:py-3 safe-area-pb z-30">
+            <form onSubmit={handleTextSubmit} className="max-w-2xl mx-auto flex items-center gap-1.5 sm:gap-2">
               {/* Date Selector Badge */}
               <button
                 type="button"
                 onClick={() => setShowDatePicker(true)}
                 title="Change logging date"
-                className={`shrink-0 w-10 h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border ${
+                className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border ${
                   selectedDate !== todayStr
                     ? 'bg-cyan-950/30 text-cyan-400 border-cyan-800/40'
                     : 'bg-surface-3 text-zinc-300 hover:text-white border-zinc-700/50'
@@ -715,7 +715,7 @@ export default function Dashboard() {
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isLoading}
                 title="Log food from photo"
-                className="relative z-10 shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
+                className="relative z-10 shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
               >
                 <CameraIcon />
               </button>
@@ -735,13 +735,13 @@ export default function Dashboard() {
                 onClick={() => setShowStaplesModal(true)}
                 disabled={isLoading}
                 title="My Staples"
-                className={`relative z-10 shrink-0 w-10 h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border disabled:opacity-30 ${
+                className={`relative z-10 shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border disabled:opacity-30 ${
                   staples.length > 0
                     ? 'bg-amber-950/30 text-amber-400 border-amber-800/40'
                     : 'bg-surface-3 text-zinc-400 border-zinc-700/50 hover:text-amber-400'
                 }`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
                   <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
                 </svg>
                 {staples.length > 0 && (
@@ -760,7 +760,7 @@ export default function Dashboard() {
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Type a meal or scan a plate/label..."
                 disabled={isLoading}
-                className="flex-1 bg-surface-2 text-white placeholder-zinc-600 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-surface-3 transition-colors disabled:opacity-30"
+                className="flex-1 min-w-0 bg-surface-2 text-white placeholder-zinc-500 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-surface-3 transition-colors disabled:opacity-30"
               />
 
               {/* Submit Button */}
@@ -768,7 +768,7 @@ export default function Dashboard() {
                 id="submit-btn"
                 type="submit"
                 disabled={isLoading || !inputText.trim()}
-                className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20"
+                className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20"
               >
                 <SendIcon />
               </button>

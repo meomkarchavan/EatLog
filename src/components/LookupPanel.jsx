@@ -83,9 +83,9 @@ export default function LookupPanel() {
   return (
     <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
       {/* Panel Header */}
-      <section className="px-5 pt-4 pb-3">
+      <section className="px-3.5 sm:px-5 pt-3.5 sm:pt-4 pb-2.5 sm:pb-3">
         <div className="flex items-center gap-2.5 mb-1">
-          <div className="w-8 h-8 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center shrink-0">
             <SearchIcon className="w-4 h-4 text-violet-400" />
           </div>
           <div>
@@ -98,8 +98,8 @@ export default function LookupPanel() {
       </section>
 
       {/* Search Input — fixed at top of panel */}
-      <div className="px-5 pb-3">
-        <form onSubmit={handleSubmit} className="flex items-center gap-2">
+      <div className="px-3.5 sm:px-5 pb-3">
+        <form onSubmit={handleSubmit} className="flex items-center gap-1.5 sm:gap-2">
           <input
             ref={inputRef}
             id="lookup-input"
@@ -108,13 +108,13 @@ export default function LookupPanel() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search food stats..."
             disabled={isLoading}
-            className="flex-1 bg-surface-2 text-white placeholder-zinc-600 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 border border-violet-500/30 focus:ring-violet-500/40 transition-colors disabled:opacity-30"
+            className="flex-1 min-w-0 bg-surface-2 text-white placeholder-zinc-600 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none focus:ring-1 border border-violet-500/30 focus:ring-violet-500/40 transition-colors disabled:opacity-30"
           />
           <button
             id="lookup-submit-btn"
             type="submit"
             disabled={isLoading || !query.trim()}
-            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-violet-600 text-white active:scale-95 transition-all disabled:opacity-20"
+            className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-violet-600 text-white active:scale-95 transition-all disabled:opacity-20"
           >
             <SendIcon />
           </button>
@@ -122,10 +122,10 @@ export default function LookupPanel() {
       </div>
 
       {/* Divider */}
-      <div className="h-px bg-surface-3 mx-5" />
+      <div className="h-px bg-surface-3 mx-3.5 sm:mx-5" />
 
       {/* Results Feed */}
-      <section className="flex-1 overflow-y-auto px-5 py-3 space-y-3">
+      <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-3 pb-28">
         {/* Loading indicator */}
         {isLoading && (
           <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3 text-center">

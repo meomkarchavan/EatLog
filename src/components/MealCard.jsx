@@ -154,9 +154,9 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
         </div>
 
         {/* Numeric Macros Grid */}
-        <div className="grid grid-cols-5 gap-2 pt-1">
+        <div className="grid grid-cols-5 gap-1 sm:gap-2 pt-1">
           <div>
-            <label className="block text-[10px] text-zinc-400 uppercase font-medium mb-0.5">
+            <label className="block text-[9px] sm:text-[10px] text-zinc-400 uppercase font-medium mb-0.5 text-center">
               Cal
             </label>
             <input
@@ -164,11 +164,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.calories}
               onChange={(e) => setEditForm({ ...editForm, calories: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
             />
           </div>
           <div>
-            <label className="block text-[10px] text-emerald-400 uppercase font-medium mb-0.5">
+            <label className="block text-[9px] sm:text-[10px] text-emerald-400 uppercase font-medium mb-0.5 text-center">
               Pro (g)
             </label>
             <input
@@ -176,11 +176,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.protein_g}
               onChange={(e) => setEditForm({ ...editForm, protein_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
             />
           </div>
           <div>
-            <label className="block text-[10px] text-sky-400 uppercase font-medium mb-0.5">
+            <label className="block text-[9px] sm:text-[10px] text-sky-400 uppercase font-medium mb-0.5 text-center">
               Carb (g)
             </label>
             <input
@@ -188,11 +188,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.carbs_g}
               onChange={(e) => setEditForm({ ...editForm, carbs_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
             />
           </div>
           <div>
-            <label className="block text-[10px] text-rose-400 uppercase font-medium mb-0.5">
+            <label className="block text-[9px] sm:text-[10px] text-rose-400 uppercase font-medium mb-0.5 text-center">
               Fat (g)
             </label>
             <input
@@ -200,11 +200,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.fat_g}
               onChange={(e) => setEditForm({ ...editForm, fat_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
             />
           </div>
           <div>
-            <label className="block text-[10px] text-lime-400 uppercase font-medium mb-0.5">
+            <label className="block text-[9px] sm:text-[10px] text-lime-400 uppercase font-medium mb-0.5 text-center">
               Fib (g)
             </label>
             <input
@@ -212,7 +212,7 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.fiber_g}
               onChange={(e) => setEditForm({ ...editForm, fiber_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
             />
           </div>
         </div>
@@ -240,13 +240,13 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
   }
 
   return (
-    <div className="group bg-surface-2 rounded-xl p-3.5 border border-surface-3/60 hover:border-zinc-700/70 transition-all">
-      <div className="flex items-start justify-between gap-3">
+    <div className="group bg-surface-2 rounded-xl p-3 sm:p-3.5 border border-surface-3/60 hover:border-zinc-700/70 transition-all">
+      <div className="flex items-start justify-between gap-2.5 sm:gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-white text-sm font-medium leading-snug">
+          <p className="text-white text-sm font-medium leading-snug break-words">
             {log.food_summary}
           </p>
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 flex-wrap">
             <span className="text-zinc-600 text-xs">
               {log.timestamp ? new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
             </span>
@@ -263,7 +263,7 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
             <button
               data-testid="edit-meal-btn"
               onClick={handleStartEdit}
-              className="text-xs text-zinc-500 hover:text-white transition-colors font-medium ml-1 flex items-center gap-1"
+              className="text-xs text-zinc-500 hover:text-white transition-colors font-medium ml-0.5 flex items-center gap-1"
               title="Edit meal description or macros"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
@@ -305,7 +305,7 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
         </div>
 
         {/* Calories and Protein header counters */}
-        <div className="flex gap-4 text-right shrink-0">
+        <div className="flex gap-3 sm:gap-4 text-right shrink-0">
           <div>
             <p className="text-white text-sm font-semibold tabular-nums">{log.calories}</p>
             <p className="text-zinc-600 text-[10px] uppercase">cal</p>

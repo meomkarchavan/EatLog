@@ -219,10 +219,10 @@ export default function Profile({ latestWeightKg }) {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5 pb-28">
+    <div className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 sm:py-4 space-y-4 sm:space-y-5 pb-28">
       {/* Title */}
       <div>
-        <h2 className="text-xl font-black text-white tracking-tight">Profile & Goals</h2>
+        <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">Profile & Goals</h2>
         <p className="text-xs text-zinc-500 mt-0.5">
           Calculate BMI, TDEE, and customized daily macro targets.
         </p>
@@ -232,39 +232,39 @@ export default function Profile({ latestWeightKg }) {
       {targets.hasProfile ? (
         <div className="space-y-3">
           {/* Main Numbers: Calories & Protein */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+            <div className="bg-surface-2 rounded-2xl p-3.5 sm:p-4 border border-surface-3">
               <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider mb-1">
                 Target Calories
               </p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-black text-amber-400 tabular-nums">
+              <div className="flex items-baseline gap-1 flex-wrap">
+                <span className="text-2xl sm:text-3xl font-black text-amber-400 tabular-nums">
                   {targets.targetCalories}
                 </span>
                 <span className="text-xs text-zinc-500 font-medium">kcal</span>
               </div>
-              <p className="text-[10px] text-zinc-500 mt-1">
+              <p className="text-[10px] text-zinc-500 mt-1 truncate">
                 TDEE: {targets.tdee} kcal • {formData.goal.toUpperCase()}
               </p>
             </div>
 
-            <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
+            <div className="bg-surface-2 rounded-2xl p-3.5 sm:p-4 border border-surface-3">
               <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider mb-1">
                 Target Protein
               </p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-black text-emerald-400 tabular-nums">
+              <div className="flex items-baseline gap-1 flex-wrap">
+                <span className="text-2xl sm:text-3xl font-black text-emerald-400 tabular-nums">
                   {targets.targetMacros.protein_g}
                 </span>
                 <span className="text-xs text-zinc-500 font-medium">g/d</span>
               </div>
-              <p className="text-[10px] text-zinc-500 mt-1">2.2g per kg bodyweight</p>
+              <p className="text-[10px] text-zinc-500 mt-1 truncate">2.2g per kg bodyweight</p>
             </div>
           </div>
 
           {/* Secondary Target Pills: Fat, Carbs, Fiber & BMI */}
           <div className="bg-surface-2 rounded-xl p-3 border border-surface-3 flex items-center justify-between text-xs flex-wrap gap-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
               <span className="text-sky-400 font-medium">{targets.targetMacros.carbs_g}g carbs</span>
               <span className="text-rose-400 font-medium">{targets.targetMacros.fat_g}g fat (25%)</span>
               <span className="text-lime-400 font-medium">{targets.targetMacros.fiber_g}g fiber</span>
@@ -282,7 +282,7 @@ export default function Profile({ latestWeightKg }) {
       )}
 
       {/* Form Card */}
-      <form onSubmit={handleSubmit} className="bg-surface-2 rounded-2xl p-5 border border-surface-3 space-y-4">
+      <form onSubmit={handleSubmit} className="bg-surface-2 rounded-2xl p-4 sm:p-5 border border-surface-3 space-y-4">
         {/* Height & Age */}
         <div className="grid grid-cols-2 gap-4">
           <div>

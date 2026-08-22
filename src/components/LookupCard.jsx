@@ -16,14 +16,14 @@ export default function LookupCard({ data, onDismiss }) {
   ];
 
   return (
-    <div className="lookup-card-enter bg-surface-2/95 backdrop-blur-sm rounded-2xl p-4 border border-violet-500/30 shadow-lg shadow-violet-950/20">
+    <div className="lookup-card-enter bg-surface-2/95 backdrop-blur-sm rounded-2xl p-3.5 sm:p-4 border border-violet-500/30 shadow-lg shadow-violet-950/20">
       {/* Header row */}
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="flex items-center gap-2 min-w-0">
           <span className="shrink-0 px-1.5 py-0.5 rounded-md bg-violet-950/50 text-violet-400 text-[10px] font-semibold uppercase tracking-wider border border-violet-800/30">
             Lookup
           </span>
-          <p className="text-white text-sm font-medium leading-snug truncate">
+          <p className="text-white text-sm font-medium leading-snug break-words">
             {data.food_summary}
           </p>
         </div>
@@ -40,13 +40,13 @@ export default function LookupCard({ data, onDismiss }) {
       </div>
 
       {/* Macro grid */}
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-1 sm:gap-2">
         {macros.map((m) => (
           <div key={m.label} className="text-center">
-            <p className={`text-base font-bold tabular-nums ${m.color}`}>
+            <p className={`text-sm sm:text-base font-bold tabular-nums ${m.color}`}>
               {m.value}
             </p>
-            <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-wider">
+            <p className="text-zinc-500 text-[9px] sm:text-[10px] font-medium uppercase tracking-wider truncate">
               {m.label}
             </p>
           </div>
