@@ -383,7 +383,7 @@ export default function Dashboard() {
   const proteinSurplus = totalProtein - targets.targetMacros.protein_g;
 
   return (
-    <div className="flex flex-col h-full bg-black max-w-2xl mx-auto w-full">
+    <div className="flex flex-col h-[100dvh] bg-black max-w-2xl mx-auto w-full">
       {/* Top Header */}
       <header className="px-3.5 sm:px-5 pt-3 sm:pt-4 pb-2 border-b border-surface-3">
         <div className="flex items-center justify-between gap-1.5 sm:gap-3">
@@ -692,14 +692,14 @@ export default function Dashboard() {
           />
 
           {/* Omni-Input Bar with Date Picker */}
-          <div className="fixed bottom-0 left-0 right-0 bg-surface-1/95 backdrop-blur-md border-t border-surface-3 px-2.5 sm:px-4 py-2.5 sm:py-3 safe-area-pb z-30">
-            <form onSubmit={handleTextSubmit} className="max-w-2xl mx-auto flex items-center gap-1.5 sm:gap-2">
+          <div className="fixed bottom-0 left-0 right-0 bg-surface-1/95 backdrop-blur-md border-t border-surface-3 px-2 sm:px-4 py-2 sm:py-3 safe-area-pb z-30">
+            <form onSubmit={handleTextSubmit} className="max-w-2xl mx-auto flex items-center gap-1 sm:gap-2">
               {/* Date Selector Badge */}
               <button
                 type="button"
                 onClick={() => setShowDatePicker(true)}
                 title="Change logging date"
-                className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border ${
+                className={`shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border ${
                   selectedDate !== todayStr
                     ? 'bg-cyan-950/30 text-cyan-400 border-cyan-800/40'
                     : 'bg-surface-3 text-zinc-300 hover:text-white border-zinc-700/50'
@@ -715,7 +715,7 @@ export default function Dashboard() {
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isLoading}
                 title="Log food from photo"
-                className="relative z-10 shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
+                className="relative z-10 shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-surface-3 text-zinc-300 hover:text-white active:scale-95 transition-all border border-zinc-700/50 disabled:opacity-30"
               >
                 <CameraIcon />
               </button>
@@ -735,7 +735,7 @@ export default function Dashboard() {
                 onClick={() => setShowStaplesModal(true)}
                 disabled={isLoading}
                 title="My Staples"
-                className={`relative z-10 shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border disabled:opacity-30 ${
+                className={`relative z-10 shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl active:scale-95 transition-all border disabled:opacity-30 ${
                   staples.length > 0
                     ? 'bg-amber-950/30 text-amber-400 border-amber-800/40'
                     : 'bg-surface-3 text-zinc-400 border-zinc-700/50 hover:text-amber-400'
@@ -768,7 +768,7 @@ export default function Dashboard() {
                 id="submit-btn"
                 type="submit"
                 disabled={isLoading || !inputText.trim()}
-                className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20"
+                className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-white text-black active:scale-95 transition-all disabled:opacity-20"
               >
                 <SendIcon />
               </button>
