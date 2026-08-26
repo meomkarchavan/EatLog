@@ -34,10 +34,10 @@ export default function LookupCard({ data, onDismiss, onAddToDailyLog }) {
               id={`lookup-add-btn-${data.id || 'current'}`}
               onClick={() => onAddToDailyLog(data)}
               title="Add to daily log"
-              className="flex items-center gap-1 px-2 py-1 rounded-lg bg-violet-600/25 hover:bg-violet-600/40 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 active:scale-95 transition-all"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/25 hover:bg-violet-600/40 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 active:scale-95 transition-all"
             >
               <PlusCircle className="w-3.5 h-3.5 text-violet-400" />
-              <span className="hidden sm:inline">Add</span>
+              <span>Add</span>
             </button>
           )}
           {onDismiss && (
@@ -45,7 +45,7 @@ export default function LookupCard({ data, onDismiss, onAddToDailyLog }) {
               id="lookup-dismiss-btn"
               onClick={onDismiss}
               title="Dismiss"
-              className="w-6 h-6 flex items-center justify-center rounded-lg text-zinc-500 hover:text-white hover:bg-surface-3 transition-all"
+              className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-white hover:bg-surface-3 transition-all"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                 <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -69,17 +69,10 @@ export default function LookupCard({ data, onDismiss, onAddToDailyLog }) {
         ))}
       </div>
 
-      {/* Footer hint */}
-      <div className="flex items-center justify-between mt-3 pt-2 border-t border-surface-3/50 text-[10px] text-zinc-500">
-        <span>Quick lookup result</span>
-        <button
-          onClick={() => onAddToDailyLog?.(data)}
-          className="text-violet-400 hover:text-violet-300 font-medium flex items-center gap-1 transition-colors"
-        >
-          <PlusCircle className="w-3 h-3" />
-          <span>Quick-Add to Daily Log</span>
-        </button>
-      </div>
+      {/* Footer note */}
+      <p className="text-zinc-600 text-[10px] text-center mt-3 pt-2 border-t border-surface-3/50">
+        This is a quick lookup — not logged to your daily intake.
+      </p>
     </div>
   );
 }

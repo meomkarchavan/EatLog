@@ -37,7 +37,7 @@ describe('LookupCard Component', () => {
 
     render(<LookupCard data={mockData} onAddToDailyLog={mockAdd} />);
 
-    const addBtn = screen.getByRole('button', { name: /quick-add to daily log/i });
+    const addBtn = screen.getByTitle(/add to daily log/i);
     await user.click(addBtn);
 
     expect(mockAdd).toHaveBeenCalledTimes(1);

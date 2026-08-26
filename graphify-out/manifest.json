@@ -55,8 +55,8 @@
     "semantic_hash": ""
   },
   "src/components/LookupCard.jsx": {
-    "mtime": 1787756857.7346187,
-    "ast_hash": "3c46676c6ab6ee4bf330a33b23b06906",
+    "mtime": 1787757096.2438853,
+    "ast_hash": "a6e1622d26e95eb2fd1303bf95c3518d",
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupPanel.test.jsx": {
-    "mtime": 1787757051.0457997,
-    "ast_hash": "126066561eea6ecefc1498e0607965fd",
+    "mtime": 1787757118.499607,
+    "ast_hash": "d0264483df159ae82e60954d73cc0fe1",
     "semantic_hash": ""
   },
   "tests/unit/MealCard.test.jsx": {
@@ -735,8 +735,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupCard.test.jsx": {
-    "mtime": 1787756898.5725849,
-    "ast_hash": "67287ff73a31f8e86aab6971c92e80be",
+    "mtime": 1787757104.082714,
+    "ast_hash": "61f29bd09deba7610edd37ae60135929",
     "semantic_hash": ""
   },
   "tests/unit/lookupHistory.test.js": {

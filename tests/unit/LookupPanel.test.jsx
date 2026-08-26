@@ -172,7 +172,7 @@ describe('LookupPanel Component', () => {
       expect(screen.getByText(/Current Search/i)).toBeInTheDocument();
     });
 
-    const cardAddBtn = screen.getByRole('button', { name: /quick-add to daily log/i });
+    const cardAddBtn = screen.getByTitle(/^add to daily log$/i);
     await user.click(cardAddBtn);
 
     expect(consoleSpy).toHaveBeenCalledWith(
