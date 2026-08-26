@@ -10,12 +10,12 @@
     "semantic_hash": ""
   },
   "firestore.indexes.json": {
-    "mtime": 1787320336.5142908,
-    "ast_hash": "d13fb13fe2b72c9fcbe8b23810919a45",
+    "mtime": 1787757177.8537877,
+    "ast_hash": "815d51cfc44e22d668b68d8ef69c6974",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787754790.8325803,
+    "mtime": 1787756297.0080206,
     "ast_hash": "e59dcda0101f169c5f4428d1715a8fad",
     "semantic_hash": ""
   },
@@ -55,13 +55,13 @@
     "semantic_hash": ""
   },
   "src/components/LookupCard.jsx": {
-    "mtime": 1787518581.0790524,
-    "ast_hash": "33b5583084591dd9b1922b0f1c683045",
+    "mtime": 1787757096.2438853,
+    "ast_hash": "a6e1622d26e95eb2fd1303bf95c3518d",
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
-    "mtime": 1787518581.0801008,
-    "ast_hash": "396cd4d6b5be158f328a930ad1da2367",
+    "mtime": 1787757315.9937127,
+    "ast_hash": "1341de47fbe87854c5b2f571ee36d83c",
     "semantic_hash": ""
   },
   "src/components/MealCard.jsx": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "src/components/WeeklyView.jsx": {
-    "mtime": 1787755548.717955,
-    "ast_hash": "88c4fa3d4f3a3b04728da3eae83e49fe",
+    "mtime": 1787756297.0095673,
+    "ast_hash": "3c835c321da37a6d65533bc3db9087f3",
     "semantic_hash": ""
   },
   "src/components/WeightTracker.jsx": {
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "tests/unit/Dashboard.test.jsx": {
-    "mtime": 1787388101.285421,
-    "ast_hash": "c9760ffb8b4ff27731dbcc73eb909ac9",
+    "mtime": 1787757249.5018635,
+    "ast_hash": "dd32bfae96db232952429d699fd0c661",
     "semantic_hash": ""
   },
   "tests/unit/DatePicker.test.jsx": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupPanel.test.jsx": {
-    "mtime": 1787387909.58366,
-    "ast_hash": "b228c7b054c23774793381a6fe95abdf",
+    "mtime": 1787757325.656136,
+    "ast_hash": "186e0e5375dba5c079cc97e1a8722ce0",
     "semantic_hash": ""
   },
   "tests/unit/MealCard.test.jsx": {
@@ -185,8 +185,8 @@
     "semantic_hash": ""
   },
   "tests/unit/WeeklyView.test.jsx": {
-    "mtime": 1787756208.5506017,
-    "ast_hash": "678f2b4dc338ec7df5e97a4e71ff34fb",
+    "mtime": 1787756297.0116835,
+    "ast_hash": "d4cdbfe8aa3bc6ed2e52c4e34e7b744e",
     "semantic_hash": ""
   },
   "tests/unit/WeightTracker.test.jsx": {
@@ -710,23 +710,38 @@
     "semantic_hash": ""
   },
   "api/analyzeLogs.js": {
-    "mtime": 1787755831.8328545,
-    "ast_hash": "1e31be869078ef322b4decf3327afdd7",
+    "mtime": 1787756296.9903169,
+    "ast_hash": "c7148754e73c8976b6322f8366e992f7",
     "semantic_hash": ""
   },
   "src/components/InsightsCard.jsx": {
-    "mtime": 1787755532.1978836,
-    "ast_hash": "14858e1e241336e1afc803a39c494239",
+    "mtime": 1787756297.0085394,
+    "ast_hash": "422e1ff41d5f2c17f3b5b69b6eaf8e8a",
     "semantic_hash": ""
   },
   "tests/unit/InsightsCard.test.jsx": {
-    "mtime": 1787756197.7644508,
-    "ast_hash": "dc88e6460a8da66aaed4848d8446c984",
+    "mtime": 1787756297.01061,
+    "ast_hash": "c5cb96ceb1dc2da7c718d6ea96333944",
     "semantic_hash": ""
   },
   "tests/unit/analyzeLogs.test.js": {
-    "mtime": 1787756187.0625486,
-    "ast_hash": "5cd78de6bea24e2079708378423e401a",
+    "mtime": 1787756297.0121949,
+    "ast_hash": "87342e8c8c75b57eb7016fe74f1b23af",
+    "semantic_hash": ""
+  },
+  "src/services/lookupHistory.js": {
+    "mtime": 1787757303.7576098,
+    "ast_hash": "25dd08e07110af98c82c06fb68336f66",
+    "semantic_hash": ""
+  },
+  "tests/unit/LookupCard.test.jsx": {
+    "mtime": 1787757104.082714,
+    "ast_hash": "61f29bd09deba7610edd37ae60135929",
+    "semantic_hash": ""
+  },
+  "tests/unit/lookupHistory.test.js": {
+    "mtime": 1787757222.3561602,
+    "ast_hash": "eb06d72665f943bd28e0040b244341db",
     "semantic_hash": ""
   }
 }

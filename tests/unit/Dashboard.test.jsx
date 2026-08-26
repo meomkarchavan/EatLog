@@ -53,6 +53,9 @@ vi.mock('firebase/firestore', () => ({
     return vi.fn();
   }),
   addDoc: vi.fn(() => Promise.resolve()),
+  getDocs: vi.fn(() => Promise.resolve({ docs: [] })),
+  limit: vi.fn((n) => ({ limit: n })),
+  serverTimestamp: vi.fn(),
   doc: vi.fn((db, coll, id) => ({ path: `${coll}/${id}`, id })),
   setDoc: vi.fn(),
   increment: vi.fn(),
@@ -61,6 +64,10 @@ vi.mock('firebase/firestore', () => ({
 vi.mock('firebase/auth', () => ({
   signOut: vi.fn(),
   getAuth: vi.fn(),
+  onAuthStateChanged: vi.fn((auth, cb) => {
+    cb({ uid: 'test-user-123' });
+    return vi.fn();
+  }),
 }));
 
 vi.mock('../../src/firebase', () => ({
