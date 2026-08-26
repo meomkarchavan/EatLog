@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-08-26)
 
 ## Corpus Check
-- 139 files · ~74,490 words
+- 143 files · ~77,639 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1063 nodes · 1065 edges · 106 communities (95 shown, 11 thin omitted)
+- 1076 nodes · 1084 edges · 107 communities (96 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bc0aaf8c`
+- Built from commit: `22e2351f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -113,6 +113,7 @@
 - [[_COMMUNITY_Community 96|Community 96]]
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 105|Community 105]]
+- [[_COMMUNITY_Community 106|Community 106]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `useToast()` - 17 edges
@@ -141,15 +142,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (106 total, 11 thin omitted)
+## Communities (107 total, 11 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
-Nodes (28): AuthScreen(), Dashboard(), formatLocalDate(), LookupCard(), LookupPanel(), MealCard(), Profile(), defaultContext (+20 more)
+Nodes (29): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupCard(), LookupPanel(), MealCard(), Profile() (+21 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
-Nodes (38): dependencies, firebase, @google/generative-ai, react, react-activity-calendar, react-dom, recharts, @vercel/analytics (+30 more)
+Nodes (39): dependencies, firebase, @google/generative-ai, lucide-react, react, react-activity-calendar, react-dom, recharts (+31 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.07
@@ -491,24 +492,28 @@ Nodes (3): Android Studio Setup, MCP Setup, Skills Installation
 Cohesion: 0.50
 Nodes (3): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, Agent Guidelines for EatLog
 
+### Community 106 - "Community 106"
+Cohesion: 0.31
+Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
+
 ## Knowledge Gaps
-- **643 isolated node(s):** `CANDIDATE_MODELS`, `name`, `version`, `private`, `type` (+638 more)
+- **646 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+641 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `useToast()` connect `Community 0` to `Community 30`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `auth` connect `Community 0` to `Community 30`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `useToast()` connect `Community 0` to `Community 30`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `CANDIDATE_MODELS`, `name`, `version` to the rest of the system?**
-  _643 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
+  _646 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.060362173038229376 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.058126619770455384 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**

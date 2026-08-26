@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787388959.864614,
-    "ast_hash": "3bbe66756170e23b15bd437da342c3d7",
+    "mtime": 1787754790.8325803,
+    "ast_hash": "e59dcda0101f169c5f4428d1715a8fad",
     "semantic_hash": ""
   },
   "playwright.config.js": {
@@ -70,12 +70,12 @@
     "semantic_hash": ""
   },
   "src/components/Profile.jsx": {
-    "mtime": 1787754429.9168105,
+    "mtime": 1787754570.4785855,
     "ast_hash": "2362167bccc40842354d46b1282cb024",
     "semantic_hash": ""
   },
   "src/components/ProfileScreen.jsx": {
-    "mtime": 1787754441.6462414,
+    "mtime": 1787754570.479624,
     "ast_hash": "3cc5b6c645cc9d356d9feb51e9a4d332",
     "semantic_hash": ""
   },
@@ -90,12 +90,12 @@
     "semantic_hash": ""
   },
   "src/components/WeeklyView.jsx": {
-    "mtime": 1787518581.0853453,
-    "ast_hash": "4082213392c21d8876bb4acf1815b4f1",
+    "mtime": 1787755548.717955,
+    "ast_hash": "88c4fa3d4f3a3b04728da3eae83e49fe",
     "semantic_hash": ""
   },
   "src/components/WeightTracker.jsx": {
-    "mtime": 1787754411.607977,
+    "mtime": 1787754570.4801412,
     "ast_hash": "afd8755d45c55e460d69cbf9b2414cba",
     "semantic_hash": ""
   },
@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "tests/unit/Profile.test.jsx": {
-    "mtime": 1787754456.6468568,
+    "mtime": 1787754570.4806552,
     "ast_hash": "e6172f527a2ff1017943a98b18625300",
     "semantic_hash": ""
   },
   "tests/unit/ProfileScreen.test.jsx": {
-    "mtime": 1787754466.61411,
-    "ast_hash": "d78b03e6300efa02323d2c2f73b6ed43",
+    "mtime": 1787754570.4811716,
+    "ast_hash": "fa2e0409a427a54de39f300d86610e33",
     "semantic_hash": ""
   },
   "tests/unit/Toast.test.jsx": {
@@ -185,12 +185,12 @@
     "semantic_hash": ""
   },
   "tests/unit/WeeklyView.test.jsx": {
-    "mtime": 1787321244.743215,
-    "ast_hash": "7e9721b8ca65e4a6b29893f45ee9bc1c",
+    "mtime": 1787756208.5506017,
+    "ast_hash": "678f2b4dc338ec7df5e97a4e71ff34fb",
     "semantic_hash": ""
   },
   "tests/unit/WeightTracker.test.jsx": {
-    "mtime": 1787754449.1421309,
+    "mtime": 1787754570.481685,
     "ast_hash": "14c6d7b251c9b1edefb1ba11f285b309",
     "semantic_hash": ""
   },
@@ -707,6 +707,26 @@
   "AGENTS.md": {
     "mtime": 1787753851.4175615,
     "ast_hash": "7bf20d37b1817d0dfbf3cac65fac32e1",
+    "semantic_hash": ""
+  },
+  "api/analyzeLogs.js": {
+    "mtime": 1787755831.8328545,
+    "ast_hash": "1e31be869078ef322b4decf3327afdd7",
+    "semantic_hash": ""
+  },
+  "src/components/InsightsCard.jsx": {
+    "mtime": 1787755532.1978836,
+    "ast_hash": "14858e1e241336e1afc803a39c494239",
+    "semantic_hash": ""
+  },
+  "tests/unit/InsightsCard.test.jsx": {
+    "mtime": 1787756197.7644508,
+    "ast_hash": "dc88e6460a8da66aaed4848d8446c984",
+    "semantic_hash": ""
+  },
+  "tests/unit/analyzeLogs.test.js": {
+    "mtime": 1787756187.0625486,
+    "ast_hash": "5cd78de6bea24e2079708378423e401a",
     "semantic_hash": ""
   }
 }
