@@ -1,8 +1,8 @@
 /**
  * LookupPanel — a dedicated full-screen panel for Quick Lookup.
  * Allows searching food nutrition stats without logging immediately,
- * saves queries to a persistent user history in Firestore, and provides
- * Quick-Add and Delete actions directly from history.
+ * saves queries to a persistent user history in Firestore and local storage,
+ * and provides Quick-Add and Delete actions directly from history.
  */
 import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -14,6 +14,8 @@ import {
   saveLookupToHistory,
   subscribeLookupHistory,
   deleteLookupFromHistory,
+  getLocalLookupHistory,
+  saveLocalLookupHistory,
 } from '../services/lookupHistory';
 
 function SearchIcon({ className }) {
@@ -36,9 +38,9 @@ export default function LookupPanel() {
   const { showToast } = useToast();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState([]); // session search history
-  const [history, setHistory] = useState([]); // persistent Firestore history
-  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+  const [results, setResults] = useState([]); // session search results
+  const [history, setHistory] = useState(() => getLocalLookupHistory(auth.currentUser?.uid));
+  const [isLoadingHistory, setIsLoadingHistory] = useState(() => history.length === 0);
   const inputRef = useRef(null);
 
   // Real-time listener for persistent lookup history across tab switches
@@ -46,21 +48,31 @@ export default function LookupPanel() {
     let unsubscribeFirestore = () => {};
 
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) {
-        setHistory([]);
+      const uid = currentUser?.uid;
+      if (!uid) {
+        const local = getLocalLookupHistory(null);
+        setHistory(local);
         setIsLoadingHistory(false);
         return;
       }
 
-      setIsLoadingHistory(true);
+      // Pre-populate immediately from local storage for 0ms tab-switch latency
+      const cached = getLocalLookupHistory(uid);
+      if (cached.length > 0) {
+        setHistory(cached);
+        setIsLoadingHistory(false);
+      }
+
       unsubscribeFirestore = subscribeLookupHistory(
-        currentUser.uid,
+        uid,
         (pastLookups) => {
-          setHistory(pastLookups);
+          if (pastLookups && pastLookups.length > 0) {
+            setHistory(pastLookups);
+          }
           setIsLoadingHistory(false);
         },
         (err) => {
-          console.error('Error in lookup history subscription:', err);
+          console.warn('Lookup history subscription error (using cache):', err);
           setIsLoadingHistory(false);
         }
       );
@@ -102,23 +114,28 @@ export default function LookupPanel() {
         carbs_g: Number(data.carbs_g) || 0,
         fat_g: Number(data.fat_g) || 0,
         fiber_g: Number(data.fiber_g) || 0,
+        createdAt: new Date().toISOString(),
       };
 
       // Prepend to current session state
       setResults((prev) => [lookupItem, ...prev]);
       setQuery('');
 
-      // Persist to Firestore
+      // Immediately update persistent history state and local storage cache
       const uid = auth.currentUser?.uid;
+      setHistory((prev) => {
+        const next = [lookupItem, ...prev.filter((i) => i.id !== lookupItem.id)];
+        saveLocalLookupHistory(uid, next);
+        return next;
+      });
+
+      // Asynchronously persist to Firestore
       if (uid) {
         try {
           await saveLookupToHistory(uid, lookupItem);
         } catch (saveErr) {
-          console.error('Failed to save to lookup history:', saveErr);
-          setHistory((prev) => [lookupItem, ...prev]);
+          console.warn('Failed to save to Firestore (saved locally):', saveErr);
         }
-      } else {
-        setHistory((prev) => [lookupItem, ...prev]);
       }
     } catch (err) {
       console.error('Lookup error:', err);
@@ -135,10 +152,16 @@ export default function LookupPanel() {
 
   const handleDeleteHistoryItem = async (id) => {
     if (!id) return;
+    const uid = auth.currentUser?.uid;
+    // Optimistically remove from state and local storage
+    setHistory((prev) => {
+      const next = prev.filter((item) => item.id !== id);
+      saveLocalLookupHistory(uid, next);
+      return next;
+    });
+
     try {
-      // Optimistically remove from state
-      setHistory((prev) => prev.filter((item) => item.id !== id));
-      await deleteLookupFromHistory(id);
+      await deleteLookupFromHistory(id, uid);
       showToast('Removed from lookup history', 'info');
     } catch (err) {
       console.error('Failed to delete lookup history entry:', err);

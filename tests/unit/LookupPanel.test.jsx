@@ -30,6 +30,18 @@ vi.mock('firebase/auth', () => ({
 vi.mock('../../src/services/lookupHistory', () => ({
   saveLookupToHistory: vi.fn(),
   getLookupHistory: vi.fn(),
+  getLocalLookupHistory: vi.fn(() => [
+    {
+      id: 'hist-1',
+      food_summary: 'Greek Yogurt Bowl',
+      calories: 180,
+      protein_g: 20,
+      carbs_g: 15,
+      fat_g: 2,
+      fiber_g: 1,
+    },
+  ]),
+  saveLocalLookupHistory: vi.fn(),
   subscribeLookupHistory: vi.fn((uid, cb) => {
     cb([
       {
@@ -51,6 +63,17 @@ describe('LookupPanel Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     globalThis.fetch = vi.fn();
+    lookupHistoryService.getLocalLookupHistory.mockReturnValue([
+      {
+        id: 'hist-1',
+        food_summary: 'Greek Yogurt Bowl',
+        calories: 180,
+        protein_g: 20,
+        carbs_g: 15,
+        fat_g: 2,
+        fiber_g: 1,
+      },
+    ]);
     lookupHistoryService.getLookupHistory.mockResolvedValue([
       {
         id: 'hist-1',
@@ -90,11 +113,6 @@ describe('LookupPanel Component', () => {
     expect(screen.getByPlaceholderText(/Search food stats\.\.\./i)).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(lookupHistoryService.subscribeLookupHistory).toHaveBeenCalledWith(
-        'test-user-123',
-        expect.any(Function),
-        expect.any(Function)
-      );
       expect(screen.getByText('Greek Yogurt Bowl')).toBeInTheDocument();
       expect(screen.getByText('180 kcal')).toBeInTheDocument();
       expect(screen.getByText('20g P')).toBeInTheDocument();
@@ -161,7 +179,7 @@ describe('LookupPanel Component', () => {
     const deleteBtn = screen.getByTitle(/delete from history/i);
     await user.click(deleteBtn);
 
-    expect(lookupHistoryService.deleteLookupFromHistory).toHaveBeenCalledWith('hist-1');
+    expect(lookupHistoryService.deleteLookupFromHistory).toHaveBeenCalledWith('hist-1', 'test-user-123');
     expect(screen.queryByText('Greek Yogurt Bowl')).not.toBeInTheDocument();
     expect(mockShowToast).toHaveBeenCalledWith('Removed from lookup history', 'info');
   });
