@@ -254,10 +254,50 @@
       "norm_label": "deploy:rules:prod"
     },
     {
-      "label": "dependencies",
+      "label": "deploy:indexes:dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "package_scripts_deploy_indexes_dev",
+      "community": 1,
+      "norm_label": "deploy:indexes:dev"
+    },
+    {
+      "label": "deploy:indexes:prod",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L17",
+      "_origin": "ast",
+      "id": "package_scripts_deploy_indexes_prod",
+      "community": 1,
+      "norm_label": "deploy:indexes:prod"
+    },
+    {
+      "label": "deploy:firestore:dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "package_scripts_deploy_firestore_dev",
+      "community": 1,
+      "norm_label": "deploy:firestore:dev"
+    },
+    {
+      "label": "deploy:firestore:prod",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "package_scripts_deploy_firestore_prod",
+      "community": 1,
+      "norm_label": "deploy:firestore:prod"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "package_dependencies",
       "community": 1,
@@ -267,7 +307,7 @@
       "label": "@google/generative-ai",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L18",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "package_dependencies_google_generative_ai",
       "community": 1,
@@ -277,7 +317,7 @@
       "label": "@vercel/analytics",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L19",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "package_dependencies_vercel_analytics",
       "community": 1,
@@ -287,7 +327,7 @@
       "label": "@vercel/speed-insights",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "package_dependencies_vercel_speed_insights",
       "community": 1,
@@ -297,7 +337,7 @@
       "label": "firebase",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "package_dependencies_firebase",
       "community": 1,
@@ -307,7 +347,7 @@
       "label": "lucide-react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "package_dependencies_lucide_react",
       "community": 1,
@@ -317,7 +357,7 @@
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "package_dependencies_react",
       "community": 1,
@@ -327,7 +367,7 @@
       "label": "react-activity-calendar",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "package_dependencies_react_activity_calendar",
       "community": 1,
@@ -337,7 +377,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "package_dependencies_react_dom",
       "community": 1,
@@ -347,7 +387,7 @@
       "label": "recharts",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "package_dependencies_recharts",
       "community": 1,
@@ -357,7 +397,7 @@
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "package_devdependencies",
       "community": 1,
@@ -367,7 +407,7 @@
       "label": "@playwright/test",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "package_devdependencies_playwright_test",
       "community": 1,
@@ -377,7 +417,7 @@
       "label": "@testing-library/dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "package_devdependencies_testing_library_dom",
       "community": 1,
@@ -387,7 +427,7 @@
       "label": "@testing-library/jest-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "package_devdependencies_testing_library_jest_dom",
       "community": 1,
@@ -397,7 +437,7 @@
       "label": "@testing-library/react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "package_devdependencies_testing_library_react",
       "community": 1,
@@ -407,7 +447,7 @@
       "label": "@testing-library/user-event",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L33",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "package_devdependencies_testing_library_user_event",
       "community": 1,
@@ -417,7 +457,7 @@
       "label": "@vitejs/plugin-react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L34",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "package_devdependencies_vitejs_plugin_react",
       "community": 1,
@@ -427,7 +467,7 @@
       "label": "autoprefixer",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L35",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "package_devdependencies_autoprefixer",
       "community": 1,
@@ -437,7 +477,7 @@
       "label": "firebase-tools",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L36",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "package_devdependencies_firebase_tools",
       "community": 1,
@@ -447,7 +487,7 @@
       "label": "jsdom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L37",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "package_devdependencies_jsdom",
       "community": 1,
@@ -457,7 +497,7 @@
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "package_devdependencies_postcss",
       "community": 1,
@@ -467,7 +507,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L43",
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss",
       "community": 1,
@@ -477,7 +517,7 @@
       "label": "vite",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L40",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "package_devdependencies_vite",
       "community": 1,
@@ -487,7 +527,7 @@
       "label": "vite-plugin-pwa",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L41",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "package_devdependencies_vite_plugin_pwa",
       "community": 1,
@@ -497,7 +537,7 @@
       "label": "vitest",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L42",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "package_devdependencies_vitest",
       "community": 1,
@@ -10634,6 +10674,16 @@
       "norm_label": "2. strict ci/cd & branching rules"
     },
     {
+      "label": "3. Deployments (Dev & Prod)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "agents_3_deployments_dev_prod",
+      "community": 105,
+      "norm_label": "3. deployments (dev & prod)"
+    },
+    {
       "label": "DEVELOPMENT_WORKFLOW.md",
       "file_type": "document",
       "source_file": "DEVELOPMENT_WORKFLOW.md",
@@ -10722,6 +10772,266 @@
       "id": "vercel_env_checklist_vercel_environment_variables_checklist",
       "community": 96,
       "norm_label": "vercel environment variables checklist"
+    },
+    {
+      "label": "DEPLOYMENT_GUIDE.md",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_deployment_guide",
+      "community": 108,
+      "norm_label": "deployment_guide.md"
+    },
+    {
+      "label": "EatLog Full-Stack Deployment Guide & Runbook",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "community": 108,
+      "norm_label": "eatlog full-stack deployment guide & runbook"
+    },
+    {
+      "label": "1. System Architecture & Components to Deploy",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_1_system_architecture_components_to_deploy",
+      "community": 108,
+      "norm_label": "1. system architecture & components to deploy"
+    },
+    {
+      "label": "2. Environments Overview",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_2_environments_overview",
+      "community": 108,
+      "norm_label": "2. environments overview"
+    },
+    {
+      "label": "3. Required Environment Variables",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_3_required_environment_variables",
+      "community": 108,
+      "norm_label": "3. required environment variables"
+    },
+    {
+      "label": "Environment Matrix",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_environment_matrix",
+      "community": 108,
+      "norm_label": "environment matrix"
+    },
+    {
+      "label": "4. Firestore Rules & Indexes: Deployment Lifecycle & Timing",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_4_firestore_rules_indexes_deployment_lifecycle_timing",
+      "community": 108,
+      "norm_label": "4. firestore rules & indexes: deployment lifecycle & timing"
+    },
+    {
+      "label": "Why aren't Rules and Indexes deployed automatically by Git / Vercel?",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_why_aren_t_rules_and_indexes_deployed_automatically_by_git_vercel",
+      "community": 108,
+      "norm_label": "why aren't rules and indexes deployed automatically by git / vercel?"
+    },
+    {
+      "label": "When MUST Rules and Indexes be deployed?",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_when_must_rules_and_indexes_be_deployed",
+      "community": 108,
+      "norm_label": "when must rules and indexes be deployed?"
+    },
+    {
+      "label": "Available Deployment Commands",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_available_deployment_commands",
+      "community": 108,
+      "norm_label": "available deployment commands"
+    },
+    {
+      "label": "5. Firebase Authentication Setup (One-time per domain)",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L120",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_5_firebase_authentication_setup_one_time_per_domain",
+      "community": 108,
+      "norm_label": "5. firebase authentication setup (one-time per domain)"
+    },
+    {
+      "label": "6. Playbook A: Deploy to Dev (Staging)",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "community": 108,
+      "norm_label": "6. playbook a: deploy to dev (staging)"
+    },
+    {
+      "label": "Step 1: Pre-deployment Local Verification",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_1_pre_deployment_local_verification",
+      "community": 108,
+      "norm_label": "step 1: pre-deployment local verification"
+    },
+    {
+      "label": "Step 2: Deploy Firestore Rules and Indexes to Dev",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L149",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_2_deploy_firestore_rules_and_indexes_to_dev",
+      "community": 108,
+      "norm_label": "step 2: deploy firestore rules and indexes to dev"
+    },
+    {
+      "label": "Step 3: Push to `dev` Branch (Triggers Vercel Preview Deploy)",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L158",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_3_push_to_dev_branch_triggers_vercel_preview_deploy",
+      "community": 108,
+      "norm_label": "step 3: push to `dev` branch (triggers vercel preview deploy)"
+    },
+    {
+      "label": "Step 4: Verify Deployment",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L166",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_4_verify_deployment",
+      "community": 108,
+      "norm_label": "step 4: verify deployment"
+    },
+    {
+      "label": "7. Playbook B: Deploy to Production (`prod`)",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L176",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "community": 108,
+      "norm_label": "7. playbook b: deploy to production (`prod`)"
+    },
+    {
+      "label": "Step 1: Verify All Tests Pass on Dev",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L183",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_1_verify_all_tests_pass_on_dev",
+      "community": 108,
+      "norm_label": "step 1: verify all tests pass on dev"
+    },
+    {
+      "label": "Step 2: Deploy Firestore Rules and Indexes to Production",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L196",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_2_deploy_firestore_rules_and_indexes_to_production",
+      "community": 108,
+      "norm_label": "step 2: deploy firestore rules and indexes to production"
+    },
+    {
+      "label": "Step 3: Merge `dev` into `main` and Push",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L205",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_3_merge_dev_into_main_and_push",
+      "community": 108,
+      "norm_label": "step 3: merge `dev` into `main` and push"
+    },
+    {
+      "label": "Step 4: Post-Production Verification & Smoke Test",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L223",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_step_4_post_production_verification_smoke_test",
+      "community": 108,
+      "norm_label": "step 4: post-production verification & smoke test"
+    },
+    {
+      "label": "8. Troubleshooting & Recovery",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L234",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_8_troubleshooting_recovery",
+      "community": 108,
+      "norm_label": "8. troubleshooting & recovery"
+    },
+    {
+      "label": "Issue 1: Gemini API 503 / Rate Limits",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_issue_1_gemini_api_503_rate_limits",
+      "community": 108,
+      "norm_label": "issue 1: gemini api 503 / rate limits"
+    },
+    {
+      "label": "Issue 2: Missing Firestore Composite Index",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L240",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_issue_2_missing_firestore_composite_index",
+      "community": 108,
+      "norm_label": "issue 2: missing firestore composite index"
+    },
+    {
+      "label": "Issue 3: Firebase Auth `auth/unauthorized-domain`",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L247",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_issue_3_firebase_auth_auth_unauthorized_domain",
+      "community": 108,
+      "norm_label": "issue 3: firebase auth `auth/unauthorized-domain`"
+    },
+    {
+      "label": "Issue 4: Rollback Strategy",
+      "file_type": "document",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L251",
+      "_origin": "ast",
+      "id": "docs_deployment_guide_issue_4_rollback_strategy",
+      "community": 108,
+      "norm_label": "issue 4: rollback strategy"
     },
     {
       "label": "2026-08-19-firebase-initialization.md",
@@ -11112,6 +11422,46 @@
       "confidence_score": 1.0,
       "source": "package_scripts",
       "target": "package_scripts_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_deploy_firestore_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_deploy_firestore_prod"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_deploy_indexes_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_deploy_indexes_prod"
     },
     {
       "relation": "contains",
@@ -12297,9 +12647,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "services_lookuphistory_getlocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlocallookuphistory"
     },
     {
       "relation": "imports",
@@ -12319,9 +12669,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "services_lookuphistory_savelocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelocallookuphistory"
     },
     {
       "relation": "imports",
@@ -13375,9 +13725,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory",
-      "target": "services_lookuphistory_getlocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlocallookuphistory"
     },
     {
       "relation": "contains",
@@ -13395,9 +13745,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory",
-      "target": "services_lookuphistory_savelocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelocallookuphistory"
     },
     {
       "relation": "contains",
@@ -13448,9 +13798,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L203",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_deletelookupfromhistory",
-      "target": "services_lookuphistory_getlocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlocallookuphistory"
     },
     {
       "relation": "calls",
@@ -13459,9 +13809,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L137",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_getlookuphistory",
-      "target": "services_lookuphistory_getlocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlocallookuphistory"
     },
     {
       "relation": "calls",
@@ -13470,9 +13820,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_savelookuptohistory",
-      "target": "services_lookuphistory_getlocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlocallookuphistory"
     },
     {
       "relation": "calls",
@@ -13481,9 +13831,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_deletelookupfromhistory",
-      "target": "services_lookuphistory_savelocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelocallookuphistory"
     },
     {
       "relation": "calls",
@@ -13492,9 +13842,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_getlookuphistory",
-      "target": "services_lookuphistory_savelocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelocallookuphistory"
     },
     {
       "relation": "calls",
@@ -13503,9 +13853,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory_savelookuptohistory",
-      "target": "services_lookuphistory_savelocallookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelocallookuphistory"
     },
     {
       "relation": "imports",
@@ -22012,6 +22362,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_agent_guidelines_for_eatlog",
+      "target": "agents_3_deployments_dev_prod"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "DEVELOPMENT_WORKFLOW.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -22078,6 +22438,256 @@
       "confidence_score": 1.0,
       "source": "vercel_env_checklist",
       "target": "vercel_env_checklist_vercel_environment_variables_checklist"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_deployment_guide",
+      "target": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_1_system_architecture_components_to_deploy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_2_environments_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_3_required_environment_variables"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_4_firestore_rules_indexes_deployment_lifecycle_timing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L120",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_5_firebase_authentication_setup_one_time_per_domain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L176",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_eatlog_full_stack_deployment_guide_runbook",
+      "target": "docs_deployment_guide_8_troubleshooting_recovery",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_deployment_guide_3_required_environment_variables",
+      "target": "docs_deployment_guide_environment_matrix"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_4_firestore_rules_indexes_deployment_lifecycle_timing",
+      "target": "docs_deployment_guide_available_deployment_commands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_4_firestore_rules_indexes_deployment_lifecycle_timing",
+      "target": "docs_deployment_guide_when_must_rules_and_indexes_be_deployed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_4_firestore_rules_indexes_deployment_lifecycle_timing",
+      "target": "docs_deployment_guide_why_aren_t_rules_and_indexes_deployed_automatically_by_git_vercel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "target": "docs_deployment_guide_step_1_pre_deployment_local_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "target": "docs_deployment_guide_step_2_deploy_firestore_rules_and_indexes_to_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "target": "docs_deployment_guide_step_3_push_to_dev_branch_triggers_vercel_preview_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
+      "target": "docs_deployment_guide_step_4_verify_deployment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "target": "docs_deployment_guide_step_1_verify_all_tests_pass_on_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L196",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "target": "docs_deployment_guide_step_2_deploy_firestore_rules_and_indexes_to_production",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L205",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "target": "docs_deployment_guide_step_3_merge_dev_into_main_and_push",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L223",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
+      "target": "docs_deployment_guide_step_4_post_production_verification_smoke_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_8_troubleshooting_recovery",
+      "target": "docs_deployment_guide_issue_1_gemini_api_503_rate_limits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L240",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_8_troubleshooting_recovery",
+      "target": "docs_deployment_guide_issue_2_missing_firestore_composite_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_8_troubleshooting_recovery",
+      "target": "docs_deployment_guide_issue_3_firebase_auth_auth_unauthorized_domain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEPLOYMENT_GUIDE.md",
+      "source_location": "L251",
+      "weight": 1.0,
+      "source": "docs_deployment_guide_8_troubleshooting_recovery",
+      "target": "docs_deployment_guide_issue_4_rollback_strategy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -22201,5 +22811,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fd256edeb9d99f268e8eaf593ff916eebade6bbc"
+  "built_at_commit": "1607d6cbc157903ffe5030b3d5fa34425ff3a10b"
 }

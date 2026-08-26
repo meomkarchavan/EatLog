@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787756297.0080206,
-    "ast_hash": "e59dcda0101f169c5f4428d1715a8fad",
+    "mtime": 1787757861.5932379,
+    "ast_hash": "56d86327ea859037c498429877c745c7",
     "semantic_hash": ""
   },
   "playwright.config.js": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787753851.4175615,
-    "ast_hash": "7bf20d37b1817d0dfbf3cac65fac32e1",
+    "mtime": 1787757884.5682328,
+    "ast_hash": "519eec53f046acb2b3ff4da410d2d4d6",
     "semantic_hash": ""
   },
   "api/analyzeLogs.js": {
@@ -742,6 +742,11 @@
   "tests/unit/lookupHistory.test.js": {
     "mtime": 1787757742.094462,
     "ast_hash": "dd3e3281362475d6691cb42c66b3b09e",
+    "semantic_hash": ""
+  },
+  "docs/DEPLOYMENT_GUIDE.md": {
+    "mtime": 1787758051.3169923,
+    "ast_hash": "f53e461e07f53d13110af32eb0815a50",
     "semantic_hash": ""
   }
 }

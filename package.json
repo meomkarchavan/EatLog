@@ -12,7 +12,11 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "deploy:rules:dev": "npx firebase-tools deploy --only firestore:rules --project dev",
-    "deploy:rules:prod": "npx firebase-tools deploy --only firestore:rules --project production"
+    "deploy:rules:prod": "npx firebase-tools deploy --only firestore:rules --project production",
+    "deploy:indexes:dev": "npx firebase-tools deploy --only firestore:indexes --project dev",
+    "deploy:indexes:prod": "npx firebase-tools deploy --only firestore:indexes --project production",
+    "deploy:firestore:dev": "npx firebase-tools deploy --only firestore --project dev",
+    "deploy:firestore:prod": "npx firebase-tools deploy --only firestore --project production"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

@@ -12,3 +12,9 @@ All AI agents working on this project MUST use the Graphify knowledge graph (`gr
 - **Feature Branches**: Branch from `dev` (`feature/*`, `fix/*`, `chore/*`).
 - **Merge Target**: Merge only into `dev` via PR after test verification.
 - **Production Guard**: Never merge to `main` without explicit user instruction.
+
+## 3. Deployments (Dev & Prod)
+When instructed to deploy to Dev or Prod, follow the step-by-step instructions in [docs/DEPLOYMENT_GUIDE.md](file:///d:/code/EatLog/docs/DEPLOYMENT_GUIDE.md):
+- **Dev**: Deploy Firestore rules/indexes (`npm run deploy:firestore:dev`) and push to `dev` branch for Vercel preview.
+- **Prod**: Verify all tests pass, deploy Firestore rules/indexes (`npm run deploy:firestore:prod`), and merge to `main` (requires explicit user confirmation).
+
