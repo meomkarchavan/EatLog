@@ -36,7 +36,7 @@ describe('WeightTracker Component', () => {
     render(<WeightTracker selectedDate="2026-08-21" />);
 
     expect(screen.getByText(/^Weight$/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/e\.g\. 74\.5/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/e\.g\. 74\.55/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
   });
 
@@ -45,24 +45,24 @@ describe('WeightTracker Component', () => {
 
     snapshotCallback({
       exists: () => true,
-      data: () => ({ weight_kg: 76.5 }),
+      data: () => ({ weight_kg: 76.55 }),
     });
 
     await waitFor(() => {
-      expect(screen.getByText('76.5')).toBeInTheDocument();
+      expect(screen.getByText('76.55')).toBeInTheDocument();
       expect(screen.getByText('kg')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
     });
   });
 
-  it('calls setDoc with merge: true when weight is entered and saved', async () => {
+  it('calls setDoc with merge: true when 2-decimal weight is entered and saved', async () => {
     const user = userEvent.setup();
     render(<WeightTracker selectedDate="2026-08-21" />);
 
-    const input = screen.getByPlaceholderText(/e\.g\. 74\.5/i);
+    const input = screen.getByPlaceholderText(/e\.g\. 74\.55/i);
     const saveBtn = screen.getByRole('button', { name: /save/i });
 
-    await user.type(input, '75.2');
+    await user.type(input, '33.22');
     await user.click(saveBtn);
 
     await waitFor(() => {
@@ -76,7 +76,7 @@ describe('WeightTracker Component', () => {
         expect.objectContaining({
           user_id: 'test-user-123',
           date: '2026-08-21',
-          weight_kg: 75.2,
+          weight_kg: 33.22,
         }),
         { merge: true }
       );

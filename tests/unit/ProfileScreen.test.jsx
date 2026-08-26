@@ -67,11 +67,11 @@ describe('ProfileScreen Component', () => {
 
   it('calls setDoc on user_profiles/{uid} when form is submitted', async () => {
     const user = userEvent.setup();
-    render(<ProfileScreen latestWeightKg={75} />);
+    render(<ProfileScreen latestWeightKg={75.25} />);
 
     await user.type(screen.getByLabelText(/height/i), '175');
     await user.type(screen.getByLabelText(/age/i), '25');
-    await user.type(screen.getByLabelText(/current \/ baseline weight/i), '75');
+    await user.type(screen.getByLabelText(/current \/ baseline weight/i), '75.25');
 
     const saveBtn = screen.getByRole('button', { name: /save profile/i });
     await user.click(saveBtn);
@@ -88,7 +88,7 @@ describe('ProfileScreen Component', () => {
           user_id: 'test-user-123',
           height_cm: 175,
           age: 25,
-          baseline_weight_kg: 75,
+          baseline_weight_kg: 75.25,
         }),
         { merge: true }
       );
