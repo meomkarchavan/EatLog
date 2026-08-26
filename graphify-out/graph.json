@@ -867,7 +867,7 @@
       "label": "SearchIcon()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "components_lookuppanel_searchicon",
       "community": 107,
@@ -877,7 +877,7 @@
       "label": "SendIcon()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L29",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "components_lookuppanel_sendicon",
       "community": 107,
@@ -887,10 +887,10 @@
       "label": "LookupPanel()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L37",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "components_lookuppanel_lookuppanel",
-      "community": 107,
+      "community": 0,
       "norm_label": "lookuppanel()"
     },
     {
@@ -1572,6 +1572,26 @@
       "id": "unit_lookuppanel_test_mockshowtoast",
       "community": 107,
       "norm_label": "mockshowtoast"
+    },
+    {
+      "label": "mockAddDoc",
+      "file_type": "code",
+      "source_file": "tests/unit/LookupPanel.test.jsx",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "unit_lookuppanel_test_mockadddoc",
+      "community": 107,
+      "norm_label": "mockadddoc"
+    },
+    {
+      "label": "mockCollection",
+      "file_type": "code",
+      "source_file": "tests/unit/LookupPanel.test.jsx",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "unit_lookuppanel_test_mockcollection",
+      "community": 107,
+      "norm_label": "mockcollection"
     },
     {
       "label": "MealCard.test.jsx",
@@ -11579,9 +11599,9 @@
       "source_file": "package.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_test_e2e_dev",
-      "confidence_score": 1.0
+      "target": "package_scripts_test_e2e_dev"
     },
     {
       "relation": "contains",
@@ -11589,9 +11609,9 @@
       "source_file": "package.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_test_e2e_prod",
-      "confidence_score": 1.0
+      "target": "package_scripts_test_e2e_prod"
     },
     {
       "relation": "contains",
@@ -12786,6 +12806,17 @@
       "confidence_score": 1.0,
       "source": "components_lookuppanel",
       "target": "src_firebase_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/LookupPanel.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "components_lookuppanel",
+      "target": "src_firebase_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -14348,6 +14379,26 @@
       "confidence_score": 1.0,
       "source": "tests_setup",
       "target": "tests_setup_unobserve"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/LookupPanel.test.jsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "unit_lookuppanel_test",
+      "target": "unit_lookuppanel_test_mockadddoc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/LookupPanel.test.jsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "unit_lookuppanel_test",
+      "target": "unit_lookuppanel_test_mockcollection",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -22445,9 +22496,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agent_guidelines_for_eatlog",
-      "target": "agents_4_mandatory_post_deployment_live_ui_e2e_verification",
-      "confidence_score": 1.0
+      "target": "agents_4_mandatory_post_deployment_live_ui_e2e_verification"
     },
     {
       "relation": "contains",
@@ -22685,9 +22736,9 @@
       "source_file": "docs/DEPLOYMENT_GUIDE.md",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
-      "target": "docs_deployment_guide_step_4_wait_and_verify_vercel_build_status",
-      "confidence_score": 1.0
+      "target": "docs_deployment_guide_step_4_wait_and_verify_vercel_build_status"
     },
     {
       "relation": "contains",
@@ -22695,9 +22746,9 @@
       "source_file": "docs/DEPLOYMENT_GUIDE.md",
       "source_location": "L175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_deployment_guide_6_playbook_a_deploy_to_dev_staging",
-      "target": "docs_deployment_guide_step_5_live_ui_scenarios_e2e_verification",
-      "confidence_score": 1.0
+      "target": "docs_deployment_guide_step_5_live_ui_scenarios_e2e_verification"
     },
     {
       "relation": "contains",
@@ -22735,9 +22786,9 @@
       "source_file": "docs/DEPLOYMENT_GUIDE.md",
       "source_location": "L231",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
-      "target": "docs_deployment_guide_step_4_wait_and_verify_vercel_production_build_status",
-      "confidence_score": 1.0
+      "target": "docs_deployment_guide_step_4_wait_and_verify_vercel_production_build_status"
     },
     {
       "relation": "contains",
@@ -22745,9 +22796,9 @@
       "source_file": "docs/DEPLOYMENT_GUIDE.md",
       "source_location": "L238",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_deployment_guide_7_playbook_b_deploy_to_production_prod",
-      "target": "docs_deployment_guide_step_5_live_ui_scenarios_e2e_verification_238",
-      "confidence_score": 1.0
+      "target": "docs_deployment_guide_step_5_live_ui_scenarios_e2e_verification_238"
     },
     {
       "relation": "contains",
@@ -22911,5 +22962,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e21ccc937d4ef4e5c2905c84addfc319e1e64bbd"
+  "built_at_commit": "4e22fc23384ebc84974b40ec4777426f9f281009"
 }

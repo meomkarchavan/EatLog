@@ -55,4 +55,13 @@ describe('LookupCard Component', () => {
 
     expect(mockDismiss).toHaveBeenCalledTimes(1);
   });
+
+  it('shows loading spinner and disables button when isAdding is true', () => {
+    const mockAdd = vi.fn();
+    render(<LookupCard data={mockData} onAddToDailyLog={mockAdd} isAdding={true} />);
+
+    const addBtn = screen.getByTitle(/adding to log\.\.\./i);
+    expect(addBtn).toBeDisabled();
+    expect(screen.getByText('Adding...')).toBeInTheDocument();
+  });
 });

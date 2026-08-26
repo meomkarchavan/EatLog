@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "src/components/Dashboard.jsx": {
-    "mtime": 1787518581.0774493,
-    "ast_hash": "688f1eec7ea0f8b189cccf712f26c234",
+    "mtime": 1787759561.966578,
+    "ast_hash": "bffe2062ab76037b6ab221c32c5e7c8f",
     "semantic_hash": ""
   },
   "src/components/DatePicker.jsx": {
@@ -55,13 +55,13 @@
     "semantic_hash": ""
   },
   "src/components/LookupCard.jsx": {
-    "mtime": 1787758810.0014443,
-    "ast_hash": "ed99540bdc4cc8c8fea4e0160a9ccfb2",
+    "mtime": 1787759694.348599,
+    "ast_hash": "c612cfa208d4fedff322d1302fa16a2a",
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
-    "mtime": 1787758810.0024772,
-    "ast_hash": "d503f4994ae1f61cf34c4db8f7247bd6",
+    "mtime": 1787759740.8576446,
+    "ast_hash": "15d94f2081c4be10b501136bb8bac569",
     "semantic_hash": ""
   },
   "src/components/MealCard.jsx": {
@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "tests/e2e/eatlog.spec.js": {
-    "mtime": 1787759210.337143,
-    "ast_hash": "ec23dbacad94cd7db91b43e709812025",
+    "mtime": 1787759561.9680915,
+    "ast_hash": "a806439628bb921b4dcf1bb139e99bbe",
     "semantic_hash": ""
   },
   "tests/setup.js": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupPanel.test.jsx": {
-    "mtime": 1787758810.0097444,
-    "ast_hash": "befa78024c27f3ffd813423bfa04cc10",
+    "mtime": 1787759561.9685962,
+    "ast_hash": "06ff2fc4a6e9a2729d30e46f7aed8c07",
     "semantic_hash": ""
   },
   "tests/unit/MealCard.test.jsx": {
@@ -735,8 +735,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupCard.test.jsx": {
-    "mtime": 1787758810.0092306,
-    "ast_hash": "99ff5b18e6066d17f87cd2886e4ef63b",
+    "mtime": 1787759756.7316213,
+    "ast_hash": "c6190cba8b8ee5d95a1fac9246b0cd85",
     "semantic_hash": ""
   },
   "tests/unit/lookupHistory.test.js": {

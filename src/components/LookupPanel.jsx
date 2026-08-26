@@ -7,7 +7,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { PlusCircle, History, Trash2 } from 'lucide-react';
+import { PlusCircle, History, Trash2, Loader2 } from 'lucide-react';
 import LookupCard from './LookupCard';
 import { useToast } from './Toast';
 import { auth, db } from '../firebase';
@@ -39,6 +39,7 @@ export default function LookupPanel({ onAddMeal }) {
   const { showToast } = useToast();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [addingId, setAddingId] = useState(null); // ID of food currently being logged
   const [results, setResults] = useState([]); // session search results
   const [history, setHistory] = useState(() => getLocalLookupHistory(auth.currentUser?.uid));
   const [isLoadingHistory, setIsLoadingHistory] = useState(() => history.length === 0);
@@ -147,18 +148,21 @@ export default function LookupPanel({ onAddMeal }) {
   };
 
   const handleAddToDailyLog = async (item) => {
-    if (onAddMeal) {
-      await onAddMeal(item);
-      return;
-    }
-
-    const uid = auth.currentUser?.uid;
-    if (!uid) {
-      showToast('Please sign in to log meals', 'error');
-      return;
-    }
+    const itemKey = item.id || item.food_summary;
+    setAddingId(itemKey);
 
     try {
+      if (onAddMeal) {
+        await onAddMeal(item);
+        return;
+      }
+
+      const uid = auth.currentUser?.uid;
+      if (!uid) {
+        showToast('Please sign in to log meals', 'error');
+        return;
+      }
+
       await addDoc(collection(db, 'daily_logs'), {
         id: crypto.randomUUID(),
         user_id: uid,
@@ -175,6 +179,8 @@ export default function LookupPanel({ onAddMeal }) {
     } catch (err) {
       console.error('Failed to log lookup item:', err);
       showToast('Failed to add meal to log.', 'error');
+    } finally {
+      setAddingId(null);
     }
   };
 
@@ -279,6 +285,7 @@ export default function LookupPanel({ onAddMeal }) {
                 data={result}
                 onDismiss={() => dismissResult(result.id)}
                 onAddToDailyLog={handleAddToDailyLog}
+                isAdding={addingId === (result.id || result.food_summary)}
               />
             ))}
           </div>
@@ -333,56 +340,65 @@ export default function LookupPanel({ onAddMeal }) {
             </div>
           ) : (
             <div className="space-y-2">
-              {history.map((item, index) => (
-                <div
-                  key={item.id || index}
-                  className="group bg-surface-2 hover:bg-surface-3/70 border border-surface-3 hover:border-violet-500/30 rounded-xl p-3 flex items-center justify-between gap-3 transition-all duration-200"
-                >
-                  <div className="min-w-0 flex-1">
-                    <p className="text-white text-xs sm:text-sm font-medium leading-snug break-words">
-                      {item.food_summary}
-                    </p>
-                    {/* All macros displayed clearly */}
-                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-amber-400 tabular-nums border border-zinc-700/40">
-                        {item.calories} kcal
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-emerald-400 tabular-nums border border-zinc-700/40">
-                        {item.protein_g}g P
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-sky-400 tabular-nums border border-zinc-700/40">
-                        {item.carbs_g}g C
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-rose-400 tabular-nums border border-zinc-700/40">
-                        {item.fat_g}g F
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-lime-400 tabular-nums border border-zinc-700/40">
-                        {item.fiber_g}g Fib
-                      </span>
+              {history.map((item, index) => {
+                const isItemAdding = addingId === (item.id || item.food_summary);
+                return (
+                  <div
+                    key={item.id || index}
+                    className="group bg-surface-2 hover:bg-surface-3/70 border border-surface-3 hover:border-violet-500/30 rounded-xl p-3 flex items-center justify-between gap-3 transition-all duration-200"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <p className="text-white text-xs sm:text-sm font-medium leading-snug break-words">
+                        {item.food_summary}
+                      </p>
+                      {/* All macros displayed clearly */}
+                      <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-amber-400 tabular-nums border border-zinc-700/40">
+                          {item.calories} kcal
+                        </span>
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-emerald-400 tabular-nums border border-zinc-700/40">
+                          {item.protein_g}g P
+                        </span>
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-sky-400 tabular-nums border border-zinc-700/40">
+                          {item.carbs_g}g C
+                        </span>
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-rose-400 tabular-nums border border-zinc-700/40">
+                          {item.fat_g}g F
+                        </span>
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-lime-400 tabular-nums border border-zinc-700/40">
+                          {item.fiber_g}g Fib
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="shrink-0 flex items-center gap-1.5">
+                      <button
+                        id={`quick-add-history-${item.id || index}`}
+                        onClick={() => handleAddToDailyLog(item)}
+                        disabled={isItemAdding}
+                        title={isItemAdding ? 'Adding to log...' : 'Quick-Add to Daily Log'}
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isItemAdding ? (
+                          <Loader2 className="w-3.5 h-3.5 text-violet-300 animate-spin" />
+                        ) : (
+                          <PlusCircle className="w-3.5 h-3.5" />
+                        )}
+                        <span>{isItemAdding ? 'Adding...' : 'Add'}</span>
+                      </button>
+                      <button
+                        id={`delete-history-${item.id || index}`}
+                        onClick={() => handleDeleteHistoryItem(item.id)}
+                        disabled={isItemAdding}
+                        title="Delete from history"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95 disabled:opacity-40"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
-
-                  <div className="shrink-0 flex items-center gap-1.5">
-                    <button
-                      id={`quick-add-history-${item.id || index}`}
-                      onClick={() => handleAddToDailyLog(item)}
-                      title="Quick-Add to Daily Log"
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95"
-                    >
-                      <PlusCircle className="w-3.5 h-3.5" />
-                      <span>Add</span>
-                    </button>
-                    <button
-                      id={`delete-history-${item.id || index}`}
-                      onClick={() => handleDeleteHistoryItem(item.id)}
-                      title="Delete from history"
-                      className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
