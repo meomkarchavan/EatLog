@@ -11,6 +11,8 @@
     "test:unit": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:dev": "node scripts/run-e2e.js dev",
+    "test:e2e:prod": "node scripts/run-e2e.js prod",
     "deploy:rules:dev": "npx firebase-tools deploy --only firestore:rules --project dev",
     "deploy:rules:prod": "npx firebase-tools deploy --only firestore:rules --project production",
     "deploy:indexes:dev": "npx firebase-tools deploy --only firestore:indexes --project dev",

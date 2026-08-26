@@ -172,12 +172,12 @@ npx vercel ls
 npx vercel inspect https://eat-log-git-dev-omkar-chavans-projects.vercel.app
 ```
 
-### Step 5: Smoke Test Preview Environment
-Run smoke / E2E tests against the live preview URL:
+### Step 5: Live UI Scenarios & E2E Verification
+Execute the automated end-to-end UI suite directly against the live Dev preview URL:
 ```powershell
-$env:BASE_URL="https://eat-log-git-dev-omkar-chavans-projects.vercel.app"
-npx playwright test
+npm run test:e2e:dev
 ```
+*(This verifies real Auth login/signup, profile dynamic target calculation, HUD macronutrient bars, water & weight logging, zero-friction meal logging, meal editing, pinning staples, quick lookup modal, custom date navigation, and weekly charts).*
 
 ---
 
@@ -197,7 +197,7 @@ git pull origin dev
 # Run unit tests
 npm run test
 
-# Run e2e tests
+# Run local e2e tests
 npm run test:e2e
 ```
 
@@ -228,14 +228,25 @@ git push origin main
 npx vercel --prod
 ```
 
-### Step 4: Post-Production Verification & Smoke Test
-1. Visit production URL: `https://eattlog.vercel.app`.
-2. Verify:
-   - User authentication (Google Sign-In & Email/Password).
-   - Logging a meal with image upload & text analysis (`/api/logMeal`).
-   - Requesting nutritionist insights (`/api/analyzeLogs`).
-   - Real-time Firestore sync on Daily Logs, Water, Weight, and Quick Lookup history.
-   - PWA service worker installation.
+### Step 4: Wait and Verify Vercel Production Build Status
+Do NOT report completion until the deployment status is verified as `● Ready`:
+```powershell
+npx vercel ls
+npx vercel inspect https://eattlog.vercel.app
+```
+
+### Step 5: Live UI Scenarios & E2E Verification
+Execute the automated end-to-end UI suite directly against the live Production domain:
+```powershell
+npm run test:e2e:prod
+```
+Verify that all test steps pass 100%:
+- User authentication & session restore
+- Profile & dynamic goals engine calculation
+- Live Firestore sync across Daily, Water, Weight, Staples & Lookup collections
+- Multimodal meal logging and editing
+- Weekly insights & consistency heatmap
+- PWA service worker installation
 
 ---
 

@@ -26,8 +26,10 @@
 1. Develop on `dev` (or branch off `dev`).
 2. Run local unit tests: `npm run test` (must pass 100%).
 3. Run local E2E tests: `npm run test:e2e` (must pass 100%).
-4. Commit and push to `origin/dev`.
-5. Wait for Vercel preview deployment to build (`● Ready`).
-6. Run E2E tests against the live preview URL (`BASE_URL=<preview-url> npx playwright test`).
-7. **STOP & Report to User**: Wait for explicit user confirmation before merging to `main`.
+4. Deploy Firestore rules/indexes to dev: `npm run deploy:firestore:dev`.
+5. Commit and push to `origin/dev`.
+6. Wait for Vercel preview deployment to build (`● Ready`).
+7. Run live UI E2E test scenarios against the Dev deployment: `npm run test:e2e:dev` (must pass 100%).
+8. **STOP & Report to User**: Wait for explicit user confirmation before merging to `main`.
+9. Upon approval for Prod: Deploy rules to prod (`npm run deploy:firestore:prod`), merge to `main`, wait for Vercel `● Ready`, and run `npm run test:e2e:prod` (must pass 100%).
 
