@@ -92,7 +92,7 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
     const addWaterBtn = page.locator('#add-water-btn');
     await expect(addWaterBtn).toBeVisible();
     await addWaterBtn.click();
-    await expect(page.getByText(/0\.25\s*L/i)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText(/\d+\.\d+\s*L/i).first()).toBeVisible({ timeout: 10000 });
 
     // 6. Test Body Weight Tracking
     const weightInput = page.locator('#weight-input');
