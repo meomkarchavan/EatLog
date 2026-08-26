@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "firestore.indexes.json": {
-    "mtime": 1787320336.5142908,
-    "ast_hash": "d13fb13fe2b72c9fcbe8b23810919a45",
+    "mtime": 1787757177.8537877,
+    "ast_hash": "815d51cfc44e22d668b68d8ef69c6974",
     "semantic_hash": ""
   },
   "package.json": {
@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
-    "mtime": 1787757035.1682217,
-    "ast_hash": "87406f2416671e70f3688a119b4b2646",
+    "mtime": 1787757196.4465358,
+    "ast_hash": "360d1b152083a87036d4773bc390cc33",
     "semantic_hash": ""
   },
   "src/components/MealCard.jsx": {
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "tests/unit/Dashboard.test.jsx": {
-    "mtime": 1787756951.2903597,
-    "ast_hash": "0c24afe669fb240b39e2007df41d28be",
+    "mtime": 1787757249.5018635,
+    "ast_hash": "dd32bfae96db232952429d699fd0c661",
     "semantic_hash": ""
   },
   "tests/unit/DatePicker.test.jsx": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupPanel.test.jsx": {
-    "mtime": 1787757118.499607,
-    "ast_hash": "d0264483df159ae82e60954d73cc0fe1",
+    "mtime": 1787757209.8298547,
+    "ast_hash": "97a00bf095fbd82f80fa0a55d0ef127d",
     "semantic_hash": ""
   },
   "tests/unit/MealCard.test.jsx": {
@@ -730,8 +730,8 @@
     "semantic_hash": ""
   },
   "src/services/lookupHistory.js": {
-    "mtime": 1787757025.3076327,
-    "ast_hash": "35e402dee9f206123f2849c1b31d2dc7",
+    "mtime": 1787757184.5805993,
+    "ast_hash": "a04304c766ff327891fdea3fde02cc44",
     "semantic_hash": ""
   },
   "tests/unit/LookupCard.test.jsx": {
@@ -740,8 +740,8 @@
     "semantic_hash": ""
   },
   "tests/unit/lookupHistory.test.js": {
-    "mtime": 1787757043.5802226,
-    "ast_hash": "e769795834cee67b0000346885b46fae",
+    "mtime": 1787757222.3561602,
+    "ast_hash": "eb06d72665f943bd28e0040b244341db",
     "semantic_hash": ""
   }
 }

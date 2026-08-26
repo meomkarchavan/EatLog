@@ -8,6 +8,7 @@ import {
   where,
   orderBy,
   limit,
+  onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -45,6 +46,7 @@ export async function saveLookupToHistory(userId, data) {
 
 /**
  * Fetches the user's past lookups ordered by createdAt descending (limit 20).
+ * Includes resilient fallback client sorting if composite index is pending.
  *
  * @param {string} userId - The Firebase Auth UID.
  * @returns {Promise<Array>} List of persistent lookup documents.
@@ -52,18 +54,82 @@ export async function saveLookupToHistory(userId, data) {
 export async function getLookupHistory(userId) {
   if (!userId) return [];
 
+  try {
+    const q = query(
+      collection(db, COLLECTION_NAME),
+      where('userId', '==', userId),
+      orderBy('createdAt', 'desc'),
+      limit(20)
+    );
+
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+  } catch (err) {
+    console.warn('Ordered Firestore query failed (index pending?), applying fallback sort:', err);
+    const fallbackQuery = query(
+      collection(db, COLLECTION_NAME),
+      where('userId', '==', userId),
+      limit(50)
+    );
+    const snapshot = await getDocs(fallbackQuery);
+    const items = snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+
+    items.sort((a, b) => {
+      const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+      const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+      return timeB - timeA;
+    });
+
+    return items.slice(0, 20);
+  }
+}
+
+/**
+ * Subscribes to real-time updates of the user's persistent lookup history.
+ *
+ * @param {string} userId - The Firebase Auth UID.
+ * @param {Function} onUpdate - Callback invoked with sorted array of lookup history docs.
+ * @param {Function} [onError] - Optional error handler callback.
+ * @returns {Function} Unsubscribe function.
+ */
+export function subscribeLookupHistory(userId, onUpdate, onError) {
+  if (!userId) {
+    onUpdate([]);
+    return () => {};
+  }
+
   const q = query(
     collection(db, COLLECTION_NAME),
-    where('userId', '==', userId),
-    orderBy('createdAt', 'desc'),
-    limit(20)
+    where('userId', '==', userId)
   );
 
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map((docSnap) => ({
-    id: docSnap.id,
-    ...docSnap.data(),
-  }));
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const items = snapshot.docs.map((docSnap) => ({
+        id: docSnap.id,
+        ...docSnap.data(),
+      }));
+
+      items.sort((a, b) => {
+        const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+        const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+        return timeB - timeA;
+      });
+
+      onUpdate(items.slice(0, 20));
+    },
+    (err) => {
+      console.error('Firestore lookup history listener error:', err);
+      if (onError) onError(err);
+    }
+  );
 }
 
 /**

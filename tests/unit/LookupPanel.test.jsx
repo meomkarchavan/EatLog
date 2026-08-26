@@ -20,9 +20,30 @@ vi.mock('../../src/firebase', () => ({
   db: {},
 }));
 
+vi.mock('firebase/auth', () => ({
+  onAuthStateChanged: vi.fn((auth, cb) => {
+    cb({ uid: 'test-user-123' });
+    return vi.fn();
+  }),
+}));
+
 vi.mock('../../src/services/lookupHistory', () => ({
   saveLookupToHistory: vi.fn(),
   getLookupHistory: vi.fn(),
+  subscribeLookupHistory: vi.fn((uid, cb) => {
+    cb([
+      {
+        id: 'hist-1',
+        food_summary: 'Greek Yogurt Bowl',
+        calories: 180,
+        protein_g: 20,
+        carbs_g: 15,
+        fat_g: 2,
+        fiber_g: 1,
+      },
+    ]);
+    return vi.fn();
+  }),
   deleteLookupFromHistory: vi.fn(),
 }));
 
@@ -41,6 +62,20 @@ describe('LookupPanel Component', () => {
         fiber_g: 1,
       },
     ]);
+    lookupHistoryService.subscribeLookupHistory.mockImplementation((uid, cb) => {
+      cb([
+        {
+          id: 'hist-1',
+          food_summary: 'Greek Yogurt Bowl',
+          calories: 180,
+          protein_g: 20,
+          carbs_g: 15,
+          fat_g: 2,
+          fiber_g: 1,
+        },
+      ]);
+      return vi.fn();
+    });
     lookupHistoryService.saveLookupToHistory.mockImplementation(async (uid, data) => ({
       id: 'saved-doc-1',
       ...data,
@@ -55,7 +90,11 @@ describe('LookupPanel Component', () => {
     expect(screen.getByPlaceholderText(/Search food stats\.\.\./i)).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(lookupHistoryService.getLookupHistory).toHaveBeenCalledWith('test-user-123');
+      expect(lookupHistoryService.subscribeLookupHistory).toHaveBeenCalledWith(
+        'test-user-123',
+        expect.any(Function),
+        expect.any(Function)
+      );
       expect(screen.getByText('Greek Yogurt Bowl')).toBeInTheDocument();
       expect(screen.getByText('180 kcal')).toBeInTheDocument();
       expect(screen.getByText('20g P')).toBeInTheDocument();

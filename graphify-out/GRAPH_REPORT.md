@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-08-26)
 
 ## Corpus Check
-- 146 files · ~79,686 words
+- 146 files · ~80,083 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1083 nodes · 1103 edges · 107 communities (96 shown, 11 thin omitted)
+- 1084 nodes · 1106 edges · 107 communities (96 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9eacc637`
+- Built from commit: `fb680a00`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -130,8 +130,8 @@
 ## Surprising Connections (you probably didn't know these)
 - `TestConsumer()` --calls--> `useToast()`  [EXTRACTED]
   tests/unit/Toast.test.jsx → src/components/Toast.jsx
-- `ProfileScreen()` --calls--> `useToast()`  [EXTRACTED]
-  src/components/ProfileScreen.jsx → src/components/Toast.jsx
+- `ProfileScreen()` --calls--> `calculateTargets()`  [EXTRACTED]
+  src/components/ProfileScreen.jsx → src/utils/targetEngine.js
 - `Dashboard()` --calls--> `useToast()`  [EXTRACTED]
   src/components/Dashboard.jsx → src/components/Toast.jsx
 - `Dashboard()` --calls--> `calculateNutritionTargets()`  [EXTRACTED]
@@ -146,7 +146,7 @@
 
 ### Community 0 - "Community 0"
 Cohesion: 0.05
-Nodes (33): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupCard(), LookupPanel(), MealCard(), Profile() (+25 more)
+Nodes (35): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupCard(), LookupPanel(), MealCard(), Profile() (+27 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
@@ -265,8 +265,8 @@ Cohesion: 0.17
 Nodes (11): 1. Re-running `flutterfire configure` Upon Renaming, 2. Platform-Specific Build Requirements, 3. Web CORS Best Practices, 4. Elaborating on `WidgetsFlutterBinding.ensureInitialized()`, Flutter & Firebase Setup Guide, Prerequisites, Step 1: Create a Flutter Project, Step 2: Configure Firebase (+3 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.38
-Nodes (8): ProfileScreen(), ACTIVITY_MODIFIERS, calculateBMI(), calculateBMR(), calculateTargets(), calculateTDEE(), getBMICategory(), GOAL_MODIFIERS
+Cohesion: 0.47
+Nodes (7): ACTIVITY_MODIFIERS, calculateBMI(), calculateBMR(), calculateTargets(), calculateTDEE(), getBMICategory(), GOAL_MODIFIERS
 
 ### Community 31 - "Community 31"
 Cohesion: 0.17
@@ -504,17 +504,17 @@ Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mock
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `auth` connect `Community 0` to `Community 30`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `useToast()` connect `Community 0` to `Community 30`?**
+- **Why does `calculateTargets()` connect `Community 30` to `Community 0`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
   _647 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.05432098765432099 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05266106442577031 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+- **Should `Community 4` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._

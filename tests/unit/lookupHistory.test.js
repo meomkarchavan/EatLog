@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import {
   saveLookupToHistory,
   getLookupHistory,
+  subscribeLookupHistory,
   deleteLookupFromHistory,
 } from '../../src/services/lookupHistory';
 import * as firestore from 'firebase/firestore';
@@ -12,6 +13,26 @@ vi.mock('firebase/firestore', () => ({
   addDoc: vi.fn(),
   getDocs: vi.fn(),
   deleteDoc: vi.fn(),
+  onSnapshot: vi.fn((q, cb) => {
+    cb({
+      docs: [
+        {
+          id: 'doc-snap-1',
+          data: () => ({
+            userId: 'user-456',
+            food_summary: 'Protein Bar',
+            calories: 210,
+            protein_g: 20,
+            carbs_g: 22,
+            fat_g: 7,
+            fiber_g: 10,
+            createdAt: new Date('2026-01-01T12:00:00Z'),
+          }),
+        },
+      ],
+    });
+    return vi.fn();
+  }),
   query: vi.fn((coll, ...clauses) => ({ coll, clauses })),
   where: vi.fn((field, op, val) => ({ field, op, val })),
   orderBy: vi.fn((field, dir) => ({ field, dir })),
@@ -114,6 +135,30 @@ describe('Lookup History Service', () => {
         fat_g: 6,
         fiber_g: 5,
       });
+    });
+  });
+
+  describe('subscribeLookupHistory', () => {
+    it('returns empty array if userId is not provided', () => {
+      const onUpdate = vi.fn();
+      const unsub = subscribeLookupHistory(null, onUpdate);
+      expect(onUpdate).toHaveBeenCalledWith([]);
+      expect(typeof unsub).toBe('function');
+    });
+
+    it('subscribes with onSnapshot and returns mapped and sorted items', () => {
+      const onUpdate = vi.fn();
+      const unsub = subscribeLookupHistory('user-456', onUpdate);
+
+      expect(firestore.onSnapshot).toHaveBeenCalled();
+      expect(onUpdate).toHaveBeenCalledWith([
+        expect.objectContaining({
+          id: 'doc-snap-1',
+          food_summary: 'Protein Bar',
+          calories: 210,
+        }),
+      ]);
+      expect(typeof unsub).toBe('function');
     });
   });
 

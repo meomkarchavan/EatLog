@@ -64,6 +64,10 @@ vi.mock('firebase/firestore', () => ({
 vi.mock('firebase/auth', () => ({
   signOut: vi.fn(),
   getAuth: vi.fn(),
+  onAuthStateChanged: vi.fn((auth, cb) => {
+    cb({ uid: 'test-user-123' });
+    return vi.fn();
+  }),
 }));
 
 vi.mock('../../src/firebase', () => ({

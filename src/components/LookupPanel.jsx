@@ -5,13 +5,14 @@
  * Quick-Add and Delete actions directly from history.
  */
 import { useState, useEffect, useRef } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 import { PlusCircle, History, Trash2 } from 'lucide-react';
 import LookupCard from './LookupCard';
 import { useToast } from './Toast';
 import { auth } from '../firebase';
 import {
   saveLookupToHistory,
-  getLookupHistory,
+  subscribeLookupHistory,
   deleteLookupFromHistory,
 } from '../services/lookupHistory';
 
@@ -35,41 +36,39 @@ export default function LookupPanel() {
   const { showToast } = useToast();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState([]); // session history, newest first
+  const [results, setResults] = useState([]); // session search history
   const [history, setHistory] = useState([]); // persistent Firestore history
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const inputRef = useRef(null);
 
-  // Fetch persistent lookup history on mount
+  // Real-time listener for persistent lookup history across tab switches
   useEffect(() => {
-    let isMounted = true;
+    let unsubscribeFirestore = () => {};
 
-    async function loadHistory() {
-      const uid = auth.currentUser?.uid;
-      if (!uid) {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
+        setHistory([]);
         setIsLoadingHistory(false);
         return;
       }
 
       setIsLoadingHistory(true);
-      try {
-        const pastLookups = await getLookupHistory(uid);
-        if (isMounted) {
+      unsubscribeFirestore = subscribeLookupHistory(
+        currentUser.uid,
+        (pastLookups) => {
           setHistory(pastLookups);
-        }
-      } catch (err) {
-        console.error('Error fetching lookup history:', err);
-      } finally {
-        if (isMounted) {
+          setIsLoadingHistory(false);
+        },
+        (err) => {
+          console.error('Error in lookup history subscription:', err);
           setIsLoadingHistory(false);
         }
-      }
-    }
-
-    loadHistory();
+      );
+    });
 
     return () => {
-      isMounted = false;
+      unsubscribeAuth();
+      unsubscribeFirestore();
     };
   }, []);
 
@@ -109,13 +108,11 @@ export default function LookupPanel() {
       setResults((prev) => [lookupItem, ...prev]);
       setQuery('');
 
-      // Persist to Firestore and update persistent history state
+      // Persist to Firestore
       const uid = auth.currentUser?.uid;
       if (uid) {
         try {
-          const savedDoc = await saveLookupToHistory(uid, lookupItem);
-          const historyEntry = savedDoc ? { ...lookupItem, id: savedDoc.id } : lookupItem;
-          setHistory((prev) => [historyEntry, ...prev]);
+          await saveLookupToHistory(uid, lookupItem);
         } catch (saveErr) {
           console.error('Failed to save to lookup history:', saveErr);
           setHistory((prev) => [lookupItem, ...prev]);
