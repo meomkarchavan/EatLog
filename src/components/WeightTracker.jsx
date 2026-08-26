@@ -50,7 +50,8 @@ export default function WeightTracker({ selectedDate }) {
   const handleSaveWeight = async (e) => {
     e?.preventDefault();
     const uid = auth.currentUser?.uid;
-    const numericWeight = parseFloat(weightKg);
+    const rawNumeric = parseFloat(weightKg);
+    const numericWeight = !isNaN(rawNumeric) ? Math.round(rawNumeric * 100) / 100 : NaN;
 
     if (!uid || !selectedDate || isNaN(numericWeight) || numericWeight <= 0) {
       showToast('Please enter a valid weight in kg.', 'warning');
@@ -128,10 +129,10 @@ export default function WeightTracker({ selectedDate }) {
           <input
             id="weight-input"
             type="number"
-            step="0.1"
+            step="0.01"
             min="20"
             max="300"
-            placeholder="e.g. 74.5"
+            placeholder="e.g. 74.55"
             value={weightKg}
             onChange={(e) => setWeightKg(e.target.value)}
             className="w-16 sm:w-20 bg-surface-3 text-white text-xs rounded-xl px-2 sm:px-2.5 py-1.5 sm:py-2 outline-none focus:ring-1 focus:ring-purple-500 border border-zinc-700/50 tabular-nums"

@@ -193,6 +193,7 @@ export default function AuthScreen() {
 
         {/* Toggle */}
         <button
+          type="button"
           id="auth-toggle"
           onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
           className="mt-6 text-zinc-500 text-sm w-full text-center active:text-zinc-300 transition-colors"

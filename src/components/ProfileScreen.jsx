@@ -65,6 +65,9 @@ export default function ProfileScreen({ latestWeightKg }) {
 
     try {
       const docRef = doc(db, 'user_profiles', uid);
+      const rawBaseline = Number(profile.baseline_weight_kg);
+      const parsedBaseline = !isNaN(rawBaseline) && rawBaseline > 0 ? Math.round(rawBaseline * 100) / 100 : null;
+
       await setDoc(
         docRef,
         {
@@ -74,7 +77,7 @@ export default function ProfileScreen({ latestWeightKg }) {
           gender: profile.gender,
           activity_level: profile.activity_level,
           goal: profile.goal,
-          baseline_weight_kg: Number(profile.baseline_weight_kg) || null,
+          baseline_weight_kg: parsedBaseline,
           updated_at: new Date().toISOString(),
         },
         { merge: true }
@@ -213,11 +216,11 @@ export default function ProfileScreen({ latestWeightKg }) {
           <input
             id="profile-weight"
             type="number"
-            step="0.1"
+            step="0.01"
             min="30"
             max="300"
             required
-            placeholder="e.g. 75.0"
+            placeholder="e.g. 75.00"
             value={profile.baseline_weight_kg}
             onChange={(e) => setProfile({ ...profile, baseline_weight_kg: e.target.value })}
             className="w-full bg-surface-3 text-white placeholder-zinc-600 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-zinc-700/50 tabular-nums"

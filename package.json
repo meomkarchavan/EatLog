@@ -11,14 +11,21 @@
     "test:unit": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:dev": "node scripts/run-e2e.js dev",
+    "test:e2e:prod": "node scripts/run-e2e.js prod",
     "deploy:rules:dev": "npx firebase-tools deploy --only firestore:rules --project dev",
-    "deploy:rules:prod": "npx firebase-tools deploy --only firestore:rules --project production"
+    "deploy:rules:prod": "npx firebase-tools deploy --only firestore:rules --project production",
+    "deploy:indexes:dev": "npx firebase-tools deploy --only firestore:indexes --project dev",
+    "deploy:indexes:prod": "npx firebase-tools deploy --only firestore:indexes --project production",
+    "deploy:firestore:dev": "npx firebase-tools deploy --only firestore --project dev",
+    "deploy:firestore:prod": "npx firebase-tools deploy --only firestore --project production"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "firebase": "^12.17.1",
+    "lucide-react": "^1.34.0",
     "react": "^19.2.8",
     "react-activity-calendar": "^2.7.5",
     "react-dom": "^19.2.8",

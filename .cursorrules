@@ -33,3 +33,6 @@ You must strictly adhere to the following Git workflow and deployment rules for 
 6. Run E2E tests against the live preview URL (`BASE_URL=<preview-url> npx playwright test`).
 7. **STOP & Report to User**: Wait for explicit user confirmation before merging to `main`.
 
+## 6. Codebase Knowledge & Architecture (Graphify)
+- **Primary Source of Truth**: Before performing broad file searches or reading raw files to understand the project architecture, consult the Graphify knowledge graph located at `graphify-out/` (read `graphify-out/GRAPH_REPORT.md` or run `graphify query "<question>"`).
+- **Graph Sync**: Always run `graphify update .` after adding, modifying, or deleting code files in any session to keep the knowledge graph up-to-date.

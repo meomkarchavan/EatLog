@@ -46,10 +46,9 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await page.locator('#auth-password').fill(testPassword);
       await page.locator('#auth-submit').click();
 
-      // If sign in returns error (e.g. invalid credential), toggle to sign up and submit
-      const errorMsg = page.locator('p.text-red-400');
-      const hasError = await errorMsg.isVisible({ timeout: 4000 }).catch(() => false);
-      if (hasError) {
+      // If sign-in did not succeed within 5 seconds, switch to sign-up and retry
+      const isDashboardVisible = await page.locator('#tab-daily').isVisible({ timeout: 5000 }).catch(() => false);
+      if (!isDashboardVisible) {
         const toggleSignUp = page.locator('#auth-toggle');
         if (await toggleSignUp.isVisible()) {
           await toggleSignUp.click();

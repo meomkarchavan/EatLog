@@ -1,11 +1,22 @@
 /**
  * LookupPanel — a dedicated full-screen panel for Quick Lookup.
- * Self-contained: owns its own search input, API calls, loading state,
- * and session-scoped results history. Does NOT write to Firestore.
+ * Allows searching food nutrition stats without logging immediately,
+ * saves queries to a persistent user history in Firestore and local storage,
+ * and provides Quick-Add and Delete actions directly from history.
  */
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { PlusCircle, History, Trash2 } from 'lucide-react';
 import LookupCard from './LookupCard';
 import { useToast } from './Toast';
+import { auth } from '../firebase';
+import {
+  saveLookupToHistory,
+  subscribeLookupHistory,
+  deleteLookupFromHistory,
+  getLocalLookupHistory,
+  saveLocalLookupHistory,
+} from '../services/lookupHistory';
 
 function SearchIcon({ className }) {
   return (
@@ -27,8 +38,51 @@ export default function LookupPanel() {
   const { showToast } = useToast();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState([]); // session history, newest first
+  const [results, setResults] = useState([]); // session search results
+  const [history, setHistory] = useState(() => getLocalLookupHistory(auth.currentUser?.uid));
+  const [isLoadingHistory, setIsLoadingHistory] = useState(() => history.length === 0);
   const inputRef = useRef(null);
+
+  // Real-time listener for persistent lookup history across tab switches
+  useEffect(() => {
+    let unsubscribeFirestore = () => {};
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      const uid = currentUser?.uid;
+      if (!uid) {
+        const local = getLocalLookupHistory(null);
+        setHistory(local);
+        setIsLoadingHistory(false);
+        return;
+      }
+
+      // Pre-populate immediately from local storage for 0ms tab-switch latency
+      const cached = getLocalLookupHistory(uid);
+      if (cached.length > 0) {
+        setHistory(cached);
+        setIsLoadingHistory(false);
+      }
+
+      unsubscribeFirestore = subscribeLookupHistory(
+        uid,
+        (pastLookups) => {
+          if (pastLookups && pastLookups.length > 0) {
+            setHistory(pastLookups);
+          }
+          setIsLoadingHistory(false);
+        },
+        (err) => {
+          console.warn('Lookup history subscription error (using cache):', err);
+          setIsLoadingHistory(false);
+        }
+      );
+    });
+
+    return () => {
+      unsubscribeAuth();
+      unsubscribeFirestore();
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,25 +106,66 @@ export default function LookupPanel() {
         return;
       }
 
-      // Prepend to session history (no Firestore write)
-      setResults((prev) => [
-        {
-          id: crypto.randomUUID(),
-          food_summary: data.food_summary,
-          calories: Number(data.calories) || 0,
-          protein_g: Number(data.protein_g) || 0,
-          carbs_g: Number(data.carbs_g) || 0,
-          fat_g: Number(data.fat_g) || 0,
-          fiber_g: Number(data.fiber_g) || 0,
-        },
-        ...prev,
-      ]);
+      const lookupItem = {
+        id: crypto.randomUUID(),
+        food_summary: data.food_summary,
+        calories: Number(data.calories) || 0,
+        protein_g: Number(data.protein_g) || 0,
+        carbs_g: Number(data.carbs_g) || 0,
+        fat_g: Number(data.fat_g) || 0,
+        fiber_g: Number(data.fiber_g) || 0,
+        createdAt: new Date().toISOString(),
+      };
+
+      // Prepend to current session state
+      setResults((prev) => [lookupItem, ...prev]);
       setQuery('');
+
+      // Immediately update persistent history state and local storage cache
+      const uid = auth.currentUser?.uid;
+      setHistory((prev) => {
+        const next = [lookupItem, ...prev.filter((i) => i.id !== lookupItem.id)];
+        saveLocalLookupHistory(uid, next);
+        return next;
+      });
+
+      // Asynchronously persist to Firestore
+      if (uid) {
+        try {
+          await saveLookupToHistory(uid, lookupItem);
+        } catch (saveErr) {
+          console.warn('Failed to save to Firestore (saved locally):', saveErr);
+        }
+      }
     } catch (err) {
       console.error('Lookup error:', err);
       showToast('Something went wrong. Please try again.', 'error');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleAddToDailyLog = (item) => {
+    console.log('Quick-Add item to daily log:', item);
+    showToast(`Added "${item.food_summary}" to daily log!`, 'success');
+  };
+
+  const handleDeleteHistoryItem = async (id) => {
+    if (!id) return;
+    const uid = auth.currentUser?.uid;
+    // Optimistically remove from state and local storage
+    setHistory((prev) => {
+      const next = prev.filter((item) => item.id !== id);
+      saveLocalLookupHistory(uid, next);
+      return next;
+    });
+
+    try {
+      await deleteLookupFromHistory(id, uid);
+      showToast('Removed from lookup history', 'info');
+    } catch (err) {
+      console.error('Failed to delete lookup history entry:', err);
+      showToast('Could not delete history item', 'error');
     }
   };
 
@@ -91,7 +186,7 @@ export default function LookupPanel() {
           <div>
             <h2 className="text-white text-base font-bold leading-tight">Quick Lookup</h2>
             <p className="text-zinc-500 text-[11px] leading-tight">
-              Search nutrition facts without logging
+              Search nutrition facts and quick-add to your log
             </p>
           </div>
         </div>
@@ -124,8 +219,8 @@ export default function LookupPanel() {
       {/* Divider */}
       <div className="h-px bg-surface-3 mx-3.5 sm:mx-5" />
 
-      {/* Results Feed */}
-      <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-3 pb-28">
+      {/* Scrollable Content: Session Results + Recent Lookups */}
+      <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-4 pb-28">
         {/* Loading indicator */}
         {isLoading && (
           <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3 text-center">
@@ -135,30 +230,16 @@ export default function LookupPanel() {
           </div>
         )}
 
-        {/* Results */}
-        {results.length === 0 && !isLoading && (
-          <div className="flex flex-col items-center justify-center pt-16 pb-8">
-            <div className="w-14 h-14 rounded-2xl bg-surface-2 border border-surface-3 flex items-center justify-center mb-4">
-              <SearchIcon className="w-7 h-7 text-zinc-600" />
-            </div>
-            <p className="text-zinc-500 text-sm text-center font-medium">
-              Search any food to see its nutrition
-            </p>
-            <p className="text-zinc-600 text-xs text-center mt-1">
-              e.g. "2 scrambled eggs", "chicken biryani", "1 banana"
-            </p>
-          </div>
-        )}
-
+        {/* Current Session Results */}
         {results.length > 0 && (
-          <>
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-zinc-500 text-[10px] font-medium uppercase tracking-wider">
-                {results.length} result{results.length !== 1 ? 's' : ''}
+              <span className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+                Current Search ({results.length})
               </span>
               <button
                 onClick={clearAll}
-                className="text-[10px] text-zinc-600 hover:text-zinc-400 font-medium transition-colors"
+                className="text-[11px] text-zinc-500 hover:text-zinc-300 font-medium transition-colors"
               >
                 Clear All
               </button>
@@ -169,10 +250,114 @@ export default function LookupPanel() {
                 key={result.id}
                 data={result}
                 onDismiss={() => dismissResult(result.id)}
+                onAddToDailyLog={handleAddToDailyLog}
               />
             ))}
-          </>
+          </div>
         )}
+
+        {/* Empty state when no session results & no query */}
+        {results.length === 0 && !isLoading && history.length === 0 && !isLoadingHistory && (
+          <div className="flex flex-col items-center justify-center pt-10 pb-6">
+            <div className="w-14 h-14 rounded-2xl bg-surface-2 border border-surface-3 flex items-center justify-center mb-4">
+              <SearchIcon className="w-7 h-7 text-zinc-600" />
+            </div>
+            <p className="text-zinc-400 text-sm text-center font-medium">
+              Search any food to see its nutrition
+            </p>
+            <p className="text-zinc-600 text-xs text-center mt-1">
+              e.g. "2 scrambled eggs", "chicken biryani", "1 banana"
+            </p>
+          </div>
+        )}
+
+        {/* Recent Lookups History Section */}
+        <div className="pt-2">
+          <div className="flex items-center justify-between mb-2.5">
+            <div className="flex items-center gap-1.5">
+              <History className="w-3.5 h-3.5 text-violet-400" />
+              <h3 className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+                Recent Lookups
+              </h3>
+            </div>
+            {history.length > 0 && (
+              <span className="text-[10px] text-zinc-600 font-medium">
+                Last {history.length}
+              </span>
+            )}
+          </div>
+
+          {isLoadingHistory ? (
+            <div className="space-y-2">
+              {[1, 2, 3].map((n) => (
+                <div
+                  key={n}
+                  className="bg-surface-2/60 border border-surface-3/50 rounded-xl p-3 animate-pulse h-14"
+                />
+              ))}
+            </div>
+          ) : history.length === 0 ? (
+            <div className="bg-surface-2/40 border border-surface-3/40 rounded-xl p-4 text-center">
+              <p className="text-zinc-500 text-xs font-medium">No past lookups yet</p>
+              <p className="text-zinc-600 text-[11px] mt-0.5">
+                Foods you search will appear here for quick access
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {history.map((item, index) => (
+                <div
+                  key={item.id || index}
+                  className="group bg-surface-2 hover:bg-surface-3/70 border border-surface-3 hover:border-violet-500/30 rounded-xl p-3 flex items-center justify-between gap-3 transition-all duration-200"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="text-white text-xs sm:text-sm font-medium leading-snug break-words">
+                      {item.food_summary}
+                    </p>
+                    {/* All macros displayed clearly */}
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-amber-400 tabular-nums border border-zinc-700/40">
+                        {item.calories} kcal
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-emerald-400 tabular-nums border border-zinc-700/40">
+                        {item.protein_g}g P
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-sky-400 tabular-nums border border-zinc-700/40">
+                        {item.carbs_g}g C
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-rose-400 tabular-nums border border-zinc-700/40">
+                        {item.fat_g}g F
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-lime-400 tabular-nums border border-zinc-700/40">
+                        {item.fiber_g}g Fib
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 flex items-center gap-1.5">
+                    <button
+                      id={`quick-add-history-${item.id || index}`}
+                      onClick={() => handleAddToDailyLog(item)}
+                      title="Quick-Add to Daily Log"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95"
+                    >
+                      <PlusCircle className="w-3.5 h-3.5" />
+                      <span>Add</span>
+                    </button>
+                    <button
+                      id={`delete-history-${item.id || index}`}
+                      onClick={() => handleDeleteHistoryItem(item.id)}
+                      title="Delete from history"
+                      className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

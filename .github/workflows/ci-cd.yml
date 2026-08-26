@@ -1,0 +1,83 @@
+name: EatLog CI/CD & Post-Deployment UI Verification
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+  workflow_dispatch:
+
+jobs:
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Vitest Suite
+        run: npm run test
+
+  e2e-live-verification:
+    name: Live UI E2E Scenarios (Post-Deployment)
+    needs: unit-tests
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Determine Target Environment & URL
+        id: env-target
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "ENV_NAME=prod" >> $GITHUB_OUTPUT
+            echo "TARGET_URL=https://eattlog.vercel.app" >> $GITHUB_OUTPUT
+          else
+            echo "ENV_NAME=dev" >> $GITHUB_OUTPUT
+            echo "TARGET_URL=https://eat-log-git-dev-omkar-chavans-projects.vercel.app" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Wait for Vercel Live Deployment
+        run: |
+          echo "Waiting 30 seconds for Vercel build & edge propagation on ${{ steps.env-target.outputs.TARGET_URL }}..."
+          sleep 30
+
+      - name: Run Live E2E UI Tests
+        run: |
+          if [ "${{ steps.env-target.outputs.ENV_NAME }}" = "prod" ]; then
+            npm run test:e2e:prod
+          else
+            npm run test:e2e:dev
+          fi
+
+      - name: Upload Playwright Test Report (On Failure)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-${{ steps.env-target.outputs.ENV_NAME }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
