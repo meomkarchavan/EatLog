@@ -6,10 +6,11 @@
  */
 import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
 import { PlusCircle, History, Trash2 } from 'lucide-react';
 import LookupCard from './LookupCard';
 import { useToast } from './Toast';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import {
   saveLookupToHistory,
   subscribeLookupHistory,
@@ -34,7 +35,7 @@ function SendIcon() {
   );
 }
 
-export default function LookupPanel() {
+export default function LookupPanel({ onAddMeal }) {
   const { showToast } = useToast();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -145,9 +146,36 @@ export default function LookupPanel() {
     }
   };
 
-  const handleAddToDailyLog = (item) => {
-    console.log('Quick-Add item to daily log:', item);
-    showToast(`Added "${item.food_summary}" to daily log!`, 'success');
+  const handleAddToDailyLog = async (item) => {
+    if (onAddMeal) {
+      await onAddMeal(item);
+      return;
+    }
+
+    const uid = auth.currentUser?.uid;
+    if (!uid) {
+      showToast('Please sign in to log meals', 'error');
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'daily_logs'), {
+        id: crypto.randomUUID(),
+        user_id: uid,
+        timestamp: new Date().toISOString(),
+        food_summary: item.food_summary,
+        calories: Number(item.calories) || 0,
+        protein_g: Number(item.protein_g) || 0,
+        carbs_g: Number(item.carbs_g) || 0,
+        fat_g: Number(item.fat_g) || 0,
+        fiber_g: Number(item.fiber_g) || 0,
+        input_method: 'lookup',
+      });
+      showToast(`Logged: ${item.food_summary}`, 'success');
+    } catch (err) {
+      console.error('Failed to log lookup item:', err);
+      showToast('Failed to add meal to log.', 'error');
+    }
   };
 
   const handleDeleteHistoryItem = async (id) => {

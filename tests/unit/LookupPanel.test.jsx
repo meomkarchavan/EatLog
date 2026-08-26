@@ -27,6 +27,14 @@ vi.mock('firebase/auth', () => ({
   }),
 }));
 
+export const mockAddDoc = vi.fn();
+export const mockCollection = vi.fn();
+
+vi.mock('firebase/firestore', () => ({
+  addDoc: (...args) => mockAddDoc(...args),
+  collection: (...args) => mockCollection(...args),
+}));
+
 vi.mock('../../src/services/lookupHistory', () => ({
   saveLookupToHistory: vi.fn(),
   getLookupHistory: vi.fn(),
@@ -184,9 +192,9 @@ describe('LookupPanel Component', () => {
     expect(mockShowToast).toHaveBeenCalledWith('Removed from lookup history', 'info');
   });
 
-  it('triggers handleAddToDailyLog placeholder when Quick-Add button is clicked on lookup card and history item', async () => {
+  it('calls onAddMeal or writes to Firestore when Quick-Add button is clicked on lookup card and history item', async () => {
     const user = userEvent.setup();
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const mockOnAddMeal = vi.fn();
 
     globalThis.fetch.mockResolvedValueOnce({
       ok: true,
@@ -201,7 +209,7 @@ describe('LookupPanel Component', () => {
       }),
     });
 
-    render(<LookupPanel />);
+    render(<LookupPanel onAddMeal={mockOnAddMeal} />);
 
     // Wait for history item to be rendered
     await waitFor(() => {
@@ -212,13 +220,8 @@ describe('LookupPanel Component', () => {
     const historyAddBtn = screen.getByTitle(/Quick-Add to Daily Log/i);
     await user.click(historyAddBtn);
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      'Quick-Add item to daily log:',
-      expect.objectContaining({ food_summary: 'Greek Yogurt Bowl' })
-    );
-    expect(mockShowToast).toHaveBeenCalledWith(
-      'Added "Greek Yogurt Bowl" to daily log!',
-      'success'
+    expect(mockOnAddMeal).toHaveBeenCalledWith(
+      expect.objectContaining({ food_summary: 'Greek Yogurt Bowl', calories: 180, protein_g: 20 })
     );
 
     // Now submit search and quick-add from LookupCard
@@ -232,16 +235,35 @@ describe('LookupPanel Component', () => {
     const cardAddBtn = screen.getByTitle(/^add to daily log$/i);
     await user.click(cardAddBtn);
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      'Quick-Add item to daily log:',
-      expect.objectContaining({ food_summary: '1 Protein Shake' })
+    expect(mockOnAddMeal).toHaveBeenCalledWith(
+      expect.objectContaining({ food_summary: '1 Protein Shake', calories: 200, protein_g: 30 })
     );
-    expect(mockShowToast).toHaveBeenCalledWith(
-      'Added "1 Protein Shake" to daily log!',
-      'success'
-    );
+  });
 
-    consoleSpy.mockRestore();
+  it('directly writes to Firestore daily_logs if onAddMeal prop is not provided', async () => {
+    const user = userEvent.setup();
+    mockAddDoc.mockResolvedValueOnce({ id: 'new-log-1' });
+
+    render(<LookupPanel />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Greek Yogurt Bowl')).toBeInTheDocument();
+    });
+
+    const historyAddBtn = screen.getByTitle(/Quick-Add to Daily Log/i);
+    await user.click(historyAddBtn);
+
+    expect(mockAddDoc).toHaveBeenCalledWith(
+      undefined,
+      expect.objectContaining({
+        user_id: 'test-user-123',
+        food_summary: 'Greek Yogurt Bowl',
+        calories: 180,
+        protein_g: 20,
+        input_method: 'lookup',
+      })
+    );
+    expect(mockShowToast).toHaveBeenCalledWith('Logged: Greek Yogurt Bowl', 'success');
   });
 
   it('allows dismissing a lookup card from current search results', async () => {

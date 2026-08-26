@@ -368,6 +368,41 @@ export default function Dashboard() {
     }
   };
 
+  const handleLogMealItem = async (item, inputMethod = 'lookup') => {
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+
+    // Use actual current time for today; noon for past dates
+    const todayCheck = formatLocalDate(new Date());
+    let timestamp;
+    if (selectedDate === todayCheck) {
+      timestamp = new Date().toISOString();
+    } else {
+      const [year, month, day] = selectedDate.split('-').map(Number);
+      const noonDate = new Date(year, month - 1, day, 12, 0, 0);
+      timestamp = noonDate.toISOString();
+    }
+
+    try {
+      await addDoc(collection(db, 'daily_logs'), {
+        id: crypto.randomUUID(),
+        user_id: uid,
+        timestamp: timestamp,
+        food_summary: item.food_summary,
+        calories: Number(item.calories) || 0,
+        protein_g: Number(item.protein_g) || 0,
+        carbs_g: Number(item.carbs_g) || 0,
+        fat_g: Number(item.fat_g) || 0,
+        fiber_g: Number(item.fiber_g) || 0,
+        input_method: inputMethod,
+      });
+      showToast(`Logged: ${item.food_summary}`, 'success');
+    } catch (err) {
+      console.error('Error logging meal item:', err);
+      showToast('Failed to log meal.', 'error');
+    }
+  };
+
   const isToday = selectedDate === todayStr;
   const displayDateTitle = isToday
     ? "Today's Intake"
@@ -452,7 +487,7 @@ export default function Dashboard() {
 
       {/* Main Content Area */}
       {currentTab === 'lookup' ? (
-        <LookupPanel />
+        <LookupPanel onAddMeal={handleLogMealItem} />
       ) : currentTab === 'weekly' ? (
         <WeeklyView />
       ) : currentTab === 'profile' ? (

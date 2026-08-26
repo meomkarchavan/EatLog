@@ -141,17 +141,25 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       }
     }
 
-    // 10. Test Quick Lookup Panel
+    // 10. Test Quick Lookup Panel & Quick-Add to Daily Log
     const lookupTab = page.locator('#tab-lookup');
     if (await lookupTab.isVisible()) {
       await lookupTab.click();
       await expect(page.getByText('Quick Lookup')).toBeVisible({ timeout: 5000 });
       const lookupInput = page.locator('#lookup-input');
-      await lookupInput.fill('2 chapatis');
+      await lookupInput.fill('2 chapatis and 1 bowl dal');
       await page.locator('#lookup-submit-btn').click();
       await expect(page.getByText(/chapatis/i).first()).toBeVisible({ timeout: 10000 });
-      // Return to Daily tab
+
+      // Click "Add" on lookup result card
+      const addFromLookupBtn = page.locator('button:has-text("Add")').first();
+      if (await addFromLookupBtn.isVisible()) {
+        await addFromLookupBtn.click();
+      }
+
+      // Return to Daily tab and verify the meal was logged into Daily feed
       await page.locator('#tab-daily').click();
+      await expect(page.getByText(/chapati/i).first()).toBeVisible({ timeout: 10000 });
     }
 
     // 11. Test Custom DatePicker Modal Navigation
