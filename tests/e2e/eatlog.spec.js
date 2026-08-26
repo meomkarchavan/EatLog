@@ -46,9 +46,13 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await page.locator('#auth-password').fill(testPassword);
       await page.locator('#auth-submit').click();
 
-      // If sign-in did not succeed within 5 seconds, switch to sign-up and retry
-      const isDashboardVisible = await page.locator('#tab-daily').isVisible({ timeout: 5000 }).catch(() => false);
-      if (!isDashboardVisible) {
+      // Wait for either successful Dashboard load or an auth error message
+      const authOutcome = await Promise.race([
+        page.locator('#tab-daily').waitFor({ state: 'visible', timeout: 12000 }).then(() => 'dashboard'),
+        page.locator('p.text-red-400').waitFor({ state: 'visible', timeout: 12000 }).then(() => 'error'),
+      ]).catch(() => null);
+
+      if (authOutcome === 'error') {
         const toggleSignUp = page.locator('#auth-toggle');
         if (await toggleSignUp.isVisible()) {
           await toggleSignUp.click();
@@ -61,11 +65,11 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
 
     // 3. Verify Dashboard HUD (Primary & Secondary Macros)
     await expect(page.locator('#tab-daily')).toBeVisible({ timeout: 25000 });
-    await expect(page.getByText('CALORIES', { exact: false })).toBeVisible();
-    await expect(page.getByText('PROTEIN', { exact: false })).toBeVisible();
-    await expect(page.getByText('CARBS', { exact: false })).toBeVisible();
-    await expect(page.getByText('FAT', { exact: false })).toBeVisible();
-    await expect(page.getByText('FIBER', { exact: false })).toBeVisible();
+    await expect(page.getByText('CALORIES', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('PROTEIN', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('CARBS', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('FAT', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('FIBER', { exact: false }).first()).toBeVisible();
 
     // 4. Test "Profile & Goals" Setup (Dynamic Target Engine)
     const profileTab = page.locator('#tab-profile');
