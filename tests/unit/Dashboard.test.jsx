@@ -53,6 +53,9 @@ vi.mock('firebase/firestore', () => ({
     return vi.fn();
   }),
   addDoc: vi.fn(() => Promise.resolve()),
+  getDocs: vi.fn(() => Promise.resolve({ docs: [] })),
+  limit: vi.fn((n) => ({ limit: n })),
+  serverTimestamp: vi.fn(),
   doc: vi.fn((db, coll, id) => ({ path: `${coll}/${id}`, id })),
   setDoc: vi.fn(),
   increment: vi.fn(),
