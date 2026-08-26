@@ -3,9 +3,9 @@
  * from a Quick Lookup query.
  * Styled with a violet-tinted border to distinguish from logged MealCards.
  */
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, Loader2 } from 'lucide-react';
 
-export default function LookupCard({ data, onDismiss, onAddToDailyLog }) {
+export default function LookupCard({ data, onDismiss, onAddToDailyLog, isAdding = false }) {
   if (!data) return null;
 
   const macros = [
@@ -33,11 +33,16 @@ export default function LookupCard({ data, onDismiss, onAddToDailyLog }) {
             <button
               id={`lookup-add-btn-${data.id || 'current'}`}
               onClick={() => onAddToDailyLog(data)}
-              title="Add to daily log"
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/25 hover:bg-violet-600/40 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 active:scale-95 transition-all"
+              disabled={isAdding}
+              title={isAdding ? 'Adding to log...' : 'Add to daily log'}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/25 hover:bg-violet-600/40 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <PlusCircle className="w-3.5 h-3.5 text-violet-400" />
-              <span>Add</span>
+              {isAdding ? (
+                <Loader2 className="w-3.5 h-3.5 text-violet-300 animate-spin" />
+              ) : (
+                <PlusCircle className="w-3.5 h-3.5 text-violet-400" />
+              )}
+              <span>{isAdding ? 'Adding...' : 'Add'}</span>
             </button>
           )}
           {onDismiss && (
