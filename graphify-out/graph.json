@@ -530,7 +530,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app",
-      "community": 109,
+      "community": 0,
       "norm_label": "app.jsx"
     },
     {
@@ -540,7 +540,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_app_app",
-      "community": 109,
+      "community": 0,
       "norm_label": "app()"
     },
     {
@@ -550,7 +550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_authscreen",
-      "community": 109,
+      "community": 0,
       "norm_label": "authscreen.jsx"
     },
     {
@@ -560,7 +560,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_authscreen_googleicon",
-      "community": 109,
+      "community": 0,
       "norm_label": "googleicon()"
     },
     {
@@ -570,7 +570,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_authscreen_eyeicon",
-      "community": 109,
+      "community": 0,
       "norm_label": "eyeicon()"
     },
     {
@@ -580,7 +580,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "components_authscreen_eyeslashicon",
-      "community": 109,
+      "community": 0,
       "norm_label": "eyeslashicon()"
     },
     {
@@ -590,7 +590,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "components_authscreen_authscreen",
-      "community": 109,
+      "community": 0,
       "norm_label": "authscreen()"
     },
     {
@@ -780,7 +780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_lookupcard",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookupcard.jsx"
     },
     {
@@ -790,7 +790,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_lookupcard_lookupcard",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookupcard()"
     },
     {
@@ -800,37 +800,37 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_lookuppanel",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookuppanel.jsx"
     },
     {
       "label": "SearchIcon()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L14",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "components_lookuppanel_searchicon",
-      "community": 108,
+      "community": 0,
       "norm_label": "searchicon()"
     },
     {
       "label": "SendIcon()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L22",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "components_lookuppanel_sendicon",
-      "community": 108,
+      "community": 0,
       "norm_label": "sendicon()"
     },
     {
       "label": "LookupPanel()",
       "file_type": "code",
       "source_file": "src/components/LookupPanel.jsx",
-      "source_location": "L30",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "components_lookuppanel_lookuppanel",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookuppanel()"
     },
     {
@@ -840,7 +840,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_mealcard",
-      "community": 107,
+      "community": 0,
       "norm_label": "mealcard.jsx"
     },
     {
@@ -850,7 +850,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_mealcard_mealcard",
-      "community": 107,
+      "community": 0,
       "norm_label": "mealcard()"
     },
     {
@@ -860,7 +860,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_profile",
-      "community": 110,
+      "community": 0,
       "norm_label": "profile.jsx"
     },
     {
@@ -870,7 +870,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_profile_googleicon",
-      "community": 110,
+      "community": 0,
       "norm_label": "googleicon()"
     },
     {
@@ -880,7 +880,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_profile_profile",
-      "community": 110,
+      "community": 0,
       "norm_label": "profile()"
     },
     {
@@ -910,7 +910,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_toast",
-      "community": 107,
+      "community": 0,
       "norm_label": "toast.jsx"
     },
     {
@@ -920,7 +920,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_toast_toastcontext",
-      "community": 107,
+      "community": 0,
       "norm_label": "toastcontext"
     },
     {
@@ -930,7 +930,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_toast_defaultcontext",
-      "community": 107,
+      "community": 0,
       "norm_label": "defaultcontext"
     },
     {
@@ -940,7 +940,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_toast_usetoast",
-      "community": 107,
+      "community": 0,
       "norm_label": "usetoast()"
     },
     {
@@ -950,7 +950,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_toast_toastitem",
-      "community": 107,
+      "community": 0,
       "norm_label": "toastitem()"
     },
     {
@@ -960,7 +960,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "components_toast_confirmmodalui",
-      "community": 107,
+      "community": 0,
       "norm_label": "confirmmodalui()"
     },
     {
@@ -970,7 +970,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "components_toast_toastprovider",
-      "community": 109,
+      "community": 0,
       "norm_label": "toastprovider()"
     },
     {
@@ -980,7 +980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_watertracker",
-      "community": 111,
+      "community": 0,
       "norm_label": "watertracker.jsx"
     },
     {
@@ -990,7 +990,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_watertracker_waterdropicon",
-      "community": 111,
+      "community": 0,
       "norm_label": "waterdropicon()"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_watertracker_watertracker",
-      "community": 111,
+      "community": 0,
       "norm_label": "watertracker()"
     },
     {
@@ -1040,7 +1040,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_weighttracker",
-      "community": 107,
+      "community": 0,
       "norm_label": "weighttracker.jsx"
     },
     {
@@ -1050,7 +1050,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_weighttracker_scaleicon",
-      "community": 107,
+      "community": 0,
       "norm_label": "scaleicon()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_weighttracker_weighttracker",
-      "community": 107,
+      "community": 0,
       "norm_label": "weighttracker()"
     },
     {
@@ -1070,7 +1070,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_firebase",
-      "community": 111,
+      "community": 0,
       "norm_label": "firebase.js"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "src_firebase_firebaseconfig",
-      "community": 111,
+      "community": 0,
       "norm_label": "firebaseconfig"
     },
     {
@@ -1090,7 +1090,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "src_firebase_auth",
-      "community": 111,
+      "community": 0,
       "norm_label": "auth"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "src_firebase_db",
-      "community": 111,
+      "community": 0,
       "norm_label": "db"
     },
     {
@@ -1110,7 +1110,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "src_firebase_googleprovider",
-      "community": 109,
+      "community": 0,
       "norm_label": "googleprovider"
     },
     {
@@ -1120,7 +1120,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main",
-      "community": 109,
+      "community": 0,
       "norm_label": "main.jsx"
     },
     {
@@ -1130,28 +1130,38 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_lookuphistory",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookuphistory.js"
     },
     {
       "label": "saveLookupToHistory()",
       "file_type": "code",
       "source_file": "src/services/lookupHistory.js",
-      "source_location": "L22",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "services_lookuphistory_savelookuptohistory",
-      "community": 108,
+      "community": 0,
       "norm_label": "savelookuptohistory()"
     },
     {
       "label": "getLookupHistory()",
       "file_type": "code",
       "source_file": "src/services/lookupHistory.js",
-      "source_location": "L50",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "services_lookuphistory_getlookuphistory",
-      "community": 108,
+      "community": 0,
       "norm_label": "getlookuphistory()"
+    },
+    {
+      "label": "deleteLookupFromHistory()",
+      "file_type": "code",
+      "source_file": "src/services/lookupHistory.js",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "services_lookuphistory_deletelookupfromhistory",
+      "community": 0,
+      "norm_label": "deletelookupfromhistory()"
     },
     {
       "label": "exportCsv.js",
@@ -1160,7 +1170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "utils_exportcsv",
-      "community": 110,
+      "community": 0,
       "norm_label": "exportcsv.js"
     },
     {
@@ -1170,7 +1180,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "utils_exportcsv_escapecsv",
-      "community": 110,
+      "community": 0,
       "norm_label": "escapecsv()"
     },
     {
@@ -1180,7 +1190,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "utils_exportcsv_downloadcsv",
-      "community": 110,
+      "community": 0,
       "norm_label": "downloadcsv()"
     },
     {
@@ -1190,7 +1200,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "utils_exportcsv_formatdate",
-      "community": 110,
+      "community": 0,
       "norm_label": "formatdate()"
     },
     {
@@ -1200,7 +1210,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "utils_exportcsv_formattime",
-      "community": 110,
+      "community": 0,
       "norm_label": "formattime()"
     },
     {
@@ -1210,7 +1220,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "utils_exportcsv_exportalldataascsv",
-      "community": 110,
+      "community": 0,
       "norm_label": "exportalldataascsv()"
     },
     {
@@ -1410,7 +1420,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_authscreen_test",
-      "community": 109,
+      "community": 0,
       "norm_label": "authscreen.test.jsx"
     },
     {
@@ -1450,7 +1460,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_lookupcard_test",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookupcard.test.jsx"
     },
     {
@@ -1460,7 +1470,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_lookuppanel_test",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookuppanel.test.jsx"
     },
     {
@@ -1470,7 +1480,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "unit_lookuppanel_test_mockshowtoast",
-      "community": 108,
+      "community": 0,
       "norm_label": "mockshowtoast"
     },
     {
@@ -1480,7 +1490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_mealcard_test",
-      "community": 107,
+      "community": 0,
       "norm_label": "mealcard.test.jsx"
     },
     {
@@ -1490,7 +1500,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_profile_test",
-      "community": 110,
+      "community": 0,
       "norm_label": "profile.test.jsx"
     },
     {
@@ -1510,7 +1520,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_toast_test",
-      "community": 107,
+      "community": 0,
       "norm_label": "toast.test.jsx"
     },
     {
@@ -1520,7 +1530,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "unit_toast_test_testconsumer",
-      "community": 107,
+      "community": 0,
       "norm_label": "testconsumer()"
     },
     {
@@ -1530,7 +1540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_watertracker_test",
-      "community": 111,
+      "community": 0,
       "norm_label": "watertracker.test.jsx"
     },
     {
@@ -1550,7 +1560,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_weighttracker_test",
-      "community": 107,
+      "community": 0,
       "norm_label": "weighttracker.test.jsx"
     },
     {
@@ -1600,7 +1610,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_exportcsv_test",
-      "community": 110,
+      "community": 0,
       "norm_label": "exportcsv.test.js"
     },
     {
@@ -1610,7 +1620,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_firebase_test",
-      "community": 111,
+      "community": 0,
       "norm_label": "firebase.test.js"
     },
     {
@@ -1660,7 +1670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_lookuphistory_test",
-      "community": 108,
+      "community": 0,
       "norm_label": "lookuphistory.test.js"
     },
     {
@@ -12150,9 +12160,9 @@
       "source_file": "tests/unit/LookupCard.test.jsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookupcard_test",
-      "target": "components_lookupcard",
-      "confidence_score": 1.0
+      "target": "components_lookupcard"
     },
     {
       "relation": "imports",
@@ -12172,9 +12182,9 @@
       "source_file": "tests/unit/LookupCard.test.jsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookupcard_test",
-      "target": "components_lookupcard_lookupcard",
-      "confidence_score": 1.0
+      "target": "components_lookupcard_lookupcard"
     },
     {
       "relation": "contains",
@@ -12235,9 +12245,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "services_lookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory"
     },
     {
       "relation": "imports",
@@ -12247,7 +12257,7 @@
       "source_location": "L12",
       "weight": 1.0,
       "source": "components_lookuppanel",
-      "target": "services_lookuphistory_getlookuphistory",
+      "target": "services_lookuphistory_deletelookupfromhistory",
       "confidence_score": 1.0
     },
     {
@@ -12257,9 +12267,20 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "services_lookuphistory_savelookuptohistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_getlookuphistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/LookupPanel.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_lookuppanel",
+      "target": "services_lookuphistory_savelookuptohistory"
     },
     {
       "relation": "imports_from",
@@ -12268,9 +12289,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "src_firebase",
-      "confidence_score": 1.0
+      "target": "src_firebase"
     },
     {
       "relation": "imports",
@@ -12279,9 +12300,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "src_firebase_auth",
-      "confidence_score": 1.0
+      "target": "src_firebase_auth"
     },
     {
       "relation": "imports_from",
@@ -13154,9 +13175,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory",
-      "target": "src_firebase",
-      "confidence_score": 1.0
+      "target": "src_firebase"
     },
     {
       "relation": "contains",
@@ -13249,9 +13270,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory",
-      "target": "src_firebase_db",
-      "confidence_score": 1.0
+      "target": "src_firebase_db"
     },
     {
       "relation": "imports",
@@ -13279,11 +13300,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/services/lookupHistory.js",
-      "source_location": "L50",
+      "source_location": "L75",
       "weight": 1.0,
       "source": "services_lookuphistory",
-      "target": "services_lookuphistory_getlookuphistory",
+      "target": "services_lookuphistory_deletelookupfromhistory",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/lookupHistory.js",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_lookuphistory",
+      "target": "services_lookuphistory_getlookuphistory"
     },
     {
       "relation": "contains",
@@ -13291,9 +13322,9 @@
       "source_file": "src/services/lookupHistory.js",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_lookuphistory",
-      "target": "services_lookuphistory_savelookuptohistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory_savelookuptohistory"
     },
     {
       "relation": "imports_from",
@@ -13302,9 +13333,9 @@
       "source_file": "tests/unit/lookupHistory.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookuphistory_test",
-      "target": "services_lookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory"
     },
     {
       "relation": "imports_from",
@@ -13313,9 +13344,31 @@
       "source_file": "tests/unit/LookupPanel.test.jsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookuppanel_test",
-      "target": "services_lookuphistory",
-      "confidence_score": 1.0
+      "target": "services_lookuphistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/lookupHistory.test.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "unit_lookuphistory_test",
+      "target": "services_lookuphistory_savelookuptohistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/lookupHistory.test.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "unit_lookuphistory_test",
+      "target": "services_lookuphistory_getlookuphistory"
     },
     {
       "relation": "imports",
@@ -13325,18 +13378,7 @@
       "source_location": "L2",
       "weight": 1.0,
       "source": "unit_lookuphistory_test",
-      "target": "services_lookuphistory_savelookuptohistory",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/lookupHistory.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "unit_lookuphistory_test",
-      "target": "services_lookuphistory_getlookuphistory",
+      "target": "services_lookuphistory_deletelookupfromhistory",
       "confidence_score": 1.0
     },
     {
@@ -13723,9 +13765,9 @@
       "source_file": "tests/unit/LookupPanel.test.jsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookuppanel_test",
-      "target": "unit_lookuppanel_test_mockshowtoast",
-      "confidence_score": 1.0
+      "target": "unit_lookuppanel_test_mockshowtoast"
     },
     {
       "relation": "contains",
@@ -21989,5 +22031,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b0ff6de642f4fdc6a3674eacf5df24943a11f140"
+  "built_at_commit": "9eacc637a7e9e6699245836822d547001cca66f4"
 }

@@ -1,11 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { saveLookupToHistory, getLookupHistory } from '../../src/services/lookupHistory';
+import {
+  saveLookupToHistory,
+  getLookupHistory,
+  deleteLookupFromHistory,
+} from '../../src/services/lookupHistory';
 import * as firestore from 'firebase/firestore';
 
 vi.mock('firebase/firestore', () => ({
   collection: vi.fn((db, name) => ({ path: name })),
+  doc: vi.fn((db, name, id) => ({ path: `${name}/${id}`, id })),
   addDoc: vi.fn(),
   getDocs: vi.fn(),
+  deleteDoc: vi.fn(),
   query: vi.fn((coll, ...clauses) => ({ coll, clauses })),
   where: vi.fn((field, op, val) => ({ field, op, val })),
   orderBy: vi.fn((field, dir) => ({ field, dir })),
@@ -108,6 +114,23 @@ describe('Lookup History Service', () => {
         fat_g: 6,
         fiber_g: 5,
       });
+    });
+  });
+
+  describe('deleteLookupFromHistory', () => {
+    it('returns false if historyId is falsy', async () => {
+      const result = await deleteLookupFromHistory(null);
+      expect(result).toBe(false);
+      expect(firestore.deleteDoc).not.toHaveBeenCalled();
+    });
+
+    it('deletes document from lookup_history in Firestore', async () => {
+      firestore.deleteDoc.mockResolvedValueOnce();
+
+      const result = await deleteLookupFromHistory('hist-123');
+      expect(result).toBe(true);
+      expect(firestore.doc).toHaveBeenCalledWith(expect.anything(), 'lookup_history', 'hist-123');
+      expect(firestore.deleteDoc).toHaveBeenCalledWith(expect.objectContaining({ path: 'lookup_history/hist-123' }));
     });
   });
 });

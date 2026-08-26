@@ -2,6 +2,8 @@ import {
   collection,
   addDoc,
   getDocs,
+  deleteDoc,
+  doc,
   query,
   where,
   orderBy,
@@ -62,4 +64,16 @@ export async function getLookupHistory(userId) {
     id: docSnap.id,
     ...docSnap.data(),
   }));
+}
+
+/**
+ * Deletes a lookup item from Firestore history by its document ID.
+ *
+ * @param {string} historyId - The document ID in lookup_history.
+ * @returns {Promise<boolean>}
+ */
+export async function deleteLookupFromHistory(historyId) {
+  if (!historyId) return false;
+  await deleteDoc(doc(db, COLLECTION_NAME, historyId));
+  return true;
 }

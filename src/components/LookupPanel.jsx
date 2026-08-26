@@ -2,14 +2,18 @@
  * LookupPanel — a dedicated full-screen panel for Quick Lookup.
  * Allows searching food nutrition stats without logging immediately,
  * saves queries to a persistent user history in Firestore, and provides
- * a Quick-Add action to add items directly to the daily log.
+ * Quick-Add and Delete actions directly from history.
  */
 import { useState, useEffect, useRef } from 'react';
-import { PlusCircle, History, Clock } from 'lucide-react';
+import { PlusCircle, History, Trash2 } from 'lucide-react';
 import LookupCard from './LookupCard';
 import { useToast } from './Toast';
 import { auth } from '../firebase';
-import { saveLookupToHistory, getLookupHistory } from '../services/lookupHistory';
+import {
+  saveLookupToHistory,
+  getLookupHistory,
+  deleteLookupFromHistory,
+} from '../services/lookupHistory';
 
 function SearchIcon({ className }) {
   return (
@@ -130,6 +134,19 @@ export default function LookupPanel() {
   const handleAddToDailyLog = (item) => {
     console.log('Quick-Add item to daily log:', item);
     showToast(`Added "${item.food_summary}" to daily log!`, 'success');
+  };
+
+  const handleDeleteHistoryItem = async (id) => {
+    if (!id) return;
+    try {
+      // Optimistically remove from state
+      setHistory((prev) => prev.filter((item) => item.id !== id));
+      await deleteLookupFromHistory(id);
+      showToast('Removed from lookup history', 'info');
+    } catch (err) {
+      console.error('Failed to delete lookup history entry:', err);
+      showToast('Could not delete history item', 'error');
+    }
   };
 
   const dismissResult = (id) => {
@@ -274,38 +291,48 @@ export default function LookupPanel() {
                   className="group bg-surface-2 hover:bg-surface-3/70 border border-surface-3 hover:border-violet-500/30 rounded-xl p-3 flex items-center justify-between gap-3 transition-all duration-200"
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="text-white text-xs sm:text-sm font-medium leading-snug truncate">
+                    <p className="text-white text-xs sm:text-sm font-medium leading-snug break-words">
                       {item.food_summary}
                     </p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-amber-400 tabular-nums">
+                    {/* All macros displayed clearly */}
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-amber-400 tabular-nums border border-zinc-700/40">
                         {item.calories} kcal
                       </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-emerald-400 tabular-nums">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-emerald-400 tabular-nums border border-zinc-700/40">
                         {item.protein_g}g P
                       </span>
-                      {item.carbs_g > 0 && (
-                        <span className="hidden xs:inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-sky-400 tabular-nums">
-                          {item.carbs_g}g C
-                        </span>
-                      )}
-                      {item.fat_g > 0 && (
-                        <span className="hidden xs:inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-rose-400 tabular-nums">
-                          {item.fat_g}g F
-                        </span>
-                      )}
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-sky-400 tabular-nums border border-zinc-700/40">
+                        {item.carbs_g}g C
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-rose-400 tabular-nums border border-zinc-700/40">
+                        {item.fat_g}g F
+                      </span>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-lime-400 tabular-nums border border-zinc-700/40">
+                        {item.fiber_g}g Fib
+                      </span>
                     </div>
                   </div>
 
-                  <button
-                    id={`quick-add-history-${item.id || index}`}
-                    onClick={() => handleAddToDailyLog(item)}
-                    title="Quick-Add to Daily Log"
-                    className="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95"
-                  >
-                    <PlusCircle className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Add</span>
-                  </button>
+                  <div className="shrink-0 flex items-center gap-1.5">
+                    <button
+                      id={`quick-add-history-${item.id || index}`}
+                      onClick={() => handleAddToDailyLog(item)}
+                      title="Quick-Add to Daily Log"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95"
+                    >
+                      <PlusCircle className="w-3.5 h-3.5" />
+                      <span>Add</span>
+                    </button>
+                    <button
+                      id={`delete-history-${item.id || index}`}
+                      onClick={() => handleDeleteHistoryItem(item.id)}
+                      title="Delete from history"
+                      className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

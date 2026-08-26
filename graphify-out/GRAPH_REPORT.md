@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-08-26)
 
 ## Corpus Check
-- 146 files · ~79,430 words
+- 146 files · ~79,686 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1082 nodes · 1100 edges · 112 communities (101 shown, 11 thin omitted)
+- 1083 nodes · 1103 edges · 107 communities (96 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b0ff6de6`
+- Built from commit: `9eacc637`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -114,11 +114,6 @@
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 105|Community 105]]
 - [[_COMMUNITY_Community 106|Community 106]]
-- [[_COMMUNITY_Community 107|Community 107]]
-- [[_COMMUNITY_Community 108|Community 108]]
-- [[_COMMUNITY_Community 109|Community 109]]
-- [[_COMMUNITY_Community 110|Community 110]]
-- [[_COMMUNITY_Community 111|Community 111]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `useToast()` - 17 edges
@@ -135,23 +130,23 @@
 ## Surprising Connections (you probably didn't know these)
 - `TestConsumer()` --calls--> `useToast()`  [EXTRACTED]
   tests/unit/Toast.test.jsx → src/components/Toast.jsx
+- `ProfileScreen()` --calls--> `useToast()`  [EXTRACTED]
+  src/components/ProfileScreen.jsx → src/components/Toast.jsx
 - `Dashboard()` --calls--> `useToast()`  [EXTRACTED]
   src/components/Dashboard.jsx → src/components/Toast.jsx
+- `Dashboard()` --calls--> `calculateNutritionTargets()`  [EXTRACTED]
+  src/components/Dashboard.jsx → src/utils/nutritionMath.js
 - `LookupPanel()` --calls--> `useToast()`  [EXTRACTED]
   src/components/LookupPanel.jsx → src/components/Toast.jsx
-- `Profile()` --calls--> `useToast()`  [EXTRACTED]
-  src/components/Profile.jsx → src/components/Toast.jsx
-- `Profile()` --calls--> `calculateNutritionTargets()`  [EXTRACTED]
-  src/components/Profile.jsx → src/utils/nutritionMath.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (112 total, 11 thin omitted)
+## Communities (107 total, 11 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.15
-Nodes (7): Dashboard(), formatLocalDate(), InsightsCard(), WeeklyView(), ACTIVITY_MULTIPLIERS, calculateNutritionTargets(), GOAL_ADJUSTMENTS
+Cohesion: 0.05
+Nodes (33): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupCard(), LookupPanel(), MealCard(), Profile() (+25 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
@@ -501,26 +496,6 @@ Nodes (3): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD 
 Cohesion: 0.31
 Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
 
-### Community 107 - "Community 107"
-Cohesion: 0.21
-Nodes (6): MealCard(), defaultContext, ToastContext, useToast(), WeightTracker(), TestConsumer()
-
-### Community 108 - "Community 108"
-Cohesion: 0.26
-Nodes (5): LookupCard(), LookupPanel(), getLookupHistory(), saveLookupToHistory(), mockShowToast
-
-### Community 109 - "Community 109"
-Cohesion: 0.24
-Nodes (4): AuthScreen(), ToastProvider(), App(), googleProvider
-
-### Community 110 - "Community 110"
-Cohesion: 0.31
-Nodes (6): Profile(), downloadCsv(), escapeCsv(), exportAllDataAsCsv(), formatDate(), formatTime()
-
-### Community 111 - "Community 111"
-Cohesion: 0.36
-Nodes (4): WaterTracker(), auth, db, firebaseConfig
-
 ## Knowledge Gaps
 - **647 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+642 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -529,14 +504,14 @@ Nodes (4): WaterTracker(), auth, db, firebaseConfig
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `auth` connect `Community 111` to `Community 0`, `Community 107`, `Community 108`, `Community 109`, `Community 110`, `Community 30`?**
+- **Why does `auth` connect `Community 0` to `Community 30`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `useToast()` connect `Community 107` to `Community 0`, `Community 108`, `Community 110`, `Community 111`, `Community 30`?**
+- **Why does `useToast()` connect `Community 0` to `Community 30`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
   _647 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.14761904761904762 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05432098765432099 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**

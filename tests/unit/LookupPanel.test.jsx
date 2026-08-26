@@ -23,6 +23,7 @@ vi.mock('../../src/firebase', () => ({
 vi.mock('../../src/services/lookupHistory', () => ({
   saveLookupToHistory: vi.fn(),
   getLookupHistory: vi.fn(),
+  deleteLookupFromHistory: vi.fn(),
 }));
 
 describe('LookupPanel Component', () => {
@@ -44,9 +45,10 @@ describe('LookupPanel Component', () => {
       id: 'saved-doc-1',
       ...data,
     }));
+    lookupHistoryService.deleteLookupFromHistory.mockResolvedValue(true);
   });
 
-  it('renders Quick Lookup panel header, search input, and loads past lookup history on mount', async () => {
+  it('renders Quick Lookup panel header, search input, and loads past lookup history with all macros on mount', async () => {
     render(<LookupPanel />);
 
     expect(screen.getByText(/Quick Lookup/i)).toBeInTheDocument();
@@ -57,6 +59,9 @@ describe('LookupPanel Component', () => {
       expect(screen.getByText('Greek Yogurt Bowl')).toBeInTheDocument();
       expect(screen.getByText('180 kcal')).toBeInTheDocument();
       expect(screen.getByText('20g P')).toBeInTheDocument();
+      expect(screen.getByText('15g C')).toBeInTheDocument();
+      expect(screen.getByText('2g F')).toBeInTheDocument();
+      expect(screen.getByText('1g Fib')).toBeInTheDocument();
     });
   });
 
@@ -103,6 +108,23 @@ describe('LookupPanel Component', () => {
       expect(screen.getByText('27')).toBeInTheDocument();
       expect(screen.getByText('Carbs')).toBeInTheDocument();
     });
+  });
+
+  it('allows deleting an item from lookup history', async () => {
+    const user = userEvent.setup();
+
+    render(<LookupPanel />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Greek Yogurt Bowl')).toBeInTheDocument();
+    });
+
+    const deleteBtn = screen.getByTitle(/delete from history/i);
+    await user.click(deleteBtn);
+
+    expect(lookupHistoryService.deleteLookupFromHistory).toHaveBeenCalledWith('hist-1');
+    expect(screen.queryByText('Greek Yogurt Bowl')).not.toBeInTheDocument();
+    expect(mockShowToast).toHaveBeenCalledWith('Removed from lookup history', 'info');
   });
 
   it('triggers handleAddToDailyLog placeholder when Quick-Add button is clicked on lookup card and history item', async () => {
