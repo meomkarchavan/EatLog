@@ -5,6 +5,7 @@ import {
   where,
   orderBy,
   onSnapshot,
+  doc,
 } from 'firebase/firestore';
 import {
   BarChart,
@@ -18,7 +19,10 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { ActivityCalendar } from 'react-activity-calendar';
+import { Sparkles, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 import { auth, db } from '../firebase';
+import { calculateNutritionTargets } from '../utils/nutritionMath';
+import InsightsCard from './InsightsCard';
 
 // Helper to format Date as YYYY-MM-DD in local time
 function formatLocalDate(d) {
@@ -32,7 +36,14 @@ export default function WeeklyView() {
   const [logs90Days, setLogs90Days] = useState([]);
   const [waterLogs, setWaterLogs] = useState([]);
   const [weightLogs, setWeightLogs] = useState([]);
+  const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // AI Insights state
+  const [insights, setInsights] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [error, setError] = useState(null);
+  const [timeframe, setTimeframe] = useState(7);
 
   useEffect(() => {
     const uid = auth.currentUser?.uid;
@@ -98,10 +109,27 @@ export default function WeeklyView() {
       }
     );
 
+    // 4. User Profile Listener (for AI goals and targets)
+    const profileRef = doc(db, 'user_profiles', uid);
+    const unsubProfile = onSnapshot(
+      profileRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setUserProfile(docSnap.data());
+        } else {
+          setUserProfile(null);
+        }
+      },
+      (error) => {
+        console.error('WeeklyView Firestore profile error:', error);
+      }
+    );
+
     return () => {
       unsubMeals();
       unsubWater();
       unsubWeight();
+      unsubProfile();
     };
   }, []);
 
@@ -112,10 +140,19 @@ export default function WeeklyView() {
       if (!log.timestamp) continue;
       const dateKey = formatLocalDate(new Date(log.timestamp));
       if (!map[dateKey]) {
-        map[dateKey] = { calories: 0, protein_g: 0 };
+        map[dateKey] = {
+          calories: 0,
+          protein_g: 0,
+          carbs_g: 0,
+          fat_g: 0,
+          fiber_g: 0,
+        };
       }
       map[dateKey].calories += Number(log.calories) || 0;
       map[dateKey].protein_g += Number(log.protein_g) || 0;
+      map[dateKey].carbs_g += Number(log.carbs_g) || 0;
+      map[dateKey].fat_g += Number(log.fat_g) || 0;
+      map[dateKey].fiber_g += Number(log.fiber_g) || 0;
     }
     return map;
   }, [logs90Days]);
@@ -158,7 +195,7 @@ export default function WeeklyView() {
       const dateKey = formatLocalDate(d);
       const dayLabel = d.toLocaleDateString(undefined, { weekday: 'short' });
 
-      const dayData = dailyTotalsMap[dateKey] || { calories: 0, protein_g: 0 };
+      const dayData = dailyTotalsMap[dateKey] || { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0, fiber_g: 0 };
       const waterMl = dailyWaterMap[dateKey] || 0;
       const weightVal = dailyWeightMap[dateKey] ?? null;
 
@@ -219,6 +256,88 @@ export default function WeeklyView() {
     dark: ['#1e1e1e', '#86efac', '#15803d'],
   };
 
+  // Helper to get aggregated daily logs for any timeframe (7, 14, 30 days)
+  const getAggregatedLogsForTimeframe = (daysCount) => {
+    const list = [];
+    for (let i = daysCount - 1; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const dateKey = formatLocalDate(d);
+      const totals = dailyTotalsMap[dateKey] || {
+        calories: 0,
+        protein_g: 0,
+        carbs_g: 0,
+        fat_g: 0,
+        fiber_g: 0,
+      };
+
+      list.push({
+        date: dateKey,
+        calories: totals.calories,
+        protein_g: totals.protein_g,
+        carbs_g: totals.carbs_g,
+        fat_g: totals.fat_g,
+        fiber_g: totals.fiber_g,
+      });
+    }
+    return list;
+  };
+
+  // Timeframe change handler - resets insights as required
+  const handleTimeframeChange = (newDays) => {
+    const parsed = Number(newDays);
+    setTimeframe(parsed);
+    setInsights(null);
+    setError(null);
+  };
+
+  // Handle AI analysis request
+  const handleAnalyze = async () => {
+    setIsAnalyzing(true);
+    setError(null);
+
+    try {
+      const targets = calculateNutritionTargets(userProfile || {});
+      const profilePayload = {
+        goal: userProfile?.goal || 'maintain',
+        targetCalories: targets.targetCalories,
+        targetMacros: targets.targetMacros,
+        bmr: targets.bmr,
+        tdee: targets.tdee,
+        current_weight_kg: userProfile?.current_weight_kg || userProfile?.baseline_weight_kg,
+        height_cm: userProfile?.height_cm,
+        age: userProfile?.age,
+        gender: userProfile?.gender,
+        activity_level: userProfile?.activity_level,
+      };
+
+      const logsPayload = getAggregatedLogsForTimeframe(timeframe);
+
+      const res = await fetch('/api/analyzeLogs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profile: profilePayload,
+          timeframe_days: timeframe,
+          logs: logsPayload,
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server error: ${res.status}`);
+      }
+
+      const data = await res.json();
+      setInsights(data);
+    } catch (err) {
+      console.error('AI Analysis failed:', err);
+      setError(err.message || 'Failed to analyze nutrition logs. Please try again.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <div className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 sm:py-4 space-y-4 sm:space-y-5 pb-28">
       {/* 7-Day Averages Summary Grid */}
@@ -265,6 +384,91 @@ export default function WeeklyView() {
           <p className="text-[9px] sm:text-[10px] text-zinc-500 mt-1 truncate">Hydration</p>
         </section>
       </div>
+
+      {/* AI Nutrition Coach Section */}
+      <section className="bg-surface-2 rounded-2xl p-4 sm:p-5 border border-surface-3 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                AI Nutrition Coach
+              </h3>
+              <p className="text-[11px] text-zinc-400">
+                Personalized nutritional insights & actionable coaching
+              </p>
+            </div>
+          </div>
+
+          {/* Timeframe selector dropdown */}
+          <div className="flex items-center gap-2">
+            <label htmlFor="timeframe-select" className="text-xs text-zinc-400 font-medium whitespace-nowrap">
+              Timeframe:
+            </label>
+            <select
+              id="timeframe-select"
+              aria-label="Timeframe selector"
+              value={timeframe}
+              onChange={(e) => handleTimeframeChange(e.target.value)}
+              className="bg-surface-3 text-white text-xs font-semibold rounded-xl px-3 py-2 border border-zinc-700/60 outline-none focus:ring-1 focus:ring-zinc-500 transition-colors"
+            >
+              <option value={7}>Last 7 Days</option>
+              <option value={14}>Last 14 Days</option>
+              <option value={30}>Last 30 Days</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Action Button */}
+        {isAnalyzing ? (
+          <button
+            id="analyze-data-btn"
+            type="button"
+            disabled
+            className="w-full bg-surface-3 border border-zinc-700/50 text-zinc-300 font-medium text-xs rounded-xl py-2.5 px-4 flex items-center justify-center gap-2 cursor-not-allowed"
+          >
+            <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
+            <span>Analyzing {timeframe} Days of Nutrition...</span>
+          </button>
+        ) : insights ? (
+          <button
+            id="analyze-data-btn"
+            type="button"
+            onClick={handleAnalyze}
+            className="w-full border border-teal-500/40 hover:border-teal-500/70 bg-teal-950/20 hover:bg-teal-950/40 text-teal-400 font-semibold text-xs rounded-xl py-2.5 px-4 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>↻ Refresh Analysis ({timeframe} Days)</span>
+          </button>
+        ) : (
+          <button
+            id="analyze-data-btn"
+            type="button"
+            onClick={handleAnalyze}
+            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-bold text-xs sm:text-sm rounded-xl py-3 px-4 shadow-lg shadow-emerald-950/40 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>✨ Analyze My Data ({timeframe} Days)</span>
+          </button>
+        )}
+
+        {/* Error message */}
+        {error && (
+          <div className="bg-red-950/30 border border-red-800/40 rounded-xl p-3 flex items-start gap-2.5 text-xs text-red-200">
+            <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+            <span className="leading-snug">{error}</span>
+          </div>
+        )}
+
+        {/* Render InsightsCard when analysis is available */}
+        {insights && (
+          <div className="pt-2">
+            <InsightsCard data={insights} days={timeframe} />
+          </div>
+        )}
+      </section>
 
       {/* Chart 1: Daily Protein Bar Chart */}
       <section className="bg-surface-2 rounded-2xl p-4 border border-surface-3">
