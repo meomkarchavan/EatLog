@@ -163,9 +163,17 @@ git commit -m "feat/fix: <description of changes>"
 git push origin dev
 ```
 
-### Step 4: Verify Deployment
-1. Check Vercel dashboard or CLI output for deployment URL: `https://eat-log-git-dev-omkar-chavans-projects.vercel.app`.
-2. Run smoke tests / E2E against the preview environment:
+### Step 4: Wait and Verify Vercel Build Status
+Do NOT report completion until the deployment status is verified as `● Ready`:
+```powershell
+# Check deployment status and wait for Ready status
+npx vercel ls
+# Inspect the active preview deployment
+npx vercel inspect https://eat-log-git-dev-omkar-chavans-projects.vercel.app
+```
+
+### Step 5: Smoke Test Preview Environment
+Run smoke / E2E tests against the live preview URL:
 ```powershell
 $env:BASE_URL="https://eat-log-git-dev-omkar-chavans-projects.vercel.app"
 npx playwright test
