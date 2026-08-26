@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787757861.5932379,
-    "ast_hash": "56d86327ea859037c498429877c745c7",
+    "mtime": 1787758373.7903566,
+    "ast_hash": "1c0ab4ae7ff9cb670cf185d690b106af",
     "semantic_hash": ""
   },
   "playwright.config.js": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/components/AuthScreen.jsx": {
-    "mtime": 1787392481.5805986,
-    "ast_hash": "988418e88f7d1e1623199bf05f6b05f9",
+    "mtime": 1787758529.2848594,
+    "ast_hash": "be578fb0fd6f363a876b4052f72e1438",
     "semantic_hash": ""
   },
   "src/components/Dashboard.jsx": {
@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "tests/e2e/eatlog.spec.js": {
-    "mtime": 1787518581.0884604,
-    "ast_hash": "dd699336231b0423a82a4995c3acf38f",
+    "mtime": 1787758535.3211298,
+    "ast_hash": "a572fece5a0efe18f6b72835d17e4fd9",
     "semantic_hash": ""
   },
   "tests/setup.js": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "DEVELOPMENT_WORKFLOW.md": {
-    "mtime": 1787389684.1783347,
-    "ast_hash": "925df7c8794e86b6d0b4596185a11b3e",
+    "mtime": 1787758571.8670087,
+    "ast_hash": "6484eb916538b90aaf5fc0f7d682aa24",
     "semantic_hash": ""
   },
   "VERCEL_ENV_CHECKLIST.md": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787757884.5682328,
-    "ast_hash": "519eec53f046acb2b3ff4da410d2d4d6",
+    "mtime": 1787758562.6781356,
+    "ast_hash": "a51ea5a0faa01a09bc55f54aab38fd10",
     "semantic_hash": ""
   },
   "api/analyzeLogs.js": {
@@ -745,8 +745,8 @@
     "semantic_hash": ""
   },
   "docs/DEPLOYMENT_GUIDE.md": {
-    "mtime": 1787758051.3169923,
-    "ast_hash": "f53e461e07f53d13110af32eb0815a50",
+    "mtime": 1787758581.8851302,
+    "ast_hash": "b59ae70272cbd71cf6682079f6112951",
     "semantic_hash": ""
   }
 }

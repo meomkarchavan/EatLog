@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-08-26)
 
 ## Corpus Check
-- 147 files · ~82,078 words
+- 147 files · ~82,329 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1117 nodes · 1146 edges · 109 communities (98 shown, 11 thin omitted)
+- 1122 nodes · 1151 edges · 109 communities (98 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1607d6cb`
+- Built from commit: `e21ccc93`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -119,8 +119,8 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `useToast()` - 17 edges
-2. `Firebase Authentication Web SDK` - 15 edges
-3. `scripts` - 14 edges
+2. `scripts` - 16 edges
+3. `Firebase Authentication Web SDK` - 15 edges
 4. `auth` - 12 edges
 5. `db` - 11 edges
 6. `Flutter SDK` - 10 edges
@@ -151,8 +151,8 @@ Cohesion: 0.07
 Nodes (27): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), MealCard(), Profile(), defaultContext, ToastContext (+19 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.05
-Nodes (43): dependencies, firebase, @google/generative-ai, lucide-react, react, react-activity-calendar, react-dom, recharts (+35 more)
+Cohesion: 0.04
+Nodes (45): dependencies, firebase, @google/generative-ai, lucide-react, react, react-activity-calendar, react-dom, recharts (+37 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.07
@@ -491,8 +491,8 @@ Cohesion: 0.50
 Nodes (3): Android Studio Setup, MCP Setup, Skills Installation
 
 ### Community 105 - "Community 105"
-Cohesion: 0.40
-Nodes (4): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), Agent Guidelines for EatLog
+Cohesion: 0.33
+Nodes (5): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), 4. Mandatory Post-Deployment Live UI / E2E Verification, Agent Guidelines for EatLog
 
 ### Community 106 - "Community 106"
 Cohesion: 0.31
@@ -503,11 +503,11 @@ Cohesion: 0.26
 Nodes (9): LookupCard(), LookupPanel(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory(), saveLookupToHistory(), subscribeLookupHistory() (+1 more)
 
 ### Community 108 - "Community 108"
-Cohesion: 0.08
-Nodes (25): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+17 more)
+Cohesion: 0.07
+Nodes (27): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+19 more)
 
 ## Knowledge Gaps
-- **671 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+666 more)
+- **676 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+671 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -515,15 +515,15 @@ Nodes (25): 1. System Architecture & Components to Deploy, 2. Environments Overv
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `useToast()` connect `Community 0` to `Community 107`, `Community 30`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `auth` connect `Community 0` to `Community 107`, `Community 30`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
-  _671 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _676 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06512890094979647 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
