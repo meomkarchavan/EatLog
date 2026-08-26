@@ -165,7 +165,8 @@ export default function Profile({ latestWeightKg }) {
 
     try {
       const docRef = doc(db, 'user_profiles', uid);
-      const parsedWeight = Number(formData.current_weight_kg) || null;
+      const rawWeight = Number(formData.current_weight_kg);
+      const parsedWeight = !isNaN(rawWeight) && rawWeight > 0 ? Math.round(rawWeight * 100) / 100 : null;
 
       await setDoc(
         docRef,
@@ -328,11 +329,11 @@ export default function Profile({ latestWeightKg }) {
           <input
             id="profile-weight"
             type="number"
-            step="0.1"
+            step="0.01"
             min="30"
             max="300"
             required
-            placeholder="e.g. 75.0"
+            placeholder="e.g. 75.00"
             value={formData.current_weight_kg}
             onChange={(e) => setFormData({ ...formData, current_weight_kg: e.target.value })}
             className="w-full bg-surface-3 text-white placeholder-zinc-600 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-1 focus:ring-zinc-600 border border-zinc-700/50 tabular-nums"

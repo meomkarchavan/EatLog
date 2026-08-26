@@ -70,13 +70,13 @@
     "semantic_hash": ""
   },
   "src/components/Profile.jsx": {
-    "mtime": 1787518581.08218,
-    "ast_hash": "d1080fd8014abcc639b8e659700c07a6",
+    "mtime": 1787754429.9168105,
+    "ast_hash": "2362167bccc40842354d46b1282cb024",
     "semantic_hash": ""
   },
   "src/components/ProfileScreen.jsx": {
-    "mtime": 1787387631.5330193,
-    "ast_hash": "f50a33aeaea6e0df1849a49dc2d5cd68",
+    "mtime": 1787754441.6462414,
+    "ast_hash": "3cc5b6c645cc9d356d9feb51e9a4d332",
     "semantic_hash": ""
   },
   "src/components/Toast.jsx": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "src/components/WeightTracker.jsx": {
-    "mtime": 1787518581.086936,
-    "ast_hash": "ef41c5f85056fb7da1b4e433c321c99b",
+    "mtime": 1787754411.607977,
+    "ast_hash": "afd8755d45c55e460d69cbf9b2414cba",
     "semantic_hash": ""
   },
   "src/firebase.js": {
@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "tests/unit/Profile.test.jsx": {
-    "mtime": 1787392481.5856874,
-    "ast_hash": "5d45f394c2ee14e6057b0d3dd97f3cce",
+    "mtime": 1787754456.6468568,
+    "ast_hash": "e6172f527a2ff1017943a98b18625300",
     "semantic_hash": ""
   },
   "tests/unit/ProfileScreen.test.jsx": {
-    "mtime": 1787321815.4667785,
-    "ast_hash": "4dc58474b9c9706bff3e99e5a2a71e03",
+    "mtime": 1787754466.61411,
+    "ast_hash": "d78b03e6300efa02323d2c2f73b6ed43",
     "semantic_hash": ""
   },
   "tests/unit/Toast.test.jsx": {
@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "tests/unit/WeightTracker.test.jsx": {
-    "mtime": 1787387631.5406475,
-    "ast_hash": "d0ea891b80e04f8f2044622e1b6f7c6d",
+    "mtime": 1787754449.1421309,
+    "ast_hash": "14c6d7b251c9b1edefb1ba11f285b309",
     "semantic_hash": ""
   },
   "tests/unit/exportCsv.test.js": {
