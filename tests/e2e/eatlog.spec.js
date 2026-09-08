@@ -33,11 +33,17 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await dialog.dismiss();
     });
 
-    // 1. Visit App
-    await page.goto('/');
+    // 1. Visit App Auth Route
+    await page.goto('/#auth');
 
-    // 2. Wait for auth state initialization to finish (either AuthScreen or Dashboard)
-    await expect(page.locator('#auth-email, #tab-daily').first()).toBeVisible({ timeout: 20000 });
+    // 2. If landed on LandingPage or redirected, ensure we are on Auth or Dashboard
+    const startTrackingBtn = page.locator('#hero-start-tracking-btn, #landing-signin-btn, #landing-cta-nav').first();
+    if (await startTrackingBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await startTrackingBtn.click();
+    }
+
+    // 3. Wait for AuthScreen or Dashboard
+    await expect(page.locator('#auth-email, #tab-daily, #skip-onboarding-btn').first()).toBeVisible({ timeout: 20000 });
 
     // If AuthScreen is displayed, log in (or sign up)
     const emailInput = page.locator('#auth-email');
@@ -46,9 +52,10 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
       await page.locator('#auth-password').fill(testPassword);
       await page.locator('#auth-submit').click();
 
-      // Wait for either successful Dashboard load or an auth error message
+      // Wait for either successful Dashboard load, Onboarding, or an auth error message
       const authOutcome = await Promise.race([
         page.locator('#tab-daily').waitFor({ state: 'visible', timeout: 12000 }).then(() => 'dashboard'),
+        page.locator('#skip-onboarding-btn').waitFor({ state: 'visible', timeout: 12000 }).then(() => 'onboarding'),
         page.locator('p.text-red-400').waitFor({ state: 'visible', timeout: 12000 }).then(() => 'error'),
       ]).catch(() => null);
 
@@ -61,6 +68,12 @@ test.describe('EatLog E2E Functional & UI Automation Suite', () => {
           await page.locator('#auth-submit').click();
         }
       }
+    }
+
+    // If OnboardingScreen is displayed, skip to dashboard
+    const skipOnboardingBtn = page.locator('#skip-onboarding-btn');
+    if (await skipOnboardingBtn.isVisible({ timeout: 4000 }).catch(() => false)) {
+      await skipOnboardingBtn.click();
     }
 
     // 3. Verify Dashboard HUD (Primary & Secondary Macros)

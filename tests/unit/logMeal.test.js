@@ -80,11 +80,13 @@ describe('api/logMeal Serverless Function', () => {
     expect(res.statusCode).toBe(200);
     expect(res.data).toEqual({
       food_summary: '2 boiled eggs',
+      items: [],
       calories: 140,
       protein_g: 12,
       carbs_g: 1,
       fat_g: 10,
       fiber_g: 0,
+      cooking_fat_assumed: null,
       is_valid: true,
       error_message: null,
     });

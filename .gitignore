@@ -1,10 +1,13 @@
 node_modules/
 .env
-.env.*
+.env.local
+.env.development
+.env.production
 .firebase/
 .vercel
 dist/
 test-results/
 playwright-report/
 firebase-debug.log
-scripts/
+.agents/
+graphify-out/cache/

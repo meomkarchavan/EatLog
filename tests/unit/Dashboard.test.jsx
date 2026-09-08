@@ -214,5 +214,18 @@ describe('Dashboard Component', () => {
     expect(screen.getByText('Quick Lookup')).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Search food stats\.\.\./i)).toBeInTheDocument();
   });
+
+  it('opens photo options modal with Take Photo and Choose from Gallery when camera button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<Dashboard />);
+
+    const cameraBtn = document.getElementById('camera-btn');
+    expect(cameraBtn).toBeInTheDocument();
+    await user.click(cameraBtn);
+
+    expect(screen.getByText('Log Food from Photo')).toBeInTheDocument();
+    expect(screen.getByText('Take Photo')).toBeInTheDocument();
+    expect(screen.getByText('Choose from Gallery')).toBeInTheDocument();
+  });
 });
 

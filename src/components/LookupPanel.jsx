@@ -1,9 +1,3 @@
-/**
- * LookupPanel — a dedicated full-screen panel for Quick Lookup.
- * Allows searching food nutrition stats without logging immediately,
- * saves queries to a persistent user history in Firestore and local storage,
- * and provides Quick-Add and Delete actions directly from history.
- */
 import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
@@ -187,7 +181,6 @@ export default function LookupPanel({ onAddMeal }) {
   const handleDeleteHistoryItem = async (id) => {
     if (!id) return;
     const uid = auth.currentUser?.uid;
-    // Optimistically remove from state and local storage
     setHistory((prev) => {
       const next = prev.filter((item) => item.id !== id);
       saveLocalLookupHistory(uid, next);
@@ -210,56 +203,57 @@ export default function LookupPanel({ onAddMeal }) {
   const clearAll = () => setResults([]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-      {/* Panel Header */}
-      <section className="px-3.5 sm:px-5 pt-3.5 sm:pt-4 pb-2.5 sm:pb-3">
-        <div className="flex items-center gap-2.5 mb-1">
-          <div className="w-8 h-8 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center shrink-0">
-            <SearchIcon className="w-4 h-4 text-violet-400" />
+    <div className="flex-1 flex flex-col min-h-0 overflow-hidden bg-[#090a0c]">
+      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col min-h-0">
+        {/* Panel Header */}
+        <section className="px-3.5 sm:px-5 pt-3.5 sm:pt-4 pb-2.5 sm:pb-3">
+          <div className="flex items-center gap-2.5 mb-1">
+            <div className="w-8 h-8 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(56,189,248,0.2)]">
+              <SearchIcon className="w-4 h-4 text-[#38bdf8]" />
+            </div>
+            <div>
+              <h2 className="text-[#f3f4f6] text-base font-extrabold leading-tight tracking-tight">Quick Lookup</h2>
+              <p className="text-[#9ca3af] text-[11px] leading-tight">
+                Search instant nutritional breakdown & add to log with 1-tap
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-white text-base font-bold leading-tight">Quick Lookup</h2>
-            <p className="text-zinc-500 text-[11px] leading-tight">
-              Search nutrition facts and quick-add to your log
-            </p>
-          </div>
+        </section>
+
+        {/* Search Input */}
+        <div className="px-3.5 sm:px-5 pb-3">
+          <form onSubmit={handleSubmit} className="flex items-center gap-1.5 sm:gap-2">
+            <input
+              ref={inputRef}
+              id="lookup-input"
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search food stats..."
+              disabled={isLoading}
+              className="flex-1 min-w-0 bg-[#121316] text-[#f3f4f6] placeholder-[#6b7280] rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none focus:ring-2 focus:ring-sky-500/40 border border-white/[0.08] focus:border-sky-500/60 transition-all disabled:opacity-30 font-sans"
+            />
+            <button
+              id="lookup-submit-btn"
+              type="submit"
+              disabled={isLoading || !query.trim()}
+              className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-[#38bdf8] hover:bg-sky-400 text-[#090a0c] active:scale-95 transition-all disabled:opacity-20 shadow-[0_0_12px_rgba(56,189,248,0.3)]"
+            >
+              <SendIcon />
+            </button>
+          </form>
         </div>
-      </section>
 
-      {/* Search Input — fixed at top of panel */}
-      <div className="px-3.5 sm:px-5 pb-3">
-        <form onSubmit={handleSubmit} className="flex items-center gap-1.5 sm:gap-2">
-          <input
-            ref={inputRef}
-            id="lookup-input"
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search food stats..."
-            disabled={isLoading}
-            className="flex-1 min-w-0 bg-surface-2 text-white placeholder-zinc-600 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none focus:ring-1 border border-violet-500/30 focus:ring-violet-500/40 transition-colors disabled:opacity-30"
-          />
-          <button
-            id="lookup-submit-btn"
-            type="submit"
-            disabled={isLoading || !query.trim()}
-            className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-violet-600 text-white active:scale-95 transition-all disabled:opacity-20"
-          >
-            <SendIcon />
-          </button>
-        </form>
-      </div>
+        {/* Divider */}
+        <div className="h-px bg-white/[0.06] mx-3.5 sm:mx-5" />
 
-      {/* Divider */}
-      <div className="h-px bg-surface-3 mx-3.5 sm:mx-5" />
-
-      {/* Scrollable Content: Session Results + Recent Lookups */}
-      <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-4 pb-28">
+        {/* Scrollable Content */}
+        <section className="flex-1 overflow-y-auto px-3.5 sm:px-5 py-3 space-y-4 pb-28">
         {/* Loading indicator */}
         {isLoading && (
-          <div className="bg-surface-2 rounded-2xl p-4 border border-surface-3 text-center">
-            <p className="text-white text-sm font-medium animate-pulse-slow">
-              Looking up nutrition facts...
+          <div className="bg-[#121316] rounded-2xl p-4 border border-white/[0.08] text-center shadow-lg">
+            <p className="text-[#f3f4f6] text-sm font-semibold animate-pulse-slow">
+              Looking up nutrition facts with AI...
             </p>
           </div>
         )}
@@ -268,12 +262,12 @@ export default function LookupPanel({ onAddMeal }) {
         {results.length > 0 && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              <span className="text-[#9ca3af] text-xs font-semibold uppercase tracking-wider font-mono">
                 Current Search ({results.length})
               </span>
               <button
                 onClick={clearAll}
-                className="text-[11px] text-zinc-500 hover:text-zinc-300 font-medium transition-colors"
+                className="text-[11px] text-[#6b7280] hover:text-[#f3f4f6] font-medium transition-colors font-mono"
               >
                 Clear All
               </button>
@@ -291,32 +285,32 @@ export default function LookupPanel({ onAddMeal }) {
           </div>
         )}
 
-        {/* Empty state when no session results & no query */}
+        {/* Empty state */}
         {results.length === 0 && !isLoading && history.length === 0 && !isLoadingHistory && (
-          <div className="flex flex-col items-center justify-center pt-10 pb-6">
-            <div className="w-14 h-14 rounded-2xl bg-surface-2 border border-surface-3 flex items-center justify-center mb-4">
-              <SearchIcon className="w-7 h-7 text-zinc-600" />
+          <div className="flex flex-col items-center justify-center pt-10 pb-6 bg-[#121316]/40 rounded-2xl border border-white/[0.05] p-6 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-[#15171b] border border-white/[0.08] flex items-center justify-center mb-3 shadow-inner">
+              <SearchIcon className="w-6 h-6 text-[#6b7280]" />
             </div>
-            <p className="text-zinc-400 text-sm text-center font-medium">
+            <p className="text-[#f3f4f6] text-sm font-semibold">
               Search any food to see its nutrition
             </p>
-            <p className="text-zinc-600 text-xs text-center mt-1">
+            <p className="text-[#6b7280] text-xs mt-1 font-mono">
               e.g. "2 scrambled eggs", "chicken biryani", "1 banana"
             </p>
           </div>
         )}
 
-        {/* Recent Lookups History Section */}
+        {/* Recent Lookups History */}
         <div className="pt-2">
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-1.5">
-              <History className="w-3.5 h-3.5 text-violet-400" />
-              <h3 className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              <History className="w-3.5 h-3.5 text-[#38bdf8]" />
+              <h3 className="text-[#9ca3af] text-xs font-semibold uppercase tracking-wider font-mono">
                 Recent Lookups
               </h3>
             </div>
             {history.length > 0 && (
-              <span className="text-[10px] text-zinc-600 font-medium">
+              <span className="text-[10px] text-[#6b7280] font-stat-mono">
                 Last {history.length}
               </span>
             )}
@@ -327,14 +321,14 @@ export default function LookupPanel({ onAddMeal }) {
               {[1, 2, 3].map((n) => (
                 <div
                   key={n}
-                  className="bg-surface-2/60 border border-surface-3/50 rounded-xl p-3 animate-pulse h-14"
+                  className="bg-[#121316] border border-white/[0.06] rounded-2xl p-3 animate-pulse h-14"
                 />
               ))}
             </div>
           ) : history.length === 0 ? (
-            <div className="bg-surface-2/40 border border-surface-3/40 rounded-xl p-4 text-center">
-              <p className="text-zinc-500 text-xs font-medium">No past lookups yet</p>
-              <p className="text-zinc-600 text-[11px] mt-0.5">
+            <div className="bg-[#121316]/50 border border-white/[0.06] rounded-2xl p-4 text-center">
+              <p className="text-[#9ca3af] text-xs font-medium">No past lookups yet</p>
+              <p className="text-[#6b7280] text-[11px] mt-0.5">
                 Foods you search will appear here for quick access
               </p>
             </div>
@@ -345,27 +339,27 @@ export default function LookupPanel({ onAddMeal }) {
                 return (
                   <div
                     key={item.id || index}
-                    className="group bg-surface-2 hover:bg-surface-3/70 border border-surface-3 hover:border-violet-500/30 rounded-xl p-3 flex items-center justify-between gap-3 transition-all duration-200"
+                    className="group bg-[#121316] hover:bg-[#15171b] border border-white/[0.07] hover:border-white/[0.14] rounded-2xl p-3 flex items-center justify-between gap-3 transition-all duration-200 shadow-sm"
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="text-white text-xs sm:text-sm font-medium leading-snug break-words">
+                      <p className="text-[#f3f4f6] text-xs sm:text-sm font-semibold leading-snug break-words">
                         {item.food_summary}
                       </p>
-                      {/* All macros displayed clearly */}
-                      <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-amber-400 tabular-nums border border-zinc-700/40">
+                      {/* All macros displayed */}
+                      <div className="flex flex-wrap items-center gap-1.5 mt-1.5 font-stat-mono">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-lg bg-[#1a1c22] text-[10px] font-bold text-[#facc15] border border-white/[0.06]">
                           {item.calories} kcal
                         </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-emerald-400 tabular-nums border border-zinc-700/40">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-lg bg-[#1a1c22] text-[10px] font-bold text-[#22c55e] border border-white/[0.06]">
                           {item.protein_g}g P
                         </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-sky-400 tabular-nums border border-zinc-700/40">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-lg bg-[#1a1c22] text-[10px] font-bold text-[#38bdf8] border border-white/[0.06]">
                           {item.carbs_g}g C
                         </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-rose-400 tabular-nums border border-zinc-700/40">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-lg bg-[#1a1c22] text-[10px] font-bold text-[#fb923c] border border-white/[0.06]">
                           {item.fat_g}g F
                         </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-zinc-800/90 text-[11px] font-semibold text-lime-400 tabular-nums border border-zinc-700/40">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-lg bg-[#1a1c22] text-[10px] font-bold text-[#a78bfa] border border-white/[0.06]">
                           {item.fiber_g}g Fib
                         </span>
                       </div>
@@ -377,10 +371,10 @@ export default function LookupPanel({ onAddMeal }) {
                         onClick={() => handleAddToDailyLog(item)}
                         disabled={isItemAdding}
                         title={isItemAdding ? 'Adding to log...' : 'Quick-Add to Daily Log'}
-                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-xs font-medium border border-violet-500/30 hover:border-violet-500 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#22c55e]/15 hover:bg-[#22c55e]/25 text-[#22c55e] text-xs font-bold border border-[#22c55e]/30 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-mono"
                       >
                         {isItemAdding ? (
-                          <Loader2 className="w-3.5 h-3.5 text-violet-300 animate-spin" />
+                          <Loader2 className="w-3.5 h-3.5 text-[#22c55e] animate-spin" />
                         ) : (
                           <PlusCircle className="w-3.5 h-3.5" />
                         )}
@@ -391,7 +385,7 @@ export default function LookupPanel({ onAddMeal }) {
                         onClick={() => handleDeleteHistoryItem(item.id)}
                         disabled={isItemAdding}
                         title="Delete from history"
-                        className="w-7 h-7 flex items-center justify-center rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95 disabled:opacity-40"
+                        className="w-7 h-7 flex items-center justify-center rounded-xl text-[#6b7280] hover:text-rose-400 hover:bg-rose-500/15 transition-all active:scale-95 disabled:opacity-40"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -404,5 +398,6 @@ export default function LookupPanel({ onAddMeal }) {
         </div>
       </section>
     </div>
-  );
+  </div>
+);
 }

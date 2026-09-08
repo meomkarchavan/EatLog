@@ -13,49 +13,32 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const COLLECTION_NAME = 'lookup_history';
-const LOCAL_STORAGE_KEY_PREFIX = 'eatlog_lookup_history_';
+const toMs = (ts) => (ts?.toDate ? ts.toDate().getTime() : new Date(ts || 0).getTime());
 
-/**
- * Gets cached lookup history from localStorage.
- */
 export function getLocalLookupHistory(userId) {
   if (typeof window === 'undefined') return [];
-  const key = `${LOCAL_STORAGE_KEY_PREFIX}${userId || 'default'}`;
   try {
-    const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(`eatlog_lookup_history_${userId || 'default'}`);
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
 }
 
-/**
- * Saves lookup history to localStorage for instant tab-switching cache.
- */
 export function saveLocalLookupHistory(userId, items) {
   if (typeof window === 'undefined') return;
-  const key = `${LOCAL_STORAGE_KEY_PREFIX}${userId || 'default'}`;
   try {
-    localStorage.setItem(key, JSON.stringify((items || []).slice(0, 30)));
+    localStorage.setItem(`eatlog_lookup_history_${userId || 'default'}`, JSON.stringify((items || []).slice(0, 30)));
   } catch (err) {
     console.warn('Could not save lookup history to localStorage:', err);
   }
 }
 
-/**
- * Saves a successful food lookup to the user's persistent lookup history in Firestore and localStorage.
- *
- * @param {string} userId - The Firebase Auth UID.
- * @param {Object} data - Nutritional data for the looked-up food.
- * @returns {Promise<Object>} The saved document reference / item data.
- */
 export async function saveLookupToHistory(userId, data) {
   if (!userId || !data) return null;
 
   const docPayload = {
     userId,
-    user_id: userId, // for backwards and rules compatibility
     food_summary: data.food_summary || 'Unknown Food',
     calories: Number(data.calories) || 0,
     protein_g: Number(data.protein_g) || 0,
@@ -65,14 +48,13 @@ export async function saveLookupToHistory(userId, data) {
     createdAt: serverTimestamp(),
   };
 
-  const docRef = await addDoc(collection(db, COLLECTION_NAME), docPayload);
+  const docRef = await addDoc(collection(db, 'lookup_history'), docPayload);
   const result = {
     id: docRef.id,
     ...docPayload,
     createdAt: new Date().toISOString(),
   };
 
-  // Update local cache
   const cached = getLocalLookupHistory(userId);
   const updated = [result, ...cached.filter((i) => i.id !== result.id && i.food_summary !== result.food_summary)];
   saveLocalLookupHistory(userId, updated);
@@ -80,19 +62,12 @@ export async function saveLookupToHistory(userId, data) {
   return result;
 }
 
-/**
- * Fetches the user's past lookups ordered by createdAt descending (limit 20).
- * Includes resilient fallback client sorting if composite index is pending.
- *
- * @param {string} userId - The Firebase Auth UID.
- * @returns {Promise<Array>} List of persistent lookup documents.
- */
 export async function getLookupHistory(userId) {
   if (!userId) return [];
 
   try {
     const q = query(
-      collection(db, COLLECTION_NAME),
+      collection(db, 'lookup_history'),
       where('userId', '==', userId),
       orderBy('createdAt', 'desc'),
       limit(20)
@@ -104,15 +79,13 @@ export async function getLookupHistory(userId) {
       ...docSnap.data(),
     }));
 
-    if (docs.length > 0) {
-      saveLocalLookupHistory(userId, docs);
-    }
+    if (docs.length > 0) saveLocalLookupHistory(userId, docs);
     return docs;
   } catch (err) {
-    console.warn('Ordered Firestore query failed (index pending?), applying fallback sort:', err);
+    console.warn('Ordered Firestore query failed, applying fallback sort:', err);
     try {
       const fallbackQuery = query(
-        collection(db, COLLECTION_NAME),
+        collection(db, 'lookup_history'),
         where('userId', '==', userId),
         limit(50)
       );
@@ -122,16 +95,9 @@ export async function getLookupHistory(userId) {
         ...docSnap.data(),
       }));
 
-      items.sort((a, b) => {
-        const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
-        const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
-        return timeB - timeA;
-      });
-
+      items.sort((a, b) => toMs(b.createdAt) - toMs(a.createdAt));
       const sliced = items.slice(0, 20);
-      if (sliced.length > 0) {
-        saveLocalLookupHistory(userId, sliced);
-      }
+      if (sliced.length > 0) saveLocalLookupHistory(userId, sliced);
       return sliced;
     } catch {
       return getLocalLookupHistory(userId);
@@ -139,14 +105,6 @@ export async function getLookupHistory(userId) {
   }
 }
 
-/**
- * Subscribes to real-time updates of the user's persistent lookup history.
- *
- * @param {string} userId - The Firebase Auth UID.
- * @param {Function} onUpdate - Callback invoked with sorted array of lookup history docs.
- * @param {Function} [onError] - Optional error handler callback.
- * @returns {Function} Unsubscribe function.
- */
 export function subscribeLookupHistory(userId, onUpdate, onError) {
   if (!userId) {
     onUpdate([]);
@@ -154,7 +112,7 @@ export function subscribeLookupHistory(userId, onUpdate, onError) {
   }
 
   const q = query(
-    collection(db, COLLECTION_NAME),
+    collection(db, 'lookup_history'),
     where('userId', '==', userId)
   );
 
@@ -166,36 +124,20 @@ export function subscribeLookupHistory(userId, onUpdate, onError) {
         ...docSnap.data(),
       }));
 
-      items.sort((a, b) => {
-        const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
-        const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
-        return timeB - timeA;
-      });
-
+      items.sort((a, b) => toMs(b.createdAt) - toMs(a.createdAt));
       const finalItems = items.slice(0, 20);
-      if (finalItems.length > 0) {
-        saveLocalLookupHistory(userId, finalItems);
-      }
+      if (finalItems.length > 0) saveLocalLookupHistory(userId, finalItems);
       onUpdate(finalItems);
     },
     (err) => {
       console.warn('Firestore lookup history listener error, using local cache:', err);
       const local = getLocalLookupHistory(userId);
-      if (local.length > 0) {
-        onUpdate(local);
-      }
+      if (local.length > 0) onUpdate(local);
       if (onError) onError(err);
     }
   );
 }
 
-/**
- * Deletes a lookup item from Firestore history by its document ID.
- *
- * @param {string} historyId - The document ID in lookup_history.
- * @param {string} [userId] - The user ID to sync with local cache.
- * @returns {Promise<boolean>}
- */
 export async function deleteLookupFromHistory(historyId, userId) {
   if (!historyId) return false;
 
@@ -205,7 +147,7 @@ export async function deleteLookupFromHistory(historyId, userId) {
   }
 
   try {
-    await deleteDoc(doc(db, COLLECTION_NAME, historyId));
+    await deleteDoc(doc(db, 'lookup_history', historyId));
   } catch (err) {
     console.warn('Could not delete from Firestore (local cache removed):', err);
   }

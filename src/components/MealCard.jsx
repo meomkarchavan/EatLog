@@ -115,14 +115,14 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
     return (
       <form
         onSubmit={handleSave}
-        className="bg-surface-2 rounded-2xl p-4 border border-zinc-700/70 space-y-3"
+        className="bg-[#121316] rounded-2xl p-4 border border-white/[0.12] space-y-3.5 shadow-xl"
       >
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-zinc-300">Edit Meal Log</span>
+          <span className="text-xs font-bold text-[#f3f4f6]">Edit Meal Log</span>
           <button
             type="button"
             onClick={handleDelete}
-            className="text-xs text-rose-400 hover:text-rose-300 font-medium transition-colors"
+            className="text-xs text-rose-400 hover:text-rose-300 font-semibold transition-colors"
           >
             Delete Log
           </button>
@@ -130,7 +130,7 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
 
         {/* Meal description & AI re-estimate button */}
         <div>
-          <label className="block text-[11px] text-zinc-400 font-medium mb-1">
+          <label className="block text-[11px] text-[#9ca3af] font-medium mb-1">
             Food Description
           </label>
           <div className="flex gap-2">
@@ -139,14 +139,14 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               required
               value={editForm.food_summary}
               onChange={(e) => setEditForm({ ...editForm, food_summary: e.target.value })}
-              className="flex-1 bg-surface-3 text-white placeholder-zinc-600 rounded-xl px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-zinc-500 border border-zinc-700/50"
+              className="flex-1 bg-[#1a1c22] text-[#f3f4f6] placeholder-[#6b7280] rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-sky-500/40 border border-white/[0.08] focus:border-sky-500/60"
             />
             <button
               type="button"
               onClick={handleReEstimate}
               disabled={isReEstimating || !editForm.food_summary.trim()}
               title="Recalculate nutrition with AI"
-              className="shrink-0 px-2.5 py-1.5 rounded-xl bg-surface-3 text-cyan-400 hover:text-cyan-300 text-xs font-semibold border border-cyan-800/40 disabled:opacity-40 transition-all flex items-center gap-1"
+              className="shrink-0 px-3 py-1.5 rounded-xl bg-[#15171b] text-sky-400 hover:text-sky-300 text-xs font-bold border border-sky-800/40 disabled:opacity-40 active:scale-95 transition-all flex items-center gap-1"
             >
               {isReEstimating ? '...' : '✨ AI Recalc'}
             </button>
@@ -154,9 +154,9 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
         </div>
 
         {/* Numeric Macros Grid */}
-        <div className="grid grid-cols-5 gap-1 sm:gap-2 pt-1">
+        <div className="grid grid-cols-5 gap-1.5 sm:gap-2 pt-1">
           <div>
-            <label className="block text-[9px] sm:text-[10px] text-zinc-400 uppercase font-medium mb-0.5 text-center">
+            <label className="block text-[9px] sm:text-[10px] text-[#facc15] uppercase font-mono font-bold mb-0.5 text-center">
               Cal
             </label>
             <input
@@ -164,11 +164,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.calories}
               onChange={(e) => setEditForm({ ...editForm, calories: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-[#1a1c22] text-[#f3f4f6] rounded-xl px-1 sm:px-2 py-1.5 text-xs text-center font-stat-mono outline-none border border-white/[0.08] focus:border-white/[0.2]"
             />
           </div>
           <div>
-            <label className="block text-[9px] sm:text-[10px] text-emerald-400 uppercase font-medium mb-0.5 text-center">
+            <label className="block text-[9px] sm:text-[10px] text-[#22c55e] uppercase font-mono font-bold mb-0.5 text-center">
               Pro (g)
             </label>
             <input
@@ -176,11 +176,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.protein_g}
               onChange={(e) => setEditForm({ ...editForm, protein_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-[#1a1c22] text-[#f3f4f6] rounded-xl px-1 sm:px-2 py-1.5 text-xs text-center font-stat-mono outline-none border border-white/[0.08] focus:border-white/[0.2]"
             />
           </div>
           <div>
-            <label className="block text-[9px] sm:text-[10px] text-sky-400 uppercase font-medium mb-0.5 text-center">
+            <label className="block text-[9px] sm:text-[10px] text-[#38bdf8] uppercase font-mono font-bold mb-0.5 text-center">
               Carb (g)
             </label>
             <input
@@ -188,11 +188,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.carbs_g}
               onChange={(e) => setEditForm({ ...editForm, carbs_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-[#1a1c22] text-[#f3f4f6] rounded-xl px-1 sm:px-2 py-1.5 text-xs text-center font-stat-mono outline-none border border-white/[0.08] focus:border-white/[0.2]"
             />
           </div>
           <div>
-            <label className="block text-[9px] sm:text-[10px] text-rose-400 uppercase font-medium mb-0.5 text-center">
+            <label className="block text-[9px] sm:text-[10px] text-[#fb923c] uppercase font-mono font-bold mb-0.5 text-center">
               Fat (g)
             </label>
             <input
@@ -200,11 +200,11 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.fat_g}
               onChange={(e) => setEditForm({ ...editForm, fat_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-[#1a1c22] text-[#f3f4f6] rounded-xl px-1 sm:px-2 py-1.5 text-xs text-center font-stat-mono outline-none border border-white/[0.08] focus:border-white/[0.2]"
             />
           </div>
           <div>
-            <label className="block text-[9px] sm:text-[10px] text-lime-400 uppercase font-medium mb-0.5 text-center">
+            <label className="block text-[9px] sm:text-[10px] text-[#a78bfa] uppercase font-mono font-bold mb-0.5 text-center">
               Fib (g)
             </label>
             <input
@@ -212,25 +212,25 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               min="0"
               value={editForm.fiber_g}
               onChange={(e) => setEditForm({ ...editForm, fiber_g: e.target.value })}
-              className="w-full bg-surface-3 text-white rounded-lg px-1 sm:px-2 py-1.5 text-xs text-center tabular-nums outline-none border border-zinc-700/50"
+              className="w-full bg-[#1a1c22] text-[#f3f4f6] rounded-xl px-1 sm:px-2 py-1.5 text-xs text-center font-stat-mono outline-none border border-white/[0.08] focus:border-white/[0.2]"
             />
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end gap-2 pt-2 border-t border-surface-3/50">
+        <div className="flex justify-end gap-2 pt-2 border-t border-white/[0.08]">
           <button
             type="button"
             onClick={handleCancelEdit}
             disabled={isSaving}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-[#9ca3af] hover:text-[#f3f4f6] transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSaving}
-            className="px-4 py-1.5 rounded-lg bg-white text-black text-xs font-semibold hover:bg-zinc-200 transition-colors shadow-sm disabled:opacity-50"
+            className="px-4 py-1.5 rounded-xl bg-[#22c55e] text-[#090a0c] text-xs font-bold hover:bg-emerald-400 active:scale-95 transition-all shadow-sm disabled:opacity-50"
           >
             {isSaving ? 'Saving...' : 'Save Changes'}
           </button>
@@ -240,30 +240,30 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
   }
 
   return (
-    <div className="group bg-surface-2 rounded-xl p-3 sm:p-3.5 border border-surface-3/60 hover:border-zinc-700/70 transition-all">
+    <div className="group bg-[#121316] rounded-2xl p-3 sm:p-3.5 border border-white/[0.07] hover:border-white/[0.14] transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.45),inset_0_1px_0_0_rgba(255,255,255,0.03)]">
       <div className="flex items-start justify-between gap-2.5 sm:gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-white text-sm font-medium leading-snug break-words">
+          <p className="text-[#f3f4f6] text-sm font-semibold leading-snug break-words">
             {log.food_summary}
           </p>
-          <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 flex-wrap">
-            <span className="text-zinc-600 text-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 mt-1.5 flex-wrap">
+            <span className="text-[#6b7280] text-xs font-stat-mono font-medium">
               {log.timestamp ? new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
             </span>
             {log.input_method === 'vision' && (
-              <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] text-zinc-400">
+              <span className="px-1.5 py-0.5 rounded bg-[#1a1c22] text-[10px] text-[#9ca3af] border border-white/[0.06] font-mono">
                 Photo
               </span>
             )}
             {log.input_method === 'staple' && (
-              <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] text-zinc-400">
+              <span className="px-1.5 py-0.5 rounded bg-amber-950/40 text-[10px] text-amber-400 border border-amber-800/30 font-mono">
                 Staple
               </span>
             )}
             <button
               data-testid="edit-meal-btn"
               onClick={handleStartEdit}
-              className="text-xs text-zinc-500 hover:text-white transition-colors font-medium ml-0.5 flex items-center gap-1"
+              className="text-xs text-[#6b7280] hover:text-[#f3f4f6] transition-colors font-medium ml-0.5 flex items-center gap-1 active:scale-95"
               title="Edit meal description or macros"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
@@ -277,10 +277,10 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
               <button
                 data-testid="pin-staple-btn"
                 onClick={() => onPinStaple(log)}
-                className={`text-xs transition-colors font-medium ml-0.5 flex items-center gap-0.5 ${
+                className={`text-xs transition-colors font-medium ml-0.5 flex items-center gap-0.5 active:scale-95 ${
                   isPinned
-                    ? 'text-amber-400 hover:text-amber-300'
-                    : 'text-zinc-500 hover:text-amber-400'
+                    ? 'text-amber-400 hover:text-amber-300 font-semibold'
+                    : 'text-[#6b7280] hover:text-amber-400'
                 }`}
                 title={isPinned ? 'Remove from staples' : 'Pin to staples'}
               >
@@ -294,7 +294,7 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
             <button
               data-testid="delete-meal-btn"
               onClick={handleDelete}
-              className="text-xs text-zinc-500 hover:text-rose-400 transition-colors font-medium ml-0.5 flex items-center gap-0.5"
+              className="text-xs text-[#6b7280] hover:text-rose-400 transition-colors font-medium ml-0.5 flex items-center gap-0.5 active:scale-95"
               title="Delete meal"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
@@ -307,31 +307,31 @@ export default function MealCard({ log, onPinStaple, isPinned }) {
         {/* Calories and Protein header counters */}
         <div className="flex gap-3 sm:gap-4 text-right shrink-0">
           <div>
-            <p className="text-white text-sm font-semibold tabular-nums">{log.calories}</p>
-            <p className="text-zinc-600 text-[10px] uppercase">cal</p>
+            <p className="text-[#f3f4f6] text-sm font-bold font-stat-mono">{log.calories}</p>
+            <p className="text-[#6b7280] text-[10px] uppercase font-mono font-medium tracking-wider">cal</p>
           </div>
           <div>
-            <p className="text-white text-sm font-semibold tabular-nums">{log.protein_g}</p>
-            <p className="text-zinc-600 text-[10px] uppercase">pro</p>
+            <p className="text-[#f3f4f6] text-sm font-bold font-stat-mono">{log.protein_g}</p>
+            <p className="text-[#6b7280] text-[10px] uppercase font-mono font-medium tracking-wider">pro</p>
           </div>
         </div>
       </div>
 
       {/* Secondary Macro Badges */}
       {((Number(log.carbs_g) || 0) > 0 || (Number(log.fat_g) || 0) > 0 || (Number(log.fiber_g) || 0) > 0) && (
-        <div className="flex gap-1.5 mt-2 flex-wrap pt-2 border-t border-surface-3/30">
+        <div className="flex gap-1.5 mt-2.5 flex-wrap pt-2 border-t border-white/[0.06]">
           {(Number(log.carbs_g) || 0) > 0 && (
-            <span className="px-2 py-0.5 rounded-md bg-sky-950/40 text-sky-400 text-[10px] font-medium border border-sky-800/30">
+            <span className="px-2 py-0.5 rounded-lg bg-sky-950/40 text-[#38bdf8] text-[10px] font-stat-mono font-semibold border border-sky-800/40">
               {log.carbs_g}g carbs
             </span>
           )}
           {(Number(log.fat_g) || 0) > 0 && (
-            <span className="px-2 py-0.5 rounded-md bg-rose-950/40 text-rose-400 text-[10px] font-medium border border-rose-800/30">
+            <span className="px-2 py-0.5 rounded-lg bg-orange-950/40 text-[#fb923c] text-[10px] font-stat-mono font-semibold border border-orange-800/40">
               {log.fat_g}g fat
             </span>
           )}
           {(Number(log.fiber_g) || 0) > 0 && (
-            <span className="px-2 py-0.5 rounded-md bg-lime-950/40 text-lime-400 text-[10px] font-medium border border-lime-800/30">
+            <span className="px-2 py-0.5 rounded-lg bg-purple-950/40 text-[#a78bfa] text-[10px] font-stat-mono font-semibold border border-purple-800/40">
               {log.fiber_g}g fiber
             </span>
           )}
