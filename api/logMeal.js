@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import fs from "fs";
-import path from "path";
+import { getApiKey, extractAndParseJSON } from "./_geminiUtils.js";
 
 const SYSTEM_INSTRUCTION = `You are a backend nutritional analysis engine. Your sole function is to estimate total calories and macronutrients (protein, carbs, fat, fiber) from either text descriptions or images of food. 
 RULES:
@@ -17,65 +16,6 @@ const CANDIDATE_MODELS = [
   "gemini-3.7-flash",
   "gemini-3.6-flash",
 ];
-
-// Helper to get GEMINI_API_KEY from process.env, .env.local, .env.development, or .env.production
-function getApiKey() {
-  if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "your_gemini_api_key_here") {
-    return process.env.GEMINI_API_KEY;
-  }
-  const envFiles = [".env.local", ".env.development", ".env.production", ".env"];
-  for (const file of envFiles) {
-    try {
-      const envPath = path.resolve(process.cwd(), file);
-      if (fs.existsSync(envPath)) {
-        const content = fs.readFileSync(envPath, "utf-8");
-        const match = content.match(/^GEMINI_API_KEY=(.+)$/m);
-        if (match && match[1] && match[1].trim() !== "your_gemini_api_key_here") {
-          return match[1].trim();
-        }
-      }
-    } catch (e) {
-      // Continue searching
-    }
-  }
-  return process.env.GEMINI_API_KEY;
-}
-
-// Resilient JSON extractor
-function extractAndParseJSON(raw) {
-  if (!raw || typeof raw !== "string") {
-    throw new Error("Empty AI response");
-  }
-
-  let text = raw.trim();
-
-  // Strip markdown fences
-  if (text.startsWith("```json")) {
-    text = text.replace(/^```json\s*/, "").replace(/```$/, "").trim();
-  } else if (text.startsWith("```")) {
-    text = text.replace(/^```\s*/, "").replace(/```$/, "").trim();
-  }
-
-  // Direct parse attempt
-  try {
-    return JSON.parse(text);
-  } catch (_) {
-    // Extract outermost {...}
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) {
-      try {
-        return JSON.parse(match[0]);
-      } catch (innerErr) {
-        // Clean common unquoted or trailing issues
-        let sanitized = match[0]
-          .replace(/:\s*~?(\d+)\s*(kcal|calories|g|grams)?/gi, ": $1")
-          .replace(/,\s*([\}\]])/g, "$1");
-        return JSON.parse(sanitized);
-      }
-    }
-    throw new Error(`Invalid JSON format: ${text.slice(0, 100)}`);
-  }
-}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

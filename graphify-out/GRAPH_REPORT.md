@@ -1,16 +1,16 @@
-# Graph Report - EatLog  (2026-08-26)
+# Graph Report - EatLog  (2026-09-08)
 
 ## Corpus Check
-- 147 files · ~82,883 words
+- 145 files · ~81,378 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1124 nodes · 1154 edges · 109 communities (98 shown, 11 thin omitted)
+- 1111 nodes · 1124 edges · 108 communities (96 shown, 12 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4e22fc23`
+- Built from commit: `134b85de`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,7 +45,6 @@
 - [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
-- [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 31|Community 31]]
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
@@ -113,16 +112,16 @@
 - [[_COMMUNITY_Community 96|Community 96]]
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 105|Community 105]]
-- [[_COMMUNITY_Community 106|Community 106]]
 - [[_COMMUNITY_Community 107|Community 107]]
 - [[_COMMUNITY_Community 108|Community 108]]
+- [[_COMMUNITY_Community 109|Community 109]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `useToast()` - 17 edges
-2. `scripts` - 16 edges
+1. `scripts` - 16 edges
+2. `useToast()` - 15 edges
 3. `Firebase Authentication Web SDK` - 15 edges
-4. `auth` - 12 edges
-5. `db` - 12 edges
+4. `auth` - 11 edges
+5. `db` - 11 edges
 6. `Flutter SDK` - 10 edges
 7. `Web SDK` - 10 edges
 8. `Firebase AI Logic Basics` - 9 edges
@@ -132,23 +131,23 @@
 ## Surprising Connections (you probably didn't know these)
 - `TestConsumer()` --calls--> `useToast()`  [EXTRACTED]
   tests/unit/Toast.test.jsx → src/components/Toast.jsx
-- `ProfileScreen()` --calls--> `useToast()`  [EXTRACTED]
-  src/components/ProfileScreen.jsx → src/components/Toast.jsx
-- `Dashboard()` --calls--> `useToast()`  [EXTRACTED]
-  src/components/Dashboard.jsx → src/components/Toast.jsx
-- `Dashboard()` --calls--> `calculateNutritionTargets()`  [EXTRACTED]
-  src/components/Dashboard.jsx → src/utils/nutritionMath.js
 - `LookupPanel()` --calls--> `useToast()`  [EXTRACTED]
   src/components/LookupPanel.jsx → src/components/Toast.jsx
+- `handler()` --calls--> `getApiKey()`  [EXTRACTED]
+  api/analyzeLogs.js → api/_geminiUtils.js
+- `handler()` --calls--> `getApiKey()`  [EXTRACTED]
+  api/logMeal.js → api/_geminiUtils.js
+- `handler()` --calls--> `extractAndParseJSON()`  [EXTRACTED]
+  api/analyzeLogs.js → api/_geminiUtils.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (109 total, 11 thin omitted)
+## Communities (108 total, 12 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (28): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupPanel(), MealCard(), Profile(), defaultContext (+20 more)
+Cohesion: 0.07
+Nodes (27): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), MealCard(), Profile(), defaultContext, ToastContext (+19 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
@@ -266,10 +265,6 @@ Nodes (12): Basic Query, Best Practices for Agents, Calling Operations, Client-S
 Cohesion: 0.17
 Nodes (11): 1. Re-running `flutterfire configure` Upon Renaming, 2. Platform-Specific Build Requirements, 3. Web CORS Best Practices, 4. Elaborating on `WidgetsFlutterBinding.ensureInitialized()`, Flutter & Firebase Setup Guide, Prerequisites, Step 1: Create a Flutter Project, Step 2: Configure Firebase (+3 more)
 
-### Community 30 - "Community 30"
-Cohesion: 0.38
-Nodes (8): ProfileScreen(), ACTIVITY_MODIFIERS, calculateBMI(), calculateBMR(), calculateTargets(), calculateTDEE(), getBMICategory(), GOAL_MODIFIERS
-
 ### Community 31 - "Community 31"
 Cohesion: 0.17
 Nodes (11): 1. Provisioning, 2. Client Setup & Usage, 3. Security Rules, Core Concepts, Identity Providers, Option 1. Enabling Authentication via CLI, Option 2. Enabling Authentication in Console, Prerequisites (+3 more)
@@ -335,12 +330,12 @@ Cohesion: 0.22
 Nodes (8): Add Dependencies to Gradle Build, App-level `build.gradle.kts` (`<project>/<app-module>/build.gradle.kts`), Follow up Steps, Project and App Setup, Project-level `build.gradle.kts` (`<project>/build.gradle.kts`), Fetch and Activate Values, Firebase Remote Config Android Setup Guide, Set In-App Defaults
 
 ### Community 47 - "Community 47"
-Cohesion: 0.31
-Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
+Cohesion: 0.19
+Nodes (8): CANDIDATE_MODELS, handler(), extractAndParseJSON(), getApiKey(), CANDIDATE_MODELS, handler(), mockGenerateContent, mockGenerateContent
 
 ### Community 48 - "Community 48"
-Cohesion: 0.31
-Nodes (5): DatePicker(), DAY_LABELS, MONTH_NAMES, pad(), toDateStr()
+Cohesion: 0.33
+Nodes (3): DatePicker(), DAY_LABELS, MONTH_NAMES
 
 ### Community 49 - "Community 49"
 Cohesion: 0.22
@@ -494,37 +489,33 @@ Nodes (3): Android Studio Setup, MCP Setup, Skills Installation
 Cohesion: 0.33
 Nodes (5): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), 4. Mandatory Post-Deployment Live UI / E2E Verification, Agent Guidelines for EatLog
 
-### Community 106 - "Community 106"
-Cohesion: 0.31
-Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
-
 ### Community 107 - "Community 107"
-Cohesion: 0.24
-Nodes (10): LookupCard(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory(), saveLookupToHistory(), subscribeLookupHistory(), mockAddDoc (+2 more)
+Cohesion: 0.22
+Nodes (11): LookupCard(), LookupPanel(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory(), saveLookupToHistory(), subscribeLookupHistory() (+3 more)
 
 ### Community 108 - "Community 108"
 Cohesion: 0.07
 Nodes (27): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+19 more)
 
 ## Knowledge Gaps
-- **678 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+673 more)
+- **679 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+674 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useToast()` connect `Community 0` to `Community 107`, `Community 30`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `auth` connect `Community 0` to `Community 107`, `Community 30`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `db` connect `Community 0` to `Community 107`?**
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
-  _678 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _679 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.06409130816505706 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06512890094979647 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+- **Should `Community 4` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._

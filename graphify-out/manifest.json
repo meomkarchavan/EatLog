@@ -1,7 +1,7 @@
 {
   "api/logMeal.js": {
-    "mtime": 1787335506.4537692,
-    "ast_hash": "d61478506646c10859ac89002b769067",
+    "mtime": 1788866623.1408818,
+    "ast_hash": "75d2922a964643a76da40231daab6d57",
     "semantic_hash": ""
   },
   "firebase.json": {
@@ -50,17 +50,17 @@
     "semantic_hash": ""
   },
   "src/components/DatePicker.jsx": {
-    "mtime": 1787387631.529952,
-    "ast_hash": "1fa03dba177ec7a1f41e4fad15611f2d",
+    "mtime": 1788866597.2233083,
+    "ast_hash": "ecf51c77addb10f27a3a214bf79d63e4",
     "semantic_hash": ""
   },
   "src/components/LookupCard.jsx": {
-    "mtime": 1787759694.348599,
+    "mtime": 1787760340.631808,
     "ast_hash": "c612cfa208d4fedff322d1302fa16a2a",
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
-    "mtime": 1787759740.8576446,
+    "mtime": 1787760340.6328359,
     "ast_hash": "15d94f2081c4be10b501136bb8bac569",
     "semantic_hash": ""
   },
@@ -72,11 +72,6 @@
   "src/components/Profile.jsx": {
     "mtime": 1787758810.0029945,
     "ast_hash": "2362167bccc40842354d46b1282cb024",
-    "semantic_hash": ""
-  },
-  "src/components/ProfileScreen.jsx": {
-    "mtime": 1787758810.0040202,
-    "ast_hash": "3cc5b6c645cc9d356d9feb51e9a4d332",
     "semantic_hash": ""
   },
   "src/components/Toast.jsx": {
@@ -117,11 +112,6 @@
   "src/utils/nutritionMath.js": {
     "mtime": 1787322011.7660143,
     "ast_hash": "afb05f068146e5bbb3791b5aca2ae57e",
-    "semantic_hash": ""
-  },
-  "src/utils/targetEngine.js": {
-    "mtime": 1787321656.9992926,
-    "ast_hash": "d313e930759265018b3a164d732d7d82",
     "semantic_hash": ""
   },
   "tailwind.config.js": {
@@ -169,11 +159,6 @@
     "ast_hash": "e6172f527a2ff1017943a98b18625300",
     "semantic_hash": ""
   },
-  "tests/unit/ProfileScreen.test.jsx": {
-    "mtime": 1787758810.0112836,
-    "ast_hash": "fa2e0409a427a54de39f300d86610e33",
-    "semantic_hash": ""
-  },
   "tests/unit/Toast.test.jsx": {
     "mtime": 1787387909.5857494,
     "ast_hash": "8a7664eae9236215e53dae3074a3a321",
@@ -212,11 +197,6 @@
   "tests/unit/nutritionMath.test.js": {
     "mtime": 1787322087.911868,
     "ast_hash": "3177969206b98544f6b24a496e0beda8",
-    "semantic_hash": ""
-  },
-  "tests/unit/targetEngine.test.js": {
-    "mtime": 1787321805.3771062,
-    "ast_hash": "196ded7d351ef2df85bbb398c2aa8be6",
     "semantic_hash": ""
   },
   "vercel.json": {
@@ -710,8 +690,8 @@
     "semantic_hash": ""
   },
   "api/analyzeLogs.js": {
-    "mtime": 1787758809.920939,
-    "ast_hash": "c7148754e73c8976b6322f8366e992f7",
+    "mtime": 1788866632.5520709,
+    "ast_hash": "72ffe8b569a471729fb3dd31493c738d",
     "semantic_hash": ""
   },
   "src/components/InsightsCard.jsx": {
@@ -735,7 +715,7 @@
     "semantic_hash": ""
   },
   "tests/unit/LookupCard.test.jsx": {
-    "mtime": 1787759756.7316213,
+    "mtime": 1787760340.6333492,
     "ast_hash": "c6190cba8b8ee5d95a1fac9246b0cd85",
     "semantic_hash": ""
   },
@@ -752,6 +732,16 @@
   ".github/workflows/ci-cd.yml": {
     "mtime": 1787758809.9188747,
     "ast_hash": "757170963b1fcdb6e71163a028af9992",
+    "semantic_hash": ""
+  },
+  ".agents/rules/ponytail.md": {
+    "mtime": 1788861492.9301312,
+    "ast_hash": "c015b34524a6b541eb95b792e6e61626",
+    "semantic_hash": ""
+  },
+  "api/_geminiUtils.js": {
+    "mtime": 1788866610.7061243,
+    "ast_hash": "c4b1689825674b7a49ade05656799a76",
     "semantic_hash": ""
   }
 }

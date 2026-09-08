@@ -27,27 +27,13 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
-/**
- * Pad a number to 2 digits
- */
-function pad(n) {
-  return String(n).padStart(2, '0');
-}
-
-/**
- * Format a Date to YYYY-MM-DD
- */
-function toDateStr(d) {
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
-
 export default function DatePicker({ selectedDate, onSelectDate, isOpen, onClose }) {
   // Parse selectedDate (YYYY-MM-DD) to determine initial view month
   const [selYear, selMonth] = selectedDate.split('-').map(Number);
   const [viewYear, setViewYear] = useState(selYear);
   const [viewMonth, setViewMonth] = useState(selMonth); // 1-indexed
 
-  const todayStr = toDateStr(new Date());
+  const todayStr = new Date().toLocaleDateString('en-CA');
 
   // Build calendar grid for viewYear/viewMonth
   const calendarDays = useMemo(() => {
@@ -68,7 +54,7 @@ export default function DatePicker({ selectedDate, onSelectDate, isOpen, onClose
 
     // Actual days
     for (let d = 1; d <= daysInMonth; d++) {
-      const dateStr = `${viewYear}-${pad(viewMonth)}-${pad(d)}`;
+      const dateStr = new Date(viewYear, viewMonth - 1, d).toLocaleDateString('en-CA');
       days.push(dateStr);
     }
 

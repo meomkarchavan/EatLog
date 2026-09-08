@@ -4,53 +4,63 @@
   "graph": {},
   "nodes": [
     {
+      "label": "_geminiUtils.js",
+      "file_type": "code",
+      "source_file": "api/_geminiUtils.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "api_geminiutils",
+      "community": 47,
+      "norm_label": "_geminiutils.js"
+    },
+    {
+      "label": "getApiKey()",
+      "file_type": "code",
+      "source_file": "api/_geminiUtils.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "api_geminiutils_getapikey",
+      "community": 47,
+      "norm_label": "getapikey()"
+    },
+    {
+      "label": "extractAndParseJSON()",
+      "file_type": "code",
+      "source_file": "api/_geminiUtils.js",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "api_geminiutils_extractandparsejson",
+      "community": 47,
+      "norm_label": "extractandparsejson()"
+    },
+    {
       "label": "analyzeLogs.js",
       "file_type": "code",
       "source_file": "api/analyzeLogs.js",
       "source_location": "L1",
       "_origin": "ast",
       "id": "api_analyzelogs",
-      "community": 106,
+      "community": 47,
       "norm_label": "analyzelogs.js"
     },
     {
       "label": "CANDIDATE_MODELS",
       "file_type": "code",
       "source_file": "api/analyzeLogs.js",
-      "source_location": "L28",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "api_analyzelogs_candidate_models",
-      "community": 106,
+      "community": 47,
       "norm_label": "candidate_models"
-    },
-    {
-      "label": "getApiKey()",
-      "file_type": "code",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "api_analyzelogs_getapikey",
-      "community": 106,
-      "norm_label": "getapikey()"
-    },
-    {
-      "label": "extractAndParseJSON()",
-      "file_type": "code",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L63",
-      "_origin": "ast",
-      "id": "api_analyzelogs_extractandparsejson",
-      "community": 106,
-      "norm_label": "extractandparsejson()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/analyzeLogs.js",
-      "source_location": "L96",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "api_analyzelogs_handler",
-      "community": 106,
+      "community": 47,
       "norm_label": "handler()"
     },
     {
@@ -67,37 +77,17 @@
       "label": "CANDIDATE_MODELS",
       "file_type": "code",
       "source_file": "api/logMeal.js",
-      "source_location": "L12",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "api_logmeal_candidate_models",
       "community": 47,
       "norm_label": "candidate_models"
     },
     {
-      "label": "getApiKey()",
-      "file_type": "code",
-      "source_file": "api/logMeal.js",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "api_logmeal_getapikey",
-      "community": 47,
-      "norm_label": "getapikey()"
-    },
-    {
-      "label": "extractAndParseJSON()",
-      "file_type": "code",
-      "source_file": "api/logMeal.js",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "api_logmeal_extractandparsejson",
-      "community": 47,
-      "norm_label": "extractandparsejson()"
-    },
-    {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/logMeal.js",
-      "source_location": "L80",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "api_logmeal_handler",
       "community": 47,
@@ -784,30 +774,10 @@
       "norm_label": "month_names"
     },
     {
-      "label": "pad()",
-      "file_type": "code",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "components_datepicker_pad",
-      "community": 48,
-      "norm_label": "pad()"
-    },
-    {
-      "label": "toDateStr()",
-      "file_type": "code",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "components_datepicker_todatestr",
-      "community": 48,
-      "norm_label": "todatestr()"
-    },
-    {
       "label": "DatePicker()",
       "file_type": "code",
       "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L44",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "components_datepicker_datepicker",
       "community": 48,
@@ -890,7 +860,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_lookuppanel_lookuppanel",
-      "community": 0,
+      "community": 107,
       "norm_label": "lookuppanel()"
     },
     {
@@ -942,26 +912,6 @@
       "id": "components_profile_profile",
       "community": 0,
       "norm_label": "profile()"
-    },
-    {
-      "label": "ProfileScreen.jsx",
-      "file_type": "code",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "components_profilescreen",
-      "community": 30,
-      "norm_label": "profilescreen.jsx"
-    },
-    {
-      "label": "ProfileScreen()",
-      "file_type": "code",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "components_profilescreen_profilescreen",
-      "community": 30,
-      "norm_label": "profilescreen()"
     },
     {
       "label": "Toast.jsx",
@@ -1354,86 +1304,6 @@
       "norm_label": "calculatenutritiontargets()"
     },
     {
-      "label": "targetEngine.js",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "utils_targetengine",
-      "community": 30,
-      "norm_label": "targetengine.js"
-    },
-    {
-      "label": "ACTIVITY_MODIFIERS",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "utils_targetengine_activity_modifiers",
-      "community": 30,
-      "norm_label": "activity_modifiers"
-    },
-    {
-      "label": "GOAL_MODIFIERS",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "utils_targetengine_goal_modifiers",
-      "community": 30,
-      "norm_label": "goal_modifiers"
-    },
-    {
-      "label": "calculateBMI()",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "utils_targetengine_calculatebmi",
-      "community": 30,
-      "norm_label": "calculatebmi()"
-    },
-    {
-      "label": "getBMICategory()",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L28",
-      "_origin": "ast",
-      "id": "utils_targetengine_getbmicategory",
-      "community": 30,
-      "norm_label": "getbmicategory()"
-    },
-    {
-      "label": "calculateBMR()",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "utils_targetengine_calculatebmr",
-      "community": 30,
-      "norm_label": "calculatebmr()"
-    },
-    {
-      "label": "calculateTDEE()",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "utils_targetengine_calculatetdee",
-      "community": 30,
-      "norm_label": "calculatetdee()"
-    },
-    {
-      "label": "calculateTargets()",
-      "file_type": "code",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L59",
-      "_origin": "ast",
-      "id": "utils_targetengine_calculatetargets",
-      "community": 30,
-      "norm_label": "calculatetargets()"
-    },
-    {
       "label": "tailwind.config.js",
       "file_type": "code",
       "source_file": "tailwind.config.js",
@@ -1614,16 +1484,6 @@
       "norm_label": "profile.test.jsx"
     },
     {
-      "label": "ProfileScreen.test.jsx",
-      "file_type": "code",
-      "source_file": "tests/unit/ProfileScreen.test.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "unit_profilescreen_test",
-      "community": 30,
-      "norm_label": "profilescreen.test.jsx"
-    },
-    {
       "label": "Toast.test.jsx",
       "file_type": "code",
       "source_file": "tests/unit/Toast.test.jsx",
@@ -1680,7 +1540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_analyzelogs_test",
-      "community": 106,
+      "community": 47,
       "norm_label": "analyzelogs.test.js"
     },
     {
@@ -1690,7 +1550,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "unit_analyzelogs_test_mockgeneratecontent",
-      "community": 106,
+      "community": 47,
       "norm_label": "mockgeneratecontent"
     },
     {
@@ -1700,7 +1560,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "unit_analyzelogs_test_getgenerativemodel",
-      "community": 106,
+      "community": 47,
       "norm_label": "getgenerativemodel()"
     },
     {
@@ -1710,7 +1570,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_analyzelogs_test_createmockreqres",
-      "community": 106,
+      "community": 47,
       "norm_label": "createmockreqres()"
     },
     {
@@ -1792,16 +1652,6 @@
       "id": "unit_nutritionmath_test",
       "community": 0,
       "norm_label": "nutritionmath.test.js"
-    },
-    {
-      "label": "targetEngine.test.js",
-      "file_type": "code",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "unit_targetengine_test",
-      "community": 30,
-      "norm_label": "targetengine.test.js"
     },
     {
       "label": "vercel.json",
@@ -1912,6 +1762,26 @@
       "id": "rules_graphify_mandatory_rules_for_all_agents",
       "community": 94,
       "norm_label": "mandatory rules for all agents:"
+    },
+    {
+      "label": "ponytail.md",
+      "file_type": "document",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "rules_ponytail",
+      "community": 109,
+      "norm_label": "ponytail.md"
+    },
+    {
+      "label": "Ponytail, lazy senior dev mode",
+      "file_type": "document",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "rules_ponytail_ponytail_lazy_senior_dev_mode",
+      "community": 109,
+      "norm_label": "ponytail, lazy senior dev mode"
     },
     {
       "label": "SKILL.md",
@@ -11246,6 +11116,136 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/analyzeLogs.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_analyzelogs",
+      "target": "api_geminiutils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_geminiUtils.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "api_geminiutils",
+      "target": "api_geminiutils_extractandparsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_geminiUtils.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "api_geminiutils",
+      "target": "api_geminiutils_getapikey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/logMeal.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_logmeal",
+      "target": "api_geminiutils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/analyzeLogs.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_analyzelogs",
+      "target": "api_geminiutils_getapikey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "api/analyzeLogs.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "api_analyzelogs_handler",
+      "target": "api_geminiutils_getapikey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/logMeal.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_logmeal",
+      "target": "api_geminiutils_getapikey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "api/logMeal.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "api_logmeal_handler",
+      "target": "api_geminiutils_getapikey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/analyzeLogs.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_analyzelogs",
+      "target": "api_geminiutils_extractandparsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "api/analyzeLogs.js",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "api_analyzelogs_handler",
+      "target": "api_geminiutils_extractandparsejson"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/logMeal.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_logmeal",
+      "target": "api_geminiutils_extractandparsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "api/logMeal.js",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "api_logmeal_handler",
+      "target": "api_geminiutils_extractandparsejson"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/analyzeLogs.js",
@@ -11254,26 +11254,6 @@
       "confidence_score": 1.0,
       "source": "api_analyzelogs",
       "target": "api_analyzelogs_candidate_models"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_analyzelogs",
-      "target": "api_analyzelogs_extractandparsejson"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_analyzelogs",
-      "target": "api_analyzelogs_getapikey"
     },
     {
       "relation": "contains",
@@ -11295,28 +11275,6 @@
       "confidence_score": 1.0,
       "source": "unit_analyzelogs_test",
       "target": "api_analyzelogs"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L103",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_analyzelogs_handler",
-      "target": "api_analyzelogs_getapikey"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/analyzeLogs.js",
-      "source_location": "L176",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_analyzelogs_handler",
-      "target": "api_analyzelogs_extractandparsejson"
     },
     {
       "relation": "imports",
@@ -11343,26 +11301,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/logMeal.js",
-      "source_location": "L45",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_logmeal",
-      "target": "api_logmeal_extractandparsejson"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/logMeal.js",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_logmeal",
-      "target": "api_logmeal_getapikey"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/logMeal.js",
       "source_location": "L80",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -11379,28 +11317,6 @@
       "confidence_score": 1.0,
       "source": "unit_logmeal_test",
       "target": "api_logmeal"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/logMeal.js",
-      "source_location": "L92",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_logmeal_handler",
-      "target": "api_logmeal_getapikey"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/logMeal.js",
-      "source_location": "L151",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_logmeal_handler",
-      "target": "api_logmeal_extractandparsejson"
     },
     {
       "relation": "imports",
@@ -12485,26 +12401,6 @@
       "target": "components_datepicker_month_names"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_datepicker",
-      "target": "components_datepicker_pad"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_datepicker",
-      "target": "components_datepicker_todatestr"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -12514,28 +12410,6 @@
       "confidence_score": 1.0,
       "source": "unit_datepicker_test",
       "target": "components_datepicker"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L41",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_datepicker_todatestr",
-      "target": "components_datepicker_pad"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/DatePicker.jsx",
-      "source_location": "L50",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_datepicker_datepicker",
-      "target": "components_datepicker_todatestr"
     },
     {
       "relation": "imports",
@@ -12814,9 +12688,9 @@
       "source_file": "src/components/LookupPanel.jsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_lookuppanel",
-      "target": "src_firebase_db",
-      "confidence_score": 1.0
+      "target": "src_firebase_db"
     },
     {
       "relation": "imports_from",
@@ -13111,159 +12985,6 @@
       "confidence_score": 1.0,
       "source": "unit_profile_test",
       "target": "components_profile_profile"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "components_profilescreen_profilescreen"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "components_toast"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "components_toast_usetoast"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "src_firebase"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "src_firebase_auth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "src_firebase_db"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "utils_targetengine"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "utils_targetengine_activity_modifiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "utils_targetengine_calculatetargets"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_profilescreen",
-      "target": "utils_targetengine_goal_modifiers"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/ProfileScreen.test.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_profilescreen_test",
-      "target": "components_profilescreen"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "components_profilescreen_profilescreen",
-      "target": "components_toast_usetoast"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/ProfileScreen.jsx",
-      "source_location": "L56",
-      "weight": 1.0,
-      "source": "components_profilescreen_profilescreen",
-      "target": "utils_targetengine_calculatetargets"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/ProfileScreen.test.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_profilescreen_test",
-      "target": "components_profilescreen_profilescreen"
     },
     {
       "relation": "contains",
@@ -14171,186 +13892,6 @@
       "target": "utils_nutritionmath_calculatenutritiontargets"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_activity_modifiers"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_calculatebmi"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L41",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_calculatebmr"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L59",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_calculatetargets"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L50",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_calculatetdee"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_getbmicategory"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine",
-      "target": "utils_targetengine_goal_modifiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine_calculatebmi"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L80",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine_calculatetargets",
-      "target": "utils_targetengine_calculatebmi"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine_getbmicategory"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L81",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine_calculatetargets",
-      "target": "utils_targetengine_getbmicategory"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine_calculatebmr"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L82",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine_calculatetargets",
-      "target": "utils_targetengine_calculatebmr"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine_calculatetdee"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/utils/targetEngine.js",
-      "source_location": "L83",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_targetengine_calculatetargets",
-      "target": "utils_targetengine_calculatetdee"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/targetEngine.test.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_targetengine_test",
-      "target": "utils_targetengine_calculatetargets"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/setup.js",
@@ -14386,9 +13927,9 @@
       "source_file": "tests/unit/LookupPanel.test.jsx",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookuppanel_test",
-      "target": "unit_lookuppanel_test_mockadddoc",
-      "confidence_score": 1.0
+      "target": "unit_lookuppanel_test_mockadddoc"
     },
     {
       "relation": "contains",
@@ -14396,9 +13937,9 @@
       "source_file": "tests/unit/LookupPanel.test.jsx",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_lookuppanel_test",
-      "target": "unit_lookuppanel_test_mockcollection",
-      "confidence_score": 1.0
+      "target": "unit_lookuppanel_test_mockcollection"
     },
     {
       "relation": "contains",
@@ -14539,6 +14080,16 @@
       "confidence_score": 1.0,
       "source": "rules_graphify_codebase_knowledge_exploration_rule_graphify",
       "target": "rules_graphify_mandatory_rules_for_all_agents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/ponytail.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "rules_ponytail",
+      "target": "rules_ponytail_ponytail_lazy_senior_dev_mode"
     },
     {
       "relation": "contains",
@@ -22962,5 +22513,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4e22fc23384ebc84974b40ec4777426f9f281009"
+  "built_at_commit": "134b85deac1a85f53d4998849b06b37330410cf0"
 }
