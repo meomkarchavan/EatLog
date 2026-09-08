@@ -9,4 +9,5 @@ dist/
 test-results/
 playwright-report/
 firebase-debug.log
-
+.agents/
+graphify-out/cache/

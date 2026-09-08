@@ -30,68 +30,68 @@
     "semantic_hash": ""
   },
   "skills-lock.json": {
-    "mtime": 1787148049.0701804,
-    "ast_hash": "8dd94f4acfe968c1e3d3133db8eb78b0",
+    "mtime": 1788869239.8586495,
+    "ast_hash": "a6a7da0f85de739afcdd83a9a93ed76f",
     "semantic_hash": ""
   },
   "src/App.jsx": {
-    "mtime": 1787388959.8666444,
-    "ast_hash": "663a116bed523eff21b5215eba5e9586",
+    "mtime": 1788872008.1800816,
+    "ast_hash": "f2f67984bcdaf5b1d25c4a135da07f65",
     "semantic_hash": ""
   },
   "src/components/AuthScreen.jsx": {
-    "mtime": 1787758810.0003552,
-    "ast_hash": "be578fb0fd6f363a876b4052f72e1438",
+    "mtime": 1788871863.314948,
+    "ast_hash": "df0e350f2bc2c497a838918224a56802",
     "semantic_hash": ""
   },
   "src/components/Dashboard.jsx": {
-    "mtime": 1787759561.966578,
-    "ast_hash": "bffe2062ab76037b6ab221c32c5e7c8f",
+    "mtime": 1788871542.0675156,
+    "ast_hash": "1dfb11e25961f42750c88ad5df8b5749",
     "semantic_hash": ""
   },
   "src/components/DatePicker.jsx": {
-    "mtime": 1788866781.4054067,
-    "ast_hash": "ecf51c77addb10f27a3a214bf79d63e4",
+    "mtime": 1788870742.4383605,
+    "ast_hash": "58f0e80d14e45e31cdfa1f137156670b",
     "semantic_hash": ""
   },
   "src/components/LookupCard.jsx": {
-    "mtime": 1787760340.631808,
-    "ast_hash": "c612cfa208d4fedff322d1302fa16a2a",
+    "mtime": 1788871436.4926145,
+    "ast_hash": "f4e98b2f06004ed814df81b0159d9671",
     "semantic_hash": ""
   },
   "src/components/LookupPanel.jsx": {
-    "mtime": 1787760340.6328359,
-    "ast_hash": "15d94f2081c4be10b501136bb8bac569",
+    "mtime": 1788871094.6956112,
+    "ast_hash": "8747a3582fdb7b6896ab4af52a56f2c7",
     "semantic_hash": ""
   },
   "src/components/MealCard.jsx": {
-    "mtime": 1787518581.0811498,
-    "ast_hash": "2c4d5904a6cb649830c9c08173851713",
+    "mtime": 1788871463.5212874,
+    "ast_hash": "f2d89faf4bb566d762035f67e951c855",
     "semantic_hash": ""
   },
   "src/components/Profile.jsx": {
-    "mtime": 1787758810.0029945,
-    "ast_hash": "2362167bccc40842354d46b1282cb024",
+    "mtime": 1788871072.9635327,
+    "ast_hash": "0777cd9b6702947d0db60f959d9aa7f6",
     "semantic_hash": ""
   },
   "src/components/Toast.jsx": {
-    "mtime": 1787387631.534544,
-    "ast_hash": "07bf4036a5fa7145240987f4d231d2ed",
+    "mtime": 1788870755.1614647,
+    "ast_hash": "4b5b84da2126cd8eeb9c9d3ebfb07af8",
     "semantic_hash": ""
   },
   "src/components/WaterTracker.jsx": {
-    "mtime": 1787518581.083223,
-    "ast_hash": "478c9d9b78ccb278ff3455e05b4255be",
+    "mtime": 1788870648.5792964,
+    "ast_hash": "11025d4cd0fd2588dd8e0cf2b37f4990",
     "semantic_hash": ""
   },
   "src/components/WeeklyView.jsx": {
-    "mtime": 1787758810.0045345,
-    "ast_hash": "3c835c321da37a6d65533bc3db9087f3",
+    "mtime": 1788871497.47507,
+    "ast_hash": "b49e849f07513560f5e3cb34128839ce",
     "semantic_hash": ""
   },
   "src/components/WeightTracker.jsx": {
-    "mtime": 1787758810.0055606,
-    "ast_hash": "afd8755d45c55e460d69cbf9b2414cba",
+    "mtime": 1788870658.5454328,
+    "ast_hash": "71e7311fc6e09e1a9709f97eb2b67ec9",
     "semantic_hash": ""
   },
   "src/firebase.js": {
@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "tailwind.config.js": {
-    "mtime": 1787149558.8489661,
-    "ast_hash": "0e466dc7e352fb5d3b05b03103a9659a",
+    "mtime": 1788870536.8993566,
+    "ast_hash": "45f7559856f82eb5d5e09208a3cdcc98",
     "semantic_hash": ""
   },
   "tests/e2e/eatlog.spec.js": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1787149565.8511047,
-    "ast_hash": "c27c84acec1acb21ae15863fe2f1a264",
+    "mtime": 1788870531.886588,
+    "ast_hash": "476247696cae0ea5357ba8109e78ac44",
     "semantic_hash": ""
   },
   "public/pwa-192x192.png": {
@@ -695,8 +695,8 @@
     "semantic_hash": ""
   },
   "src/components/InsightsCard.jsx": {
-    "mtime": 1787758810.000873,
-    "ast_hash": "422e1ff41d5f2c17f3b5b69b6eaf8e8a",
+    "mtime": 1788870764.2051344,
+    "ast_hash": "1ea71963d2163907ae4ede9266902ee7",
     "semantic_hash": ""
   },
   "tests/unit/InsightsCard.test.jsx": {
@@ -762,6 +762,471 @@
   "scripts/run-e2e.js": {
     "mtime": 1787758383.5800416,
     "ast_hash": "34ce29dc656358d9c05bdf21e6f17ee1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/brandkit/SKILL.md": {
+    "mtime": 1788869171.963382,
+    "ast_hash": "7491f8fb77b0ebf517b758d096ac4ab4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend-v1/SKILL.md": {
+    "mtime": 1788869171.9720964,
+    "ast_hash": "05b271f9985412ac9c081a0511bb6cbe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/SKILL.md": {
+    "mtime": 1788869294.046096,
+    "ast_hash": "e45053668ca63754b6c0c0a40e0357d1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/full-output-enforcement/SKILL.md": {
+    "mtime": 1788869171.9690034,
+    "ast_hash": "2072dc2c1357dc9cd6384d1f441e05c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gpt-taste/SKILL.md": {
+    "mtime": 1788869171.9644036,
+    "ast_hash": "e2a7560cbfce7a853dd8f65eca12c103",
+    "semantic_hash": ""
+  },
+  ".agents/skills/high-end-visual-design/SKILL.md": {
+    "mtime": 1788869171.9705353,
+    "ast_hash": "64f7c1069a5a3d18797950d8fac7b63a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/image-to-code/SKILL.md": {
+    "mtime": 1788869171.965428,
+    "ast_hash": "b18a810930da9c6b558b15c85bc74007",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-mobile/SKILL.md": {
+    "mtime": 1788869171.9664493,
+    "ast_hash": "6253c18387ca5d561a945ffe14e70d54",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-web/SKILL.md": {
+    "mtime": 1788869171.9669597,
+    "ast_hash": "728f55ab7e44330e78aac4ca8331d83a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/industrial-brutalist-ui/SKILL.md": {
+    "mtime": 1788869171.9638946,
+    "ast_hash": "da7f92d7e3b8b526ecbd71009fe973ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/minimalist-ui/SKILL.md": {
+    "mtime": 1788869171.968494,
+    "ast_hash": "32f8681f79a681d00a4b72ddce4415b1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/redesign-existing-projects/SKILL.md": {
+    "mtime": 1788869171.9695134,
+    "ast_hash": "c8d729e3e807df37dcd5e6262c9b8843",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/DESIGN.md": {
+    "mtime": 1788869171.9710639,
+    "ast_hash": "7f8c91aeecc8983b687965c2fc23438c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/SKILL.md": {
+    "mtime": 1788869171.9715807,
+    "ast_hash": "fcbb4f37d67a66a53013b484dcfc9f25",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1788870421.9298158,
+    "ast_hash": "571408b91c2faf594c8f4f935bc74f3b",
+    "semantic_hash": ""
+  },
+  "RULES.md": {
+    "mtime": 1788868965.155588,
+    "ast_hash": "d2915799ac9c7ff469a31d6f20156cbe",
+    "semantic_hash": ""
+  },
+  "WEB_DESIGN_GUIDELINES.md": {
+    "mtime": 1788868931.8031542,
+    "ast_hash": "0f33eab805f4b63e08351aef1b4ab792",
+    "semantic_hash": ""
+  },
+  "src/components/LandingPage.jsx": {
+    "mtime": 1788871442.6611173,
+    "ast_hash": "eb00073c52953f4b4aa1d281921bc141",
+    "semantic_hash": ""
+  },
+  "tests/unit/LandingPage.test.jsx": {
+    "mtime": 1788870231.5404172,
+    "ast_hash": "ac58cbe04f9402c77f09ba4234ef6141",
+    "semantic_hash": ""
+  },
+  "src/components/OnboardingScreen.jsx": {
+    "mtime": 1788872002.077498,
+    "ast_hash": "4b9dc233ece70daae6747389316721ac",
+    "semantic_hash": ""
+  },
+  "tests/unit/OnboardingScreen.test.jsx": {
+    "mtime": 1788871709.551413,
+    "ast_hash": "be95fb0c331a8a1112fa5e8edbe813dd",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\firebase.json": {
+    "mtime": 1787392481.5790732,
+    "ast_hash": "deda1eb37a7304e008c6e91c3d157d7d",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\firestore.indexes.json": {
+    "mtime": 1787758809.9226146,
+    "ast_hash": "109bda26cb76eb60ae197a4477151660",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\package.json": {
+    "mtime": 1787758809.9993248,
+    "ast_hash": "1c0ab4ae7ff9cb670cf185d690b106af",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\playwright.config.js": {
+    "mtime": 1787389483.055066,
+    "ast_hash": "fd7b536460ec8b329d5062c252497d28",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\postcss.config.js": {
+    "mtime": 1787149562.1653235,
+    "ast_hash": "c735540bb63936a123bc867d950c9f69",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\skills-lock.json": {
+    "mtime": 1788869239.8586495,
+    "ast_hash": "a6a7da0f85de739afcdd83a9a93ed76f",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tailwind.config.js": {
+    "mtime": 1788870536.8993566,
+    "ast_hash": "45f7559856f82eb5d5e09208a3cdcc98",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\vercel.json": {
+    "mtime": 1787324637.6559875,
+    "ast_hash": "fb7bd6bdc6966bbd74d50f7b34b55ad2",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\vite.config.js": {
+    "mtime": 1787322849.3801663,
+    "ast_hash": "a5ba18f40ec4a6b556d60c42df1d2bf4",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\vitest.config.js": {
+    "mtime": 1788867611.4286134,
+    "ast_hash": "3f0c6f683d2476e67b3e4051cc561182",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\api\\analyzeLogs.js": {
+    "mtime": 1788874897.3185484,
+    "ast_hash": "d5b4b5464cefeee53d8f2cba114e0c6d",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\api\\logMeal.js": {
+    "mtime": 1788874876.5325992,
+    "ast_hash": "534da87419bae9c33fcd88128f14ea1a",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\api\\_geminiUtils.js": {
+    "mtime": 1788874860.2666566,
+    "ast_hash": "87b4389b58a26778284aa8b5bcee772d",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\scripts\\cleanupUsers.js": {
+    "mtime": 1788866605.2124875,
+    "ast_hash": "23744385e8f930db807797a773b957b7",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\scripts\\run-e2e.js": {
+    "mtime": 1787758383.5800416,
+    "ast_hash": "34ce29dc656358d9c05bdf21e6f17ee1",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\App.jsx": {
+    "mtime": 1788872008.1800816,
+    "ast_hash": "f2f67984bcdaf5b1d25c4a135da07f65",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\firebase.js": {
+    "mtime": 1788867452.0387082,
+    "ast_hash": "102fef3ba1db641e46d727efb1784453",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\main.jsx": {
+    "mtime": 1787392481.5841289,
+    "ast_hash": "b8014b5ba0b0e9611ae592e82fe086d3",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\AuthScreen.jsx": {
+    "mtime": 1788871863.314948,
+    "ast_hash": "df0e350f2bc2c497a838918224a56802",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\Dashboard.jsx": {
+    "mtime": 1788871542.0675156,
+    "ast_hash": "1dfb11e25961f42750c88ad5df8b5749",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\DatePicker.jsx": {
+    "mtime": 1788870742.4383605,
+    "ast_hash": "58f0e80d14e45e31cdfa1f137156670b",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\InsightsCard.jsx": {
+    "mtime": 1788870764.2051344,
+    "ast_hash": "1ea71963d2163907ae4ede9266902ee7",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\LandingPage.jsx": {
+    "mtime": 1788871442.6611173,
+    "ast_hash": "eb00073c52953f4b4aa1d281921bc141",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\LookupCard.jsx": {
+    "mtime": 1788871436.4926145,
+    "ast_hash": "f4e98b2f06004ed814df81b0159d9671",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\LookupPanel.jsx": {
+    "mtime": 1788871094.6956112,
+    "ast_hash": "8747a3582fdb7b6896ab4af52a56f2c7",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\MealCard.jsx": {
+    "mtime": 1788871463.5212874,
+    "ast_hash": "f2d89faf4bb566d762035f67e951c855",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\OnboardingScreen.jsx": {
+    "mtime": 1788872002.077498,
+    "ast_hash": "4b9dc233ece70daae6747389316721ac",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\Profile.jsx": {
+    "mtime": 1788871072.9635327,
+    "ast_hash": "0777cd9b6702947d0db60f959d9aa7f6",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\Toast.jsx": {
+    "mtime": 1788870755.1614647,
+    "ast_hash": "4b5b84da2126cd8eeb9c9d3ebfb07af8",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\WaterTracker.jsx": {
+    "mtime": 1788870648.5792964,
+    "ast_hash": "11025d4cd0fd2588dd8e0cf2b37f4990",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\WeeklyView.jsx": {
+    "mtime": 1788871497.47507,
+    "ast_hash": "b49e849f07513560f5e3cb34128839ce",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\components\\WeightTracker.jsx": {
+    "mtime": 1788870658.5454328,
+    "ast_hash": "71e7311fc6e09e1a9709f97eb2b67ec9",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\services\\lookupHistory.js": {
+    "mtime": 1788875128.4405901,
+    "ast_hash": "0a6bc89c15259c740b2e26dc5a0a2fa6",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\utils\\exportCsv.js": {
+    "mtime": 1787387631.5396366,
+    "ast_hash": "892f93bd50172835f0d570605c0fa9ed",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\src\\utils\\nutritionMath.js": {
+    "mtime": 1787322011.7660143,
+    "ast_hash": "afb05f068146e5bbb3791b5aca2ae57e",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\setup.js": {
+    "mtime": 1788867467.8370662,
+    "ast_hash": "86c58832a658def0ae5b37efc0340b23",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\e2e\\eatlog.spec.js": {
+    "mtime": 1787759561.9680915,
+    "ast_hash": "a806439628bb921b4dcf1bb139e99bbe",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\analyzeLogs.test.js": {
+    "mtime": 1787758810.0128224,
+    "ast_hash": "87342e8c8c75b57eb7016fe74f1b23af",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\AuthScreen.test.jsx": {
+    "mtime": 1787392481.5856874,
+    "ast_hash": "25e6ffaff07a79b4b2afce1ba31a30d8",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\Dashboard.test.jsx": {
+    "mtime": 1787758810.0081959,
+    "ast_hash": "dd32bfae96db232952429d699fd0c661",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\DatePicker.test.jsx": {
+    "mtime": 1787387909.58261,
+    "ast_hash": "b4caa5e739bf06829e0bb573eb88bb04",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\exportCsv.test.js": {
+    "mtime": 1787387909.5857494,
+    "ast_hash": "b82b89641be48c1489fb99dbb46a39c5",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\firebase.test.js": {
+    "mtime": 1787319345.0133505,
+    "ast_hash": "a3320e2b6384015faf177999ce2b8f33",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\InsightsCard.test.jsx": {
+    "mtime": 1787758810.0087159,
+    "ast_hash": "c5cb96ceb1dc2da7c718d6ea96333944",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\LandingPage.test.jsx": {
+    "mtime": 1788870231.5404172,
+    "ast_hash": "ac58cbe04f9402c77f09ba4234ef6141",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\logMeal.test.js": {
+    "mtime": 1788875132.98441,
+    "ast_hash": "f649b52b6e3c03aad4b69d4f912a729d",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\LookupCard.test.jsx": {
+    "mtime": 1787760340.6333492,
+    "ast_hash": "c6190cba8b8ee5d95a1fac9246b0cd85",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\lookupHistory.test.js": {
+    "mtime": 1787758810.0133734,
+    "ast_hash": "dd3e3281362475d6691cb42c66b3b09e",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\LookupPanel.test.jsx": {
+    "mtime": 1787759561.9685962,
+    "ast_hash": "06ff2fc4a6e9a2729d30e46f7aed8c07",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\MealCard.test.jsx": {
+    "mtime": 1787387909.584188,
+    "ast_hash": "ba2f6eae1c1bb2f1b77596ef36cc25dc",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\nutritionMath.test.js": {
+    "mtime": 1787322087.911868,
+    "ast_hash": "3177969206b98544f6b24a496e0beda8",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\OnboardingScreen.test.jsx": {
+    "mtime": 1788871709.551413,
+    "ast_hash": "be95fb0c331a8a1112fa5e8edbe813dd",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\Profile.test.jsx": {
+    "mtime": 1787758810.0107698,
+    "ast_hash": "e6172f527a2ff1017943a98b18625300",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\Toast.test.jsx": {
+    "mtime": 1787387909.5857494,
+    "ast_hash": "8a7664eae9236215e53dae3074a3a321",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\WaterTracker.test.jsx": {
+    "mtime": 1787322584.2206988,
+    "ast_hash": "16e310ad305908b045835fee1a4e1755",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\WeeklyView.test.jsx": {
+    "mtime": 1787758810.0117984,
+    "ast_hash": "d4cdbfe8aa3bc6ed2e52c4e34e7b744e",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\tests\\unit\\WeightTracker.test.jsx": {
+    "mtime": 1787758810.0123115,
+    "ast_hash": "14c6d7b251c9b1edefb1ba11f285b309",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\AGENTS.md": {
+    "mtime": 1787758809.91939,
+    "ast_hash": "9e62f2c1aac743e6f60e7ac903b06ea6",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\DESIGN.md": {
+    "mtime": 1788870421.9298158,
+    "ast_hash": "571408b91c2faf594c8f4f935bc74f3b",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\DEVELOPMENT_WORKFLOW.md": {
+    "mtime": 1787758809.919908,
+    "ast_hash": "6484eb916538b90aaf5fc0f7d682aa24",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\index.html": {
+    "mtime": 1788870531.886588,
+    "ast_hash": "476247696cae0ea5357ba8109e78ac44",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\RULES.md": {
+    "mtime": 1788868965.155588,
+    "ast_hash": "d2915799ac9c7ff469a31d6f20156cbe",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\VERCEL_ENV_CHECKLIST.md": {
+    "mtime": 1787323935.2859025,
+    "ast_hash": "108071a3e0ec909412979b594c7e7ba3",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\WEB_DESIGN_GUIDELINES.md": {
+    "mtime": 1788868931.8031542,
+    "ast_hash": "0f33eab805f4b63e08351aef1b4ab792",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\.github\\workflows\\ci-cd.yml": {
+    "mtime": 1788867619.2309265,
+    "ast_hash": "4a0b9ce3ebe7e9e5e4f6ea5cec41964f",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\docs\\DEPLOYMENT_GUIDE.md": {
+    "mtime": 1787758809.921452,
+    "ast_hash": "6fbeeb514d447f61c294871f1ca349f9",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\docs\\superpowers\\plans\\2026-08-19-firebase-initialization.md": {
+    "mtime": 1787147878.631376,
+    "ast_hash": "4aaa0d5330657f9ceac79be0320bb0b7",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\docs\\superpowers\\specs\\2026-08-19-firebase-initialization-design.md": {
+    "mtime": 1787147616.843426,
+    "ast_hash": "cd7b02fe0c6ae7ae352d0de6bd182e67",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\scripts\\report_export.html": {
+    "mtime": 1788873079.721457,
+    "ast_hash": "5c627c33f76df0edef3bebfae30630e0",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\EatLog_Application_Report.pdf": {
+    "mtime": 1788873082.5892034,
+    "ast_hash": "298f6dfabfd53e3fd513c42c6dc0a518",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\public\\pwa-192x192.png": {
+    "mtime": 1787323833.317049,
+    "ast_hash": "c3930e68557536a969e59d8e17ea6e14",
+    "semantic_hash": ""
+  },
+  "D:\\code\\EatLog\\public\\pwa-512x512.png": {
+    "mtime": 1787323845.7187376,
+    "ast_hash": "1dee9cf40553b7b0f508ae4a1e756bb3",
     "semantic_hash": ""
   }
 }
