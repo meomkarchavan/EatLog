@@ -65,6 +65,8 @@ jobs:
           sleep 30
 
       - name: Run Live E2E UI Tests
+        env:
+          VERCEL_PROTECTION_BYPASS: ${{ secrets.VERCEL_PROTECTION_BYPASS }}
         run: |
           if [ "${{ steps.env-target.outputs.ENV_NAME }}" = "prod" ]; then
             npm run test:e2e:prod
