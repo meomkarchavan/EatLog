@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-09-08)
 
 ## Corpus Check
-- 66 files · ~43,205 words
+- 66 files · ~41,422 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2180 nodes · 2335 edges · 220 communities (203 shown, 17 thin omitted)
+- 2182 nodes · 2337 edges · 217 communities (200 shown, 17 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1f95a35f`
+- Built from commit: `067f7960`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -178,16 +178,13 @@
 - [[_COMMUNITY_Community 167|Community 167]]
 - [[_COMMUNITY_Community 168|Community 168]]
 - [[_COMMUNITY_Community 169|Community 169]]
-- [[_COMMUNITY_Community 170|Community 170]]
 - [[_COMMUNITY_Community 171|Community 171]]
 - [[_COMMUNITY_Community 172|Community 172]]
 - [[_COMMUNITY_Community 173|Community 173]]
 - [[_COMMUNITY_Community 174|Community 174]]
 - [[_COMMUNITY_Community 175|Community 175]]
-- [[_COMMUNITY_Community 176|Community 176]]
 - [[_COMMUNITY_Community 177|Community 177]]
 - [[_COMMUNITY_Community 178|Community 178]]
-- [[_COMMUNITY_Community 179|Community 179]]
 - [[_COMMUNITY_Community 180|Community 180]]
 - [[_COMMUNITY_Community 181|Community 181]]
 - [[_COMMUNITY_Community 182|Community 182]]
@@ -248,11 +245,11 @@
 - `LookupPanel()` --calls--> `useToast()`  [EXTRACTED]
   src/components/LookupPanel.jsx → src/components/Toast.jsx
 
-## Communities (220 total, 17 thin omitted)
+## Communities (217 total, 17 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.16
-Nodes (13): MealCard(), ConfirmModalUI(), defaultContext, ToastContext, ToastItem(), ToastProvider(), useToast(), cancelBtn (+5 more)
+Cohesion: 0.17
+Nodes (13): OnboardingScreen(), ConfirmModalUI(), defaultContext, ToastContext, ToastItem(), ToastProvider(), useToast(), cancelBtn (+5 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
@@ -443,8 +440,8 @@ Cohesion: 0.15
 Nodes (17): CANDIDATE_MODELS, handler(), CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), CANDIDATE_MODELS, handler(), createMockReqRes() (+9 more)
 
 ### Community 48 - "Community 48"
-Cohesion: 0.27
-Nodes (6): OnboardingScreen(), profile, result, ACTIVITY_MULTIPLIERS, calculateNutritionTargets(), GOAL_ADJUSTMENTS
+Cohesion: 0.25
+Nodes (7): GoogleIcon(), Profile(), profile, result, ACTIVITY_MULTIPLIERS, calculateNutritionTargets(), GOAL_ADJUSTMENTS
 
 ### Community 49 - "Community 49"
 Cohesion: 0.22
@@ -607,8 +604,8 @@ Cohesion: 0.43
 Nodes (6): app, auth, deleteUserByEmailAndPassword(), __dirname, __filename, firebaseConfig
 
 ### Community 107 - "Community 107"
-Cohesion: 0.22
-Nodes (14): LookupCard(), LookupPanel(), SearchIcon(), SendIcon(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory() (+6 more)
+Cohesion: 0.09
+Nodes (32): LookupCard(), LookupPanel(), SearchIcon(), SendIcon(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory() (+24 more)
 
 ### Community 108 - "Community 108"
 Cohesion: 0.05
@@ -731,8 +728,8 @@ Cohesion: 0.25
 Nodes (8): 8. ANTI-AI-SLOP RULES, Carousel / marquee slop (layout), Content slop, Data / KPI slop, Density slop, Layout slop, Typography slop, Visual slop
 
 ### Community 140 - "Community 140"
-Cohesion: 0.26
-Nodes (7): formatLocalDate(), WeeklyView(), ScaleIcon(), WeightTracker(), auth, db, firebaseConfig
+Cohesion: 0.27
+Nodes (6): MealCard(), ScaleIcon(), WeightTracker(), auth, db, firebaseConfig
 
 ### Community 141 - "Community 141"
 Cohesion: 0.29
@@ -763,8 +760,8 @@ Cohesion: 0.29
 Nodes (7): 4. HERO MINIMALISM RULES, Absolute Hero Rules, Graphic Restraint, Headline Rule, Hero Composition Bias, Pre-output check, Typography Execution
 
 ### Community 148 - "Community 148"
-Cohesion: 0.33
-Nodes (7): GoogleIcon(), Profile(), downloadCsv(), escapeCsv(), exportAllDataAsCsv(), formatDate(), formatTime()
+Cohesion: 0.23
+Nodes (11): clickedLinks, createdLinks, el, mockMeals, mockWeights, originalCreateElement, downloadCsv(), escapeCsv() (+3 more)
 
 ### Community 149 - "Community 149"
 Cohesion: 0.33
@@ -839,8 +836,8 @@ Cohesion: 0.09
 Nodes (22): 1. Layout & Spacing, 2. Alignment, 3. Accessibility, 4. Component Structure & Patterns, 5. Performance & Quality Checks, Before Shipping Any Component, Contrast, Data Displays (Macro Cards, Meal Rows, Charts) (+14 more)
 
 ### Community 167 - "Community 167"
-Cohesion: 0.11
-Nodes (18): addFromLookupBtn, addWaterBtn, calendarBtn, closeBtn, editMealBtn, emailInput, exportBtn, json (+10 more)
+Cohesion: 0.10
+Nodes (20): addFromLookupBtn, addWaterBtn, calendarBtn, closeBtn, editMealBtn, emailInput, exportBtn, json (+12 more)
 
 ### Community 168 - "Community 168"
 Cohesion: 0.17
@@ -849,10 +846,6 @@ Nodes (12): ChevronLeftIcon(), ChevronRightIcon(), DatePicker(), DAY_LABELS, MON
 ### Community 169 - "Community 169"
 Cohesion: 0.15
 Nodes (12): auth, authorizedDomains, providers, firestore, indexes, rules, hosting, ignore (+4 more)
-
-### Community 170 - "Community 170"
-Cohesion: 0.18
-Nodes (11): cardAddBtn, clearAllBtn, deleteBtn, dismissBtn, historyAddBtn, input, mockAddDoc, mockCollection (+3 more)
 
 ### Community 171 - "Community 171"
 Cohesion: 0.22
@@ -867,16 +860,12 @@ Cohesion: 0.22
 Nodes (8): aiRecalcBtn, deleteBtn, descInput, handlePin, mockLog, pinBtn, stapleLog, user
 
 ### Community 174 - "Community 174"
-Cohesion: 0.29
-Nodes (4): InsightsCard(), { container }, mockData, partialData
+Cohesion: 0.22
+Nodes (6): InsightsCard(), formatLocalDate(), WeeklyView(), { container }, mockData, partialData
 
 ### Community 175 - "Community 175"
 Cohesion: 0.32
 Nodes (4): WaterDropIcon(), WaterTracker(), button, user
-
-### Community 176 - "Community 176"
-Cohesion: 0.25
-Nodes (7): addBtn, { container }, dismissBtn, mockAdd, mockData, mockDismiss, user
 
 ### Community 177 - "Community 177"
 Cohesion: 0.25
@@ -885,10 +874,6 @@ Nodes (7): goalSelect, onComplete, onSkip, skipBtn, submitBtn, user, weightInput
 ### Community 178 - "Community 178"
 Cohesion: 0.29
 Nodes (6): 1. Protected Branches, 2. Feature & Fix Branching, 3. Staging (`dev` Branch), 4. Production (`main` Branch) — Explicit Approval Required, 5. Verification Pipeline (Step-by-Step), EatLog — Strict CI/CD Git & Development Workflow
-
-### Community 179 - "Community 179"
-Cohesion: 0.29
-Nodes (6): clickedLinks, createdLinks, el, mockMeals, mockWeights, originalCreateElement
 
 ### Community 180 - "Community 180"
 Cohesion: 0.29
@@ -1015,7 +1000,7 @@ Cohesion: 0.50
 Nodes (3): input, saveBtn, user
 
 ## Knowledge Gaps
-- **1465 isolated node(s):** `public`, `ignore`, `rewrites`, `authorizedDomains`, `emailPassword` (+1460 more)
+- **1467 isolated node(s):** `public`, `ignore`, `rewrites`, `authorizedDomains`, `emailPassword` (+1462 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1024,12 +1009,12 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `skills` connect `Community 212` to `Community 184`, `Community 185`, `Community 186`, `Community 187`, `Community 188`, `Community 189`, `Community 190`, `Community 191`, `Community 192`, `Community 193`, `Community 194`, `Community 195`, `Community 196`, `Community 197`, `Community 198`, `Community 199`, `Community 200`, `Community 201`, `Community 202`, `Community 203`, `Community 204`, `Community 205`, `Community 206`, `Community 207`, `Community 208`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `db` connect `Community 140` to `Community 0`, `Community 107`, `Community 175`, `Community 48`, `Community 148`, `Community 121`, `Community 125`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `tasteskill: Anti-Slop Frontend Skill` connect `Community 130` to `Community 128`, `Community 129`, `Community 137`, `Community 141`, `Community 142`, `Community 143`, `Community 118`, `Community 151`, `Community 152`, `Community 153`, `Community 154`, `Community 156`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **Why does `db` connect `Community 140` to `Community 0`, `Community 107`, `Community 174`, `Community 175`, `Community 48`, `Community 148`, `Community 121`, `Community 125`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `public`, `ignore`, `rewrites` to the rest of the system?**
-  _1465 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1467 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
