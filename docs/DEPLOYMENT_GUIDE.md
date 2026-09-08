@@ -235,12 +235,18 @@ npx vercel ls
 npx vercel inspect https://eattlog.vercel.app
 ```
 
-### Step 5: Live UI Scenarios & E2E Verification
-Execute the automated end-to-end UI suite directly against the live Production domain:
+### Step 5: Live UI & Backend API Verification
+Execute the automated live smoke and end-to-end UI suite directly against the live Production domain:
 ```powershell
+# 1. Verify Live Gemini Models & Serverless Endpoints
+npm run test:live:prod
+
+# 2. Run Full E2E UI Scenarios Suite
 npm run test:e2e:prod
 ```
 Verify that all test steps pass 100%:
+- Real Google Gemini API model fallback connectivity (unmocked)
+- Serverless `/api/logMeal` & `/api/analyzeLogs` HTTP 200 responses
 - User authentication & session restore
 - Profile & dynamic goals engine calculation
 - Live Firestore sync across Daily, Water, Weight, Staples & Lookup collections

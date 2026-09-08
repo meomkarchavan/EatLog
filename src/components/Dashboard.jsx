@@ -33,6 +33,14 @@ function CameraIcon() {
   );
 }
 
+function GalleryIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+      <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clipRule="evenodd" />
+    </svg>
+  );
+}
+
 function SendIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -121,8 +129,11 @@ export default function Dashboard({ onNavigateToLanding }) {
   const [inputText, setInputText] = useState('');
   const [showStaplesModal, setShowStaplesModal] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showPhotoOptions, setShowPhotoOptions] = useState(false);
   const [isDateLoading, setIsDateLoading] = useState(false);
   const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
+  const galleryInputRef = useRef(null);
   const inputRef = useRef(null);
 
   // 1. Real-time listener for logs on selectedDate
@@ -292,6 +303,8 @@ export default function Dashboard({ onNavigateToLanding }) {
       showToast('Failed to process image.', 'error');
     }
 
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
+    if (galleryInputRef.current) galleryInputRef.current.value = '';
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
@@ -784,6 +797,75 @@ export default function Dashboard({ onNavigateToLanding }) {
         onSelectDate={setSelectedDate}
       />
 
+      {/* Photo Source Action Sheet / Modal */}
+      {showPhotoOptions && (
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center z-50 p-0 sm:p-4"
+          onClick={() => setShowPhotoOptions(false)}
+        >
+          <div
+            className="w-full max-w-sm bg-[#121316] border-t sm:border border-white/[0.1] rounded-t-[28px] sm:rounded-3xl p-5 pb-8 sm:pb-6 lookup-card-enter shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/[0.07]">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+                <h3 className="text-[#f3f4f6] text-sm font-bold tracking-tight">Log Food from Photo</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPhotoOptions(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-xl text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/[0.08] transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                  <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Action Options */}
+            <div className="space-y-2.5">
+              <button
+                type="button"
+                id="take-photo-btn"
+                onClick={() => {
+                  setShowPhotoOptions(false);
+                  cameraInputRef.current?.click();
+                }}
+                className="w-full flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#181a1f] hover:bg-[#22252c] active:scale-[0.98] transition-all border border-white/[0.08] hover:border-sky-500/40 text-left group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <CameraIcon />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[#f3f4f6] text-sm font-semibold">Take Photo</div>
+                  <div className="text-[#9ca3af] text-xs">Open camera to capture meal or nutrition label</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                id="choose-gallery-btn"
+                onClick={() => {
+                  setShowPhotoOptions(false);
+                  galleryInputRef.current?.click();
+                }}
+                className="w-full flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#181a1f] hover:bg-[#22252c] active:scale-[0.98] transition-all border border-white/[0.08] hover:border-emerald-500/40 text-left group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <GalleryIcon />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[#f3f4f6] text-sm font-semibold">Choose from Gallery</div>
+                  <div className="text-[#9ca3af] text-xs">Pick from photos, library, or files</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Omni-Input Bar (Clean Floating Dock on Desktop and Mobile) */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#090a0c]/90 backdrop-blur-2xl border-t border-white/[0.08] px-3 sm:px-6 py-2.5 sm:py-3 safe-area-pb z-30 shadow-[0_-12px_36px_rgba(0,0,0,0.8)]">
         <form onSubmit={handleTextSubmit} className="max-w-4xl mx-auto flex items-center gap-1.5 sm:gap-2">
@@ -801,22 +883,44 @@ export default function Dashboard({ onNavigateToLanding }) {
             <CalendarIcon />
           </button>
 
-          {/* Camera Button */}
+          {/* Camera / Photo Button */}
           <button
             id="camera-btn"
             type="button"
-            onClick={() => fileInputRef.current?.click()}
+            onClick={() => setShowPhotoOptions(true)}
             disabled={isLoading}
             title="Log food from photo"
             className="relative z-10 shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-[#15171b] text-[#9ca3af] hover:text-[#f3f4f6] active:scale-95 transition-all border border-white/[0.08] hover:border-white/[0.15] disabled:opacity-30"
           >
             <CameraIcon />
           </button>
+
+          {/* Camera Direct Capture Input */}
+          <input
+            ref={cameraInputRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onChange={handleImageCapture}
+            className="hidden"
+            id="camera-capture-input"
+          />
+
+          {/* Gallery / File Picker Input */}
+          <input
+            ref={galleryInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageCapture}
+            className="hidden"
+            id="gallery-upload-input"
+          />
+
+          {/* Fallback File Input ref for backward compatibility */}
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            capture="environment"
             onChange={handleImageCapture}
             className="hidden"
           />

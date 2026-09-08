@@ -18,10 +18,10 @@ When instructed to deploy to Dev or Prod, follow the step-by-step instructions i
 - **Dev**: Deploy Firestore rules/indexes (`npm run deploy:firestore:dev`) and push to `dev` branch for Vercel preview.
 - **Prod**: Verify all tests pass, deploy Firestore rules/indexes (`npm run deploy:firestore:prod`), and merge to `main` (requires explicit user confirmation).
 
-## 4. Mandatory Post-Deployment Live UI / E2E Verification
-After every deployment (Dev or Prod), agents MUST execute the end-to-end UI scenarios test suite against the target live URL to verify full app functionality (Auth, Profile/Dynamic Targets, HUD Macros, Water, Weight, Meal Logging, Edit/Pin Staples, Quick Lookup, Weekly Charts, CSV Export):
-- **Dev Live UI Check**: `npm run test:e2e:dev`
-- **Prod Live UI Check**: `npm run test:e2e:prod`
-- Never claim a deployment is successful without passing the live UI scenario verification.
+## 4. Mandatory Post-Deployment Live UI & Backend API Verification
+After every deployment (Dev or Prod), agents MUST execute both the unmocked live backend smoke test and end-to-end UI suite against the target live URL to verify full app functionality (Live Gemini Models, Serverless Endpoints, Auth, Profile/Dynamic Targets, HUD Macros, Water, Weight, Meal Logging, Edit/Pin Staples, Quick Lookup, Weekly Charts, CSV Export):
+- **Dev Live Backend & UI Check**: `npm run test:live:dev` && `npm run test:e2e:dev`
+- **Prod Live Backend & UI Check**: `npm run test:live:prod` && `npm run test:e2e:prod`
+- Never claim a deployment is successful without passing both live API and UI scenario verifications.
 
 
