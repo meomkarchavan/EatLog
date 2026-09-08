@@ -66,3 +66,12 @@ export function extractAndParseJSON(raw) {
     throw new Error(`Invalid JSON format: ${text.slice(0, 100)}`);
   }
 }
+
+/**
+ * Ordered list of Gemini model candidates for fallback on 429/404/503.
+ */
+export const CANDIDATE_MODELS = [
+  "gemini-2.5-flash",
+  "gemini-2.0-flash-lite",
+  "gemini-flash-latest",
+];

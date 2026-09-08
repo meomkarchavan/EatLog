@@ -8,14 +8,26 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Outfit', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Geist Mono', 'ui-monospace', 'Menlo', 'monospace'],
       },
       colors: {
         surface: {
-          0: '#000000',
-          1: '#0a0a0a',
-          2: '#141414',
-          3: '#1e1e1e',
+          0: '#090a0c',
+          1: '#0f1013',
+          2: '#15171b',
+          3: '#1c1e24',
+          4: '#252830',
+          5: '#343843',
+        },
+        macro: {
+          protein: '#22c55e',
+          carbs: '#38bdf8',
+          fat: '#fb923c',
+          fiber: '#a78bfa',
+          calories: '#facc15',
+          water: '#38bdf8',
+          weight: '#f472b6',
         },
       },
     },
