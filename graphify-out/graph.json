@@ -1337,7 +1337,7 @@
       "label": "observe()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L11",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "tests_setup_observe",
       "community": 86,
@@ -1347,7 +1347,7 @@
       "label": "unobserve()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L12",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "tests_setup_unobserve",
       "community": 86,
@@ -1357,7 +1357,7 @@
       "label": "disconnect()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L13",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "tests_setup_disconnect",
       "community": 86,
@@ -1367,7 +1367,7 @@
       "label": ".getBBox()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L33",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "tests_setup_svgelement_getbbox",
       "community": 102,
@@ -22513,5 +22513,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b7b1cee98dbb0d5924c4def5ac88d6ff68629b6e"
+  "built_at_commit": "7cb6ff36adcf455d199145cf61c6ee5c921171e4"
 }

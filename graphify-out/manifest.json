@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "src/firebase.js": {
-    "mtime": 1788867356.7569835,
-    "ast_hash": "21987bea4c03deaf878bdf695fe15260",
+    "mtime": 1788867452.0387082,
+    "ast_hash": "102fef3ba1db641e46d727efb1784453",
     "semantic_hash": ""
   },
   "src/main.jsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "tests/setup.js": {
-    "mtime": 1788867364.0102942,
-    "ast_hash": "4167fe4b3c5c3e67a70d459a0effc7cd",
+    "mtime": 1788867467.8370662,
+    "ast_hash": "86c58832a658def0ae5b37efc0340b23",
     "semantic_hash": ""
   },
   "tests/unit/AuthScreen.test.jsx": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "vitest.config.js": {
-    "mtime": 1787319195.5656922,
-    "ast_hash": "3f0c6f683d2476e67b3e4051cc561182",
+    "mtime": 1788867460.3311982,
+    "ast_hash": "ce6f1888c8952b243bba9e7db1d94a83",
     "semantic_hash": ""
   },
   ".agents/rules/dev-workflow.md": {
@@ -730,8 +730,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci-cd.yml": {
-    "mtime": 1787758809.9188747,
-    "ast_hash": "757170963b1fcdb6e71163a028af9992",
+    "mtime": 1788867428.3041048,
+    "ast_hash": "13f4183eff7575965507d90b61e167a1",
     "semantic_hash": ""
   },
   ".agents/rules/ponytail.md": {

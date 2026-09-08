@@ -1,7 +1,7 @@
 # Graph Report - EatLog  (2026-09-08)
 
 ## Corpus Check
-- 145 files · ~81,409 words
+- 145 files · ~81,394 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b7b1cee9`
+- Built from commit: `7cb6ff36`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
