@@ -1337,7 +1337,7 @@
       "label": "observe()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L6",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "tests_setup_observe",
       "community": 86,
@@ -1347,7 +1347,7 @@
       "label": "unobserve()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L7",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "tests_setup_unobserve",
       "community": 86,
@@ -1357,7 +1357,7 @@
       "label": "disconnect()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L8",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "tests_setup_disconnect",
       "community": 86,
@@ -1367,7 +1367,7 @@
       "label": ".getBBox()",
       "file_type": "code",
       "source_file": "tests/setup.js",
-      "source_location": "L28",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "tests_setup_svgelement_getbbox",
       "community": 102,
@@ -11122,9 +11122,9 @@
       "source_file": "api/analyzeLogs.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_analyzelogs",
-      "target": "api_geminiutils",
-      "confidence_score": 1.0
+      "target": "api_geminiutils"
     },
     {
       "relation": "contains",
@@ -11132,9 +11132,9 @@
       "source_file": "api/_geminiUtils.js",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_geminiutils",
-      "target": "api_geminiutils_extractandparsejson",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_extractandparsejson"
     },
     {
       "relation": "contains",
@@ -11142,9 +11142,9 @@
       "source_file": "api/_geminiUtils.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_geminiutils",
-      "target": "api_geminiutils_getapikey",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_getapikey"
     },
     {
       "relation": "imports_from",
@@ -11153,9 +11153,9 @@
       "source_file": "api/logMeal.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_logmeal",
-      "target": "api_geminiutils",
-      "confidence_score": 1.0
+      "target": "api_geminiutils"
     },
     {
       "relation": "imports",
@@ -11164,9 +11164,9 @@
       "source_file": "api/analyzeLogs.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_analyzelogs",
-      "target": "api_geminiutils_getapikey",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_getapikey"
     },
     {
       "relation": "calls",
@@ -11186,9 +11186,9 @@
       "source_file": "api/logMeal.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_logmeal",
-      "target": "api_geminiutils_getapikey",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_getapikey"
     },
     {
       "relation": "calls",
@@ -11208,9 +11208,9 @@
       "source_file": "api/analyzeLogs.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_analyzelogs",
-      "target": "api_geminiutils_extractandparsejson",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_extractandparsejson"
     },
     {
       "relation": "calls",
@@ -11230,9 +11230,9 @@
       "source_file": "api/logMeal.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_logmeal",
-      "target": "api_geminiutils_extractandparsejson",
-      "confidence_score": 1.0
+      "target": "api_geminiutils_extractandparsejson"
     },
     {
       "relation": "calls",
@@ -22513,5 +22513,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "134b85deac1a85f53d4998849b06b37330410cf0"
+  "built_at_commit": "b7b1cee98dbb0d5924c4def5ac88d6ff68629b6e"
 }
