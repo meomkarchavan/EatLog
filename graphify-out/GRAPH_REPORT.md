@@ -1,16 +1,16 @@
 # Graph Report - EatLog  (2026-09-08)
 
 ## Corpus Check
-- 145 files · ~81,394 words
+- 149 files · ~82,409 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1111 nodes · 1124 edges · 108 communities (96 shown, 12 thin omitted)
+- 1135 nodes · 1152 edges · 112 communities (99 shown, 13 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7cb6ff36`
+- Built from commit: `5d192245`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,6 +45,7 @@
 - [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 31|Community 31]]
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
@@ -112,9 +113,12 @@
 - [[_COMMUNITY_Community 96|Community 96]]
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 105|Community 105]]
+- [[_COMMUNITY_Community 106|Community 106]]
 - [[_COMMUNITY_Community 107|Community 107]]
 - [[_COMMUNITY_Community 108|Community 108]]
 - [[_COMMUNITY_Community 109|Community 109]]
+- [[_COMMUNITY_Community 110|Community 110]]
+- [[_COMMUNITY_Community 111|Community 111]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `scripts` - 16 edges
@@ -143,7 +147,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (108 total, 12 thin omitted)
+## Communities (112 total, 13 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.07
@@ -264,6 +268,10 @@ Nodes (12): Basic Query, Best Practices for Agents, Calling Operations, Client-S
 ### Community 29 - "Community 29"
 Cohesion: 0.17
 Nodes (11): 1. Re-running `flutterfire configure` Upon Renaming, 2. Platform-Specific Build Requirements, 3. Web CORS Best Practices, 4. Elaborating on `WidgetsFlutterBinding.ensureInitialized()`, Flutter & Firebase Setup Guide, Prerequisites, Step 1: Create a Flutter Project, Step 2: Configure Firebase (+3 more)
+
+### Community 30 - "Community 30"
+Cohesion: 0.33
+Nodes (10): Bool, Foundation, PathKit, PBXProj, addCrashlyticsRunScriptBuildPhase(), hasCrashlyticsRunScriptBuildPhase(), isUserScriptSandboxingEnabled(), main() (+2 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.17
@@ -489,6 +497,10 @@ Nodes (3): Android Studio Setup, MCP Setup, Skills Installation
 Cohesion: 0.33
 Nodes (5): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), 4. Mandatory Post-Deployment Live UI / E2E Verification, Agent Guidelines for EatLog
 
+### Community 106 - "Community 106"
+Cohesion: 0.29
+Nodes (5): app, auth, __dirname, __filename, firebaseConfig
+
 ### Community 107 - "Community 107"
 Cohesion: 0.22
 Nodes (11): LookupCard(), LookupPanel(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory(), saveLookupToHistory(), subscribeLookupHistory() (+3 more)
@@ -497,18 +509,20 @@ Nodes (11): LookupCard(), LookupPanel(), deleteLookupFromHistory(), getLocalLook
 Cohesion: 0.07
 Nodes (27): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+19 more)
 
+### Community 110 - "Community 110"
+Cohesion: 0.50
+Nodes (3): child, env, targetUrls
+
 ## Knowledge Gaps
-- **679 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+674 more)
+- **690 isolated node(s):** `PackageDescription`, `Foundation`, `PathKit`, `CANDIDATE_MODELS`, `CANDIDATE_MODELS` (+685 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `db` connect `Community 0` to `Community 107`?**
-  _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
-  _679 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `PackageDescription`, `Foundation`, `PathKit` to the rest of the system?**
+  _690 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06512890094979647 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
@@ -518,4 +532,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Community 4` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+- **Should `Community 5` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._

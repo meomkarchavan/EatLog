@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "vitest.config.js": {
-    "mtime": 1788867460.3311982,
-    "ast_hash": "ce6f1888c8952b243bba9e7db1d94a83",
+    "mtime": 1788867611.4286134,
+    "ast_hash": "3f0c6f683d2476e67b3e4051cc561182",
     "semantic_hash": ""
   },
   ".agents/rules/dev-workflow.md": {
@@ -730,8 +730,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci-cd.yml": {
-    "mtime": 1788867428.3041048,
-    "ast_hash": "13f4183eff7575965507d90b61e167a1",
+    "mtime": 1788867619.2309265,
+    "ast_hash": "4a0b9ce3ebe7e9e5e4f6ea5cec41964f",
     "semantic_hash": ""
   },
   ".agents/rules/ponytail.md": {
@@ -742,6 +742,26 @@
   "api/_geminiUtils.js": {
     "mtime": 1788866781.39412,
     "ast_hash": "94abbed352cb2b76106006b6b7b67637",
+    "semantic_hash": ""
+  },
+  ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift": {
+    "mtime": 1787148007.7340486,
+    "ast_hash": "37ff2f9cdc7da654e9d533e0e2932d23",
+    "semantic_hash": ""
+  },
+  ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift": {
+    "mtime": 1787148007.7350552,
+    "ast_hash": "3c909cc042e887a1dfeb09b4546365b1",
+    "semantic_hash": ""
+  },
+  "scripts/cleanupUsers.js": {
+    "mtime": 1788866605.2124875,
+    "ast_hash": "23744385e8f930db807797a773b957b7",
+    "semantic_hash": ""
+  },
+  "scripts/run-e2e.js": {
+    "mtime": 1787758383.5800416,
+    "ast_hash": "34ce29dc656358d9c05bdf21e6f17ee1",
     "semantic_hash": ""
   }
 }

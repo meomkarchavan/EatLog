@@ -4,6 +4,140 @@
   "graph": {},
   "nodes": [
     {
+      "label": "Package.swift",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "xcode_spm_setup_package",
+      "community": 111,
+      "norm_label": "package.swift"
+    },
+    {
+      "label": "PackageDescription",
+      "file_type": "code",
+      "type": "module",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "packagedescription",
+      "community": 111,
+      "norm_label": "packagedescription"
+    },
+    {
+      "label": "main.swift",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "sources_main",
+      "community": 30,
+      "norm_label": "main.swift"
+    },
+    {
+      "label": "Foundation",
+      "file_type": "code",
+      "type": "module",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "foundation",
+      "community": 30,
+      "norm_label": "foundation"
+    },
+    {
+      "label": "XcodeProj",
+      "file_type": "code",
+      "type": "module",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "xcodeproj",
+      "community": 30,
+      "norm_label": "xcodeproj"
+    },
+    {
+      "label": "PathKit",
+      "file_type": "code",
+      "type": "module",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "pathkit",
+      "community": 30,
+      "norm_label": "pathkit"
+    },
+    {
+      "label": "isUserScriptSandboxingEnabled()",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "sources_main_isuserscriptsandboxingenabled",
+      "community": 30,
+      "norm_label": "isuserscriptsandboxingenabled()"
+    },
+    {
+      "label": "PBXProj",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "pbxproj",
+      "community": 30,
+      "norm_label": "pbxproj"
+    },
+    {
+      "label": "Bool",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "bool",
+      "community": 30,
+      "norm_label": "bool"
+    },
+    {
+      "label": "hasCrashlyticsRunScriptBuildPhase()",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "sources_main_hascrashlyticsrunscriptbuildphase",
+      "community": 30,
+      "norm_label": "hascrashlyticsrunscriptbuildphase()"
+    },
+    {
+      "label": "addCrashlyticsRunScriptBuildPhase()",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "sources_main_addcrashlyticsrunscriptbuildphase",
+      "community": 30,
+      "norm_label": "addcrashlyticsrunscriptbuildphase()"
+    },
+    {
+      "label": "setDwarfWithDsymDebugInformationFormat()",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "sources_main_setdwarfwithdsymdebuginformationformat",
+      "community": 30,
+      "norm_label": "setdwarfwithdsymdebuginformationformat()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "sources_main_main",
+      "community": 30,
+      "norm_label": "main()"
+    },
+    {
       "label": "_geminiUtils.js",
       "file_type": "code",
       "source_file": "api/_geminiUtils.js",
@@ -572,6 +706,116 @@
       "id": "postcss_config",
       "community": 100,
       "norm_label": "postcss.config.js"
+    },
+    {
+      "label": "cleanupUsers.js",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers",
+      "community": 106,
+      "norm_label": "cleanupusers.js"
+    },
+    {
+      "label": "__filename",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_filename",
+      "community": 106,
+      "norm_label": "__filename"
+    },
+    {
+      "label": "__dirname",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_dirname",
+      "community": 106,
+      "norm_label": "__dirname"
+    },
+    {
+      "label": "firebaseConfig",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_firebaseconfig",
+      "community": 106,
+      "norm_label": "firebaseconfig"
+    },
+    {
+      "label": "app",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_app",
+      "community": 106,
+      "norm_label": "app"
+    },
+    {
+      "label": "auth",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_auth",
+      "community": 106,
+      "norm_label": "auth"
+    },
+    {
+      "label": "deleteUserByEmailAndPassword()",
+      "file_type": "code",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "scripts_cleanupusers_deleteuserbyemailandpassword",
+      "community": 106,
+      "norm_label": "deleteuserbyemailandpassword()"
+    },
+    {
+      "label": "run-e2e.js",
+      "file_type": "code",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_run_e2e",
+      "community": 110,
+      "norm_label": "run-e2e.js"
+    },
+    {
+      "label": "targetUrls",
+      "file_type": "code",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "scripts_run_e2e_targeturls",
+      "community": 110,
+      "norm_label": "targeturls"
+    },
+    {
+      "label": "env",
+      "file_type": "code",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "scripts_run_e2e_env",
+      "community": 110,
+      "norm_label": "env"
+    },
+    {
+      "label": "child",
+      "file_type": "code",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "scripts_run_e2e_child",
+      "community": 110,
+      "norm_label": "child"
     },
     {
       "label": "App.jsx",
@@ -11116,6 +11360,210 @@
   ],
   "links": [
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "xcode_spm_setup_package",
+      "target": "packagedescription",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "foundation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "pathkit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "sources_main_addcrashlyticsrunscriptbuildphase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "sources_main_hascrashlyticsrunscriptbuildphase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "sources_main_isuserscriptsandboxingenabled",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "sources_main_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "sources_main_setdwarfwithdsymdebuginformationformat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "sources_main",
+      "target": "xcodeproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "sources_main_main",
+      "target": "xcodeproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "sources_main_addcrashlyticsrunscriptbuildphase",
+      "target": "sources_main_isuserscriptsandboxingenabled",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "sources_main_isuserscriptsandboxingenabled",
+      "target": "bool",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "sources_main_isuserscriptsandboxingenabled",
+      "target": "pbxproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L37",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "sources_main_addcrashlyticsrunscriptbuildphase",
+      "target": "pbxproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "sources_main_hascrashlyticsrunscriptbuildphase",
+      "target": "pbxproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L68",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "sources_main_setdwarfwithdsymdebuginformationformat",
+      "target": "pbxproj",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "sources_main_hascrashlyticsrunscriptbuildphase",
+      "target": "bool",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L216",
+      "weight": 1.0,
+      "source": "sources_main_main",
+      "target": "sources_main_addcrashlyticsrunscriptbuildphase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/main.swift",
+      "source_location": "L212",
+      "weight": 1.0,
+      "source": "sources_main_main",
+      "target": "sources_main_setdwarfwithdsymdebuginformationformat",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -11778,6 +12226,96 @@
       "confidence_score": 1.0,
       "source": "package_devdependencies",
       "target": "package_devdependencies_vitest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_deleteuserbyemailandpassword",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_dirname",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_filename",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanupUsers.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "scripts_cleanupusers",
+      "target": "scripts_cleanupusers_firebaseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "scripts_run_e2e",
+      "target": "scripts_run_e2e_child",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "scripts_run_e2e",
+      "target": "scripts_run_e2e_env",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/run-e2e.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scripts_run_e2e",
+      "target": "scripts_run_e2e_targeturls",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -22513,5 +23051,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7cb6ff36adcf455d199145cf61c6ee5c921171e4"
+  "built_at_commit": "5d192245fa858ede14e21e56e9b5ec28ce00c896"
 }
