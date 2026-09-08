@@ -1,97 +1,38 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import fs from "fs";
-import path from "path";
+import { getApiKey, extractAndParseJSON, CANDIDATE_MODELS } from "./_geminiUtils.js";
 
-const SYSTEM_INSTRUCTION = `You are an expert AI sports nutritionist and dietary coach specializing in Indian diets and athletic nutrition.
-Your role is to analyze a user's logged nutrition data over a specified timeframe in comparison with their physical profile, daily targets, and fitness goals (such as muscle gain, fat loss, or maintenance).
+const SYSTEM_INSTRUCTION = `You are an elite sports nutritionist and performance dietary coach specializing in Indian diets, body recomposition, and hypertrophy. You analyze multi-day nutritional intake against athletic goals (Cut, Bulk, Recomp, Maintain).
 
-CULTURAL & DIETARY CONTEXT (STRICT CONSTRAINTS):
-1. ABSOLUTE RESTRICTIONS: NEVER suggest or mention beef or pork under any circumstance.
-2. INDIAN CUISINE FOCUS: All actionable tips, snack suggestions, and meal recommendations must be culturally relevant to Indian diets. Never suggest Western-centric items (e.g., avoid turkey breast, beef jerky, deli slices, or canned tuna).
-3. HIGH-PROTEIN INDIAN SOURCES: To close macro gaps and optimize for muscle gain and recovery, recommend accessible Indian high-protein sources:
-   - Vegetarian & Dairy: Paneer, Greek yogurt / curd (dahi / hung curd), soya chunks, moong dal sprouts, roasted chana, sattu, or whey protein.
-   - Non-Vegetarian (if applicable): Eggs (boiled / egg bhurji / omelettes) or chicken breast.
+COACHING PHILOSOPHY & CULTURAL INTELLIGENCE:
+1. ZERO FORBIDDEN MEATS: NEVER suggest, mention, or reference beef or pork under any circumstances.
+2. INDIAN NUTRITION REALITIES (AVOID TRAPS):
+   - Do NOT tell a user to "just eat more dal" to hit high protein targets. A bowl of dal is primarily carbohydrates (~3:1 carb-to-protein ratio).
+   - Recommend bioavailable, high-density Indian protein sources:
+     * Vegetarian: Low-fat paneer, soya chunks (52% protein by dry weight), sattu (in moderation due to carbs), hung curd / Greek yogurt, moong dal sprouts, roasted chana, and whey protein.
+     * Non-Vegetarian: Whole eggs, egg whites / egg bhurji, chicken breast (tandoori / roasted / curry with controlled oil), fish.
+3. HIDDEN CALORIE AUDIT: Watch for common Indian caloric leaks: excessive tea/chai consumption with sugar, excess ghee brushing on chapatis, hidden oil in restaurant gravies, and deep-fried tea-time snacks (namkeen, biscuits, bhujia).
+4. TONE & DELIVERY: Speak like an authentic, high-caliber fitness coach. Be concise, direct, empathetic, and encouraging. Never sound clinical, bureaucratic, or robotic.
 
-GENERAL RULES:
-1. STRICT JSON ONLY: Respond exclusively with a raw JSON object. No markdown formatting, no \`\`\`json blocks.
-2. ADHERENCE & MACRO ANALYSIS: Assess calorie intake vs target, protein sufficiency, consistency, and macronutrient balance.
-3. TONE & COACHING STYLE: Use an empathetic, conversational, encouraging, and punchy tone like a dedicated personal coach. Avoid robotic, overly academic, or clinical phrasing (e.g., avoid clinical language like 'demonstrating that you have the capacity'). Speak directly to the user as 'you'.
-4. OUTPUT SCHEMA: Return exactly this structure:
+RULES:
+1. STRICT JSON ONLY: Return exclusively valid raw JSON without markdown markers or backticks.
+2. OUTPUT SCHEMA:
 {
-  "summary": "Concise 2-3 sentence overview evaluating overall performance and adherence over the timeframe.",
-  "strengths": ["string", "string"],
-  "areas_for_improvement": ["string", "string"],
-  "actionable_tips": ["string", "string", "string"]
+  "summary": "Punchy 2-3 sentence assessment of caloric balance and protein threshold.",
+  "strengths": [
+    "Specific positive habit or consistency win",
+    "Specific macro adherence win"
+  ],
+  "areas_for_improvement": [
+    "Specific dietary leak or macro gap with quantified metric",
+    "Consistency or meal-timing imbalance"
+  ],
+  "actionable_tips": [
+    "Specific Indian food swap with exact quantities (e.g., 'Swap your evening biscuit for 40g dry-roasted chana to add 8g protein with zero saturated fat')",
+    "Tactical preparation tweak (e.g., 'Request rotis without ghee when dining out to cut ~130 kcal of empty fats')",
+    "Goal-aligned target adjustment"
+  ]
 }`;
 
-// Candidate models in order of preference with fallback capabilities
-const CANDIDATE_MODELS = [
-  "gemini-3.5-flash",
-  "gemini-3.5-flash-lite",
-  "gemini-3.1-flash-lite",
-  "gemini-flash-latest",
-  "gemini-2.5-flash",
-  "gemini-2.0-flash-lite",
-  "gemini-3.7-flash",
-  "gemini-3.6-flash",
-];
-
-// Helper to get GEMINI_API_KEY from process.env, .env.local, .env.development, or .env.production
-function getApiKey() {
-  if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "your_gemini_api_key_here") {
-    return process.env.GEMINI_API_KEY;
-  }
-  const envFiles = [".env.local", ".env.development", ".env.production", ".env"];
-  for (const file of envFiles) {
-    try {
-      const envPath = path.resolve(process.cwd(), file);
-      if (fs.existsSync(envPath)) {
-        const content = fs.readFileSync(envPath, "utf-8");
-        const match = content.match(/^GEMINI_API_KEY=(.+)$/m);
-        if (match && match[1] && match[1].trim() !== "your_gemini_api_key_here") {
-          return match[1].trim();
-        }
-      }
-    } catch (e) {
-      // Continue searching
-    }
-  }
-  return process.env.GEMINI_API_KEY;
-}
-
-// Resilient JSON extractor
-function extractAndParseJSON(raw) {
-  if (!raw || typeof raw !== "string") {
-    throw new Error("Empty AI response");
-  }
-
-  let text = raw.trim();
-
-  // Strip markdown fences
-  if (text.startsWith("```json")) {
-    text = text.replace(/^```json\s*/, "").replace(/```$/, "").trim();
-  } else if (text.startsWith("```")) {
-    text = text.replace(/^```\s*/, "").replace(/```$/, "").trim();
-  }
-
-  // Direct parse attempt
-  try {
-    return JSON.parse(text);
-  } catch (_) {
-    // Extract outermost {...}
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) {
-      try {
-        return JSON.parse(match[0]);
-      } catch (innerErr) {
-        let sanitized = match[0]
-          .replace(/,\s*([\}\]])/g, "$1");
-        return JSON.parse(sanitized);
-      }
-    }
-    throw new Error(`Invalid JSON format: ${text.slice(0, 100)}`);
-  }
-}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -114,25 +55,19 @@ export default async function handler(req, res) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
 
-    const promptText = `Analyze the user's nutritional data over the last ${days} days.
+    const weightKg = profile?.current_weight_kg || profile?.weight_kg || 'N/A';
+    const promptText = `Perform an in-depth nutritional audit for this user over the past ${days} days.
 
-User Profile & Target Goals:
-- Goal: ${profile?.goal || 'maintain'}
-- Target Calories: ${profile?.targetCalories || profile?.calories || 'Not specified'} kcal/day
-- Target Protein: ${profile?.targetMacros?.protein_g || profile?.protein_g || 'Not specified'} g/day
-- Target Carbs: ${profile?.targetMacros?.carbs_g || profile?.carbs_g || 'Not specified'} g/day
-- Target Fat: ${profile?.targetMacros?.fat_g || profile?.fat_g || 'Not specified'} g/day
-- BMR / TDEE: ${profile?.bmr || 'N/A'} kcal / ${profile?.tdee || 'N/A'} kcal
-- Current Weight: ${profile?.current_weight_kg || profile?.weight_kg || 'N/A'} kg
+User Profile:
+- Primary Objective: ${profile?.goal || 'maintain'}
+- Target Daily Energy: ${profile?.targetCalories || profile?.calories || 'Not specified'} kcal (BMR: ${profile?.bmr || 'N/A'} kcal | TDEE: ${profile?.tdee || 'N/A'} kcal)
+- Target Macros: Protein: ${profile?.targetMacros?.protein_g || profile?.protein_g || 'Not specified'}g | Carbs: ${profile?.targetMacros?.carbs_g || profile?.carbs_g || 'Not specified'}g | Fat: ${profile?.targetMacros?.fat_g || profile?.fat_g || 'Not specified'}g
+- Body Weight: ${weightKg} kg
 
-Logged Daily Totals (${logs.length} day records in ${days}-day window):
+Logged Intake Data (${logs.length} days recorded):
 ${JSON.stringify(logs, null, 2)}
 
-Provide a strict JSON response with:
-1. "summary": 2-3 sentence overview evaluating the ${days}-day trend against goals.
-2. "strengths": Array of 2-4 specific positive achievements or consistent habits.
-3. "areas_for_improvement": Array of 2-3 opportunities for better consistency or macro balance.
-4. "actionable_tips": Array of 2-4 tangible, immediate next steps.`;
+Evaluate caloric adherence, protein density relative to bodyweight (${weightKg} kg), and provide immediate Indian dietary optimizations in strict JSON format.`;
 
     let response = null;
     let lastError = null;

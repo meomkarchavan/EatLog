@@ -46,7 +46,7 @@ function EyeSlashIcon() {
   );
 }
 
-export default function AuthScreen() {
+export default function AuthScreen({ onBack, onSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -64,6 +64,9 @@ export default function AuthScreen() {
         await createUserWithEmailAndPassword(auth, email, password);
       } else {
         await signInWithEmailAndPassword(auth, email, password);
+      }
+      if (onSuccess) {
+        onSuccess();
       }
     } catch (err) {
       console.error('[Firebase Auth Error]:', err);
@@ -85,6 +88,9 @@ export default function AuthScreen() {
 
     try {
       await signInWithPopup(auth, googleProvider);
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (err) {
       console.error('[Firebase Google Auth Error]:', {
         code: err.code,
@@ -109,16 +115,33 @@ export default function AuthScreen() {
     }
   };
 
-
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-black px-6">
-      <div className="w-full max-w-sm">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-surface-0 px-6 py-12 relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-b from-macro-protein/10 via-macro-water/5 to-transparent blur-[120px] rounded-full pointer-events-none" />
+
+      {onBack && (
+        <button
+          id="auth-back-btn"
+          type="button"
+          onClick={onBack}
+          className="absolute top-6 left-6 text-xs text-text-muted hover:text-text-primary flex items-center gap-1.5 transition-colors font-medium px-3.5 py-2 rounded-xl bg-surface-1 border border-border/80 hover:border-border hover:bg-surface-2 active:scale-95"
+        >
+          <span>←</span>
+          <span>Back to Overview</span>
+        </button>
+      )}
+
+      <div className="w-full max-w-sm relative z-10 bg-surface-1 border border-border/80 rounded-3xl p-6 sm:p-8 shadow-2xl">
         {/* Brand */}
-        <h1 className="text-4xl font-black text-white tracking-tight mb-1">
-          EatLog
-        </h1>
-        <p className="text-zinc-500 text-sm mb-8">
-          Track calories & protein in seconds.
+        <div className="flex items-center gap-2.5 mb-1.5">
+          <div className="w-3 h-3 rounded-full bg-macro-protein shadow-[0_0_12px_rgba(34,197,94,0.6)] animate-pulse" />
+          <h1 className="text-3xl sm:text-4xl font-black text-text-primary tracking-tight">
+            EatLog
+          </h1>
+        </div>
+        <p className="text-text-muted text-xs sm:text-sm mb-7">
+          Hyper-precise nutrition tracking in seconds.
         </p>
 
         {/* Google Sign-In Button */}
@@ -127,32 +150,43 @@ export default function AuthScreen() {
           id="google-auth-btn"
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-surface-2 hover:bg-zinc-800 border border-zinc-700/80 text-white font-medium rounded-xl py-3.5 px-4 text-sm active:scale-[0.98] transition-all disabled:opacity-40"
+          className="w-full flex items-center justify-center gap-3 bg-surface-2 hover:bg-surface-3 border border-border/80 hover:border-border text-text-primary font-semibold rounded-2xl py-3.5 px-4 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-sm"
         >
-          <GoogleIcon />
-          <span>Continue with Google</span>
+          {loading ? (
+            <>
+              <div className="w-4 h-4 border-2 border-text-muted border-t-text-primary rounded-full animate-spin" />
+              <span>Connecting...</span>
+            </>
+          ) : (
+            <>
+              <GoogleIcon />
+              <span>Continue with Google</span>
+            </>
+          )}
         </button>
 
         {/* Divider */}
         <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-zinc-800" />
-          <span className="px-3 text-xs uppercase tracking-wider text-zinc-500 font-medium">
-            or
+          <div className="flex-1 border-t border-border/60" />
+          <span className="px-3 text-[11px] uppercase tracking-wider text-text-dim font-mono font-medium">
+            or email
           </span>
-          <div className="flex-1 border-t border-zinc-800" />
+          <div className="flex-1 border-t border-border/60" />
         </div>
 
         {/* Email/Password Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            id="auth-email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full bg-surface-2 text-white placeholder-zinc-600 rounded-xl px-4 py-3.5 text-base outline-none focus:ring-1 focus:ring-zinc-700 transition-colors"
-          />
+          <div>
+            <input
+              id="auth-email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl px-4 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-sans"
+            />
+          </div>
 
           {/* Password with Eye Toggle */}
           <div className="relative">
@@ -164,30 +198,41 @@ export default function AuthScreen() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full bg-surface-2 text-white placeholder-zinc-600 rounded-xl pl-4 pr-12 py-3.5 text-base outline-none focus:ring-1 focus:ring-zinc-700 transition-colors"
+              className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl pl-4 pr-12 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-mono"
             />
             <button
               type="button"
               id="toggle-password-btn"
               onClick={() => setShowPassword(!showPassword)}
               title={showPassword ? 'Hide password' : 'Show password'}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors p-1"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-dim hover:text-text-primary transition-colors p-1.5 rounded-lg hover:bg-surface-3"
             >
               {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
             </button>
           </div>
 
           {error && (
-            <p className="text-red-400 text-sm">{error}</p>
+            <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs leading-relaxed">
+              {error}
+            </div>
           )}
 
           <button
             id="auth-submit"
             type="submit"
             disabled={loading}
-            className="w-full bg-white text-black font-semibold rounded-xl py-3.5 text-base active:scale-[0.98] transition-transform disabled:opacity-40"
+            className="w-full bg-macro-protein hover:bg-emerald-400 text-surface-0 font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_28px_rgba(34,197,94,0.45)] flex items-center justify-center gap-2"
           >
-            {loading ? '...' : isSignUp ? 'Create Account' : 'Sign In'}
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-surface-0/30 border-t-surface-0 rounded-full animate-spin" />
+                <span>{isSignUp ? 'Creating Account...' : 'Signing In...'}</span>
+              </>
+            ) : isSignUp ? (
+              'Create Account'
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
 
@@ -196,7 +241,7 @@ export default function AuthScreen() {
           type="button"
           id="auth-toggle"
           onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
-          className="mt-6 text-zinc-500 text-sm w-full text-center active:text-zinc-300 transition-colors"
+          className="mt-6 text-text-muted text-xs sm:text-sm w-full text-center hover:text-text-primary transition-colors font-medium py-1"
         >
           {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
         </button>
@@ -204,4 +249,3 @@ export default function AuthScreen() {
     </div>
   );
 }
-

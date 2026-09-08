@@ -2,22 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hide scrollbar for horizontal scroll containers */
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+:root {
+  /* Slate-tinted off-black base surfaces */
+  --bg-base: #090a0c;
+  --bg-surface: #121316;
+  --bg-elevated: #1a1c22;
+  --bg-overlay: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.15);
 
-html, body, #root {
-  height: 100%;
-  height: 100dvh;
-  overflow-x: hidden;
+  /* Ink Typography */
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+  --color-text-tertiary: #6b7280;
+  --color-text-inverse: #090a0c;
+
+  /* EatLog Macro Accent Colors */
+  --color-protein: #22c55e;
+  --color-carbs: #38bdf8;
+  --color-fat: #fb923c;
+  --color-fiber: #a78bfa;
+  --color-calories: #facc15;
+  --color-water: #38bdf8;
+  --color-weight: #f472b6;
+
+  /* Semantic */
+  --color-success: #22c55e;
+  --color-warning: #fbbf24;
+  --color-danger: #f43f5e;
+  --color-muted: #6b7280;
+
+  /* Shadows & Glow with inner refraction */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 2px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 36px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  --glow-protein: 0 0 14px rgba(34, 197, 94, 0.4);
+  --glow-carbs: 0 0 14px rgba(56, 189, 248, 0.4);
+  --glow-fat: 0 0 14px rgba(251, 146, 60, 0.4);
+  --glow-calories: 0 0 14px rgba(250, 204, 21, 0.4);
+
+  /* Fonts */
+  --font-sans: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, Menlo, monospace;
+
+  /* Durations & Easings */
+  --duration-short: 140ms;
+  --duration-base: 220ms;
+  --duration-enter: 300ms;
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-progress: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.safe-area-pb {
-  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+/* Base resets & typography */
+html, body, #root {
+  min-height: 100%;
+  min-height: 100dvh;
+  background-color: var(--bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
 }
 
 body {
   -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom sleek dark scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2129;
+  border-radius: 9999px;
+  border: 2px solid #090a0c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2e39;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e2129 #090a0c;
+}
+
+/* Hide scrollbar utility when needed */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+.safe-area-pb {
+  padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
 }
 
 /* Hide spinner on number inputs */
@@ -27,19 +110,101 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+/* Stat typography utilities */
+.font-stat-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' on, 'zero' on;
+}
+
+.text-stat-xl {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-stat-lg {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-stat-md {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-stat-sm {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Premium Card & Surface styles */
+.hud-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--duration-short) ease, transform var(--duration-short) ease;
+}
+
+.hud-card:hover {
+  border-color: var(--border-strong);
+}
+
+.glass-panel {
+  background: rgba(18, 19, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Glow on progress bars */
+.progress-glow-calories {
+  box-shadow: var(--glow-calories);
+}
+
+.progress-glow-protein {
+  box-shadow: var(--glow-protein);
+}
+
+.progress-glow-carbs {
+  box-shadow: var(--glow-carbs);
+}
+
+.progress-glow-fat {
+  box-shadow: var(--glow-fat);
+}
+
+/* Smooth progress transition */
+.progress-fill {
+  transition: width var(--duration-enter) var(--ease-progress);
+}
+
 @keyframes pulse-slow {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.45; }
 }
 
 .animate-pulse-slow {
-  animation: pulse-slow 1.5s ease-in-out infinite;
+  animation: pulse-slow 1.6s ease-in-out infinite;
 }
 
 @keyframes lookup-card-enter {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -48,5 +213,5 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .lookup-card-enter {
-  animation: lookup-card-enter 0.25s ease-out;
+  animation: lookup-card-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -1,16 +1,16 @@
-# Graph Report - EatLog  (2026-08-26)
+# Graph Report - EatLog  (2026-09-08)
 
 ## Corpus Check
-- 147 files · ~82,883 words
+- 66 files · ~41,422 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1124 nodes · 1154 edges · 109 communities (98 shown, 11 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- 2182 nodes · 2337 edges · 217 communities (200 shown, 17 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4e22fc23`
+- Built from commit: `067f7960`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -101,6 +101,7 @@
 - [[_COMMUNITY_Community 83|Community 83]]
 - [[_COMMUNITY_Community 84|Community 84]]
 - [[_COMMUNITY_Community 85|Community 85]]
+- [[_COMMUNITY_Community 86|Community 86]]
 - [[_COMMUNITY_Community 87|Community 87]]
 - [[_COMMUNITY_Community 88|Community 88]]
 - [[_COMMUNITY_Community 89|Community 89]]
@@ -116,24 +117,127 @@
 - [[_COMMUNITY_Community 106|Community 106]]
 - [[_COMMUNITY_Community 107|Community 107]]
 - [[_COMMUNITY_Community 108|Community 108]]
+- [[_COMMUNITY_Community 109|Community 109]]
+- [[_COMMUNITY_Community 110|Community 110]]
+- [[_COMMUNITY_Community 111|Community 111]]
+- [[_COMMUNITY_Community 112|Community 112]]
+- [[_COMMUNITY_Community 113|Community 113]]
+- [[_COMMUNITY_Community 114|Community 114]]
+- [[_COMMUNITY_Community 115|Community 115]]
+- [[_COMMUNITY_Community 116|Community 116]]
+- [[_COMMUNITY_Community 117|Community 117]]
+- [[_COMMUNITY_Community 118|Community 118]]
+- [[_COMMUNITY_Community 119|Community 119]]
+- [[_COMMUNITY_Community 120|Community 120]]
+- [[_COMMUNITY_Community 121|Community 121]]
+- [[_COMMUNITY_Community 122|Community 122]]
+- [[_COMMUNITY_Community 123|Community 123]]
+- [[_COMMUNITY_Community 124|Community 124]]
+- [[_COMMUNITY_Community 125|Community 125]]
+- [[_COMMUNITY_Community 126|Community 126]]
+- [[_COMMUNITY_Community 127|Community 127]]
+- [[_COMMUNITY_Community 128|Community 128]]
+- [[_COMMUNITY_Community 129|Community 129]]
+- [[_COMMUNITY_Community 130|Community 130]]
+- [[_COMMUNITY_Community 131|Community 131]]
+- [[_COMMUNITY_Community 132|Community 132]]
+- [[_COMMUNITY_Community 133|Community 133]]
+- [[_COMMUNITY_Community 134|Community 134]]
+- [[_COMMUNITY_Community 135|Community 135]]
+- [[_COMMUNITY_Community 136|Community 136]]
+- [[_COMMUNITY_Community 137|Community 137]]
+- [[_COMMUNITY_Community 138|Community 138]]
+- [[_COMMUNITY_Community 139|Community 139]]
+- [[_COMMUNITY_Community 140|Community 140]]
+- [[_COMMUNITY_Community 141|Community 141]]
+- [[_COMMUNITY_Community 142|Community 142]]
+- [[_COMMUNITY_Community 143|Community 143]]
+- [[_COMMUNITY_Community 144|Community 144]]
+- [[_COMMUNITY_Community 145|Community 145]]
+- [[_COMMUNITY_Community 146|Community 146]]
+- [[_COMMUNITY_Community 147|Community 147]]
+- [[_COMMUNITY_Community 148|Community 148]]
+- [[_COMMUNITY_Community 149|Community 149]]
+- [[_COMMUNITY_Community 150|Community 150]]
+- [[_COMMUNITY_Community 151|Community 151]]
+- [[_COMMUNITY_Community 152|Community 152]]
+- [[_COMMUNITY_Community 153|Community 153]]
+- [[_COMMUNITY_Community 154|Community 154]]
+- [[_COMMUNITY_Community 155|Community 155]]
+- [[_COMMUNITY_Community 156|Community 156]]
+- [[_COMMUNITY_Community 157|Community 157]]
+- [[_COMMUNITY_Community 158|Community 158]]
+- [[_COMMUNITY_Community 159|Community 159]]
+- [[_COMMUNITY_Community 160|Community 160]]
+- [[_COMMUNITY_Community 161|Community 161]]
+- [[_COMMUNITY_Community 162|Community 162]]
+- [[_COMMUNITY_Community 163|Community 163]]
+- [[_COMMUNITY_Community 164|Community 164]]
+- [[_COMMUNITY_Community 165|Community 165]]
+- [[_COMMUNITY_Community 166|Community 166]]
+- [[_COMMUNITY_Community 167|Community 167]]
+- [[_COMMUNITY_Community 168|Community 168]]
+- [[_COMMUNITY_Community 169|Community 169]]
+- [[_COMMUNITY_Community 171|Community 171]]
+- [[_COMMUNITY_Community 172|Community 172]]
+- [[_COMMUNITY_Community 173|Community 173]]
+- [[_COMMUNITY_Community 174|Community 174]]
+- [[_COMMUNITY_Community 175|Community 175]]
+- [[_COMMUNITY_Community 177|Community 177]]
+- [[_COMMUNITY_Community 178|Community 178]]
+- [[_COMMUNITY_Community 180|Community 180]]
+- [[_COMMUNITY_Community 181|Community 181]]
+- [[_COMMUNITY_Community 182|Community 182]]
+- [[_COMMUNITY_Community 183|Community 183]]
+- [[_COMMUNITY_Community 184|Community 184]]
+- [[_COMMUNITY_Community 185|Community 185]]
+- [[_COMMUNITY_Community 186|Community 186]]
+- [[_COMMUNITY_Community 187|Community 187]]
+- [[_COMMUNITY_Community 188|Community 188]]
+- [[_COMMUNITY_Community 189|Community 189]]
+- [[_COMMUNITY_Community 190|Community 190]]
+- [[_COMMUNITY_Community 191|Community 191]]
+- [[_COMMUNITY_Community 192|Community 192]]
+- [[_COMMUNITY_Community 193|Community 193]]
+- [[_COMMUNITY_Community 194|Community 194]]
+- [[_COMMUNITY_Community 195|Community 195]]
+- [[_COMMUNITY_Community 196|Community 196]]
+- [[_COMMUNITY_Community 197|Community 197]]
+- [[_COMMUNITY_Community 198|Community 198]]
+- [[_COMMUNITY_Community 199|Community 199]]
+- [[_COMMUNITY_Community 200|Community 200]]
+- [[_COMMUNITY_Community 201|Community 201]]
+- [[_COMMUNITY_Community 202|Community 202]]
+- [[_COMMUNITY_Community 203|Community 203]]
+- [[_COMMUNITY_Community 204|Community 204]]
+- [[_COMMUNITY_Community 205|Community 205]]
+- [[_COMMUNITY_Community 206|Community 206]]
+- [[_COMMUNITY_Community 207|Community 207]]
+- [[_COMMUNITY_Community 208|Community 208]]
+- [[_COMMUNITY_Community 209|Community 209]]
+- [[_COMMUNITY_Community 210|Community 210]]
+- [[_COMMUNITY_Community 211|Community 211]]
+- [[_COMMUNITY_Community 212|Community 212]]
+- [[_COMMUNITY_Community 213|Community 213]]
+- [[_COMMUNITY_Community 214|Community 214]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `useToast()` - 17 edges
-2. `scripts` - 16 edges
-3. `Firebase Authentication Web SDK` - 15 edges
-4. `auth` - 12 edges
-5. `db` - 12 edges
-6. `Flutter SDK` - 10 edges
-7. `Web SDK` - 10 edges
-8. `Firebase AI Logic Basics` - 9 edges
-9. `Configuration Reference` - 9 edges
-10. `iOS SDK` - 9 edges
+1. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
+2. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
+3. `skills` - 26 edges
+4. `db` - 26 edges
+5. `useToast()` - 26 edges
+6. `auth` - 24 edges
+7. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
+8. `scripts` - 16 edges
+9. `scripts` - 16 edges
+10. `tasteskill: Anti-Slop Frontend Skill` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `subscribeLookupHistory()` --calls--> `onUpdate`  [INFERRED]
+  src/services/lookupHistory.js → tests/unit/lookupHistory.test.js
 - `TestConsumer()` --calls--> `useToast()`  [EXTRACTED]
   tests/unit/Toast.test.jsx → src/components/Toast.jsx
-- `ProfileScreen()` --calls--> `useToast()`  [EXTRACTED]
-  src/components/ProfileScreen.jsx → src/components/Toast.jsx
 - `Dashboard()` --calls--> `useToast()`  [EXTRACTED]
   src/components/Dashboard.jsx → src/components/Toast.jsx
 - `Dashboard()` --calls--> `calculateNutritionTargets()`  [EXTRACTED]
@@ -141,14 +245,11 @@
 - `LookupPanel()` --calls--> `useToast()`  [EXTRACTED]
   src/components/LookupPanel.jsx → src/components/Toast.jsx
 
-## Import Cycles
-- None detected.
-
-## Communities (109 total, 11 thin omitted)
+## Communities (217 total, 17 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (28): AuthScreen(), Dashboard(), formatLocalDate(), InsightsCard(), LookupPanel(), MealCard(), Profile(), defaultContext (+20 more)
+Cohesion: 0.17
+Nodes (13): OnboardingScreen(), ConfirmModalUI(), defaultContext, ToastContext, ToastItem(), ToastProvider(), useToast(), cancelBtn (+5 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
@@ -267,8 +368,8 @@ Cohesion: 0.17
 Nodes (11): 1. Re-running `flutterfire configure` Upon Renaming, 2. Platform-Specific Build Requirements, 3. Web CORS Best Practices, 4. Elaborating on `WidgetsFlutterBinding.ensureInitialized()`, Flutter & Firebase Setup Guide, Prerequisites, Step 1: Create a Flutter Project, Step 2: Configure Firebase (+3 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.38
-Nodes (8): ProfileScreen(), ACTIVITY_MODIFIERS, calculateBMI(), calculateBMR(), calculateTargets(), calculateTDEE(), getBMICategory(), GOAL_MODIFIERS
+Cohesion: 0.33
+Nodes (10): Bool, Foundation, PathKit, PBXProj, addCrashlyticsRunScriptBuildPhase(), hasCrashlyticsRunScriptBuildPhase(), isUserScriptSandboxingEnabled(), main() (+2 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.17
@@ -335,12 +436,12 @@ Cohesion: 0.22
 Nodes (8): Add Dependencies to Gradle Build, App-level `build.gradle.kts` (`<project>/<app-module>/build.gradle.kts`), Follow up Steps, Project and App Setup, Project-level `build.gradle.kts` (`<project>/build.gradle.kts`), Fetch and Activate Values, Firebase Remote Config Android Setup Guide, Set In-App Defaults
 
 ### Community 47 - "Community 47"
-Cohesion: 0.31
-Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
+Cohesion: 0.15
+Nodes (17): CANDIDATE_MODELS, handler(), CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), CANDIDATE_MODELS, handler(), createMockReqRes() (+9 more)
 
 ### Community 48 - "Community 48"
-Cohesion: 0.31
-Nodes (5): DatePicker(), DAY_LABELS, MONTH_NAMES, pad(), toDateStr()
+Cohesion: 0.25
+Nodes (7): GoogleIcon(), Profile(), profile, result, ACTIVITY_MULTIPLIERS, calculateNutritionTargets(), GOAL_ADJUSTMENTS
 
 ### Community 49 - "Community 49"
 Cohesion: 0.22
@@ -403,8 +504,8 @@ Cohesion: 0.25
 Nodes (7): 1. Configure and Verify Firebase MCP Server, 1. Install and Verify Firebase Extension, 2. Restart and Verify Connection, 2. Restart and Verify Connection, Alternative: Manual MCP Configuration (Project Scope), Gemini CLI Setup, Recommended: Installing Extensions
 
 ### Community 64 - "Community 64"
-Cohesion: 0.25
-Nodes (7): Architecture & Project Structure, Design Spec: Firebase Project Initialization for EatLog, Error Handling & Security, Goals, Module Responsibilities, Overview, Verification Strategy
+Cohesion: 0.20
+Nodes (8): Architecture & Project Structure, code:block1 (EatLog/), Design Spec: Firebase Project Initialization for EatLog, Error Handling & Security, Goals, Module Responsibilities, Overview, Verification Strategy
 
 ### Community 65 - "Community 65"
 Cohesion: 0.25
@@ -439,7 +540,7 @@ Cohesion: 0.33
 Nodes (5): App Hosting Configuration (`apphosting.yaml`), `env` (Environment Variables), File Structure, Resource Constraints, `runConfig`
 
 ### Community 73 - "Community 73"
-Cohesion: 0.33
+Cohesion: 0.29
 Nodes (5): Firebase Project Initialization Plan, Task 1: Scaffold Configuration Files, Task 2: Install Firebase SDK Dependency, Task 3: Implement Modular Firebase Initialization Script, Task 4: Unit Test & Verification
 
 ### Community 74 - "Community 74"
@@ -490,38 +591,430 @@ Nodes (3): 1. Development & Staging Flow, 2. Strict Production / `main` Branch R
 Cohesion: 0.50
 Nodes (3): Android Studio Setup, MCP Setup, Skills Installation
 
+### Community 86 - "Community 86"
+Cohesion: 0.60
+Nodes (3): disconnect(), observe(), unobserve()
+
 ### Community 105 - "Community 105"
 Cohesion: 0.33
 Nodes (5): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), 4. Mandatory Post-Deployment Live UI / E2E Verification, Agent Guidelines for EatLog
 
 ### Community 106 - "Community 106"
-Cohesion: 0.31
-Nodes (5): CANDIDATE_MODELS, extractAndParseJSON(), getApiKey(), handler(), mockGenerateContent
+Cohesion: 0.43
+Nodes (6): app, auth, deleteUserByEmailAndPassword(), __dirname, __filename, firebaseConfig
 
 ### Community 107 - "Community 107"
-Cohesion: 0.24
-Nodes (10): LookupCard(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory(), saveLookupToHistory(), subscribeLookupHistory(), mockAddDoc (+2 more)
+Cohesion: 0.09
+Nodes (32): LookupCard(), LookupPanel(), SearchIcon(), SendIcon(), deleteLookupFromHistory(), getLocalLookupHistory(), getLookupHistory(), saveLocalLookupHistory() (+24 more)
 
 ### Community 108 - "Community 108"
+Cohesion: 0.05
+Nodes (42): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+34 more)
+
+### Community 110 - "Community 110"
+Cohesion: 0.60
+Nodes (3): child, env, targetUrls
+
+### Community 112 - "Community 112"
+Cohesion: 0.05
+Nodes (43): 1. Logo Cover, 1. Monogram + Meaning, 2 × 3 REFERENCE-STYLE LAYOUT, 2. Logo Construction, 2. Product Action, 3. Digital Application, 3. Metaphor Fusion, 4. Brand Essence (+35 more)
+
+### Community 113 - "Community 113"
+Cohesion: 0.06
+Nodes (34): 10. IMAGE-FIRST CODEX WEBSITE WORKFLOW, 11. WHEN TO TRIGGER IMAGE GENERATION FIRST, 13. WEBSITE REFERENCE RULE, 15. RESPONSIVE FIRST-VIEW RULE, 16. ANTI-NESTED-BOX RULE, 17. REDUCE MICRO-UI CLUTTER RULE, 18. SECTION IMAGE GENERATION RULE, 19. WEBSITE IMAGE SYSTEM RULE (+26 more)
+
+### Community 114 - "Community 114"
+Cohesion: 0.06
+Nodes (34): 10. DEVICE MOCKUP FRAME RULE, 11. ONBOARDING FLOW RULE, 12. FIRST SCREEN CLEANLINESS RULE, 13. SAFE AREA AND SYSTEM REGION RULE, 14. NAVIGATION RULE, 15. CLEAN LAYOUT RULE, 16. CREATIVE IMAGE DIRECTION RULE, 17. BACKGROUND TEXTURE AND SURFACE RULE (+26 more)
+
+### Community 115 - "Community 115"
+Cohesion: 0.06
+Nodes (30): 10. FINAL PRE-FLIGHT CHECK, 1. ACTIVE BASELINE CONFIGURATION, 2. DEFAULT ARCHITECTURE & CONVENTIONS, 3. DESIGN ENGINEERING DIRECTIVES (Bias Correction), 4. CREATIVE PROACTIVITY (Anti-Slop Implementation), 5. PERFORMANCE GUARDRAILS, 6. TECHNICAL REFERENCE (Dial Definitions), 7. AI TELLS (Forbidden Patterns) (+22 more)
+
+### Community 116 - "Community 116"
 Cohesion: 0.07
-Nodes (27): 1. System Architecture & Components to Deploy, 2. Environments Overview, 3. Required Environment Variables, 4. Firestore Rules & Indexes: Deployment Lifecycle & Timing, 5. Firebase Authentication Setup (One-time per domain), 6. Playbook A: Deploy to Dev (Staging), 7. Playbook B: Deploy to Production (`prod`), 8. Troubleshooting & Recovery (+19 more)
+Nodes (28): 10. Iconography, 11. Accessibility, 12. Do / Don't, 1. System Foundations, 2. Color Palette & Roles, 3. Typography, 4. Spacing, 5. Border Radius (+20 more)
+
+### Community 117 - "Community 117"
+Cohesion: 0.09
+Nodes (22): 1. Layout & Spacing, 2. Alignment, 3. Accessibility, 4. Component Structure & Patterns, 5. Performance & Quality Checks, Before Shipping Any Component, Contrast, Data Displays (Macro Cards, Meal Rows, Charts) (+14 more)
+
+### Community 118 - "Community 118"
+Cohesion: 0.09
+Nodes (21): APPENDICES - Real Source-Backed Reference Material, Appendix A - Install Commands per Design System, Appendix B - Canonical Sources (read these before reinventing), Appendix C - Apple Liquid Glass: Honest Web Approximation, Apple Liquid Glass (Apple platforms only), Atlassian, Bootstrap, Carbon (+13 more)
+
+### Community 119 - "Community 119"
+Cohesion: 0.10
+Nodes (19): Code Quality, Color and Surfaces, Component Patterns, Content, Design Audit, Fix Priority, How This Works, Iconography (+11 more)
+
+### Community 120 - "Community 120"
+Cohesion: 0.11
+Nodes (18): 1. Define the Atmosphere, 2. Map the Color Palette, 3. Establish Typography Rules, 4. Define the Hero Section, 5. Describe Component Stylings, 6. Define Layout Principles, 7. Define Responsive Rules, 8. Encode Motion Philosophy (+10 more)
+
+### Community 121 - "Community 121"
+Cohesion: 0.38
+Nodes (7): CalendarIcon(), CameraIcon(), Dashboard(), fileToBase64(), formatLocalDate(), getDateBounds(), SendIcon()
+
+### Community 122 - "Community 122"
+Cohesion: 0.11
+Nodes (17): 1. Meta Information & Core Directive, 2. THE "ABSOLUTE ZERO" DIRECTIVE (STRICT ANTI-PATTERNS), 3. THE CREATIVE VARIANCE ENGINE, 4. HAPTIC MICRO-AESTHETICS (COMPONENT MASTERY), 5. MOTION CHOREOGRAPHY (FLUID DYNAMICS), 6. PERFORMANCE GUARDRAILS, 7. EXECUTION PROTOCOL, 8. PRE-OUTPUT CHECKLIST (+9 more)
+
+### Community 123 - "Community 123"
+Cohesion: 0.12
+Nodes (16): 10. SECTION RHYTHM RULE, 12. DENSITY & SPACING DISCIPLINE, 14. IMAGE / MEDIA DIRECTION, 16. MULTI-IMAGE CONSISTENCY RULE, 17. CLARITY CHECK, 19. RESPONSE BEHAVIOR, 1. ACTIVE BASELINE CONFIGURATION, 21. FINAL GOAL (+8 more)
+
+### Community 124 - "Community 124"
+Cohesion: 0.12
+Nodes (16): 1. Skill Meta, 2.1 Swiss Industrial Print, 2.2 Tactical Telemetry & CRT Terminal, 2. Visual Archetypes, 3.1 Macro-Typography (Structural Headers), 3.2 Micro-Typography (Data & Telemetry), 3.3 Textural Contrast (Artistic Disruption), 3. Typographic Architecture (+8 more)
+
+### Community 125 - "Community 125"
+Cohesion: 0.22
+Nodes (7): AuthScreen(), EyeIcon(), EyeSlashIcon(), GoogleIcon(), LandingPage(), App(), googleProvider
+
+### Community 126 - "Community 126"
+Cohesion: 0.13
+Nodes (14): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Hero Section, 6. Layout Principles, 7. Responsive Rules, 8. Motion & Interaction (Code-Phase Intent) (+6 more)
+
+### Community 127 - "Community 127"
+Cohesion: 0.14
+Nodes (14): 2. THE COMBINATORIAL VARIATION ENGINE, Background Character, Background Mode (per-section), Composition Anchor (per-section), CTA Variation, Hero Architecture, Hero Scale (per-page), Motion-Implied Language (+6 more)
+
+### Community 128 - "Community 128"
+Cohesion: 0.17
+Nodes (12): 4.10 Quotes & Testimonials, 4.11 Page Theme Lock (Light / Dark Mode Consistency), 4.1 Typography, 4.2 Color Calibration, 4.3 Layout Diversification, 4.4 Materiality, Shadows, Cards, 4.5 Interactive UI States, 4.6 Data & Form Patterns (+4 more)
+
+### Community 129 - "Community 129"
+Cohesion: 0.20
+Nodes (10): 10. REFERENCE VOCABULARY (Pattern Names the Agent Should Know), Animation Library Choice, Cards & Containers, Galleries & Media, Hero Paradigms, Layout & Grids, Micro-Interactions & Effects, Navigation & Menus (+2 more)
+
+### Community 130 - "Community 130"
+Cohesion: 0.20
+Nodes (10): 13. OUT OF SCOPE, 14. FINAL PRE-FLIGHT CHECK, 1.A Dial Inference (design read → dial values), 1.B Use-Case Presets, 1.C How the Dials Drive Output, 1. THE THREE DIALS (Core Configuration), 2.A When to reach for a real design system (use official packages), 2.B When the brief is an aesthetic, not a system (+2 more)
+
+### Community 131 - "Community 131"
+Cohesion: 0.20
+Nodes (9): 1. PYTHON-DRIVEN TRUE RANDOMIZATION (BREAKING THE LOOP), 2. AIDA STRUCTURE & SPACING, 3. HERO ARCHITECTURE & THE 2-LINE IRON RULE, 4. THE GAPLESS BENTO GRID, 5. ADVANCED GSAP MOTION & HOVER PHYSICS, 6. COMPONENT ARSENAL & CREATIVITY, 7. CONTENT, ASSETS & STRICT BANS, 8. MANDATORY PRE-FLIGHT <design_plan> (+1 more)
+
+### Community 132 - "Community 132"
+Cohesion: 0.20
+Nodes (10): 22. STYLE VARIATION ENGINE, Decorative Asset Set, Image Art Direction Bias, Motion-Implied Language, Palette Logic, Signature Component Set, Structure Bias, Texture / Surface Treatment (+2 more)
+
+### Community 133 - "Community 133"
+Cohesion: 0.20
+Nodes (9): 1. Protocol Overview, 2. Absolute Negative Constraints (Banned Elements), 3. Typographic Architecture, 4. Color Palette (Warm Monochrome + Spot Pastels), 5. Component Specifications, 6. Iconography & Imagery Directives, 7. Subtle Motion & Micro-Animations, 8. Execution Protocol (+1 more)
+
+### Community 134 - "Community 134"
+Cohesion: 0.22
+Nodes (9): 11. COMPONENT EXECUTION GUIDELINES, 3D Cascading Card Deck, Diagonal Staggered Square Masonry, Hover-Accordion Slice Layout, Off-Grid Editorial Layout, Pristine Gapless Bento Grid, Product UI Panel Stack, Turning Polaroid Arc (+1 more)
+
+### Community 135 - "Community 135"
+Cohesion: 0.22
+Nodes (9): 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE, Composition variety check, Conversion focus, Cross-section contrast, CTA specificity, Cultural / tonal alignment, Data-viz restraint, Image variety inside one comp (+1 more)
+
+### Community 136 - "Community 136"
+Cohesion: 0.22
+Nodes (8): Branch & Deployment Rules, EatLog UI Rules, Layer 1 — Layout Variance (Taste Skill), Layer 2 — Structural Best Practices (Web Design Guidelines), Layer 3 — Color & Typography Tokens (Design System), Mandatory Three-Layer Rule, Pre-Ship Checklist, Stack Constraints
+
+### Community 137 - "Community 137"
+Cohesion: 0.25
+Nodes (8): 9.A Visual & CSS, 9. AI TELLS (Forbidden Patterns), 9.B Typography, 9.C Layout & Spacing, 9.D Content & Data ("Jane Doe" Effect), 9.E External Resources & Components, 9.F Production-Test Tells (banned outright), 9.G EM-DASH BAN (the single most-violated Tell)
+
+### Community 138 - "Community 138"
+Cohesion: 0.25
+Nodes (8): 12. THE COMBINATORIAL VARIATION ENGINE, Background Character, Hero Architecture, Motion-Implied Language, Section System, Signature Component Set, Theme Paradigm, Typography Character
+
+### Community 139 - "Community 139"
+Cohesion: 0.25
+Nodes (8): 8. ANTI-AI-SLOP RULES, Carousel / marquee slop (layout), Content slop, Data / KPI slop, Density slop, Layout slop, Typography slop, Visual slop
+
+### Community 140 - "Community 140"
+Cohesion: 0.27
+Nodes (6): MealCard(), ScaleIcon(), WeightTracker(), auth, db, firebaseConfig
+
+### Community 141 - "Community 141"
+Cohesion: 0.29
+Nodes (7): 11.A Detect the Mode (first action), 11.B Audit Before Touching, 11.C Preservation Rules, 11.D Modernisation Levers (priority order), 11.E Decision Tree: Targeted Evolution vs Full Redesign, 11.F What Never Changes Silently, 11. REDESIGN PROTOCOL
+
+### Community 142 - "Community 142"
+Cohesion: 0.29
+Nodes (7): 3.A Stack, 3.B State, 3.C Icons, 3.D Emoji Policy, 3. DEFAULT ARCHITECTURE & CONVENTIONS, 3.E Responsiveness & Layout Mechanics, 3.F Dependency Verification (mandatory)
+
+### Community 143 - "Community 143"
+Cohesion: 0.29
+Nodes (7): 6.A Hardware Acceleration, 6.B Reduced Motion (mandatory), 6.C Dark Mode (mandatory for any consumer-facing page), 6.D Core Web Vitals Targets, 6.E DOM Cost, 6.F Z-Index Restraint, 6. PERFORMANCE & ACCESSIBILITY GUARDRAILS
+
+### Community 144 - "Community 144"
+Cohesion: 0.29
+Nodes (6): Banned Output Patterns, Baseline, Execution Process, Full-Output Enforcement, Handling Long Outputs, Quick Check
+
+### Community 145 - "Community 145"
+Cohesion: 0.29
+Nodes (7): 33. CATEGORY-SPECIFIC BIAS, Commerce, Fintech, Health / Fitness, Productivity, Social, Wellness / Lifestyle
+
+### Community 146 - "Community 146"
+Cohesion: 0.29
+Nodes (7): 13. COLOR & MATERIAL RULES, Background Confidence Rule, Background-image harmony, Gradient Discipline, Materiality, Palette Discipline, Strong guidance
+
+### Community 147 - "Community 147"
+Cohesion: 0.29
+Nodes (7): 4. HERO MINIMALISM RULES, Absolute Hero Rules, Graphic Restraint, Headline Rule, Hero Composition Bias, Pre-output check, Typography Execution
+
+### Community 148 - "Community 148"
+Cohesion: 0.23
+Nodes (11): clickedLinks, createdLinks, el, mockMeals, mockWeights, originalCreateElement, downloadCsv(), escapeCsv() (+3 more)
+
+### Community 149 - "Community 149"
+Cohesion: 0.33
+Nodes (6): 29. ANTI-AI-SLOP RULES, Content slop, Density slop, Layout slop, Typography slop, Visual slop
+
+### Community 150 - "Community 150"
+Cohesion: 0.33
+Nodes (6): 5. IMAGE COUNT & PAGE SLICING, Continuity Rule, Counting rule, Format, Section size variety, THIS IS THE PRIMARY OUTPUT RULE
+
+### Community 151 - "Community 151"
+Cohesion: 0.40
+Nodes (5): 0.A Read these signals first, 0.B Output a one-line "Design Read" before generating, 0. BRIEF INFERENCE (Read the Room Before Anything Else), 0.C If the brief is ambiguous, ask one question, do not guess, 0.D Anti-Default Discipline
+
+### Community 152 - "Community 152"
+Cohesion: 0.40
+Nodes (5): 12.A File Location, 12.B Required Frontmatter, 12.C Required Body Sections, 12.D Block-Library Discipline, 12. THE BLOCK LIBRARY (Contract - Implementations Land Here Iteratively)
+
+### Community 153 - "Community 153"
+Cohesion: 0.40
+Nodes (5): 5.A Sticky-Stack - Canonical Skeleton, 5.B Horizontal-Pan - Canonical Skeleton, 5.C Scroll-Reveal Stagger - Canonical Skeleton (lighter alternative), 5. CONTEXT-AWARE PROACTIVITY, 5.D Forbidden Animation Patterns
+
+### Community 154 - "Community 154"
+Cohesion: 0.40
+Nodes (5): 8.A Token Strategy (pick one, stick to it), 8.B Do Not Prescribe Specific Colors Here, 8.C Default Mode, 8.D Test in Both Modes Before Finishing, 8. DARK MODE PROTOCOL
+
+### Community 155 - "Community 155"
+Cohesion: 0.40
+Nodes (5): 21. MOBILE ANTI-AI-TELLS RULE, Copy AI tells, Layout AI tells, UI clutter tells, Visual AI tells
+
+### Community 156 - "Community 156"
+Cohesion: 0.50
+Nodes (4): 7. DIAL DEFINITIONS (Technical Reference), DESIGN_VARIANCE (Level 1-10), MOTION_INTENSITY (Level 1-10), VISUAL_DENSITY (Level 1-10)
+
+### Community 157 - "Community 157"
+Cohesion: 0.50
+Nodes (4): 12-section pack, 33. DEFAULT SECTION PACKS, 4-section pack, 8-section pack
+
+### Community 158 - "Community 158"
+Cohesion: 0.50
+Nodes (4): 14. HERO MINIMALISM RULES, Absolute Hero Rules, Headline Rule, Hero Cleanliness Rule
+
+### Community 159 - "Community 159"
+Cohesion: 0.50
+Nodes (4): 37. EXAMPLE INTERPRETATIONS, Example 1, Example 2, Example 3
+
+### Community 160 - "Community 160"
+Cohesion: 0.50
+Nodes (4): 2. PLATFORM MODE RULE, Android-native premium, Cross-platform premium neutral, iOS-native premium
+
+### Community 161 - "Community 161"
+Cohesion: 0.50
+Nodes (4): 37. EXAMPLE INTERPRETATIONS, Example 1, Example 2, Example 3
+
+### Community 162 - "Community 162"
+Cohesion: 0.50
+Nodes (4): 12-section pack, 15. DEFAULT SITE PACKS, 4-section pack, 8-section pack
+
+### Community 163 - "Community 163"
+Cohesion: 0.50
+Nodes (4): 20. EXAMPLE INTERPRETATIONS, Example 1, Example 2, Example 3
+
+### Community 164 - "Community 164"
+Cohesion: 0.04
+Nodes (45): dependencies, firebase, @google/generative-ai, lucide-react, react, react-activity-calendar, react-dom, recharts (+37 more)
+
+### Community 165 - "Community 165"
+Cohesion: 0.04
+Nodes (44): 10. Iconography, 11. Accessibility, 12. Do / Don't, 1. System Foundations, 2. Color Palette & Roles, 3. Typography, 4. Spacing, 5. Border Radius (+36 more)
+
+### Community 166 - "Community 166"
+Cohesion: 0.09
+Nodes (22): 1. Layout & Spacing, 2. Alignment, 3. Accessibility, 4. Component Structure & Patterns, 5. Performance & Quality Checks, Before Shipping Any Component, Contrast, Data Displays (Macro Cards, Meal Rows, Charts) (+14 more)
+
+### Community 167 - "Community 167"
+Cohesion: 0.10
+Nodes (20): addFromLookupBtn, addWaterBtn, calendarBtn, closeBtn, editMealBtn, emailInput, exportBtn, json (+12 more)
+
+### Community 168 - "Community 168"
+Cohesion: 0.17
+Nodes (12): ChevronLeftIcon(), ChevronRightIcon(), DatePicker(), DAY_LABELS, MONTH_NAMES, buttons, { container }, day10Btn (+4 more)
+
+### Community 169 - "Community 169"
+Cohesion: 0.15
+Nodes (12): auth, authorizedDomains, providers, firestore, indexes, rules, hosting, ignore (+4 more)
+
+### Community 171 - "Community 171"
+Cohesion: 0.22
+Nodes (8): Branch & Deployment Rules, EatLog UI Rules, Layer 1 — Layout Variance (Taste Skill), Layer 2 — Structural Best Practices (Web Design Guidelines), Layer 3 — Color & Typography Tokens (Design System), Mandatory Three-Layer Rule, Pre-Ship Checklist, Stack Constraints
+
+### Community 172 - "Community 172"
+Cohesion: 0.22
+Nodes (8): dailyTab, form, goalsTab, input, lookupTab, staplesBtn, user, weeklyTab
+
+### Community 173 - "Community 173"
+Cohesion: 0.22
+Nodes (8): aiRecalcBtn, deleteBtn, descInput, handlePin, mockLog, pinBtn, stapleLog, user
+
+### Community 174 - "Community 174"
+Cohesion: 0.22
+Nodes (6): InsightsCard(), formatLocalDate(), WeeklyView(), { container }, mockData, partialData
+
+### Community 175 - "Community 175"
+Cohesion: 0.32
+Nodes (4): WaterDropIcon(), WaterTracker(), button, user
+
+### Community 177 - "Community 177"
+Cohesion: 0.25
+Nodes (7): goalSelect, onComplete, onSkip, skipBtn, submitBtn, user, weightInput
+
+### Community 178 - "Community 178"
+Cohesion: 0.29
+Nodes (6): 1. Protected Branches, 2. Feature & Fix Branching, 3. Staging (`dev` Branch), 4. Production (`main` Branch) — Explicit Approval Required, 5. Verification Pipeline (Step-by-Step), EatLog — Strict CI/CD Git & Development Workflow
+
+### Community 180 - "Community 180"
+Cohesion: 0.29
+Nodes (6): applyBtn, cutBtn, handleGetStarted, heroCta, ribeyeBtn, user
+
+### Community 181 - "Community 181"
+Cohesion: 0.33
+Nodes (5): 1. Codebase Understanding & Architecture (Graphify), 2. Strict CI/CD & Branching Rules, 3. Deployments (Dev & Prod), 4. Mandatory Post-Deployment Live UI / E2E Verification, Agent Guidelines for EatLog
+
+### Community 182 - "Community 182"
+Cohesion: 0.33
+Nodes (5): emailInput, googleBtn, passwordInput, toggleBtn, user
+
+### Community 183 - "Community 183"
+Cohesion: 0.33
+Nodes (5): connectBtn, exportBtn, exportSpy, saveBtn, user
+
+### Community 184 - "Community 184"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, brandkit
+
+### Community 185 - "Community 185"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, design-taste-frontend
+
+### Community 186 - "Community 186"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, design-taste-frontend-v1
+
+### Community 187 - "Community 187"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, extension-to-functions-codebase
+
+### Community 188 - "Community 188"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-ai-logic-basics
+
+### Community 189 - "Community 189"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-app-hosting-basics
+
+### Community 190 - "Community 190"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-auth-basics
+
+### Community 191 - "Community 191"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-basics
+
+### Community 192 - "Community 192"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-crashlytics
+
+### Community 193 - "Community 193"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-data-connect
+
+### Community 194 - "Community 194"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-firestore
+
+### Community 195 - "Community 195"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-hosting-basics
+
+### Community 196 - "Community 196"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-remote-config-basics
+
+### Community 197 - "Community 197"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, firebase-security-rules-auditor
+
+### Community 198 - "Community 198"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, full-output-enforcement
+
+### Community 199 - "Community 199"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, gpt-taste
+
+### Community 200 - "Community 200"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, high-end-visual-design
+
+### Community 201 - "Community 201"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, image-to-code
+
+### Community 202 - "Community 202"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, imagegen-frontend-mobile
+
+### Community 203 - "Community 203"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, imagegen-frontend-web
+
+### Community 204 - "Community 204"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, industrial-brutalist-ui
+
+### Community 205 - "Community 205"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, minimalist-ui
+
+### Community 206 - "Community 206"
+Cohesion: 0.40
+Nodes (5): computedHash, skillPath, source, sourceType, redesign-existing-projects
+
+### Community 207 - "Community 207"
+Cohesion: 0.40
+Nodes (5): stitch-design-taste, computedHash, skillPath, source, sourceType
+
+### Community 208 - "Community 208"
+Cohesion: 0.40
+Nodes (5): xcode-project-setup, computedHash, skillPath, source, sourceType
+
+### Community 209 - "Community 209"
+Cohesion: 0.40
+Nodes (4): analyzeBtn, isoString, timeframeSelect, today
+
+### Community 210 - "Community 210"
+Cohesion: 0.50
+Nodes (3): input, saveBtn, user
 
 ## Knowledge Gaps
-- **678 isolated node(s):** `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name`, `version`, `private` (+673 more)
+- **1467 isolated node(s):** `public`, `ignore`, `rewrites`, `authorizedDomains`, `emailPassword` (+1462 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useToast()` connect `Community 0` to `Community 107`, `Community 30`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `auth` connect `Community 0` to `Community 107`, `Community 30`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `CANDIDATE_MODELS`, `CANDIDATE_MODELS`, `name` to the rest of the system?**
-  _678 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.06409130816505706 - nodes in this community are weakly interconnected._
+- **Why does `skills` connect `Community 212` to `Community 184`, `Community 185`, `Community 186`, `Community 187`, `Community 188`, `Community 189`, `Community 190`, `Community 191`, `Community 192`, `Community 193`, `Community 194`, `Community 195`, `Community 196`, `Community 197`, `Community 198`, `Community 199`, `Community 200`, `Community 201`, `Community 202`, `Community 203`, `Community 204`, `Community 205`, `Community 206`, `Community 207`, `Community 208`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `tasteskill: Anti-Slop Frontend Skill` connect `Community 130` to `Community 128`, `Community 129`, `Community 137`, `Community 141`, `Community 142`, `Community 143`, `Community 118`, `Community 151`, `Community 152`, `Community 153`, `Community 154`, `Community 156`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **Why does `db` connect `Community 140` to `Community 0`, `Community 107`, `Community 174`, `Community 175`, `Community 48`, `Community 148`, `Community 121`, `Community 125`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **What connects `public`, `ignore`, `rewrites` to the rest of the system?**
+  _1467 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
