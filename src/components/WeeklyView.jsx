@@ -254,6 +254,8 @@ export default function WeeklyView() {
     return calendarDays;
   }, [dailyTotalsMap]);
 
+  const totalTrackedProtein = activityData.reduce((acc, curr) => acc + (curr.count || 0), 0);
+
   const calendarTheme = {
     dark: ['#1e1e1e', '#86efac', '#15803d'],
   };
@@ -354,50 +356,51 @@ export default function WeeklyView() {
 
   return (
     <div className="w-full space-y-5 sm:space-y-6 pb-28">
-      {/* 7-Day Averages Summary Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+      {/* 7-Day Averages Summary Grid — always 3 cols */}
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {/* Protein Card */}
-        <section className="bg-[#121316] rounded-2xl p-4 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#22c55e] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
-          <p className="text-[#9ca3af] text-xs font-semibold uppercase tracking-wider mb-1.5 truncate">
+        <section className="bg-[#121316] rounded-2xl p-3 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#22c55e] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
+          <p className="text-[#9ca3af] text-[9px] sm:text-xs font-semibold uppercase tracking-wider mb-1 truncate">
             Protein Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-[#22c55e] font-stat-mono leading-none tracking-tight">
+          <div className="flex items-baseline gap-0.5 sm:gap-1 flex-wrap">
+            <span className="text-xl sm:text-3xl font-extrabold text-[#22c55e] font-stat-mono leading-none tracking-tight">
               {sevenDayProteinAverage}
             </span>
-            <span className="text-xs text-[#6b7280] font-stat-mono font-medium">g/d</span>
+            <span className="text-[10px] sm:text-xs text-[#6b7280] font-stat-mono font-medium">g/d</span>
           </div>
-          <p className="text-[11px] text-[#6b7280] mt-1.5 truncate font-mono">Target: &gt;120g</p>
+          <p className="text-[9px] sm:text-[11px] text-[#6b7280] mt-1 truncate font-mono">&gt;120g target</p>
         </section>
 
         {/* Calories Card */}
-        <section className="bg-[#121316] rounded-2xl p-4 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#facc15] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
-          <p className="text-[#9ca3af] text-xs font-semibold uppercase tracking-wider mb-1.5 truncate">
+        <section className="bg-[#121316] rounded-2xl p-3 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#facc15] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
+          <p className="text-[#9ca3af] text-[9px] sm:text-xs font-semibold uppercase tracking-wider mb-1 truncate">
             Calories Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-[#facc15] font-stat-mono leading-none tracking-tight">
+          <div className="flex items-baseline gap-0.5 sm:gap-1 flex-wrap">
+            <span className="text-xl sm:text-3xl font-extrabold text-[#facc15] font-stat-mono leading-none tracking-tight">
               {sevenDayCalorieAverage}
             </span>
-            <span className="text-xs text-[#6b7280] font-stat-mono font-medium">kcal</span>
+            <span className="text-[10px] sm:text-xs text-[#6b7280] font-stat-mono font-medium">kcal</span>
           </div>
-          <p className="text-[11px] text-[#6b7280] mt-1.5 truncate font-mono">7-Day Mean</p>
+          <p className="text-[9px] sm:text-[11px] text-[#6b7280] mt-1 truncate font-mono">7-Day Mean</p>
         </section>
 
         {/* Water Card */}
-        <section className="bg-[#121316] rounded-2xl p-4 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#38bdf8] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
-          <p className="text-[#9ca3af] text-xs font-semibold uppercase tracking-wider mb-1.5 truncate">
+        <section className="bg-[#121316] rounded-2xl p-3 sm:p-5 border border-white/[0.08] border-t-2 border-t-[#38bdf8] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] transition-all hover:border-white/[0.15]">
+          <p className="text-[#9ca3af] text-[9px] sm:text-xs font-semibold uppercase tracking-wider mb-1 truncate">
             Water Avg
           </p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-[#38bdf8] font-stat-mono leading-none tracking-tight">
+          <div className="flex items-baseline gap-0.5 sm:gap-1 flex-wrap">
+            <span className="text-xl sm:text-3xl font-extrabold text-[#38bdf8] font-stat-mono leading-none tracking-tight">
               {sevenDayWaterAverage}
             </span>
-            <span className="text-xs text-[#6b7280] font-stat-mono font-medium">L/d</span>
+            <span className="text-[10px] sm:text-xs text-[#6b7280] font-stat-mono font-medium">L/d</span>
           </div>
-          <p className="text-[11px] text-[#6b7280] mt-1.5 truncate font-mono">Hydration</p>
+          <p className="text-[9px] sm:text-[11px] text-[#6b7280] mt-1 truncate font-mono">Hydration</p>
         </section>
       </div>
+
 
       {/* AI Nutrition Coach Section */}
       <section className="bg-[#121316] rounded-2xl p-5 sm:p-6 border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.04)] space-y-4">
@@ -660,7 +663,7 @@ export default function WeeklyView() {
       </div>
 
       {/* 90-Day Consistency Heatmap */}
-      <section className="bg-[#121316] rounded-2xl p-5 sm:p-6 border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)]">
+      <section className="bg-[#121316] rounded-2xl p-5 sm:p-6 border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] overflow-hidden">
         <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/[0.06]">
           <div>
             <h3 className="text-base sm:text-lg font-bold text-[#f3f4f6] tracking-tight">
@@ -670,9 +673,13 @@ export default function WeeklyView() {
               Dark green indicates &gt;120g target achieved
             </p>
           </div>
+          <span className="text-xs text-[#22c55e] font-bold font-stat-mono whitespace-nowrap">
+            {totalTrackedProtein}g Tracked
+          </span>
         </div>
 
-        <div className="overflow-x-auto py-3 flex justify-center">
+        {/* Heatmap display — centered with bleed scroll on narrow viewports */}
+        <div className="overflow-x-auto -mx-5 sm:-mx-6 px-5 sm:px-6 py-2 flex justify-center">
           {isLoading ? (
             <div className="text-[#6b7280] text-xs py-6 font-mono">Loading consistency data...</div>
           ) : (
@@ -685,36 +692,36 @@ export default function WeeklyView() {
               blockMargin={3.5}
               fontSize={11}
               showWeekdayLabels
+              hideColorLegend
+              hideTotalCount
               labels={{
-                legend: {
-                  less: '0g',
-                  more: '>120g',
-                },
                 months: [
                   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
                 ],
-                totalCount: '{{count}}g protein tracked in 90 days',
               }}
             />
           )}
         </div>
 
-        <div className="flex items-center justify-between text-xs text-[#6b7280] pt-3 border-t border-white/[0.06] mt-2 font-mono">
+        {/* Threshold legend — centered and aligned */}
+        <div className="flex items-center justify-center gap-5 sm:gap-8 text-[11px] sm:text-xs text-[#6b7280] pt-3 border-t border-white/[0.06] mt-2 font-mono">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[#1e1e1e] inline-block border border-zinc-700" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm bg-[#1e1e1e] inline-block border border-zinc-700" />
             <span>0g</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[#86efac] inline-block" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm bg-[#86efac] inline-block" />
             <span>1–120g</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[#15803d] inline-block" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm bg-[#15803d] inline-block" />
             <span>&gt;120g</span>
           </div>
         </div>
       </section>
+
+
     </div>
   );
 }
