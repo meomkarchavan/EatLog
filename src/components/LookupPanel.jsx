@@ -371,7 +371,7 @@ export default function LookupPanel({ onAddMeal }) {
                         onClick={() => handleAddToDailyLog(item)}
                         disabled={isItemAdding}
                         title={isItemAdding ? 'Adding to log...' : 'Quick-Add to Daily Log'}
-                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#22c55e]/15 hover:bg-[#22c55e]/25 text-[#22c55e] text-xs font-bold border border-[#22c55e]/30 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-mono"
+                        className="w-[88px] justify-center flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#22c55e]/15 hover:bg-[#22c55e]/25 text-[#22c55e] text-xs font-bold border border-[#22c55e]/30 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-mono"
                       >
                         {isItemAdding ? (
                           <Loader2 className="w-3.5 h-3.5 text-[#22c55e] animate-spin" />

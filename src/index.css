@@ -56,6 +56,11 @@
 }
 
 /* Base resets & typography */
+html {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
 html, body, #root {
   min-height: 100%;
   min-height: 100dvh;
@@ -67,6 +72,11 @@ html, body, #root {
 body {
   -webkit-tap-highlight-color: transparent;
   text-rendering: optimizeLegibility;
+}
+
+/* Remove 300ms tap delay on mobile for all interactive elements */
+a, button, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
 }
 
 /* Custom sleek dark scrollbars */

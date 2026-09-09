@@ -22,6 +22,7 @@ import LookupPanel from './LookupPanel';
 import DatePicker from './DatePicker';
 import { calculateNutritionTargets } from '../utils/nutritionMath';
 import { useToast } from './Toast';
+import { LogOut } from 'lucide-react';
 
 // --- Icons (inline SVG) ---
 function CameraIcon() {
@@ -431,37 +432,39 @@ export default function Dashboard({ onNavigateToLanding }) {
   const proteinSurplus = totalProtein - targets.targetMacros.protein_g;
 
   return (
-    <div className="min-h-screen bg-[#090a0c] text-[#f3f4f6] flex flex-col relative selection:bg-[#22c55e]/20 selection:text-[#22c55e]">
+    <div className="min-h-[100dvh] bg-[#090a0c] text-[#f3f4f6] flex flex-col relative selection:bg-[#22c55e]/20 selection:text-[#22c55e]">
       {/* Top Header */}
-      <header className="px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 border-b border-white/[0.07] bg-[#090a0c]/90 backdrop-blur-xl sticky top-0 z-40 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <button
-              id="nav-to-landing-btn"
-              type="button"
-              onClick={() => {
-                if (onNavigateToLanding) onNavigateToLanding();
-                else window.location.hash = '#landing';
-              }}
-              title="View Landing Page & Features"
-              className="flex items-center gap-2.5 group text-left cursor-pointer transition-transform active:scale-95 bg-transparent border-0 p-0"
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e] shadow-[0_0_12px_rgba(34,197,94,0.6)] group-hover:scale-125 transition-transform animate-pulse" />
-              <h1 className="text-lg sm:text-xl font-black text-[#f3f4f6] tracking-tight shrink-0 flex items-center gap-1.5 group-hover:text-emerald-400 transition-colors">
-                <span>EatLog</span>
-              </h1>
-            </button>
-          </div>
-          
-          {/* Tab Switcher: Daily | Weekly | Profile | Lookup */}
-          <nav aria-label="Main Navigation" className="flex items-center bg-[#15171b] p-1 rounded-xl border border-white/[0.07] gap-0.5 sm:gap-1 shadow-inner">
+      <header className="px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 border-b border-white/[0.07] bg-[#090a0c]/90 backdrop-blur-xl sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
+          {/* Brand Logo */}
+          <button
+            id="nav-to-landing-btn"
+            type="button"
+            onClick={() => {
+              if (onNavigateToLanding) onNavigateToLanding();
+              else window.location.hash = '#landing';
+            }}
+            title="View Landing Page & Features"
+            className="flex items-center gap-2 group text-left cursor-pointer transition-transform active:scale-95 bg-transparent border-0 p-0 shrink-0"
+          >
+            <div className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_10px_rgba(34,197,94,0.6)] group-hover:scale-125 transition-transform animate-pulse" />
+            <h1 className="text-base sm:text-xl font-black text-[#f3f4f6] tracking-tight group-hover:text-emerald-400 transition-colors">
+              EatLog
+            </h1>
+          </button>
+
+          {/* Tab Switcher — natural width pill, centered between logo and sign-out */}
+          <nav
+            aria-label="Main Navigation"
+            className="flex items-center bg-[#15171b] p-1 rounded-xl border border-white/[0.07] gap-0.5 shadow-inner"
+          >
             <button
               id="tab-daily"
               onClick={() => setCurrentTab('daily')}
-              className={`px-3 py-1.5 sm:px-4 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
+              className={`px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
                 currentTab === 'daily'
-                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-md'
-                  : 'text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/[0.04]'
+                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-sm'
+                  : 'text-[#9ca3af] hover:text-[#f3f4f6]'
               }`}
             >
               Daily
@@ -469,10 +472,10 @@ export default function Dashboard({ onNavigateToLanding }) {
             <button
               id="tab-weekly"
               onClick={() => setCurrentTab('weekly')}
-              className={`px-3 py-1.5 sm:px-4 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
+              className={`px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
                 currentTab === 'weekly'
-                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-md'
-                  : 'text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/[0.04]'
+                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-sm'
+                  : 'text-[#9ca3af] hover:text-[#f3f4f6]'
               }`}
             >
               Weekly
@@ -480,10 +483,10 @@ export default function Dashboard({ onNavigateToLanding }) {
             <button
               id="tab-profile"
               onClick={() => setCurrentTab('profile')}
-              className={`px-3 py-1.5 sm:px-4 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 active:scale-95 ${
+              className={`px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 active:scale-95 ${
                 currentTab === 'profile'
-                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-md'
-                  : 'text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-white/[0.04]'
+                  ? 'bg-[#f3f4f6] text-[#090a0c] shadow-sm'
+                  : 'text-[#9ca3af] hover:text-[#f3f4f6]'
               }`}
             >
               <span>Goals</span>
@@ -494,25 +497,29 @@ export default function Dashboard({ onNavigateToLanding }) {
             <button
               id="tab-lookup"
               onClick={() => setCurrentTab('lookup')}
-              className={`px-3 py-1.5 sm:px-4 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
+              className={`px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 ${
                 currentTab === 'lookup'
-                  ? 'bg-[#38bdf8] text-[#090a0c] shadow-md'
-                  : 'text-[#9ca3af] hover:text-[#38bdf8] hover:bg-white/[0.04]'
+                  ? 'bg-[#38bdf8] text-[#090a0c] shadow-sm'
+                  : 'text-[#9ca3af] hover:text-[#38bdf8]'
               }`}
             >
               Lookup
             </button>
           </nav>
 
+          {/* Sign Out — icon-only on mobile, text on sm+ */}
           <button
             id="sign-out-btn"
             onClick={() => signOut(auth)}
-            className="text-[#6b7280] hover:text-[#f3f4f6] text-xs font-medium shrink-0 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
+            title="Sign out"
+            className="shrink-0 text-[#6b7280] hover:text-[#f3f4f6] transition-colors rounded-lg hover:bg-white/[0.05] p-1.5 sm:px-2.5 sm:py-1.5 flex items-center gap-1.5"
           >
-            Sign Out
+            <LogOut className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline text-xs font-medium">Sign Out</span>
           </button>
         </div>
       </header>
+
 
       {/* Main Content Area */}
       <main className="flex-1 w-full">
@@ -623,23 +630,27 @@ export default function Dashboard({ onNavigateToLanding }) {
                 <div className="grid grid-cols-3 gap-2 px-4 py-3 bg-[#121316] rounded-2xl border border-white/[0.07] shadow-sm">
                   <div>
                     <p className="text-[#9ca3af] text-[10px] font-semibold uppercase tracking-wider">Carbs</p>
-                    <p className="text-sm font-bold text-[#38bdf8] font-stat-mono mt-0.5">
-                      {totalCarbs}<span className="text-[10px] text-[#6b7280] font-normal ml-0.5">/ {targets.targetMacros.carbs_g}g</span>
-                    </p>
+                    <div className="flex items-baseline gap-0.5 mt-0.5 whitespace-nowrap">
+                      <span className="text-sm font-bold text-[#38bdf8] font-stat-mono leading-none">{totalCarbs}</span>
+                      <span className="text-[10px] text-[#6b7280] font-normal font-stat-mono">/ {targets.targetMacros.carbs_g}g</span>
+                    </div>
                   </div>
                   <div>
                     <p className="text-[#9ca3af] text-[10px] font-semibold uppercase tracking-wider">Fat</p>
-                    <p className="text-sm font-bold text-[#fb923c] font-stat-mono mt-0.5">
-                      {totalFat}<span className="text-[10px] text-[#6b7280] font-normal ml-0.5">/ {targets.targetMacros.fat_g}g</span>
-                    </p>
+                    <div className="flex items-baseline gap-0.5 mt-0.5 whitespace-nowrap">
+                      <span className="text-sm font-bold text-[#fb923c] font-stat-mono leading-none">{totalFat}</span>
+                      <span className="text-[10px] text-[#6b7280] font-normal font-stat-mono">/ {targets.targetMacros.fat_g}g</span>
+                    </div>
                   </div>
                   <div>
                     <p className="text-[#9ca3af] text-[10px] font-semibold uppercase tracking-wider">Fiber</p>
-                    <p className="text-sm font-bold text-[#a78bfa] font-stat-mono mt-0.5">
-                      {totalFiber}<span className="text-[10px] text-[#6b7280] font-normal ml-0.5">/ {targets.targetMacros.fiber_g}g</span>
-                    </p>
+                    <div className="flex items-baseline gap-0.5 mt-0.5 whitespace-nowrap">
+                      <span className="text-sm font-bold text-[#a78bfa] font-stat-mono leading-none">{totalFiber}</span>
+                      <span className="text-[10px] text-[#6b7280] font-normal font-stat-mono">/ {targets.targetMacros.fiber_g}g</span>
+                    </div>
                   </div>
                 </div>
+
 
                 {/* Quick Trackers: Water & Weight */}
                 <div className="space-y-2.5">

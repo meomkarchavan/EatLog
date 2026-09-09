@@ -149,10 +149,10 @@ export default function LandingPage({ onGetStarted, onSignIn, user, onOpenDashbo
             {/* Left Column: Bold Typography & Conversion Trigger */}
             <div className="lg:col-span-7 space-y-6 text-left">
               {/* Badge Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121316] border border-white/[0.08] text-xs text-[#f3f4f6] shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
+              <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121316] border border-white/[0.08] text-xs text-[#f3f4f6] shadow-inner">
+                <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse shrink-0" />
                 <span className="font-mono text-[11px] text-[#22c55e] font-semibold">HYPER-PRECISE MACRO TRACKING</span>
-                <span className="text-[#6b7280]">•</span>
+                <span className="text-[#6b7280] hidden sm:inline">•</span>
                 <span className="text-[#9ca3af] text-[11px]">Built For Strength & Hypertrophy</span>
               </div>
 
@@ -297,13 +297,13 @@ export default function LandingPage({ onGetStarted, onSignIn, user, onOpenDashbo
                     <Sparkles className="w-3.5 h-3.5 text-[#22c55e]" />
                     <span>Try Instant Natural Language Parsing:</span>
                   </p>
-                  <div className="grid grid-cols-3 gap-1.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
                     {Object.entries(mealPresets).map(([key, item]) => (
                       <button
                         key={key}
                         type="button"
                         onClick={() => setSelectedMealPreset(key)}
-                        className={`text-[11px] py-1.5 px-2 rounded-lg font-medium transition-all text-center truncate ${
+                        className={`text-[11px] py-2 sm:py-1.5 px-2 rounded-lg font-medium transition-all text-center ${
                           selectedMealPreset === key
                             ? 'bg-[#22c55e] text-[#090a0c] font-bold shadow-sm'
                             : 'bg-[#1a1c22] text-[#9ca3af] hover:text-[#f3f4f6] border border-white/[0.07]'
@@ -843,17 +843,19 @@ export default function LandingPage({ onGetStarted, onSignIn, user, onOpenDashbo
       {/* =========================================================================
           7. MINIMALIST DARK FOOTER
       ========================================================================= */}
-      <footer className="border-t border-white/[0.07] bg-[#090a0c] py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-[#22c55e]/15 border border-[#22c55e]/30 flex items-center justify-center text-[#22c55e]">
-              <Flame className="w-4 h-4" />
+      <footer className="border-t border-white/[0.07] bg-[#090a0c] py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1400px] mx-auto flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-[#22c55e]/15 border border-[#22c55e]/30 flex items-center justify-center text-[#22c55e]">
+                <Flame className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-bold text-[#f3f4f6]">EatLog</span>
             </div>
-            <span className="text-sm font-bold text-[#f3f4f6]">EatLog</span>
-            <span className="text-xs text-[#6b7280]">© {new Date().getFullYear()} EatLog. All rights reserved.</span>
+            <span className="text-xs text-[#6b7280] text-center sm:text-left">© {new Date().getFullYear()} EatLog. All rights reserved.</span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-[#9ca3af]">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#9ca3af] justify-center">
             <a href="#features" className="hover:text-[#f3f4f6] transition-colors">Features</a>
             <a href="#coach" className="hover:text-[#f3f4f6] transition-colors">AI Coach</a>
             <a href="#calculator" className="hover:text-[#f3f4f6] transition-colors">Calculator</a>
