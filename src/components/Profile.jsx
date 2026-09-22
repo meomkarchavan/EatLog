@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
-import { linkWithPopup, unlink } from 'firebase/auth';
+import { linkWithPopup, unlink, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db, googleProvider } from '../firebase';
 import { calculateNutritionTargets } from '../utils/nutritionMath';
 import { exportAllDataAsCsv } from '../utils/exportCsv';
@@ -46,6 +46,8 @@ export default function Profile({ latestWeightKg }) {
   const [isExporting, setIsExporting] = useState(false);
   const [exportResult, setExportResult] = useState(null);
   const [isLinkingGoogle, setIsLinkingGoogle] = useState(false);
+  const [isSendingReset, setIsSendingReset] = useState(false);
+  const [resetSentSuccess, setResetSentSuccess] = useState(false);
   const [providerData, setProviderData] = useState(auth.currentUser?.providerData || []);
 
   useEffect(() => {
@@ -564,6 +566,67 @@ export default function Profile({ latestWeightKg }) {
               )}
             </div>
           </div>
+
+          {/* Reset Password Section - only for email/password users */}
+          {providerData.some((p) => p.providerId === 'password') && (
+            <div className="bg-[#121316] rounded-2xl p-5 border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] space-y-3">
+              <div>
+                <h3 className="text-[#f3f4f6] text-sm font-bold">Reset Password</h3>
+                <p className="text-[#9ca3af] text-xs mt-0.5">
+                  Send a password reset link to <span className="text-[#f3f4f6] font-medium">{auth.currentUser?.email}</span>
+                </p>
+              </div>
+              <button
+                id="profile-reset-password-btn"
+                type="button"
+                disabled={isSendingReset || resetSentSuccess}
+                onClick={async () => {
+                  const userEmail = auth.currentUser?.email;
+                  if (!userEmail) {
+                    showToast('No email found for your account.', 'error');
+                    return;
+                  }
+                  setIsSendingReset(true);
+                  try {
+                    await sendPasswordResetEmail(auth, userEmail);
+                    setResetSentSuccess(true);
+                    showToast('Password reset link sent! Check your inbox.', 'success');
+                    setTimeout(() => setResetSentSuccess(false), 10000);
+                  } catch (err) {
+                    console.error('[Password Reset Error]:', err);
+                    const messages = {
+                      'auth/too-many-requests': 'Too many requests. Try again later.',
+                    };
+                    showToast(messages[err.code] || `Failed to send reset email: ${err.message}`, 'error');
+                  } finally {
+                    setIsSendingReset(false);
+                  }
+                }}
+                className="w-full bg-[#1a1c22] hover:bg-[#20232a] text-[#f3f4f6] font-bold rounded-xl py-3 text-sm active:scale-[0.98] transition-all disabled:opacity-40 border border-white/[0.08] hover:border-white/[0.16] flex items-center justify-center gap-2 shadow-sm"
+              >
+                {resetSentSuccess ? (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-[#22c55e]">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-[#22c55e]">Reset Link Sent!</span>
+                  </>
+                ) : isSendingReset ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-[#6b7280] border-t-[#f3f4f6] rounded-full animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                      <path fillRule="evenodd" d="M8 7a5 5 0 113.61 4.804l-1.903 1.903A1 1 0 019 14H8v1a1 1 0 01-1 1H6v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-2a1 1 0 01.293-.707L8.196 8.39A5.002 5.002 0 018 7zm5-3a.75.75 0 000 1.5A1.5 1.5 0 0114.5 7 .75.75 0 0016 7a3 3 0 00-3-3z" clipRule="evenodd" />
+                    </svg>
+                    <span>Send Password Reset Link</span>
+                  </>
+                )}
+              </button>
+            </div>
+          )}
 
           {/* Data Export Section */}
           <div className="bg-[#121316] rounded-2xl p-5 border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.03)] space-y-3">
