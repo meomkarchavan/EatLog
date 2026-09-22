@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 
@@ -51,6 +52,9 @@ export default function AuthScreen({ onBack, onSuccess }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetSent, setResetSent] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -115,6 +119,27 @@ export default function AuthScreen({ onBack, onSuccess }) {
     }
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      setResetSent(true);
+    } catch (err) {
+      console.error('[Firebase Password Reset Error]:', err);
+      const messages = {
+        'auth/user-not-found': 'No account found with that email.',
+        'auth/invalid-email': 'Invalid email address.',
+        'auth/too-many-requests': 'Too many requests. Try again later.',
+      };
+      setError(messages[err.code] || err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-surface-0 px-6 py-12 relative overflow-hidden">
       {/* Ambient background glows */}
@@ -141,110 +166,198 @@ export default function AuthScreen({ onBack, onSuccess }) {
           </h1>
         </div>
         <p className="text-text-muted text-xs sm:text-sm mb-7">
-          Hyper-precise nutrition tracking in seconds.
+          {isForgotPassword
+            ? (resetSent ? 'Check your inbox for a reset link.' : 'Enter your email to reset your password.')
+            : 'Hyper-precise nutrition tracking in seconds.'}
         </p>
 
-        {/* Google Sign-In Button */}
-        <button
-          type="button"
-          id="google-auth-btn"
-          onClick={handleGoogleSignIn}
-          disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-surface-2 hover:bg-surface-3 border border-border/80 hover:border-border text-text-primary font-semibold rounded-2xl py-3.5 px-4 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-sm"
-        >
-          {loading ? (
-            <>
-              <div className="w-4 h-4 border-2 border-text-muted border-t-text-primary rounded-full animate-spin" />
-              <span>Connecting...</span>
-            </>
+        {isForgotPassword ? (
+          /* ── Forgot Password View ── */
+          resetSent ? (
+            <div className="space-y-5">
+              <div className="p-4 bg-macro-protein/10 border border-macro-protein/20 rounded-2xl text-center">
+                <div className="text-2xl mb-2">✉️</div>
+                <p className="text-macro-protein text-sm font-semibold mb-1">Reset email sent!</p>
+                <p className="text-text-muted text-xs leading-relaxed">
+                  We sent a password reset link to <span className="font-medium text-text-primary">{resetEmail}</span>. Check your inbox (and spam folder).
+                </p>
+              </div>
+              <button
+                type="button"
+                id="back-to-signin-btn"
+                onClick={() => { setIsForgotPassword(false); setResetSent(false); setResetEmail(''); setError(''); }}
+                className="w-full bg-macro-protein hover:bg-emerald-400 text-surface-0 font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_28px_rgba(34,197,94,0.45)]"
+              >
+                Back to Sign In
+              </button>
+            </div>
           ) : (
-            <>
-              <GoogleIcon />
-              <span>Continue with Google</span>
-            </>
-          )}
-        </button>
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div>
+                <input
+                  id="reset-email"
+                  type="email"
+                  placeholder="Email address"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                  autoFocus
+                  className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl px-4 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-sans"
+                />
+              </div>
 
-        {/* Divider */}
-        <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-border/60" />
-          <span className="px-3 text-[11px] uppercase tracking-wider text-text-dim font-mono font-medium">
-            or email
-          </span>
-          <div className="flex-1 border-t border-border/60" />
-        </div>
+              {error && (
+                <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs leading-relaxed">
+                  {error}
+                </div>
+              )}
 
-        {/* Email/Password Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              id="auth-email"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl px-4 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-sans"
-            />
-          </div>
+              <button
+                id="reset-submit"
+                type="submit"
+                disabled={loading}
+                className="w-full bg-macro-protein hover:bg-emerald-400 text-surface-0 font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_28px_rgba(34,197,94,0.45)] flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-surface-0/30 border-t-surface-0 rounded-full animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  'Send Reset Link'
+                )}
+              </button>
 
-          {/* Password with Eye Toggle */}
-          <div className="relative">
-            <input
-              id="auth-password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-              className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl pl-4 pr-12 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-mono"
-            />
+              <button
+                type="button"
+                id="cancel-reset-btn"
+                onClick={() => { setIsForgotPassword(false); setError(''); setResetEmail(''); }}
+                className="w-full text-text-muted text-xs sm:text-sm text-center hover:text-text-primary transition-colors font-medium py-1"
+              >
+                ← Back to Sign In
+              </button>
+            </form>
+          )
+        ) : (
+          /* ── Normal Sign In / Sign Up View ── */
+          <>
+            {/* Google Sign-In Button */}
             <button
               type="button"
-              id="toggle-password-btn"
-              onClick={() => setShowPassword(!showPassword)}
-              title={showPassword ? 'Hide password' : 'Show password'}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-dim hover:text-text-primary transition-colors p-1.5 rounded-lg hover:bg-surface-3"
+              id="google-auth-btn"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-3 bg-surface-2 hover:bg-surface-3 border border-border/80 hover:border-border text-text-primary font-semibold rounded-2xl py-3.5 px-4 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-sm"
             >
-              {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-text-muted border-t-text-primary rounded-full animate-spin" />
+                  <span>Connecting...</span>
+                </>
+              ) : (
+                <>
+                  <GoogleIcon />
+                  <span>Continue with Google</span>
+                </>
+              )}
             </button>
-          </div>
 
-          {error && (
-            <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs leading-relaxed">
-              {error}
+            {/* Divider */}
+            <div className="flex items-center my-6">
+              <div className="flex-1 border-t border-border/60" />
+              <span className="px-3 text-[11px] uppercase tracking-wider text-text-dim font-mono font-medium">
+                or email
+              </span>
+              <div className="flex-1 border-t border-border/60" />
             </div>
-          )}
 
-          <button
-            id="auth-submit"
-            type="submit"
-            disabled={loading}
-            className="w-full bg-macro-protein hover:bg-emerald-400 text-surface-0 font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_28px_rgba(34,197,94,0.45)] flex items-center justify-center gap-2"
-          >
-            {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-surface-0/30 border-t-surface-0 rounded-full animate-spin" />
-                <span>{isSignUp ? 'Creating Account...' : 'Signing In...'}</span>
-              </>
-            ) : isSignUp ? (
-              'Create Account'
-            ) : (
-              'Sign In'
-            )}
-          </button>
-        </form>
+            {/* Email/Password Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <input
+                  id="auth-email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl px-4 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-sans"
+                />
+              </div>
 
-        {/* Toggle */}
-        <button
-          type="button"
-          id="auth-toggle"
-          onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
-          className="mt-6 text-text-muted text-xs sm:text-sm w-full text-center hover:text-text-primary transition-colors font-medium py-1"
-        >
-          {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
-        </button>
+              {/* Password with Eye Toggle */}
+              <div className="relative">
+                <input
+                  id="auth-password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className="w-full bg-surface-2 text-text-primary placeholder:text-text-dim rounded-2xl pl-4 pr-12 py-3.5 text-sm outline-none border border-border/80 focus:border-macro-protein focus:ring-1 focus:ring-macro-protein/30 transition-all font-mono"
+                />
+                <button
+                  type="button"
+                  id="toggle-password-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-dim hover:text-text-primary transition-colors p-1.5 rounded-lg hover:bg-surface-3"
+                >
+                  {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
+                </button>
+              </div>
+
+              {/* Forgot Password Link - only show on sign-in */}
+              {!isSignUp && (
+                <div className="text-right -mt-1">
+                  <button
+                    type="button"
+                    id="forgot-password-btn"
+                    onClick={() => { setIsForgotPassword(true); setError(''); setResetEmail(email); }}
+                    className="text-text-muted text-xs hover:text-macro-protein transition-colors font-medium"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+              )}
+
+              {error && (
+                <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs leading-relaxed">
+                  {error}
+                </div>
+              )}
+
+              <button
+                id="auth-submit"
+                type="submit"
+                disabled={loading}
+                className="w-full bg-macro-protein hover:bg-emerald-400 text-surface-0 font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-all disabled:opacity-40 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_28px_rgba(34,197,94,0.45)] flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-surface-0/30 border-t-surface-0 rounded-full animate-spin" />
+                    <span>{isSignUp ? 'Creating Account...' : 'Signing In...'}</span>
+                  </>
+                ) : isSignUp ? (
+                  'Create Account'
+                ) : (
+                  'Sign In'
+                )}
+              </button>
+            </form>
+
+            {/* Toggle */}
+            <button
+              type="button"
+              id="auth-toggle"
+              onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
+              className="mt-6 text-text-muted text-xs sm:text-sm w-full text-center hover:text-text-primary transition-colors font-medium py-1"
+            >
+              {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
